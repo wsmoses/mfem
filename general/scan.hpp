@@ -15,11 +15,18 @@
 #include "backends.hpp"
 #include "forall.hpp"
 
-#ifdef MFEM_USE_CUDA
+// The Reactant xla backends cannot execute cub's internally launched
+// kernels; fall back to the serial implementations there.
+#if (defined(MFEM_USE_CUDA) || defined(MFEM_USE_HIP)) && \
+    !defined(REACTANT_XLA_BACKEND)
+#define MFEM_USE_DEVICE_SCAN
+#endif
+
+#if defined(MFEM_USE_CUDA) && defined(MFEM_USE_DEVICE_SCAN)
 #include <cub/device/device_scan.cuh>
 #include <cub/device/device_select.cuh>
 #define MFEM_CUB_NAMESPACE cub
-#elif defined(MFEM_USE_HIP)
+#elif defined(MFEM_USE_HIP) && defined(MFEM_USE_DEVICE_SCAN)
 #include <hipcub/device/device_scan.hpp>
 #include <hipcub/device/device_select.hpp>
 #define MFEM_CUB_NAMESPACE hipcub
@@ -38,7 +45,7 @@ template <class InputIt, class OutputIt>
 void InclusiveScan(bool use_dev, InputIt d_in, OutputIt d_out, size_t num_items)
 {
    // forward to InclusiveSum for potentially faster kernels
-#if defined(MFEM_USE_CUDA) || defined(MFEM_USE_HIP)
+#ifdef MFEM_USE_DEVICE_SCAN
    if (use_dev && mfem::Device::Allows(Backend::CUDA_MASK | Backend::HIP_MASK))
    {
       static Array<std::byte> workspace;
@@ -102,7 +109,7 @@ template <class InputIt, class OutputIt, class ScanOp>
 void InclusiveScan(bool use_dev, InputIt d_in, OutputIt d_out, size_t num_items,
                    ScanOp scan_op)
 {
-#if defined(MFEM_USE_CUDA) || defined(MFEM_USE_HIP)
+#ifdef MFEM_USE_DEVICE_SCAN
    if (use_dev && mfem::Device::Allows(Backend::CUDA_MASK | Backend::HIP_MASK))
    {
       static Array<std::byte> workspace;
@@ -165,7 +172,7 @@ template <class InputIt, class OutputIt, class T, class ScanOp>
 void ExclusiveScan(bool use_dev, InputIt d_in, OutputIt d_out, size_t num_items,
                    T init_value, ScanOp scan_op)
 {
-#if defined(MFEM_USE_CUDA) || defined(MFEM_USE_HIP)
+#ifdef MFEM_USE_DEVICE_SCAN
    if (use_dev && mfem::Device::Allows(Backend::CUDA_MASK | Backend::HIP_MASK))
    {
       static Array<std::byte> workspace;
@@ -238,7 +245,7 @@ template <class InputIt, class FlagIt, class OutputIt, class NumSelectedIt>
 void CopyFlagged(bool use_dev, InputIt d_in, FlagIt d_flags, OutputIt d_out,
                  NumSelectedIt d_num_selected_out, size_t num_items)
 {
-#if defined(MFEM_USE_CUDA) || defined(MFEM_USE_HIP)
+#ifdef MFEM_USE_DEVICE_SCAN
    if (use_dev &&
        mfem::Device::Allows(Backend::CUDA_MASK | Backend::HIP_MASK))
    {
@@ -296,7 +303,7 @@ void CopyIf(bool use_dev, InputIt d_in, OutputIt d_out,
             NumSelectedIt d_num_selected_out, size_t num_items,
             SelectOp select_op)
 {
-#if defined(MFEM_USE_CUDA) || defined(MFEM_USE_HIP)
+#ifdef MFEM_USE_DEVICE_SCAN
    if (use_dev &&
        mfem::Device::Allows(Backend::CUDA_MASK | Backend::HIP_MASK))
    {
@@ -365,7 +372,7 @@ template <class InputIt, class OutputIt, class NumSelectedIt>
 void CopyUnique(bool use_dev, InputIt d_in, OutputIt d_out,
                 NumSelectedIt d_num_selected_out, size_t num_items)
 {
-#if defined(MFEM_USE_CUDA) || defined(MFEM_USE_HIP)
+#ifdef MFEM_USE_DEVICE_SCAN
    if (use_dev &&
        mfem::Device::Allows(Backend::CUDA_MASK | Backend::HIP_MASK))
    {
