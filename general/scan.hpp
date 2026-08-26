@@ -37,13 +37,54 @@
 #include <numeric>
 #include <cstddef>
 
+#if defined(REACTANT_XLA_BACKEND) && !defined(MFEM_USE_DEVICE_SCAN) && \
+    defined(MFEM_USE_CUDA)
+#include "cuda.hpp"
+#include <memory>
+#define MFEM_REACTANT_HOST_SCAN
+#endif
+
 namespace mfem
 {
+#ifdef MFEM_REACTANT_HOST_SCAN
+namespace internal
+{
+// Under the xla backends the device "pointers" are runtime handles no host
+// code may touch: the serial fallbacks run on a host staging copy instead.
+template <class T> struct ScanStage
+{
+   T *dptr;
+   size_t n;
+   std::unique_ptr<T[]> h;
+   ScanStage(const T *d, size_t n_, bool read)
+      : dptr(const_cast<T *>(d)), n(n_), h(new T[n_ ? n_ : 1])
+   {
+      if (read && n) { CuMemcpyDtoH(h.get(), dptr, n * sizeof(T)); }
+   }
+   T *get() { return h.get(); }
+   void WriteBack(size_t count)
+   {
+      if (count) { CuMemcpyHtoD(dptr, h.get(), count * sizeof(T)); }
+   }
+};
+} // namespace internal
+#endif
 /// Equivalent to InclusiveScan(use_dev, d_in, d_out, num_items, workspace,
 /// std::plus<>{})
 template <class InputIt, class OutputIt>
 void InclusiveScan(bool use_dev, InputIt d_in, OutputIt d_out, size_t num_items)
 {
+#ifdef MFEM_REACTANT_HOST_SCAN
+   if (use_dev && mfem::Device::Allows(Backend::CUDA_MASK))
+   {
+      using T = typename std::iterator_traits<InputIt>::value_type;
+      internal::ScanStage<T> in(&*d_in, num_items, true);
+      internal::ScanStage<T> out(&*d_out, num_items, false);
+      std::partial_sum(in.get(), in.get() + num_items, out.get());
+      out.WriteBack(num_items);
+      return;
+   }
+#endif
    // forward to InclusiveSum for potentially faster kernels
 #ifdef MFEM_USE_DEVICE_SCAN
    if (use_dev && mfem::Device::Allows(Backend::CUDA_MASK | Backend::HIP_MASK))
@@ -109,6 +150,18 @@ template <class InputIt, class OutputIt, class ScanOp>
 void InclusiveScan(bool use_dev, InputIt d_in, OutputIt d_out, size_t num_items,
                    ScanOp scan_op)
 {
+#ifdef MFEM_REACTANT_HOST_SCAN
+   if (use_dev && mfem::Device::Allows(Backend::CUDA_MASK))
+   {
+      using T = typename std::iterator_traits<InputIt>::value_type;
+      internal::ScanStage<T> in(&*d_in, num_items, true);
+      internal::ScanStage<T> out(&*d_out, num_items, false);
+      std::partial_sum(in.get(), in.get() + num_items, out.get(), scan_op);
+      out.WriteBack(num_items);
+      return;
+   }
+#endif
+
 #ifdef MFEM_USE_DEVICE_SCAN
    if (use_dev && mfem::Device::Allows(Backend::CUDA_MASK | Backend::HIP_MASK))
    {
@@ -172,6 +225,24 @@ template <class InputIt, class OutputIt, class T, class ScanOp>
 void ExclusiveScan(bool use_dev, InputIt d_in, OutputIt d_out, size_t num_items,
                    T init_value, ScanOp scan_op)
 {
+#ifdef MFEM_REACTANT_HOST_SCAN
+   if (use_dev && mfem::Device::Allows(Backend::CUDA_MASK))
+   {
+      using TV = typename std::iterator_traits<InputIt>::value_type;
+      internal::ScanStage<TV> in(&*d_in, num_items, true);
+      internal::ScanStage<TV> out(&*d_out, num_items, false);
+      TV acc = init_value;
+      for (size_t k = 0; k < num_items; ++k)
+      {
+         TV cur = in.get()[k];
+         out.get()[k] = acc;
+         acc = scan_op(acc, cur);
+      }
+      out.WriteBack(num_items);
+      return;
+   }
+#endif
+
 #ifdef MFEM_USE_DEVICE_SCAN
    if (use_dev && mfem::Device::Allows(Backend::CUDA_MASK | Backend::HIP_MASK))
    {
@@ -245,6 +316,28 @@ template <class InputIt, class FlagIt, class OutputIt, class NumSelectedIt>
 void CopyFlagged(bool use_dev, InputIt d_in, FlagIt d_flags, OutputIt d_out,
                  NumSelectedIt d_num_selected_out, size_t num_items)
 {
+#ifdef MFEM_REACTANT_HOST_SCAN
+   if (use_dev && mfem::Device::Allows(Backend::CUDA_MASK))
+   {
+      using T = typename std::iterator_traits<InputIt>::value_type;
+      using F = typename std::iterator_traits<FlagIt>::value_type;
+      using N = typename std::iterator_traits<NumSelectedIt>::value_type;
+      internal::ScanStage<T> in(&*d_in, num_items, true);
+      internal::ScanStage<F> flags(&*d_flags, num_items, true);
+      internal::ScanStage<T> out(&*d_out, num_items, false);
+      internal::ScanStage<N> cnt(&*d_num_selected_out, 1, false);
+      size_t k = 0;
+      for (size_t idx = 0; idx < num_items; ++idx)
+      {
+         if (flags.get()[idx]) { out.get()[k++] = in.get()[idx]; }
+      }
+      cnt.get()[0] = (N)k;
+      out.WriteBack(k);
+      cnt.WriteBack(1);
+      return;
+   }
+#endif
+
 #ifdef MFEM_USE_DEVICE_SCAN
    if (use_dev &&
        mfem::Device::Allows(Backend::CUDA_MASK | Backend::HIP_MASK))
@@ -303,6 +396,26 @@ void CopyIf(bool use_dev, InputIt d_in, OutputIt d_out,
             NumSelectedIt d_num_selected_out, size_t num_items,
             SelectOp select_op)
 {
+#ifdef MFEM_REACTANT_HOST_SCAN
+   if (use_dev && mfem::Device::Allows(Backend::CUDA_MASK))
+   {
+      using T = typename std::iterator_traits<InputIt>::value_type;
+      using N = typename std::iterator_traits<NumSelectedIt>::value_type;
+      internal::ScanStage<T> in(&*d_in, num_items, true);
+      internal::ScanStage<T> out(&*d_out, num_items, false);
+      internal::ScanStage<N> cnt(&*d_num_selected_out, 1, false);
+      size_t k = 0;
+      for (size_t idx = 0; idx < num_items; ++idx)
+      {
+         if (select_op(in.get()[idx])) { out.get()[k++] = in.get()[idx]; }
+      }
+      cnt.get()[0] = (N)k;
+      out.WriteBack(k);
+      cnt.WriteBack(1);
+      return;
+   }
+#endif
+
 #ifdef MFEM_USE_DEVICE_SCAN
    if (use_dev &&
        mfem::Device::Allows(Backend::CUDA_MASK | Backend::HIP_MASK))
@@ -372,6 +485,24 @@ template <class InputIt, class OutputIt, class NumSelectedIt>
 void CopyUnique(bool use_dev, InputIt d_in, OutputIt d_out,
                 NumSelectedIt d_num_selected_out, size_t num_items)
 {
+#ifdef MFEM_REACTANT_HOST_SCAN
+   if (use_dev && mfem::Device::Allows(Backend::CUDA_MASK))
+   {
+      using T = typename std::iterator_traits<InputIt>::value_type;
+      using N = typename std::iterator_traits<NumSelectedIt>::value_type;
+      internal::ScanStage<T> in(&*d_in, num_items, true);
+      internal::ScanStage<T> out(&*d_out, num_items, false);
+      internal::ScanStage<N> cnt(&*d_num_selected_out, 1, false);
+      size_t k =
+         std::unique_copy(in.get(), in.get() + num_items, out.get()) -
+         out.get();
+      cnt.get()[0] = (N)k;
+      out.WriteBack(k);
+      cnt.WriteBack(1);
+      return;
+   }
+#endif
+
 #ifdef MFEM_USE_DEVICE_SCAN
    if (use_dev &&
        mfem::Device::Allows(Backend::CUDA_MASK | Backend::HIP_MASK))
