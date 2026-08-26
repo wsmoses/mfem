@@ -1981,7 +1981,7 @@ void NCL2FaceRestriction::DoubleValuedNonconformingInterpolation(
                            nface_dofs, nface_dofs, nc_size);
    static constexpr int max_nd = 16*16;
    MFEM_VERIFY(nface_dofs<=max_nd, "Too many degrees of freedom.");
-   mfem::forall_2D(num_nc_faces, nface_dofs < max_nd ? nface_dofs : max_nd, 1, [=] MFEM_HOST_DEVICE (int nc_face)
+   mfem::forall_2D(num_nc_faces, MFEM_RXLA_BLOCK(nface_dofs, max_nd), 1, [=] MFEM_HOST_DEVICE (int nc_face)
    {
       MFEM_SHARED real_t dof_values[max_nd];
       const NCInterpConfig conf = interp_config_ptr[nc_face];
@@ -2060,7 +2060,7 @@ void NCL2FaceRestriction::SingleValuedNonconformingTransposeInterpolationInPlace
    auto d_interp = Reshape(interpolators, nface_dofs, nface_dofs, nc_size);
    static constexpr int max_nd = 16*16;
    MFEM_VERIFY(nface_dofs<=max_nd, "Too many degrees of freedom.");
-   mfem::forall_2D(num_nc_faces, nface_dofs < max_nd ? nface_dofs : max_nd, 1, [=] MFEM_HOST_DEVICE (int nc_face)
+   mfem::forall_2D(num_nc_faces, MFEM_RXLA_BLOCK(nface_dofs, max_nd), 1, [=] MFEM_HOST_DEVICE (int nc_face)
    {
       MFEM_SHARED real_t dof_values[max_nd];
       const NCInterpConfig conf = interp_config_ptr[nc_face];
@@ -2123,7 +2123,7 @@ void NCL2FaceRestriction::DoubleValuedNonconformingTransposeInterpolationInPlace
    auto d_interp = Reshape(interpolators, nface_dofs, nface_dofs, nc_size);
    static constexpr int max_nd = 16*16;
    MFEM_VERIFY(nface_dofs<=max_nd, "Too many degrees of freedom.");
-   mfem::forall_2D(num_nc_faces, nface_dofs < max_nd ? nface_dofs : max_nd, 1, [=] MFEM_HOST_DEVICE (int nc_face)
+   mfem::forall_2D(num_nc_faces, MFEM_RXLA_BLOCK(nface_dofs, max_nd), 1, [=] MFEM_HOST_DEVICE (int nc_face)
    {
       MFEM_SHARED real_t dof_values[max_nd];
       const NCInterpConfig conf = interp_config_ptr[nc_face];

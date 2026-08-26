@@ -28,6 +28,14 @@
 #endif
 #endif
 
+#if defined(REACTANT_XLA_BACKEND)
+// Keep the runtime device-pointer resolution out of kernel launch IR: an
+// opaque call yields a single pointer SSA value the raising path accepts.
+#define MFEM_RXLA_NOINLINE __attribute__((noinline))
+#else
+#define MFEM_RXLA_NOINLINE
+#endif
+
 namespace mfem
 {
 
@@ -1189,7 +1197,7 @@ inline Memory<T>::operator const U*() const
 }
 
 template <typename T>
-inline T *Memory<T>::ReadWrite(MemoryClass mc, int size)
+MFEM_RXLA_NOINLINE inline T *Memory<T>::ReadWrite(MemoryClass mc, int size)
 {
    const size_t bytes = size * sizeof(T);
    if (!(flags & Registered))
@@ -1202,7 +1210,7 @@ inline T *Memory<T>::ReadWrite(MemoryClass mc, int size)
 }
 
 template <typename T>
-inline const T *Memory<T>::Read(MemoryClass mc, int size) const
+MFEM_RXLA_NOINLINE inline const T *Memory<T>::Read(MemoryClass mc, int size) const
 {
    const size_t bytes = size * sizeof(T);
    if (!(flags & Registered))
@@ -1215,7 +1223,7 @@ inline const T *Memory<T>::Read(MemoryClass mc, int size) const
 }
 
 template <typename T>
-inline T *Memory<T>::Write(MemoryClass mc, int size)
+MFEM_RXLA_NOINLINE inline T *Memory<T>::Write(MemoryClass mc, int size)
 {
    const size_t bytes = size * sizeof(T);
    if (!(flags & Registered))

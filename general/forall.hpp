@@ -97,6 +97,14 @@ struct DofQuadLimits_CPU
 
 } // namespace internal
 
+#if defined(REACTANT_XLA_BACKEND)
+// A constant block dim keeps the raised axis static when the optimizer folds
+// away a min-clamp; surplus lanes fall out of the kernels' own thread guards.
+#define MFEM_RXLA_BLOCK(x, cap) (cap)
+#else
+#define MFEM_RXLA_BLOCK(x, cap) (x)
+#endif
+
 /// @brief Maximum number of 1D DOFs or quadrature points for the architecture
 /// currently being compiled for (used in fallback kernels).
 ///
