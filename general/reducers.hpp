@@ -566,6 +566,15 @@ void reduce(int N, T &res, B &&body, const R &reducer, bool use_dev,
          (N + block_size * nblocks - 1) / (block_size * nblocks);
 
       red_type red{nullptr, std::forward<B>(body), reducer, N, items_per_thread};
+#if defined(REACTANT_XLA_BACKEND)
+      // A kernel cannot write host-pinned memory under the xla backends:
+      // reduce into a device workspace and read the partials back.
+      workspace.SetSize(nblocks, MemoryType::DEVICE);
+      red.work = workspace.Write();
+      forall_2D(nblocks, block_size, 1, std::move(red));
+      MFEM_DEVICE_SYNC;
+      auto work = workspace.HostRead();
+#else
       // allocate res to fit block_size entries
       auto mt = workspace.GetMemory().GetMemoryType();
       if (mt != MemoryType::HOST_PINNED && mt != MemoryType::MANAGED)
@@ -578,6 +587,7 @@ void reduce(int N, T &res, B &&body, const R &reducer, bool use_dev,
       forall_2D(nblocks, block_size, 1, std::move(red));
       // wait for results
       MFEM_DEVICE_SYNC;
+#endif
       for (int i = 0; i < nblocks; ++i)
       {
          reducer.Join(res, work[i]);
