@@ -84,8 +84,8 @@ static void ImplValues2D(const int NE, const real_t *b_, const real_t *detJ_,
 {
    static constexpr int NBZ = T_NBZ ? T_NBZ : 1;
 
-   const int D1D = T_D1D ? T_D1D : d1d;
-   const int Q1D = T_Q1D ? T_Q1D : q1d;
+   const int D1D = T_D1D ? T_D1D : (d1d < DofQuadLimits::MAX_D1D ? d1d : DofQuadLimits::MAX_D1D);
+   const int Q1D = T_Q1D ? T_Q1D : (q1d < DofQuadLimits::MAX_Q1D ? q1d : DofQuadLimits::MAX_Q1D);
    const int VDIM = T_VDIM ? T_VDIM : vdim;
 
    const auto b = Reshape(b_, Q1D, D1D);
@@ -97,8 +97,8 @@ static void ImplValues2D(const int NE, const real_t *b_, const real_t *detJ_,
       auto y = Q_LAYOUT == QVectorLayout::byNODES
                ? Reshape(y_, Q1D, Q1D, VDIM, NE)
                : Reshape(y_, VDIM, Q1D, Q1D, NE);
-      const int D1D = T_D1D ? T_D1D : d1d;
-      const int Q1D = T_Q1D ? T_Q1D : q1d;
+      const int D1D = T_D1D ? T_D1D : (d1d < DofQuadLimits::MAX_D1D ? d1d : DofQuadLimits::MAX_D1D);
+      const int Q1D = T_Q1D ? T_Q1D : (q1d < DofQuadLimits::MAX_Q1D ? q1d : DofQuadLimits::MAX_Q1D);
       const int VDIM = T_VDIM ? T_VDIM : vdim;
       constexpr int MQ1 = T_Q1D ? T_Q1D : DofQuadLimits::MAX_Q1D;
       constexpr int MD1 = T_D1D ? T_D1D : DofQuadLimits::MAX_D1D;
@@ -170,8 +170,8 @@ static void ImplValues3D(const int NE, const real_t *b_, const real_t *detJ_,
                          const real_t *x_, real_t *y_, const int vdim = 0,
                          const int d1d = 0, const int q1d = 0)
 {
-   const int D1D = T_D1D ? T_D1D : d1d;
-   const int Q1D = T_Q1D ? T_Q1D : q1d;
+   const int D1D = T_D1D ? T_D1D : (d1d < DofQuadLimits::MAX_D1D ? d1d : DofQuadLimits::MAX_D1D);
+   const int Q1D = T_Q1D ? T_Q1D : (q1d < DofQuadLimits::MAX_Q1D ? q1d : DofQuadLimits::MAX_Q1D);
    const int VDIM = T_VDIM ? T_VDIM : vdim;
 
    const auto b = Reshape(b_, Q1D, D1D);
@@ -183,8 +183,8 @@ static void ImplValues3D(const int NE, const real_t *b_, const real_t *detJ_,
       auto y = Q_LAYOUT == QVectorLayout::byNODES
                ? Reshape(y_, Q1D, Q1D, Q1D, VDIM, NE)
                : Reshape(y_, VDIM, Q1D, Q1D, Q1D, NE);
-      const int D1D = T_D1D ? T_D1D : d1d;
-      const int Q1D = T_Q1D ? T_Q1D : q1d;
+      const int D1D = T_D1D ? T_D1D : (d1d < DofQuadLimits::MAX_D1D ? d1d : DofQuadLimits::MAX_D1D);
+      const int Q1D = T_Q1D ? T_Q1D : (q1d < DofQuadLimits::MAX_Q1D ? q1d : DofQuadLimits::MAX_Q1D);
       const int VDIM = T_VDIM ? T_VDIM : vdim;
       constexpr int MQ1 = T_Q1D ? T_Q1D : DofQuadLimits::MAX_INTERP_1D;
       constexpr int MD1 = T_D1D ? T_D1D : DofQuadLimits::MAX_INTERP_1D;
@@ -285,8 +285,8 @@ static void ImplEval2D(const int NE, const int vdim,
 
    const int nd = maps.ndof;
    const int nq = maps.nqpt;
-   const int ND = T_ND ? T_ND : nd;
-   const int NQ = T_NQ ? T_NQ : nq;
+   const int ND = T_ND ? T_ND : (nd < QI::MAX_ND2D ? nd : QI::MAX_ND2D);
+   const int NQ = T_NQ ? T_NQ : (nq < QI::MAX_NQ2D ? nq : QI::MAX_NQ2D);
    const int NMAX = NQ > ND ? NQ : ND;
    const int VDIM = T_VDIM ? T_VDIM : vdim;
    MFEM_ASSERT(maps.mode == DofToQuad::FULL, "internal error");
@@ -475,8 +475,8 @@ static void ImplEval3D(const int NE, const int vdim,
 
    const int nd = maps.ndof;
    const int nq = maps.nqpt;
-   const int ND = T_ND ? T_ND : nd;
-   const int NQ = T_NQ ? T_NQ : nq;
+   const int ND = T_ND ? T_ND : (nd < QI::MAX_ND3D ? nd : QI::MAX_ND3D);
+   const int NQ = T_NQ ? T_NQ : (nq < QI::MAX_NQ3D ? nq : QI::MAX_NQ3D);
    const int NMAX = NQ > ND ? NQ : ND;
    const int VDIM = T_VDIM ? T_VDIM : vdim;
    MFEM_ASSERT(maps.mode == DofToQuad::FULL, "internal error");

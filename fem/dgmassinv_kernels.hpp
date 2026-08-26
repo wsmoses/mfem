@@ -189,7 +189,7 @@ void DGMassBasis1D(const int e,
                    real_t *y_,
                    const int d1d = 0)
 {
-   const int D1D = T_D1D ? T_D1D : d1d;
+   const int D1D = T_D1D ? T_D1D : (d1d < DofQuadLimits::MAX_D1D ? d1d : DofQuadLimits::MAX_D1D);
 
    const auto b = Reshape(b_, D1D, D1D);
    const auto x = Reshape(x_, D1D, NE);
@@ -227,7 +227,7 @@ void DGMassBasis2D(const int e,
                    const int d1d = 0)
 {
    constexpr int MD1 = T_D1D ? T_D1D : DofQuadLimits::MAX_D1D;
-   const int D1D = T_D1D ? T_D1D : d1d;
+   const int D1D = T_D1D ? T_D1D : (d1d < DofQuadLimits::MAX_D1D ? d1d : DofQuadLimits::MAX_D1D);
 
    const auto b = Reshape(b_, D1D, D1D);
    const auto x = Reshape(x_, D1D, D1D, NE);
@@ -267,7 +267,7 @@ void DGMassBasis3D(const int e,
                    real_t *y_,
                    const int d1d = 0)
 {
-   const int D1D = T_D1D ? T_D1D : d1d;
+   const int D1D = T_D1D ? T_D1D : (d1d < DofQuadLimits::MAX_D1D ? d1d : DofQuadLimits::MAX_D1D);
 
    const auto b = Reshape(b_, D1D, D1D);
    const auto x = Reshape(x_, D1D, D1D, D1D, NE);

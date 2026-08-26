@@ -147,9 +147,9 @@ inline void PAHcurlHdivApply3D(const int d1d,
                "Error: d1dtest > HCURL_MAX_D1D");
    MFEM_VERIFY(T_Q1D || q1d <= DeviceDofQuadLimits::Get().HCURL_MAX_Q1D,
                "Error: q1d > HCURL_MAX_Q1D");
-   const int D1D = T_D1D ? T_D1D : d1d;
+   const int D1D = T_D1D ? T_D1D : (d1d < DofQuadLimits::MAX_D1D ? d1d : DofQuadLimits::MAX_D1D);
    const int D1Dtest = T_D1D_TEST ? T_D1D_TEST : d1dtest;
-   const int Q1D = T_Q1D ? T_Q1D : q1d;
+   const int Q1D = T_Q1D ? T_Q1D : (q1d < DofQuadLimits::MAX_Q1D ? q1d : DofQuadLimits::MAX_Q1D);
 
    auto Bo = Reshape(bo.Read(), Q1D, D1D-1);
    auto Bc = Reshape(bc.Read(), Q1D, D1D);
@@ -173,9 +173,9 @@ inline void PAHcurlHdivApply3D(const int d1d,
       constexpr int MD1D = T_D1D ? T_D1D :
                            DofQuadLimits::HCURL_MAX_D1D;  // Assuming HDIV_MAX_D1D <= HCURL_MAX_D1D
       constexpr int MQ1D = T_Q1D ? T_Q1D : DofQuadLimits::HCURL_MAX_Q1D;
-      const int D1D = T_D1D ? T_D1D : d1d;
+      const int D1D = T_D1D ? T_D1D : (d1d < DofQuadLimits::MAX_D1D ? d1d : DofQuadLimits::MAX_D1D);
       const int D1Dtest = T_D1D_TEST ? T_D1D_TEST : d1dtest;
-      const int Q1D = T_Q1D ? T_Q1D : q1d;
+      const int Q1D = T_Q1D ? T_Q1D : (q1d < DofQuadLimits::MAX_Q1D ? q1d : DofQuadLimits::MAX_Q1D);
 
       real_t curl[MQ1D][MQ1D][MQ1D][VDIM];
       // curl[qz][qy][qx] will be computed as the vector curl at each quadrature point.
@@ -516,9 +516,9 @@ inline void PAHcurlHdivApplyTranspose3D(const int d1d,
                "Error: d1dtest > HCURL_MAX_D1D");
    MFEM_VERIFY(T_Q1D || q1d <= DeviceDofQuadLimits::Get().HCURL_MAX_Q1D,
                "Error: q1d > HCURL_MAX_Q1D");
-   const int D1D = T_D1D ? T_D1D : d1d;
+   const int D1D = T_D1D ? T_D1D : (d1d < DofQuadLimits::MAX_D1D ? d1d : DofQuadLimits::MAX_D1D);
    const int D1Dtest = T_D1D_TEST ? T_D1D_TEST : d1dtest;
-   const int Q1D = T_Q1D ? T_Q1D : q1d;
+   const int Q1D = T_Q1D ? T_Q1D : (q1d < DofQuadLimits::MAX_Q1D ? q1d : DofQuadLimits::MAX_Q1D);
 
    auto Bo = Reshape(bo.Read(), Q1D, D1D-1);
    auto Bc = Reshape(bc.Read(), Q1D, D1D);
@@ -542,9 +542,9 @@ inline void PAHcurlHdivApplyTranspose3D(const int d1d,
       constexpr int MD1D = T_D1D ? T_D1D :
                            DofQuadLimits::HCURL_MAX_D1D;  // Assuming HDIV_MAX_D1D <= HCURL_MAX_D1D
       constexpr int MQ1D = T_Q1D ? T_Q1D : DofQuadLimits::HCURL_MAX_Q1D;
-      const int D1D = T_D1D ? T_D1D : d1d;
+      const int D1D = T_D1D ? T_D1D : (d1d < DofQuadLimits::MAX_D1D ? d1d : DofQuadLimits::MAX_D1D);
       const int D1Dtest = T_D1D_TEST ? T_D1D_TEST : d1dtest;
-      const int Q1D = T_Q1D ? T_Q1D : q1d;
+      const int Q1D = T_Q1D ? T_Q1D : (q1d < DofQuadLimits::MAX_Q1D ? q1d : DofQuadLimits::MAX_Q1D);
 
       real_t mass[MQ1D][MQ1D][MQ1D][VDIM];
 

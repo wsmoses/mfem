@@ -88,7 +88,7 @@ static void BLFEvalAssemble3D(const int vdim, const int nbe, const int d,
    const auto C = cst ? Reshape(F,cvdim,1,1,1) : Reshape(F,cvdim,q,q,nbe);
    auto Y = Reshape(y, d, d, vdim, nbe);
 
-   mfem::forall_2D(nbe, q, q, [=] MFEM_HOST_DEVICE (int e)
+   mfem::forall_2D(nbe, q < DofQuadLimits::MAX_Q1D ? q : DofQuadLimits::MAX_Q1D, q < DofQuadLimits::MAX_Q1D ? q : DofQuadLimits::MAX_Q1D, [=] MFEM_HOST_DEVICE (int e)
    {
       if (M(e) == 0) { return; } // ignore
 

@@ -113,8 +113,8 @@ static void Derivatives2D(const int NE,
                           const int d1d = 0,
                           const int q1d = 0)
 {
-   const int D1D = T_D1D ? T_D1D : d1d;
-   const int Q1D = T_Q1D ? T_Q1D : q1d;
+   const int D1D = T_D1D ? T_D1D : (d1d < DofQuadLimits::MAX_D1D ? d1d : DofQuadLimits::MAX_D1D);
+   const int Q1D = T_Q1D ? T_Q1D : (q1d < DofQuadLimits::MAX_Q1D ? q1d : DofQuadLimits::MAX_Q1D);
    const int VDIM = T_VDIM ? T_VDIM : vdim;
    const int SDIM = GRAD_PHYS ? sdim : 2;
    static constexpr int NBZ = T_NBZ ? T_NBZ : 1;
@@ -129,8 +129,8 @@ static void Derivatives2D(const int NE,
 
    mfem::forall_2D_batch(NE, Q1D, Q1D, NBZ, [=] MFEM_HOST_DEVICE (int e)
    {
-      const int D1D = T_D1D ? T_D1D : d1d;
-      const int Q1D = T_Q1D ? T_Q1D : q1d;
+      const int D1D = T_D1D ? T_D1D : (d1d < DofQuadLimits::MAX_D1D ? d1d : DofQuadLimits::MAX_D1D);
+      const int Q1D = T_Q1D ? T_Q1D : (q1d < DofQuadLimits::MAX_Q1D ? q1d : DofQuadLimits::MAX_Q1D);
       const int VDIM = T_VDIM ? T_VDIM : vdim;
       constexpr int MQ1 = T_Q1D ? T_Q1D : DofQuadLimits::MAX_Q1D;
       constexpr int MD1 = T_D1D ? T_D1D : DofQuadLimits::MAX_D1D;
@@ -243,8 +243,8 @@ static void Derivatives3D(const int NE,
                           const int d1d = 0,
                           const int q1d = 0)
 {
-   const int D1D = T_D1D ? T_D1D : d1d;
-   const int Q1D = T_Q1D ? T_Q1D : q1d;
+   const int D1D = T_D1D ? T_D1D : (d1d < DofQuadLimits::MAX_D1D ? d1d : DofQuadLimits::MAX_D1D);
+   const int Q1D = T_Q1D ? T_Q1D : (q1d < DofQuadLimits::MAX_Q1D ? q1d : DofQuadLimits::MAX_Q1D);
    const int VDIM = T_VDIM ? T_VDIM : vdim;
 
    const auto b = Reshape(b_, Q1D, D1D);
@@ -257,8 +257,8 @@ static void Derivatives3D(const int NE,
 
    mfem::forall_3D(NE, Q1D, Q1D, Q1D, [=] MFEM_HOST_DEVICE (int e)
    {
-      const int D1D = T_D1D ? T_D1D : d1d;
-      const int Q1D = T_Q1D ? T_Q1D : q1d;
+      const int D1D = T_D1D ? T_D1D : (d1d < DofQuadLimits::MAX_D1D ? d1d : DofQuadLimits::MAX_D1D);
+      const int Q1D = T_Q1D ? T_Q1D : (q1d < DofQuadLimits::MAX_Q1D ? q1d : DofQuadLimits::MAX_Q1D);
       const int VDIM = T_VDIM ? T_VDIM : vdim;
       constexpr int MQ1 = T_Q1D ? T_Q1D : DofQuadLimits::MAX_INTERP_1D;
       constexpr int MD1 = T_D1D ? T_D1D : DofQuadLimits::MAX_INTERP_1D;
@@ -401,7 +401,7 @@ static void CollocatedDerivatives2D(const int NE,
                                     const int vdim = 0,
                                     const int d1d = 0)
 {
-   const int D1D = T_D1D ? T_D1D : d1d;
+   const int D1D = T_D1D ? T_D1D : (d1d < DofQuadLimits::MAX_D1D ? d1d : DofQuadLimits::MAX_D1D);
    const int VDIM = T_VDIM ? T_VDIM : vdim;
    const int SDIM = GRAD_PHYS ? sdim : 2;
    static constexpr int NBZ = T_NBZ ? T_NBZ : 1;
@@ -415,7 +415,7 @@ static void CollocatedDerivatives2D(const int NE,
 
    mfem::forall_2D_batch(NE, D1D, D1D, NBZ, [=] MFEM_HOST_DEVICE (int e)
    {
-      const int D1D = T_D1D ? T_D1D : d1d;
+      const int D1D = T_D1D ? T_D1D : (d1d < DofQuadLimits::MAX_D1D ? d1d : DofQuadLimits::MAX_D1D);
       const int VDIM = T_VDIM ? T_VDIM : vdim;
       constexpr int MD1 = T_D1D ? T_D1D : DofQuadLimits::MAX_D1D;
 
@@ -507,7 +507,7 @@ static void CollocatedDerivatives3D(const int NE,
 {
    MFEM_VERIFY(sdim == 3, "");
 
-   const int D1D = T_D1D ? T_D1D : d1d;
+   const int D1D = T_D1D ? T_D1D : (d1d < DofQuadLimits::MAX_D1D ? d1d : DofQuadLimits::MAX_D1D);
    const int VDIM = T_VDIM ? T_VDIM : vdim;
 
    const auto g = Reshape(g_, D1D, D1D);
@@ -519,7 +519,7 @@ static void CollocatedDerivatives3D(const int NE,
 
    mfem::forall_3D(NE, D1D, D1D, D1D, [=] MFEM_HOST_DEVICE (int e)
    {
-      const int D1D = T_D1D ? T_D1D : d1d;
+      const int D1D = T_D1D ? T_D1D : (d1d < DofQuadLimits::MAX_D1D ? d1d : DofQuadLimits::MAX_D1D);
       const int VDIM = T_VDIM ? T_VDIM : vdim;
       constexpr int MD1 = T_D1D ? T_D1D : DofQuadLimits::MAX_INTERP_1D;
 

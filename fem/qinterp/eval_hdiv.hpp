@@ -42,8 +42,8 @@ inline void EvalHDiv2D(const int NE,
 {
    static constexpr int DIM = 2;
 
-   const int D1D = T_D1D ? T_D1D : d1d;
-   const int Q1D = T_Q1D ? T_Q1D : q1d;
+   const int D1D = T_D1D ? T_D1D : (d1d < DofQuadLimits::MAX_D1D ? d1d : DofQuadLimits::MAX_D1D);
+   const int Q1D = T_Q1D ? T_Q1D : (q1d < DofQuadLimits::MAX_Q1D ? q1d : DofQuadLimits::MAX_Q1D);
    const int M1D = (Q1D > D1D) ? Q1D : D1D;
 
    const auto bo = Reshape(Bo_, Q1D, D1D-1);
@@ -62,8 +62,8 @@ inline void EvalHDiv2D(const int NE,
    {
       const int tidz = MFEM_THREAD_ID(z);
 
-      const int D1D = T_D1D ? T_D1D : d1d;
-      const int Q1D = T_Q1D ? T_Q1D : q1d;
+      const int D1D = T_D1D ? T_D1D : (d1d < DofQuadLimits::MAX_D1D ? d1d : DofQuadLimits::MAX_D1D);
+      const int Q1D = T_Q1D ? T_Q1D : (q1d < DofQuadLimits::MAX_Q1D ? q1d : DofQuadLimits::MAX_Q1D);
       const int M1D = (Q1D > D1D) ? Q1D : D1D;
 
       constexpr int MQ1 = T_Q1D ? T_Q1D : DofQuadLimits::HDIV_MAX_Q1D;
@@ -219,8 +219,8 @@ inline void EvalHDiv3D(const int NE,
 {
    static constexpr int DIM = 3;
 
-   const int D1D = T_D1D ? T_D1D : d1d;
-   const int Q1D = T_Q1D ? T_Q1D : q1d;
+   const int D1D = T_D1D ? T_D1D : (d1d < DofQuadLimits::MAX_D1D ? d1d : DofQuadLimits::MAX_D1D);
+   const int Q1D = T_Q1D ? T_Q1D : (q1d < DofQuadLimits::MAX_Q1D ? q1d : DofQuadLimits::MAX_Q1D);
 
    const auto bo = Reshape(Bo_, Q1D, D1D-1);
    const auto bc = Reshape(Bc_, Q1D, D1D);
@@ -238,8 +238,8 @@ inline void EvalHDiv3D(const int NE,
    {
       const int tidz = MFEM_THREAD_ID(z);
 
-      const int D1D = T_D1D ? T_D1D : d1d;
-      const int Q1D = T_Q1D ? T_Q1D : q1d;
+      const int D1D = T_D1D ? T_D1D : (d1d < DofQuadLimits::MAX_D1D ? d1d : DofQuadLimits::MAX_D1D);
+      const int Q1D = T_Q1D ? T_Q1D : (q1d < DofQuadLimits::MAX_Q1D ? q1d : DofQuadLimits::MAX_Q1D);
 
       constexpr int MQ1 = T_Q1D ? T_Q1D : DofQuadLimits::HDIV_MAX_Q1D;
       constexpr int MD1 = T_D1D ? T_D1D : DofQuadLimits::HDIV_MAX_D1D;

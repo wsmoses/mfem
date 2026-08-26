@@ -1,0 +1,594 @@
+; ModuleID = '/mnt3/wmoses/git/mfem/fem/derefmat_op.cpp'
+source_filename = "/mnt3/wmoses/git/mfem/fem/derefmat_op.cpp"
+target datalayout = "e-p6:32:32-i64:64-i128:128-i256:256-v16:16-v32:32-n16:32:64"
+target triple = "nvptx64-nvidia-cuda"
+
+%"struct.mfem::internal::DerefineMatrixOpMultFunctor" = type { %"struct.mfem::internal::DerefineMatrixOpFunctorBase", ptr, ptr, ptr, ptr, ptr, ptr, i32, i32, i32, i32 }
+%"struct.mfem::internal::DerefineMatrixOpFunctorBase" = type { ptr, ptr }
+%"struct.mfem::internal::DerefineMatrixOpMultFunctor.0" = type { %"struct.mfem::internal::DerefineMatrixOpFunctorBase.1", ptr, ptr, ptr, ptr, ptr, ptr, i32, i32, i32, i32 }
+%"struct.mfem::internal::DerefineMatrixOpFunctorBase.1" = type { ptr, ptr }
+%"struct.mfem::internal::DerefineMatrixOpMultFunctor.2" = type { %"struct.mfem::internal::DerefineMatrixOpFunctorBase.3", ptr, ptr, ptr, ptr, ptr, ptr, i32, i32, i32, i32 }
+%"struct.mfem::internal::DerefineMatrixOpFunctorBase.3" = type { ptr, ptr }
+%"struct.mfem::internal::DerefineMatrixOpMultFunctor.4" = type { %"struct.mfem::internal::DerefineMatrixOpFunctorBase.5", ptr, ptr, ptr, ptr, ptr, ptr, i32, i32, i32, i32 }
+%"struct.mfem::internal::DerefineMatrixOpFunctorBase.5" = type { ptr, ptr }
+
+$_ZN4mfemL10CuKernel2DINS_8internal27DerefineMatrixOpMultFunctorILNS_8Ordering4TypeE0ELb0ELb1EEEEEviT_ = comdat any
+
+$_ZN4mfemL10CuKernel2DINS_8internal27DerefineMatrixOpMultFunctorILNS_8Ordering4TypeE1ELb0ELb1EEEEEviT_ = comdat any
+
+$_ZN4mfemL10CuKernel2DINS_8internal27DerefineMatrixOpMultFunctorILNS_8Ordering4TypeE0ELb1ELb1EEEEEviT_ = comdat any
+
+$_ZN4mfemL10CuKernel2DINS_8internal27DerefineMatrixOpMultFunctorILNS_8Ordering4TypeE1ELb1ELb1EEEEEviT_ = comdat any
+
+; Function Attrs: mustprogress nofree noinline norecurse nosync nounwind memory(readwrite, inaccessiblemem: none, target_mem: none)
+define dso_local ptx_kernel void @_ZN4mfemL10CuKernel2DINS_8internal27DerefineMatrixOpMultFunctorILNS_8Ordering4TypeE0ELb0ELb1EEEEEviT_(i32 noundef %0, ptr nofree noundef readonly byval(%"struct.mfem::internal::DerefineMatrixOpMultFunctor") align 8 captures(none) %1) local_unnamed_addr #0 comdat {
+  %3 = tail call noundef i32 @llvm.nvvm.read.ptx.sreg.ctaid.x()
+  %4 = tail call noundef i32 @llvm.nvvm.read.ptx.sreg.ntid.z()
+  %5 = mul i32 %3, %4
+  %6 = tail call noundef i32 @llvm.nvvm.read.ptx.sreg.tid.z()
+  %7 = add i32 %5, %6
+  %8 = icmp slt i32 %7, %0
+  br i1 %8, label %9, label %104
+
+9:                                                ; preds = %2
+  %10 = getelementptr inbounds nuw i8, ptr %1, i64 64
+  %11 = load i32, ptr %10, align 8, !tbaa !10
+  %12 = srem i32 %7, %11
+  %13 = getelementptr inbounds nuw i8, ptr %1, i64 48
+  %14 = load ptr, ptr %13, align 8, !tbaa !16
+  %15 = sext i32 %12 to i64
+  %16 = getelementptr [4 x i8], ptr %14, i64 %15
+  %17 = getelementptr i8, ptr %16, i64 4
+  %18 = load i32, ptr %17, align 4, !tbaa !17
+  %19 = load i32, ptr %16, align 4, !tbaa !17
+  %20 = sub nsw i32 %18, %19
+  %21 = load ptr, ptr %1, align 8, !tbaa !18
+  %22 = getelementptr [4 x i8], ptr %21, i64 %15
+  %23 = getelementptr i8, ptr %22, i64 4
+  %24 = load i32, ptr %23, align 4, !tbaa !17
+  %25 = load i32, ptr %22, align 4, !tbaa !17
+  %26 = sub i32 %24, %25
+  %27 = tail call noundef i32 @llvm.nvvm.read.ptx.sreg.tid.x()
+  %28 = icmp slt i32 %27, %20
+  br i1 %28, label %29, label %104
+
+29:                                               ; preds = %9
+  %30 = sdiv i32 %7, %11
+  %31 = getelementptr inbounds nuw i8, ptr %1, i64 56
+  %32 = load ptr, ptr %31, align 8, !tbaa !19
+  %33 = icmp sgt i32 %26, 0
+  %34 = getelementptr inbounds nuw i8, ptr %1, i64 8
+  %35 = load ptr, ptr %34, align 8
+  %36 = getelementptr inbounds nuw i8, ptr %1, i64 32
+  %37 = load ptr, ptr %36, align 8
+  %38 = getelementptr inbounds nuw i8, ptr %1, i64 40
+  %39 = load ptr, ptr %38, align 8
+  %40 = getelementptr inbounds [4 x i8], ptr %39, i64 %15
+  %41 = getelementptr inbounds nuw i8, ptr %1, i64 16
+  %42 = load ptr, ptr %41, align 8
+  %43 = getelementptr inbounds nuw i8, ptr %1, i64 76
+  %44 = getelementptr inbounds nuw i8, ptr %1, i64 24
+  %45 = getelementptr inbounds nuw i8, ptr %1, i64 72
+  %46 = tail call noundef i32 @llvm.nvvm.read.ptx.sreg.ntid.x()
+  %47 = load i32, ptr %43, align 4
+  %48 = mul nsw i32 %47, %30
+  %49 = load ptr, ptr %44, align 8
+  %50 = load i32, ptr %45, align 8
+  %51 = mul nsw i32 %50, %30
+  br label %52
+
+52:                                               ; preds = %101, %29
+  %53 = phi i32 [ %27, %29 ], [ %102, %101 ]
+  %54 = add nsw i32 %53, %19
+  %55 = sext i32 %54 to i64
+  %56 = getelementptr inbounds [4 x i8], ptr %32, i64 %55
+  %57 = load i32, ptr %56, align 4, !tbaa !17
+  %58 = ashr i32 %57, 31
+  %59 = xor i32 %58, %57
+  %60 = icmp sgt i32 %57, -1
+  %61 = select i1 %60, i32 1, i32 -1
+  %62 = icmp eq i32 %59, 2147483647
+  br i1 %62, label %101, label %63
+
+63:                                               ; preds = %52
+  br i1 %33, label %64, label %68
+
+64:                                               ; preds = %63
+  %65 = sub nsw i32 0, %61
+  %66 = load i32, ptr %40, align 4, !tbaa !17
+  %67 = add i32 %66, %53
+  br label %75
+
+68:                                               ; preds = %75, %63
+  %69 = phi double [ 0.000000e+00, %63 ], [ %98, %75 ]
+  %70 = add nsw i32 %51, %59
+  %71 = sext i32 %70 to i64
+  %72 = getelementptr inbounds [8 x i8], ptr %49, i64 %71
+  %73 = load double, ptr %72, align 8, !tbaa !20
+  %74 = fadd contract double %69, %73
+  store double %74, ptr %72, align 8, !tbaa !20
+  br label %101
+
+75:                                               ; preds = %75, %64
+  %76 = phi i32 [ 0, %64 ], [ %99, %75 ]
+  %77 = phi double [ 0.000000e+00, %64 ], [ %98, %75 ]
+  %78 = add nsw i32 %76, %25
+  %79 = sext i32 %78 to i64
+  %80 = getelementptr inbounds [4 x i8], ptr %35, i64 %79
+  %81 = load i32, ptr %80, align 4, !tbaa !17
+  %82 = icmp slt i32 %81, 0
+  %83 = ashr i32 %81, 31
+  %84 = xor i32 %83, %81
+  %85 = select i1 %82, i32 %65, i32 %61
+  %86 = sitofp contract i32 %85 to double
+  %87 = mul nsw i32 %76, %20
+  %88 = add i32 %67, %87
+  %89 = sext i32 %88 to i64
+  %90 = getelementptr inbounds [8 x i8], ptr %37, i64 %89
+  %91 = load double, ptr %90, align 8, !tbaa !20
+  %92 = fmul contract double %91, %86
+  %93 = add nsw i32 %84, %48
+  %94 = sext i32 %93 to i64
+  %95 = getelementptr inbounds [8 x i8], ptr %42, i64 %94
+  %96 = load double, ptr %95, align 8, !tbaa !20
+  %97 = fmul contract double %96, %92
+  %98 = fadd contract double %77, %97
+  %99 = add nuw nsw i32 %76, 1
+  %100 = icmp eq i32 %99, %26
+  br i1 %100, label %68, label %75, !llvm.loop !22
+
+101:                                              ; preds = %68, %52
+  %102 = add i32 %53, %46
+  %103 = icmp slt i32 %102, %20
+  br i1 %103, label %52, label %104, !llvm.loop !24
+
+104:                                              ; preds = %101, %9, %2
+  ret void
+}
+
+; Function Attrs: mustprogress nocallback nofree nosync nounwind speculatable willreturn memory(none)
+declare noundef range(i32 0, 2147483647) i32 @llvm.nvvm.read.ptx.sreg.ctaid.x() #1
+
+; Function Attrs: mustprogress nocallback nofree nosync nounwind speculatable willreturn memory(none)
+declare noundef range(i32 1, 65) i32 @llvm.nvvm.read.ptx.sreg.ntid.z() #1
+
+; Function Attrs: mustprogress nocallback nofree nosync nounwind speculatable willreturn memory(none)
+declare noundef range(i32 0, 64) i32 @llvm.nvvm.read.ptx.sreg.tid.z() #1
+
+; Function Attrs: mustprogress nocallback nofree nosync nounwind speculatable willreturn memory(none)
+declare noundef range(i32 0, 1024) i32 @llvm.nvvm.read.ptx.sreg.tid.x() #1
+
+; Function Attrs: mustprogress nocallback nofree nosync nounwind speculatable willreturn memory(none)
+declare noundef range(i32 1, 1025) i32 @llvm.nvvm.read.ptx.sreg.ntid.x() #1
+
+; Function Attrs: mustprogress nofree noinline norecurse nosync nounwind memory(readwrite, inaccessiblemem: none, target_mem: none)
+define dso_local ptx_kernel void @_ZN4mfemL10CuKernel2DINS_8internal27DerefineMatrixOpMultFunctorILNS_8Ordering4TypeE1ELb0ELb1EEEEEviT_(i32 noundef %0, ptr nofree noundef readonly byval(%"struct.mfem::internal::DerefineMatrixOpMultFunctor.0") align 8 captures(none) %1) local_unnamed_addr #0 comdat {
+  %3 = tail call noundef i32 @llvm.nvvm.read.ptx.sreg.ctaid.x()
+  %4 = tail call noundef i32 @llvm.nvvm.read.ptx.sreg.ntid.z()
+  %5 = mul i32 %3, %4
+  %6 = tail call noundef i32 @llvm.nvvm.read.ptx.sreg.tid.z()
+  %7 = add i32 %5, %6
+  %8 = icmp slt i32 %7, %0
+  br i1 %8, label %9, label %102
+
+9:                                                ; preds = %2
+  %10 = getelementptr inbounds nuw i8, ptr %1, i64 64
+  %11 = load i32, ptr %10, align 8, !tbaa !25
+  %12 = srem i32 %7, %11
+  %13 = sdiv i32 %7, %11
+  %14 = getelementptr inbounds nuw i8, ptr %1, i64 48
+  %15 = load ptr, ptr %14, align 8, !tbaa !28
+  %16 = sext i32 %12 to i64
+  %17 = getelementptr [4 x i8], ptr %15, i64 %16
+  %18 = getelementptr i8, ptr %17, i64 4
+  %19 = load i32, ptr %18, align 4, !tbaa !17
+  %20 = load i32, ptr %17, align 4, !tbaa !17
+  %21 = sub nsw i32 %19, %20
+  %22 = load ptr, ptr %1, align 8, !tbaa !29
+  %23 = getelementptr [4 x i8], ptr %22, i64 %16
+  %24 = getelementptr i8, ptr %23, i64 4
+  %25 = load i32, ptr %24, align 4, !tbaa !17
+  %26 = load i32, ptr %23, align 4, !tbaa !17
+  %27 = sub i32 %25, %26
+  %28 = tail call noundef i32 @llvm.nvvm.read.ptx.sreg.tid.x()
+  %29 = icmp slt i32 %28, %21
+  br i1 %29, label %30, label %102
+
+30:                                               ; preds = %9
+  %31 = getelementptr inbounds nuw i8, ptr %1, i64 56
+  %32 = load ptr, ptr %31, align 8, !tbaa !30
+  %33 = icmp sgt i32 %27, 0
+  %34 = getelementptr inbounds nuw i8, ptr %1, i64 8
+  %35 = load ptr, ptr %34, align 8
+  %36 = getelementptr inbounds nuw i8, ptr %1, i64 32
+  %37 = load ptr, ptr %36, align 8
+  %38 = getelementptr inbounds nuw i8, ptr %1, i64 40
+  %39 = load ptr, ptr %38, align 8
+  %40 = getelementptr inbounds [4 x i8], ptr %39, i64 %16
+  %41 = getelementptr inbounds nuw i8, ptr %1, i64 16
+  %42 = load ptr, ptr %41, align 8
+  %43 = getelementptr inbounds nuw i8, ptr %1, i64 68
+  %44 = getelementptr inbounds nuw i8, ptr %1, i64 24
+  %45 = tail call noundef i32 @llvm.nvvm.read.ptx.sreg.ntid.x()
+  %46 = load i32, ptr %43, align 4
+  %47 = load ptr, ptr %44, align 8
+  br label %48
+
+48:                                               ; preds = %99, %30
+  %49 = phi i32 [ %28, %30 ], [ %100, %99 ]
+  %50 = add nsw i32 %49, %20
+  %51 = sext i32 %50 to i64
+  %52 = getelementptr inbounds [4 x i8], ptr %32, i64 %51
+  %53 = load i32, ptr %52, align 4, !tbaa !17
+  %54 = ashr i32 %53, 31
+  %55 = xor i32 %54, %53
+  %56 = icmp sgt i32 %53, -1
+  %57 = select i1 %56, i32 1, i32 -1
+  %58 = icmp eq i32 %55, 2147483647
+  br i1 %58, label %99, label %59
+
+59:                                               ; preds = %48
+  br i1 %33, label %60, label %64
+
+60:                                               ; preds = %59
+  %61 = sub nsw i32 0, %57
+  %62 = load i32, ptr %40, align 4, !tbaa !17
+  %63 = add i32 %62, %49
+  br label %72
+
+64:                                               ; preds = %72, %59
+  %65 = phi double [ 0.000000e+00, %59 ], [ %96, %72 ]
+  %66 = mul nsw i32 %46, %55
+  %67 = add nsw i32 %66, %13
+  %68 = sext i32 %67 to i64
+  %69 = getelementptr inbounds [8 x i8], ptr %47, i64 %68
+  %70 = load double, ptr %69, align 8, !tbaa !20
+  %71 = fadd contract double %65, %70
+  store double %71, ptr %69, align 8, !tbaa !20
+  br label %99
+
+72:                                               ; preds = %72, %60
+  %73 = phi i32 [ 0, %60 ], [ %97, %72 ]
+  %74 = phi double [ 0.000000e+00, %60 ], [ %96, %72 ]
+  %75 = add nsw i32 %73, %26
+  %76 = sext i32 %75 to i64
+  %77 = getelementptr inbounds [4 x i8], ptr %35, i64 %76
+  %78 = load i32, ptr %77, align 4, !tbaa !17
+  %79 = icmp slt i32 %78, 0
+  %80 = ashr i32 %78, 31
+  %81 = xor i32 %80, %78
+  %82 = select i1 %79, i32 %61, i32 %57
+  %83 = sitofp contract i32 %82 to double
+  %84 = mul nsw i32 %73, %21
+  %85 = add i32 %63, %84
+  %86 = sext i32 %85 to i64
+  %87 = getelementptr inbounds [8 x i8], ptr %37, i64 %86
+  %88 = load double, ptr %87, align 8, !tbaa !20
+  %89 = fmul contract double %88, %83
+  %90 = mul nsw i32 %81, %46
+  %91 = add nsw i32 %90, %13
+  %92 = sext i32 %91 to i64
+  %93 = getelementptr inbounds [8 x i8], ptr %42, i64 %92
+  %94 = load double, ptr %93, align 8, !tbaa !20
+  %95 = fmul contract double %94, %89
+  %96 = fadd contract double %74, %95
+  %97 = add nuw nsw i32 %73, 1
+  %98 = icmp eq i32 %97, %27
+  br i1 %98, label %64, label %72, !llvm.loop !31
+
+99:                                               ; preds = %64, %48
+  %100 = add i32 %49, %45
+  %101 = icmp slt i32 %100, %21
+  br i1 %101, label %48, label %102, !llvm.loop !32
+
+102:                                              ; preds = %99, %9, %2
+  ret void
+}
+
+; Function Attrs: mustprogress noinline norecurse nounwind memory(readwrite, inaccessiblemem: none, target_mem: none)
+define dso_local ptx_kernel void @_ZN4mfemL10CuKernel2DINS_8internal27DerefineMatrixOpMultFunctorILNS_8Ordering4TypeE0ELb1ELb1EEEEEviT_(i32 noundef %0, ptr nofree noundef readonly byval(%"struct.mfem::internal::DerefineMatrixOpMultFunctor.2") align 8 captures(none) %1) local_unnamed_addr #2 comdat {
+  %3 = tail call noundef i32 @llvm.nvvm.read.ptx.sreg.ctaid.x()
+  %4 = tail call noundef i32 @llvm.nvvm.read.ptx.sreg.ntid.z()
+  %5 = mul i32 %3, %4
+  %6 = tail call noundef i32 @llvm.nvvm.read.ptx.sreg.tid.z()
+  %7 = add i32 %5, %6
+  %8 = icmp slt i32 %7, %0
+  br i1 %8, label %9, label %105
+
+9:                                                ; preds = %2
+  %10 = getelementptr inbounds nuw i8, ptr %1, i64 64
+  %11 = load i32, ptr %10, align 8, !tbaa !33
+  %12 = srem i32 %7, %11
+  %13 = getelementptr inbounds nuw i8, ptr %1, i64 48
+  %14 = load ptr, ptr %13, align 8, !tbaa !36
+  %15 = sext i32 %12 to i64
+  %16 = getelementptr [4 x i8], ptr %14, i64 %15
+  %17 = getelementptr i8, ptr %16, i64 4
+  %18 = load i32, ptr %17, align 4, !tbaa !17
+  %19 = load i32, ptr %16, align 4, !tbaa !17
+  %20 = sub nsw i32 %18, %19
+  %21 = load ptr, ptr %1, align 8, !tbaa !37
+  %22 = getelementptr [4 x i8], ptr %21, i64 %15
+  %23 = getelementptr i8, ptr %22, i64 4
+  %24 = load i32, ptr %23, align 4, !tbaa !17
+  %25 = load i32, ptr %22, align 4, !tbaa !17
+  %26 = sub i32 %24, %25
+  %27 = tail call noundef i32 @llvm.nvvm.read.ptx.sreg.tid.x()
+  %28 = icmp slt i32 %27, %20
+  br i1 %28, label %29, label %105
+
+29:                                               ; preds = %9
+  %30 = sdiv i32 %7, %11
+  %31 = getelementptr inbounds nuw i8, ptr %1, i64 56
+  %32 = icmp sgt i32 %26, 0
+  %33 = getelementptr inbounds nuw i8, ptr %1, i64 8
+  %34 = getelementptr inbounds nuw i8, ptr %1, i64 32
+  %35 = getelementptr inbounds nuw i8, ptr %1, i64 40
+  %36 = getelementptr inbounds nuw i8, ptr %1, i64 16
+  %37 = getelementptr inbounds nuw i8, ptr %1, i64 76
+  %38 = getelementptr inbounds nuw i8, ptr %1, i64 24
+  %39 = getelementptr inbounds nuw i8, ptr %1, i64 72
+  %40 = tail call noundef i32 @llvm.nvvm.read.ptx.sreg.ntid.x()
+  %41 = load ptr, ptr %31, align 8, !tbaa !38
+  %42 = load ptr, ptr %33, align 8
+  %43 = load ptr, ptr %34, align 8
+  %44 = load ptr, ptr %35, align 8
+  %45 = getelementptr inbounds [4 x i8], ptr %44, i64 %15
+  %46 = load ptr, ptr %36, align 8
+  %47 = load i32, ptr %37, align 4
+  %48 = mul nsw i32 %47, %30
+  %49 = load ptr, ptr %38, align 8
+  %50 = load i32, ptr %39, align 8
+  %51 = mul nsw i32 %50, %30
+  br label %52
+
+52:                                               ; preds = %102, %29
+  %53 = phi i32 [ %27, %29 ], [ %103, %102 ]
+  %54 = load i32, ptr %16, align 4, !tbaa !17
+  %55 = add nsw i32 %54, %53
+  %56 = sext i32 %55 to i64
+  %57 = getelementptr inbounds [4 x i8], ptr %41, i64 %56
+  %58 = load i32, ptr %57, align 4, !tbaa !17
+  %59 = ashr i32 %58, 31
+  %60 = xor i32 %59, %58
+  %61 = icmp sgt i32 %58, -1
+  %62 = select i1 %61, i32 1, i32 -1
+  %63 = icmp eq i32 %60, 2147483647
+  br i1 %63, label %102, label %64
+
+64:                                               ; preds = %52
+  br i1 %32, label %65, label %70
+
+65:                                               ; preds = %64
+  %66 = load i32, ptr %22, align 4, !tbaa !17
+  %67 = sub nsw i32 0, %62
+  %68 = load i32, ptr %45, align 4, !tbaa !17
+  %69 = add i32 %68, %53
+  br label %76
+
+70:                                               ; preds = %76, %64
+  %71 = phi double [ 0.000000e+00, %64 ], [ %99, %76 ]
+  %72 = add nsw i32 %51, %60
+  %73 = sext i32 %72 to i64
+  %74 = getelementptr inbounds [8 x i8], ptr %49, i64 %73
+  %75 = atomicrmw fadd ptr %74, double %71 monotonic, align 8
+  br label %102
+
+76:                                               ; preds = %76, %65
+  %77 = phi i32 [ 0, %65 ], [ %100, %76 ]
+  %78 = phi double [ 0.000000e+00, %65 ], [ %99, %76 ]
+  %79 = add nsw i32 %77, %66
+  %80 = sext i32 %79 to i64
+  %81 = getelementptr inbounds [4 x i8], ptr %42, i64 %80
+  %82 = load i32, ptr %81, align 4, !tbaa !17
+  %83 = icmp slt i32 %82, 0
+  %84 = ashr i32 %82, 31
+  %85 = xor i32 %84, %82
+  %86 = select i1 %83, i32 %67, i32 %62
+  %87 = sitofp contract i32 %86 to double
+  %88 = mul nsw i32 %77, %20
+  %89 = add i32 %69, %88
+  %90 = sext i32 %89 to i64
+  %91 = getelementptr inbounds [8 x i8], ptr %43, i64 %90
+  %92 = load double, ptr %91, align 8, !tbaa !20
+  %93 = fmul contract double %92, %87
+  %94 = add nsw i32 %85, %48
+  %95 = sext i32 %94 to i64
+  %96 = getelementptr inbounds [8 x i8], ptr %46, i64 %95
+  %97 = load double, ptr %96, align 8, !tbaa !20
+  %98 = fmul contract double %97, %93
+  %99 = fadd contract double %78, %98
+  %100 = add nuw nsw i32 %77, 1
+  %101 = icmp eq i32 %100, %26
+  br i1 %101, label %70, label %76, !llvm.loop !39
+
+102:                                              ; preds = %70, %52
+  %103 = add i32 %53, %40
+  %104 = icmp slt i32 %103, %20
+  br i1 %104, label %52, label %105, !llvm.loop !40
+
+105:                                              ; preds = %102, %9, %2
+  ret void
+}
+
+; Function Attrs: mustprogress noinline norecurse nounwind memory(readwrite, inaccessiblemem: none, target_mem: none)
+define dso_local ptx_kernel void @_ZN4mfemL10CuKernel2DINS_8internal27DerefineMatrixOpMultFunctorILNS_8Ordering4TypeE1ELb1ELb1EEEEEviT_(i32 noundef %0, ptr nofree noundef readonly byval(%"struct.mfem::internal::DerefineMatrixOpMultFunctor.4") align 8 captures(none) %1) local_unnamed_addr #2 comdat {
+  %3 = tail call noundef i32 @llvm.nvvm.read.ptx.sreg.ctaid.x()
+  %4 = tail call noundef i32 @llvm.nvvm.read.ptx.sreg.ntid.z()
+  %5 = mul i32 %3, %4
+  %6 = tail call noundef i32 @llvm.nvvm.read.ptx.sreg.tid.z()
+  %7 = add i32 %5, %6
+  %8 = icmp slt i32 %7, %0
+  br i1 %8, label %9, label %103
+
+9:                                                ; preds = %2
+  %10 = getelementptr inbounds nuw i8, ptr %1, i64 64
+  %11 = load i32, ptr %10, align 8, !tbaa !41
+  %12 = srem i32 %7, %11
+  %13 = sdiv i32 %7, %11
+  %14 = getelementptr inbounds nuw i8, ptr %1, i64 48
+  %15 = load ptr, ptr %14, align 8, !tbaa !44
+  %16 = sext i32 %12 to i64
+  %17 = getelementptr [4 x i8], ptr %15, i64 %16
+  %18 = getelementptr i8, ptr %17, i64 4
+  %19 = load i32, ptr %18, align 4, !tbaa !17
+  %20 = load i32, ptr %17, align 4, !tbaa !17
+  %21 = sub nsw i32 %19, %20
+  %22 = load ptr, ptr %1, align 8, !tbaa !45
+  %23 = getelementptr [4 x i8], ptr %22, i64 %16
+  %24 = getelementptr i8, ptr %23, i64 4
+  %25 = load i32, ptr %24, align 4, !tbaa !17
+  %26 = load i32, ptr %23, align 4, !tbaa !17
+  %27 = sub i32 %25, %26
+  %28 = tail call noundef i32 @llvm.nvvm.read.ptx.sreg.tid.x()
+  %29 = icmp slt i32 %28, %21
+  br i1 %29, label %30, label %103
+
+30:                                               ; preds = %9
+  %31 = getelementptr inbounds nuw i8, ptr %1, i64 56
+  %32 = icmp sgt i32 %27, 0
+  %33 = getelementptr inbounds nuw i8, ptr %1, i64 8
+  %34 = getelementptr inbounds nuw i8, ptr %1, i64 32
+  %35 = getelementptr inbounds nuw i8, ptr %1, i64 40
+  %36 = getelementptr inbounds nuw i8, ptr %1, i64 16
+  %37 = getelementptr inbounds nuw i8, ptr %1, i64 68
+  %38 = getelementptr inbounds nuw i8, ptr %1, i64 24
+  %39 = tail call noundef i32 @llvm.nvvm.read.ptx.sreg.ntid.x()
+  %40 = load ptr, ptr %31, align 8, !tbaa !46
+  %41 = load i32, ptr %37, align 4
+  %42 = load ptr, ptr %33, align 8
+  %43 = load ptr, ptr %34, align 8
+  %44 = load ptr, ptr %35, align 8
+  %45 = getelementptr inbounds [4 x i8], ptr %44, i64 %16
+  %46 = load ptr, ptr %36, align 8
+  %47 = load ptr, ptr %38, align 8
+  br label %48
+
+48:                                               ; preds = %100, %30
+  %49 = phi i32 [ %28, %30 ], [ %101, %100 ]
+  %50 = load i32, ptr %17, align 4, !tbaa !17
+  %51 = add nsw i32 %50, %49
+  %52 = sext i32 %51 to i64
+  %53 = getelementptr inbounds [4 x i8], ptr %40, i64 %52
+  %54 = load i32, ptr %53, align 4, !tbaa !17
+  %55 = ashr i32 %54, 31
+  %56 = xor i32 %55, %54
+  %57 = icmp sgt i32 %54, -1
+  %58 = select i1 %57, i32 1, i32 -1
+  %59 = icmp eq i32 %56, 2147483647
+  br i1 %59, label %100, label %60
+
+60:                                               ; preds = %48
+  br i1 %32, label %61, label %66
+
+61:                                               ; preds = %60
+  %62 = load i32, ptr %23, align 4, !tbaa !17
+  %63 = sub nsw i32 0, %58
+  %64 = load i32, ptr %45, align 4, !tbaa !17
+  %65 = add i32 %64, %49
+  br label %73
+
+66:                                               ; preds = %73, %60
+  %67 = phi double [ 0.000000e+00, %60 ], [ %97, %73 ]
+  %68 = mul nsw i32 %41, %56
+  %69 = add nsw i32 %68, %13
+  %70 = sext i32 %69 to i64
+  %71 = getelementptr inbounds [8 x i8], ptr %47, i64 %70
+  %72 = atomicrmw fadd ptr %71, double %67 monotonic, align 8
+  br label %100
+
+73:                                               ; preds = %73, %61
+  %74 = phi i32 [ 0, %61 ], [ %98, %73 ]
+  %75 = phi double [ 0.000000e+00, %61 ], [ %97, %73 ]
+  %76 = add nsw i32 %74, %62
+  %77 = sext i32 %76 to i64
+  %78 = getelementptr inbounds [4 x i8], ptr %42, i64 %77
+  %79 = load i32, ptr %78, align 4, !tbaa !17
+  %80 = icmp slt i32 %79, 0
+  %81 = ashr i32 %79, 31
+  %82 = xor i32 %81, %79
+  %83 = select i1 %80, i32 %63, i32 %58
+  %84 = sitofp contract i32 %83 to double
+  %85 = mul nsw i32 %74, %21
+  %86 = add i32 %65, %85
+  %87 = sext i32 %86 to i64
+  %88 = getelementptr inbounds [8 x i8], ptr %43, i64 %87
+  %89 = load double, ptr %88, align 8, !tbaa !20
+  %90 = fmul contract double %89, %84
+  %91 = mul nsw i32 %82, %41
+  %92 = add nsw i32 %91, %13
+  %93 = sext i32 %92 to i64
+  %94 = getelementptr inbounds [8 x i8], ptr %46, i64 %93
+  %95 = load double, ptr %94, align 8, !tbaa !20
+  %96 = fmul contract double %95, %90
+  %97 = fadd contract double %75, %96
+  %98 = add nuw nsw i32 %74, 1
+  %99 = icmp eq i32 %98, %27
+  br i1 %99, label %66, label %73, !llvm.loop !47
+
+100:                                              ; preds = %66, %48
+  %101 = add i32 %49, %39
+  %102 = icmp slt i32 %101, %21
+  br i1 %102, label %48, label %103, !llvm.loop !48
+
+103:                                              ; preds = %100, %9, %2
+  ret void
+}
+
+attributes #0 = { mustprogress nofree noinline norecurse nosync nounwind memory(readwrite, inaccessiblemem: none, target_mem: none) "frame-pointer"="all" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="sm_120" "target-features"="+ptx88,+sm_120" "uniform-work-group-size" }
+attributes #1 = { mustprogress nocallback nofree nosync nounwind speculatable willreturn memory(none) }
+attributes #2 = { mustprogress noinline norecurse nounwind memory(readwrite, inaccessiblemem: none, target_mem: none) "frame-pointer"="all" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="sm_120" "target-features"="+ptx88,+sm_120" "uniform-work-group-size" }
+
+!llvm.module.flags = !{!0, !1, !2}
+!llvm.ident = !{!3, !4}
+!llvm.errno.tbaa = !{!5}
+
+!0 = !{i32 2, !"SDK Version", [2 x i32] [i32 12, i32 9]}
+!1 = !{i32 4, !"nvvm-reflect-ftz", i32 0}
+!2 = !{i32 7, !"frame-pointer", i32 2}
+!3 = !{!"clang version 24.0.0git (git@github.com:llvm/llvm-project 0220c07a94012b9dce9250addac6a8ee1f674b21)"}
+!4 = !{!"clang version 3.8.0 (tags/RELEASE_380/final)"}
+!5 = !{!6, !7, i64 0}
+!6 = !{!"__libc_errno", !7, i64 0}
+!7 = !{!"int", !8, i64 0}
+!8 = !{!"omnipotent char", !9, i64 0}
+!9 = !{!"Simple C++ TBAA"}
+!10 = !{!11, !7, i64 64}
+!11 = !{!"_ZTSN4mfem8internal27DerefineMatrixOpMultFunctorILNS_8Ordering4TypeE0ELb0ELb1EEE", !12, i64 0, !15, i64 16, !15, i64 24, !15, i64 32, !13, i64 40, !13, i64 48, !13, i64 56, !7, i64 64, !7, i64 68, !7, i64 72, !7, i64 76}
+!12 = !{!"_ZTSN4mfem8internal27DerefineMatrixOpFunctorBaseILNS_8Ordering4TypeE0ENS0_27DerefineMatrixOpMultFunctorILS3_0ELb0ELb1EEELb1EEE", !13, i64 0, !13, i64 8}
+!13 = !{!"p1 int", !14, i64 0}
+!14 = !{!"any pointer", !8, i64 0}
+!15 = !{!"p1 double", !14, i64 0}
+!16 = !{!11, !13, i64 48}
+!17 = !{!7, !7, i64 0}
+!18 = !{!12, !13, i64 0}
+!19 = !{!11, !13, i64 56}
+!20 = !{!21, !21, i64 0}
+!21 = !{!"double", !8, i64 0}
+!22 = distinct !{!22, !23}
+!23 = !{!"llvm.loop.mustprogress"}
+!24 = distinct !{!24, !23}
+!25 = !{!26, !7, i64 64}
+!26 = !{!"_ZTSN4mfem8internal27DerefineMatrixOpMultFunctorILNS_8Ordering4TypeE1ELb0ELb1EEE", !27, i64 0, !15, i64 16, !15, i64 24, !15, i64 32, !13, i64 40, !13, i64 48, !13, i64 56, !7, i64 64, !7, i64 68, !7, i64 72, !7, i64 76}
+!27 = !{!"_ZTSN4mfem8internal27DerefineMatrixOpFunctorBaseILNS_8Ordering4TypeE1ENS0_27DerefineMatrixOpMultFunctorILS3_1ELb0ELb1EEELb1EEE", !13, i64 0, !13, i64 8}
+!28 = !{!26, !13, i64 48}
+!29 = !{!27, !13, i64 0}
+!30 = !{!26, !13, i64 56}
+!31 = distinct !{!31, !23}
+!32 = distinct !{!32, !23}
+!33 = !{!34, !7, i64 64}
+!34 = !{!"_ZTSN4mfem8internal27DerefineMatrixOpMultFunctorILNS_8Ordering4TypeE0ELb1ELb1EEE", !35, i64 0, !15, i64 16, !15, i64 24, !15, i64 32, !13, i64 40, !13, i64 48, !13, i64 56, !7, i64 64, !7, i64 68, !7, i64 72, !7, i64 76}
+!35 = !{!"_ZTSN4mfem8internal27DerefineMatrixOpFunctorBaseILNS_8Ordering4TypeE0ENS0_27DerefineMatrixOpMultFunctorILS3_0ELb1ELb1EEELb1EEE", !13, i64 0, !13, i64 8}
+!36 = !{!34, !13, i64 48}
+!37 = !{!35, !13, i64 0}
+!38 = !{!34, !13, i64 56}
+!39 = distinct !{!39, !23}
+!40 = distinct !{!40, !23}
+!41 = !{!42, !7, i64 64}
+!42 = !{!"_ZTSN4mfem8internal27DerefineMatrixOpMultFunctorILNS_8Ordering4TypeE1ELb1ELb1EEE", !43, i64 0, !15, i64 16, !15, i64 24, !15, i64 32, !13, i64 40, !13, i64 48, !13, i64 56, !7, i64 64, !7, i64 68, !7, i64 72, !7, i64 76}
+!43 = !{!"_ZTSN4mfem8internal27DerefineMatrixOpFunctorBaseILNS_8Ordering4TypeE1ENS0_27DerefineMatrixOpMultFunctorILS3_1ELb1ELb1EEELb1EEE", !13, i64 0, !13, i64 8}
+!44 = !{!42, !13, i64 48}
+!45 = !{!43, !13, i64 0}
+!46 = !{!42, !13, i64 56}
+!47 = distinct !{!47, !23}
+!48 = distinct !{!48, !23}

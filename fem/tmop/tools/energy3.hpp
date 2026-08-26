@@ -126,7 +126,7 @@ public:
    {
       const real_t metric_normal = ker.metric_normal;
       const int NE = ker.ne, d1d = ker.ndof, q1d = ker.nqpt;
-      const int D1D = T_D1D ? T_D1D : d1d, Q1D = T_Q1D ? T_Q1D : q1d;
+      const int D1D = T_D1D ? T_D1D : (d1d < DofQuadLimits::MAX_D1D ? d1d : DofQuadLimits::MAX_D1D), Q1D = T_Q1D ? T_Q1D : (q1d < DofQuadLimits::MAX_Q1D ? q1d : DofQuadLimits::MAX_Q1D);
 
       MFEM_VERIFY(T_D1D > 0 || D1D <= DeviceDofQuadLimits::Get().MAX_D1D, "");
       MFEM_VERIFY(T_Q1D > 0 || Q1D <= DeviceDofQuadLimits::Get().MAX_D1D, "");

@@ -33,8 +33,8 @@ static void PADGTraceApply2D(const int NF, const Array<real_t> &b,
                              const int q1d = 0)
 {
    const int VDIM = 1;
-   const int D1D = T_D1D ? T_D1D : d1d;
-   const int Q1D = T_Q1D ? T_Q1D : q1d;
+   const int D1D = T_D1D ? T_D1D : (d1d < DofQuadLimits::MAX_D1D ? d1d : DofQuadLimits::MAX_D1D);
+   const int Q1D = T_Q1D ? T_Q1D : (q1d < DofQuadLimits::MAX_Q1D ? q1d : DofQuadLimits::MAX_Q1D);
    MFEM_VERIFY(D1D <= DeviceDofQuadLimits::Get().MAX_D1D, "");
    MFEM_VERIFY(Q1D <= DeviceDofQuadLimits::Get().MAX_Q1D, "");
    auto B = Reshape(b.Read(), Q1D, D1D);
@@ -46,8 +46,8 @@ static void PADGTraceApply2D(const int NF, const Array<real_t> &b,
    mfem::forall(NF, [=] MFEM_HOST_DEVICE(int f)
    {
       const int VDIM = 1;
-      const int D1D = T_D1D ? T_D1D : d1d;
-      const int Q1D = T_Q1D ? T_Q1D : q1d;
+      const int D1D = T_D1D ? T_D1D : (d1d < DofQuadLimits::MAX_D1D ? d1d : DofQuadLimits::MAX_D1D);
+      const int Q1D = T_Q1D ? T_Q1D : (q1d < DofQuadLimits::MAX_Q1D ? q1d : DofQuadLimits::MAX_Q1D);
       // the following variables are evaluated at compile time
       constexpr int max_D1D = T_D1D ? T_D1D : DofQuadLimits::MAX_D1D;
       constexpr int max_Q1D = T_Q1D ? T_Q1D : DofQuadLimits::MAX_Q1D;
@@ -120,8 +120,8 @@ static void PADGTraceApply3D(const int NF, const Array<real_t> &b,
                              const int q1d = 0)
 {
    const int VDIM = 1;
-   const int D1D = T_D1D ? T_D1D : d1d;
-   const int Q1D = T_Q1D ? T_Q1D : q1d;
+   const int D1D = T_D1D ? T_D1D : (d1d < DofQuadLimits::MAX_D1D ? d1d : DofQuadLimits::MAX_D1D);
+   const int Q1D = T_Q1D ? T_Q1D : (q1d < DofQuadLimits::MAX_Q1D ? q1d : DofQuadLimits::MAX_Q1D);
    MFEM_VERIFY(D1D <= DeviceDofQuadLimits::Get().MAX_D1D, "");
    MFEM_VERIFY(Q1D <= DeviceDofQuadLimits::Get().MAX_Q1D, "");
    auto B = Reshape(b.Read(), Q1D, D1D);
@@ -133,8 +133,8 @@ static void PADGTraceApply3D(const int NF, const Array<real_t> &b,
    mfem::forall(NF, [=] MFEM_HOST_DEVICE(int f)
    {
       const int VDIM = 1;
-      const int D1D = T_D1D ? T_D1D : d1d;
-      const int Q1D = T_Q1D ? T_Q1D : q1d;
+      const int D1D = T_D1D ? T_D1D : (d1d < DofQuadLimits::MAX_D1D ? d1d : DofQuadLimits::MAX_D1D);
+      const int Q1D = T_Q1D ? T_Q1D : (q1d < DofQuadLimits::MAX_Q1D ? q1d : DofQuadLimits::MAX_Q1D);
       // the following variables are evaluated at compile time
       constexpr int max_D1D = T_D1D ? T_D1D : DofQuadLimits::MAX_D1D;
       constexpr int max_Q1D = T_Q1D ? T_Q1D : DofQuadLimits::MAX_Q1D;
@@ -260,8 +260,8 @@ static void SmemPADGTraceApply3D(const int NF, const Array<real_t> &b,
                                  const Vector &x_, Vector &y_,
                                  const int d1d = 0, const int q1d = 0)
 {
-   const int D1D = T_D1D ? T_D1D : d1d;
-   const int Q1D = T_Q1D ? T_Q1D : q1d;
+   const int D1D = T_D1D ? T_D1D : (d1d < DofQuadLimits::MAX_D1D ? d1d : DofQuadLimits::MAX_D1D);
+   const int Q1D = T_Q1D ? T_Q1D : (q1d < DofQuadLimits::MAX_Q1D ? q1d : DofQuadLimits::MAX_Q1D);
    constexpr int NBZ = T_NBZ ? T_NBZ : 1;
    MFEM_VERIFY(D1D <= DeviceDofQuadLimits::Get().MAX_D1D, "");
    MFEM_VERIFY(Q1D <= DeviceDofQuadLimits::Get().MAX_Q1D, "");
@@ -274,8 +274,8 @@ static void SmemPADGTraceApply3D(const int NF, const Array<real_t> &b,
    mfem::forall_2D_batch(NF, Q1D, Q1D, NBZ, [=] MFEM_HOST_DEVICE(int f)
    {
       const int tidz = MFEM_THREAD_ID(z);
-      const int D1D = T_D1D ? T_D1D : d1d;
-      const int Q1D = T_Q1D ? T_Q1D : q1d;
+      const int D1D = T_D1D ? T_D1D : (d1d < DofQuadLimits::MAX_D1D ? d1d : DofQuadLimits::MAX_D1D);
+      const int Q1D = T_Q1D ? T_Q1D : (q1d < DofQuadLimits::MAX_Q1D ? q1d : DofQuadLimits::MAX_Q1D);
       // the following variables are evaluated at compile time
       constexpr int NBZ = T_NBZ ? T_NBZ : 1;
       constexpr int max_D1D = T_D1D ? T_D1D : DofQuadLimits::MAX_D1D;
@@ -380,8 +380,8 @@ static void PADGTraceApplyTranspose2D(const int NF, const Array<real_t> &b,
                                       const int q1d = 0)
 {
    const int VDIM = 1;
-   const int D1D = T_D1D ? T_D1D : d1d;
-   const int Q1D = T_Q1D ? T_Q1D : q1d;
+   const int D1D = T_D1D ? T_D1D : (d1d < DofQuadLimits::MAX_D1D ? d1d : DofQuadLimits::MAX_D1D);
+   const int Q1D = T_Q1D ? T_Q1D : (q1d < DofQuadLimits::MAX_Q1D ? q1d : DofQuadLimits::MAX_Q1D);
    MFEM_VERIFY(D1D <= DeviceDofQuadLimits::Get().MAX_D1D, "");
    MFEM_VERIFY(Q1D <= DeviceDofQuadLimits::Get().MAX_Q1D, "");
    auto B = Reshape(b.Read(), Q1D, D1D);
@@ -393,8 +393,8 @@ static void PADGTraceApplyTranspose2D(const int NF, const Array<real_t> &b,
    mfem::forall(NF, [=] MFEM_HOST_DEVICE(int f)
    {
       const int VDIM = 1;
-      const int D1D = T_D1D ? T_D1D : d1d;
-      const int Q1D = T_Q1D ? T_Q1D : q1d;
+      const int D1D = T_D1D ? T_D1D : (d1d < DofQuadLimits::MAX_D1D ? d1d : DofQuadLimits::MAX_D1D);
+      const int Q1D = T_Q1D ? T_Q1D : (q1d < DofQuadLimits::MAX_Q1D ? q1d : DofQuadLimits::MAX_Q1D);
       // the following variables are evaluated at compile time
       constexpr int max_D1D = T_D1D ? T_D1D : DofQuadLimits::MAX_D1D;
       constexpr int max_Q1D = T_Q1D ? T_Q1D : DofQuadLimits::MAX_Q1D;
@@ -475,8 +475,8 @@ static void PADGTraceApplyTranspose3D(const int NF, const Array<real_t> &b,
                                       const int q1d = 0)
 {
    const int VDIM = 1;
-   const int D1D = T_D1D ? T_D1D : d1d;
-   const int Q1D = T_Q1D ? T_Q1D : q1d;
+   const int D1D = T_D1D ? T_D1D : (d1d < DofQuadLimits::MAX_D1D ? d1d : DofQuadLimits::MAX_D1D);
+   const int Q1D = T_Q1D ? T_Q1D : (q1d < DofQuadLimits::MAX_Q1D ? q1d : DofQuadLimits::MAX_Q1D);
    MFEM_VERIFY(D1D <= DeviceDofQuadLimits::Get().MAX_D1D, "");
    MFEM_VERIFY(Q1D <= DeviceDofQuadLimits::Get().MAX_Q1D, "");
    auto B = Reshape(b.Read(), Q1D, D1D);
@@ -488,8 +488,8 @@ static void PADGTraceApplyTranspose3D(const int NF, const Array<real_t> &b,
    mfem::forall(NF, [=] MFEM_HOST_DEVICE(int f)
    {
       const int VDIM = 1;
-      const int D1D = T_D1D ? T_D1D : d1d;
-      const int Q1D = T_Q1D ? T_Q1D : q1d;
+      const int D1D = T_D1D ? T_D1D : (d1d < DofQuadLimits::MAX_D1D ? d1d : DofQuadLimits::MAX_D1D);
+      const int Q1D = T_Q1D ? T_Q1D : (q1d < DofQuadLimits::MAX_Q1D ? q1d : DofQuadLimits::MAX_Q1D);
       // the following variables are evaluated at compile time
       constexpr int max_D1D = T_D1D ? T_D1D : DofQuadLimits::MAX_D1D;
       constexpr int max_Q1D = T_Q1D ? T_Q1D : DofQuadLimits::MAX_Q1D;
@@ -627,8 +627,8 @@ static void SmemPADGTraceApplyTranspose3D(const int NF, const Array<real_t> &b,
                                           Vector &y_, const int d1d = 0,
                                           const int q1d = 0)
 {
-   const int D1D = T_D1D ? T_D1D : d1d;
-   const int Q1D = T_Q1D ? T_Q1D : q1d;
+   const int D1D = T_D1D ? T_D1D : (d1d < DofQuadLimits::MAX_D1D ? d1d : DofQuadLimits::MAX_D1D);
+   const int Q1D = T_Q1D ? T_Q1D : (q1d < DofQuadLimits::MAX_Q1D ? q1d : DofQuadLimits::MAX_Q1D);
    constexpr int NBZ = T_NBZ ? T_NBZ : 1;
    MFEM_VERIFY(D1D <= DeviceDofQuadLimits::Get().MAX_D1D, "");
    MFEM_VERIFY(Q1D <= DeviceDofQuadLimits::Get().MAX_Q1D, "");
@@ -641,8 +641,8 @@ static void SmemPADGTraceApplyTranspose3D(const int NF, const Array<real_t> &b,
    mfem::forall_2D_batch(NF, Q1D, Q1D, NBZ, [=] MFEM_HOST_DEVICE(int f)
    {
       const int tidz = MFEM_THREAD_ID(z);
-      const int D1D = T_D1D ? T_D1D : d1d;
-      const int Q1D = T_Q1D ? T_Q1D : q1d;
+      const int D1D = T_D1D ? T_D1D : (d1d < DofQuadLimits::MAX_D1D ? d1d : DofQuadLimits::MAX_D1D);
+      const int Q1D = T_Q1D ? T_Q1D : (q1d < DofQuadLimits::MAX_Q1D ? q1d : DofQuadLimits::MAX_Q1D);
       // the following variables are evaluated at compile time
       constexpr int NBZ = T_NBZ ? T_NBZ : 1;
       constexpr int max_D1D = T_D1D ? T_D1D : DofQuadLimits::MAX_D1D;

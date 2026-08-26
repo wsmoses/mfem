@@ -1,0 +1,33 @@
+; ModuleID = '/mnt3/wmoses/git/mfem/fem/fe/fe_rt.cpp'
+source_filename = "/mnt3/wmoses/git/mfem/fem/fe/fe_rt.cpp"
+target datalayout = "e-p6:32:32-i64:64-i128:128-i256:256-v16:16-v32:32-n16:32:64"
+target triple = "nvptx64-nvidia-cuda"
+
+@_ZN4mfem23RT_QuadrilateralElement2nkE = dso_local addrspace(4) constant [8 x double] [double 0.000000e+00, double -1.000000e+00, double 1.000000e+00, double 0.000000e+00, double 0.000000e+00, double 1.000000e+00, double -1.000000e+00, double 0.000000e+00], align 8
+@_ZN4mfem20RT_HexahedronElement2nkE = dso_local addrspace(4) constant [18 x double] [double 0.000000e+00, double 0.000000e+00, double -1.000000e+00, double 0.000000e+00, double -1.000000e+00, double 0.000000e+00, double 1.000000e+00, double 0.000000e+00, double 0.000000e+00, double 0.000000e+00, double 1.000000e+00, double 0.000000e+00, double -1.000000e+00, double 0.000000e+00, double 0.000000e+00, double 0.000000e+00, double 0.000000e+00, double 1.000000e+00], align 8
+@_ZN4mfem18RT_TriangleElement2nkE = dso_local addrspace(4) constant [6 x double] [double 0.000000e+00, double -1.000000e+00, double 1.000000e+00, double 1.000000e+00, double -1.000000e+00, double 0.000000e+00], align 8
+@_ZN4mfem18RT_TriangleElement1cE = dso_local addrspace(4) constant double f0x3FD5555555555555, align 8
+@_ZN4mfem21RT_TetrahedronElement2nkE = dso_local addrspace(4) constant [12 x double] [double 1.000000e+00, double 1.000000e+00, double 1.000000e+00, double -1.000000e+00, double 0.000000e+00, double 0.000000e+00, double 0.000000e+00, double -1.000000e+00, double 0.000000e+00, double 0.000000e+00, double 0.000000e+00, double -1.000000e+00], align 8
+@_ZN4mfem21RT_TetrahedronElement1cE = dso_local addrspace(4) constant double 2.500000e-01, align 8
+@_ZN4mfem15RT_WedgeElement2nkE = dso_local addrspace(4) constant [15 x double] [double 0.000000e+00, double 0.000000e+00, double -1.000000e+00, double 0.000000e+00, double 0.000000e+00, double 1.000000e+00, double 0.000000e+00, double -1.000000e+00, double 0.000000e+00, double 1.000000e+00, double 1.000000e+00, double 0.000000e+00, double -1.000000e+00, double 0.000000e+00, double 0.000000e+00], align 8
+@_ZN4mfem24RT_FuentesPyramidElement2nkE = dso_local addrspace(4) constant [24 x double] [double 0.000000e+00, double 0.000000e+00, double -1.000000e+00, double 0.000000e+00, double -1.000000e+00, double 0.000000e+00, double 1.000000e+00, double 0.000000e+00, double 1.000000e+00, double 0.000000e+00, double 1.000000e+00, double 1.000000e+00, double -1.000000e+00, double 0.000000e+00, double 0.000000e+00, double f0x3FF6A09E667F3BCD, double 0.000000e+00, double f0x3FE6A09E667F3BCD, double 0.000000e+00, double f0x3FF6A09E667F3BCD, double f0x3FE6A09E667F3BCD, double 0.000000e+00, double 0.000000e+00, double 1.000000e+00], align 8
+@_ZN4mfem21RT_R1D_SegmentElement2nkE = dso_local addrspace(4) constant [9 x double] [double 1.000000e+00, double 0.000000e+00, double 0.000000e+00, double 0.000000e+00, double 1.000000e+00, double 0.000000e+00, double 0.000000e+00, double 0.000000e+00, double 1.000000e+00], align 8
+@_ZN4mfem21RT_R2D_SegmentElement2nkE = dso_local addrspace(4) constant [2 x double] [double 0.000000e+00, double 1.000000e+00], align 8
+@_ZN4mfem22RT_R2D_TriangleElement4nk_tE = dso_local addrspace(4) constant [12 x double] [double 0.000000e+00, double -1.000000e+00, double 0.000000e+00, double 1.000000e+00, double 1.000000e+00, double 0.000000e+00, double -1.000000e+00, double 0.000000e+00, double 0.000000e+00, double 0.000000e+00, double 0.000000e+00, double 1.000000e+00], align 8
+@_ZN4mfem27RT_R2D_QuadrilateralElement4nk_qE = dso_local addrspace(4) constant [15 x double] [double 0.000000e+00, double -1.000000e+00, double 0.000000e+00, double 1.000000e+00, double 0.000000e+00, double 0.000000e+00, double 0.000000e+00, double 1.000000e+00, double 0.000000e+00, double -1.000000e+00, double 0.000000e+00, double 0.000000e+00, double 0.000000e+00, double 0.000000e+00, double 1.000000e+00], align 8
+@llvm.compiler.used = appending global [12 x ptr] [ptr addrspacecast (ptr addrspace(4) @_ZN4mfem15RT_WedgeElement2nkE to ptr), ptr addrspacecast (ptr addrspace(4) @_ZN4mfem18RT_TriangleElement1cE to ptr), ptr addrspacecast (ptr addrspace(4) @_ZN4mfem18RT_TriangleElement2nkE to ptr), ptr addrspacecast (ptr addrspace(4) @_ZN4mfem20RT_HexahedronElement2nkE to ptr), ptr addrspacecast (ptr addrspace(4) @_ZN4mfem21RT_R1D_SegmentElement2nkE to ptr), ptr addrspacecast (ptr addrspace(4) @_ZN4mfem21RT_R2D_SegmentElement2nkE to ptr), ptr addrspacecast (ptr addrspace(4) @_ZN4mfem21RT_TetrahedronElement1cE to ptr), ptr addrspacecast (ptr addrspace(4) @_ZN4mfem21RT_TetrahedronElement2nkE to ptr), ptr addrspacecast (ptr addrspace(4) @_ZN4mfem22RT_R2D_TriangleElement4nk_tE to ptr), ptr addrspacecast (ptr addrspace(4) @_ZN4mfem23RT_QuadrilateralElement2nkE to ptr), ptr addrspacecast (ptr addrspace(4) @_ZN4mfem24RT_FuentesPyramidElement2nkE to ptr), ptr addrspacecast (ptr addrspace(4) @_ZN4mfem27RT_R2D_QuadrilateralElement4nk_qE to ptr)], section "llvm.metadata"
+
+!llvm.module.flags = !{!0, !1, !2}
+!llvm.ident = !{!3, !4}
+!llvm.errno.tbaa = !{!5}
+
+!0 = !{i32 2, !"SDK Version", [2 x i32] [i32 12, i32 9]}
+!1 = !{i32 4, !"nvvm-reflect-ftz", i32 0}
+!2 = !{i32 7, !"frame-pointer", i32 2}
+!3 = !{!"clang version 24.0.0git (git@github.com:llvm/llvm-project 0220c07a94012b9dce9250addac6a8ee1f674b21)"}
+!4 = !{!"clang version 3.8.0 (tags/RELEASE_380/final)"}
+!5 = !{!6, !7, i64 0}
+!6 = !{!"__libc_errno", !7, i64 0}
+!7 = !{!"int", !8, i64 0}
+!8 = !{!"omnipotent char", !9, i64 0}
+!9 = !{!"Simple C++ TBAA"}

@@ -1,0 +1,90 @@
+; ModuleID = '/mnt3/wmoses/git/mfem/linalg/ode.cpp'
+source_filename = "/mnt3/wmoses/git/mfem/linalg/ode.cpp"
+target datalayout = "e-p6:32:32-i64:64-i128:128-i256:256-v16:16-v32:32-n16:32:64"
+target triple = "nvptx64-nvidia-cuda"
+
+%class.anon = type { ptr, ptr, double }
+
+$_ZN4mfemL10CuKernel1DIZNS_9ODESolver21ComputeSlopeFromStateEdRKNS_6VectorERS2_EUliE_EEviT_ = comdat any
+
+@_ZN4mfem9RK6Solver1aE = dso_local addrspace(4) constant [28 x double] [double 6.000000e-02, double f0x3F93B3A40ECF0789, double f0x3FB3A22D3D8F8DB7, double 3.597500e-02, double 0.000000e+00, double 1.079250e-01, double f0x3FF51953C7E3436C, double 0.000000e+00, double f0xC0142B1144DF4563, double f0x4010E1F888F7A88D, double f0xC044EFB1156A8642, double 0.000000e+00, double f0x4063EDD78C9B0534, double f0xC05E87A131EEBD4A, double f0x40162081411CD0E4, double f0xC04B370F61E8AA7E, double 0.000000e+00, double f0x4069E226EC55ABB4, double f0xC063D38BC9599852, double f0x401BF79EC461258B, double f0xBF930B270CD55160, double f0xC04B54F57DAAAEAE, double 0.000000e+00, double f0x4069FE7D638B4A4A, double f0xC063E93F23BEDD20, double f0x401C13318F26E90A, double f0xBF92C76716D791CE, double f0xBF40C689082B7888], align 8
+@_ZN4mfem9RK6Solver1bE = dso_local addrspace(4) constant [8 x double] [double f0x3FA19B82C789CE7A, double 0.000000e+00, double 0.000000e+00, double f0x3FD0875F401B78B7, double f0x3FDAF0A23DE8C8A1, double f0x40119F20408C92FD, double f0xC0660F75B6072E05, double f0x40658BA6FB174EB0], align 8
+@_ZN4mfem9RK6Solver1cE = dso_local addrspace(4) constant [7 x double] [double 6.000000e-02, double f0x3FB88F1641434F99, double 1.439000e-01, double 4.973000e-01, double 9.725000e-01, double 9.995000e-01, double 1.000000e+00], align 8
+@_ZN4mfem9RK8Solver1aE = dso_local addrspace(4) constant [66 x double] [double 5.000000e-02, double f0xBF7CA4DD2F1A9FBE, double f0x3FBD11FBE76C8B44, double f0x3FA475C28F5C28F6, double 0.000000e+00, double f0x3FBEB0A3D70A3D71, double f0x3FD721233E4540A8, double 0.000000e+00, double f0xBFF576E1F094689C, double f0x3FF5EC09C4DA22AF, double f0x3FA91CB707F2D2F5, double 0.000000e+00, double 0.000000e+00, double f0x3FCE17AA49C18D26, double f0x3FC72646AC93A9A2, double f0x3FAF9635E5B22347, double 0.000000e+00, double 0.000000e+00, double f0x3FBCC3FF564E76AC, double f0xBFA3E43524681FFB, double f0x3F9444530FB73D72, double f0xBFFC4836A592CEEC, double 0.000000e+00, double 0.000000e+00, double -6.250000e+01, double f0xC0183F5FEDCF35DC, double f0x40169A71657F612C, double f0x405067C9DFC750B8, double f0xBFF2E526A7739E48, double 0.000000e+00, double 0.000000e+00, double f0xC044C09B231E8351, double f0xC011BCDD6612B806, double f0x40110AA871B65A28, double f0x4045E077486A81B0, double f0x3F801EE4D86AA5DA, double f0xBFF480A393C7FD7D, double 0.000000e+00, double 0.000000e+00, double f0xC0468608AEA59157, double f0xC012ECEA2DA74883, double f0x40120F53837B2808, double f0x4047B97BF6B4ADD7, double f0x3F85B168279B7DD0, double f0xBF778A00394177A2, double f0xBFFB976DFED960AE, double 0.000000e+00, double 0.000000e+00, double f0xC04E7634EC504383, double f0xC017CE5AD54DAC3D, double f0x401639E15B5B30ED, double f0x404FFDD356298DA7, double f0x3F8DFCA3C3DC728C, double f0x3FB089E4BBF5F06E, double f0xBFB44D3772937780, double f0xC00A69B9252DA5D8, double 0.000000e+00, double 0.000000e+00, double f0xC05D80B8AFB41F17, double f0xC024486883EAAEB3, double f0x40224753D09FCC3A, double f0x405ED80F72824A5F, double f0x40127E33C642BA87, double f0xC00B10F3EB324D60, double f0x40121C411A8216B8, double f0xC01750611EE1C739], align 8
+@_ZN4mfem9RK8Solver1bE = dso_local addrspace(4) constant [12 x double] [double f0x3FA6ABDAB2D55DE2, double 0.000000e+00, double 0.000000e+00, double 0.000000e+00, double 0.000000e+00, double f0x3FD6A9A7C346410C, double f0x3FCFBD748B7BF9FD, double f0xC02F636E731B408F, double f0x403915854815D03B, double f0xC03FBD05ABD66866, double f0x4036F03355282A67, double f0xBFCE3996ABB6CD88], align 8
+@_ZN4mfem9RK8Solver1cE = dso_local addrspace(4) constant [11 x double] [double 5.000000e-02, double f0x3FBB47AE147AE148, double f0x3FC475C28F5C28F6, double 3.900000e-01, double 4.650000e-01, double 1.550000e-01, double 9.430000e-01, double f0x3FECDB8FF49716CC, double 9.090000e-01, double f0x3FEE147AE147AE14, double 1.000000e+00], align 8
+@_ZN4mfem9AB1Solver1aE = dso_local addrspace(4) constant [1 x double] [double 1.000000e+00], align 8
+@_ZN4mfem9AB2Solver1aE = dso_local addrspace(4) constant [2 x double] [double 1.500000e+00, double -5.000000e-01], align 8
+@_ZN4mfem9AB3Solver1aE = dso_local addrspace(4) constant [3 x double] [double f0x3FFEAAAAAAAAAAAB, double f0xBFF5555555555555, double f0x3FDAAAAAAAAAAAAB], align 8
+@_ZN4mfem9AB4Solver1aE = dso_local addrspace(4) constant [4 x double] [double f0x4002555555555555, double f0xC003AAAAAAAAAAAB, double f0x3FF8AAAAAAAAAAAB, double -3.750000e-01], align 8
+@_ZN4mfem9AB5Solver1aE = dso_local addrspace(4) constant [5 x double] [double f0x40051F49F49F49F5, double f0xC00ED27D27D27D28, double f0x400D111111111111, double f0xBFFC4FA4FA4FA4FA, double f0x3FD64FA4FA4FA4FA], align 8
+@_ZN4mfem9AM1Solver1aE = dso_local addrspace(4) constant [2 x double] [double 5.000000e-01, double 5.000000e-01], align 8
+@_ZN4mfem9AM2Solver1aE = dso_local addrspace(4) constant [3 x double] [double f0x3FDAAAAAAAAAAAAB, double f0x3FE5555555555555, double f0xBFB5555555555555], align 8
+@_ZN4mfem9AM3Solver1aE = dso_local addrspace(4) constant [4 x double] [double 3.750000e-01, double f0x3FE9555555555555, double f0xBFCAAAAAAAAAAAAB, double f0x3FA5555555555555], align 8
+@_ZN4mfem9AM4Solver1aE = dso_local addrspace(4) constant [5 x double] [double f0x3FD64FA4FA4FA4FA, double f0x3FECB60B60B60B61, double f0xBFD7777777777777, double f0x3FC2D82D82D82D83, double f0xBF9B05B05B05B05B], align 8
+@llvm.compiler.used = appending global [15 x ptr] [ptr addrspacecast (ptr addrspace(4) @_ZN4mfem9AB1Solver1aE to ptr), ptr addrspacecast (ptr addrspace(4) @_ZN4mfem9AB2Solver1aE to ptr), ptr addrspacecast (ptr addrspace(4) @_ZN4mfem9AB3Solver1aE to ptr), ptr addrspacecast (ptr addrspace(4) @_ZN4mfem9AB4Solver1aE to ptr), ptr addrspacecast (ptr addrspace(4) @_ZN4mfem9AB5Solver1aE to ptr), ptr addrspacecast (ptr addrspace(4) @_ZN4mfem9AM1Solver1aE to ptr), ptr addrspacecast (ptr addrspace(4) @_ZN4mfem9AM2Solver1aE to ptr), ptr addrspacecast (ptr addrspace(4) @_ZN4mfem9AM3Solver1aE to ptr), ptr addrspacecast (ptr addrspace(4) @_ZN4mfem9AM4Solver1aE to ptr), ptr addrspacecast (ptr addrspace(4) @_ZN4mfem9RK6Solver1aE to ptr), ptr addrspacecast (ptr addrspace(4) @_ZN4mfem9RK6Solver1bE to ptr), ptr addrspacecast (ptr addrspace(4) @_ZN4mfem9RK6Solver1cE to ptr), ptr addrspacecast (ptr addrspace(4) @_ZN4mfem9RK8Solver1aE to ptr), ptr addrspacecast (ptr addrspace(4) @_ZN4mfem9RK8Solver1bE to ptr), ptr addrspacecast (ptr addrspace(4) @_ZN4mfem9RK8Solver1cE to ptr)], section "llvm.metadata"
+
+; Function Attrs: mustprogress nofree noinline norecurse nosync nounwind willreturn memory(readwrite, inaccessiblemem: none, target_mem: none)
+define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNS_9ODESolver21ComputeSlopeFromStateEdRKNS_6VectorERS2_EUliE_EEviT_(i32 noundef %0, ptr nofree noundef readonly byval(%class.anon) align 8 captures(none) %1) local_unnamed_addr #0 comdat {
+  %3 = tail call noundef i32 @llvm.nvvm.read.ptx.sreg.ntid.x()
+  %4 = tail call noundef i32 @llvm.nvvm.read.ptx.sreg.ctaid.x()
+  %5 = mul i32 %3, %4
+  %6 = tail call noundef i32 @llvm.nvvm.read.ptx.sreg.tid.x()
+  %7 = add i32 %5, %6
+  %8 = icmp slt i32 %7, %0
+  br i1 %8, label %9, label %22
+
+9:                                                ; preds = %2
+  %10 = getelementptr inbounds nuw i8, ptr %1, i64 8
+  %11 = load ptr, ptr %10, align 8, !tbaa !10
+  %12 = sext i32 %7 to i64
+  %13 = getelementptr inbounds [8 x i8], ptr %11, i64 %12
+  %14 = load double, ptr %13, align 8, !tbaa !15
+  %15 = load ptr, ptr %1, align 8, !tbaa !16
+  %16 = getelementptr inbounds [8 x i8], ptr %15, i64 %12
+  %17 = load double, ptr %16, align 8, !tbaa !15
+  %18 = fsub contract double %17, %14
+  %19 = getelementptr inbounds nuw i8, ptr %1, i64 16
+  %20 = load double, ptr %19, align 8, !tbaa !17
+  %21 = fmul contract double %18, %20
+  store double %21, ptr %16, align 8, !tbaa !15
+  br label %22
+
+22:                                               ; preds = %2, %9
+  ret void
+}
+
+; Function Attrs: mustprogress nocallback nofree nosync nounwind speculatable willreturn memory(none)
+declare noundef range(i32 1, 1025) i32 @llvm.nvvm.read.ptx.sreg.ntid.x() #1
+
+; Function Attrs: mustprogress nocallback nofree nosync nounwind speculatable willreturn memory(none)
+declare noundef range(i32 0, 2147483647) i32 @llvm.nvvm.read.ptx.sreg.ctaid.x() #1
+
+; Function Attrs: mustprogress nocallback nofree nosync nounwind speculatable willreturn memory(none)
+declare noundef range(i32 0, 1024) i32 @llvm.nvvm.read.ptx.sreg.tid.x() #1
+
+attributes #0 = { mustprogress nofree noinline norecurse nosync nounwind willreturn memory(readwrite, inaccessiblemem: none, target_mem: none) "frame-pointer"="all" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="sm_120" "target-features"="+ptx88,+sm_120" "uniform-work-group-size" }
+attributes #1 = { mustprogress nocallback nofree nosync nounwind speculatable willreturn memory(none) }
+
+!llvm.module.flags = !{!0, !1, !2}
+!llvm.ident = !{!3, !4}
+!llvm.errno.tbaa = !{!5}
+
+!0 = !{i32 2, !"SDK Version", [2 x i32] [i32 12, i32 9]}
+!1 = !{i32 4, !"nvvm-reflect-ftz", i32 0}
+!2 = !{i32 7, !"frame-pointer", i32 2}
+!3 = !{!"clang version 24.0.0git (git@github.com:llvm/llvm-project 0220c07a94012b9dce9250addac6a8ee1f674b21)"}
+!4 = !{!"clang version 3.8.0 (tags/RELEASE_380/final)"}
+!5 = !{!6, !7, i64 0}
+!6 = !{!"__libc_errno", !7, i64 0}
+!7 = !{!"int", !8, i64 0}
+!8 = !{!"omnipotent char", !9, i64 0}
+!9 = !{!"Simple C++ TBAA"}
+!10 = !{!11, !12, i64 8}
+!11 = !{!"_ZTSZN4mfem9ODESolver21ComputeSlopeFromStateEdRKNS_6VectorERS1_EUliE_", !12, i64 0, !12, i64 8, !14, i64 16}
+!12 = !{!"p1 double", !13, i64 0}
+!13 = !{!"any pointer", !8, i64 0}
+!14 = !{!"double", !8, i64 0}
+!15 = !{!14, !14, i64 0}
+!16 = !{!11, !12, i64 0}
+!17 = !{!11, !14, i64 16}

@@ -1,0 +1,893 @@
+; ModuleID = '/mnt3/wmoses/git/mfem/linalg/sparsemat.cpp'
+source_filename = "/mnt3/wmoses/git/mfem/linalg/sparsemat.cpp"
+target datalayout = "e-p6:32:32-i64:64-i128:128-i256:256-v16:16-v32:32-n16:32:64"
+target triple = "nvptx64-nvidia-cuda"
+
+%class.anon = type { ptr }
+%class.anon.0 = type { ptr, ptr, ptr, ptr }
+%class.anon.1 = type { ptr, ptr, ptr, ptr, ptr, double }
+%class.anon.2 = type { ptr, ptr, ptr, ptr, ptr, ptr }
+%class.anon.3 = type { ptr, ptr, ptr, ptr }
+%class.anon.4 = type { ptr, ptr, ptr, ptr, ptr }
+%class.anon.5 = type { ptr, ptr, ptr }
+%class.anon.6 = type <{ ptr, ptr, ptr, ptr, i32, [4 x i8] }>
+%class.anon.7 = type { ptr, ptr, i8, ptr, ptr, double, ptr }
+%class.anon.8 = type { ptr, ptr, ptr, ptr, ptr, ptr, double }
+%class.anon.9 = type { ptr, ptr, ptr, ptr, ptr, ptr, double }
+
+$_ZN4mfemL10CuKernel1DIZNS_12SparseMatrix17SortColumnIndicesEvEUliE_EEviT_ = comdat any
+
+$_ZN4mfemL10CuKernel1DIZNKS_12SparseMatrix7GetDiagERNS_6VectorEEUliE_EEviT_ = comdat any
+
+$_ZN4mfemL10CuKernel1DIZNKS_12SparseMatrix7AddMultERKNS_6VectorERS2_dEUliE_EEviT_ = comdat any
+
+$_ZN4mfemL10CuKernel1DIZNKS_12SparseMatrix8PartMultERKNS_5ArrayIiEERKNS_6VectorERS6_EUliE_EEviT_ = comdat any
+
+$_ZN4mfemL10CuKernel1DIZNKS_12SparseMatrix11BooleanMultERKNS_5ArrayIiEERS3_EUliE_EEviT_ = comdat any
+
+$_ZN4mfemL10CuKernel1DIZNKS_12SparseMatrix7AbsMultERKNS_6VectorERS2_EUliE_EEviT_ = comdat any
+
+$_ZN4mfemL10CuKernel1DIZNKS_12SparseMatrix10GetRowSumsERNS_6VectorEEUliE_EEviT_ = comdat any
+
+$_ZN4mfemL10CuKernel1DIZNS_12SparseMatrix11EliminateBCERKNS_5ArrayIiEENS_8Operator14DiagonalPolicyEEUliE_EEviT_ = comdat any
+
+$_ZN4mfemL10CuKernel1DIZNKS_12SparseMatrix9DiagScaleERKNS_6VectorERS2_dbEUliE_EEviT_ = comdat any
+
+$_ZN4mfemL10CuKernel1DIZNS_L14JacobiDispatchILb1EEEvRKNS_6VectorES4_RS2_RKNS_6MemoryIiEES9_RKNS6_IdEEidEUliE_EEviT_ = comdat any
+
+$_ZN4mfemL10CuKernel1DIZNS_L14JacobiDispatchILb0EEEvRKNS_6VectorES4_RS2_RKNS_6MemoryIiEES9_RKNS6_IdEEidEUliE_EEviT_ = comdat any
+
+@.str = private unnamed_addr constant [46 x i8] c"Diagonal not found in SparseMatrix::DiagScale\00", align 1
+@.str1 = private unnamed_addr constant [41 x i8] c"Zero diagonal in SparseMatrix::DiagScale\00", align 1
+@.str2 = private unnamed_addr constant [24 x i8] c"L1 norm of row is zero.\00", align 1
+@.str3 = private unnamed_addr constant [20 x i8] c"sum of row is zero.\00", align 1
+
+; Function Attrs: mustprogress nofree noinline norecurse nosync nounwind willreturn memory(write, argmem: readwrite, inaccessiblemem: none, target_mem: none)
+define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNS_12SparseMatrix17SortColumnIndicesEvEUliE_EEviT_(i32 noundef %0, ptr nofree noundef readonly byval(%class.anon) align 8 captures(none) %1) local_unnamed_addr #0 comdat {
+  %3 = tail call noundef i32 @llvm.nvvm.read.ptx.sreg.ntid.x()
+  %4 = tail call noundef i32 @llvm.nvvm.read.ptx.sreg.ctaid.x()
+  %5 = mul i32 %3, %4
+  %6 = tail call noundef i32 @llvm.nvvm.read.ptx.sreg.tid.x()
+  %7 = add i32 %5, %6
+  %8 = icmp slt i32 %7, %0
+  br i1 %8, label %9, label %13
+
+9:                                                ; preds = %2
+  %10 = sext i32 %7 to i64
+  %11 = load ptr, ptr %1, align 8, !tbaa !10
+  %12 = getelementptr inbounds [4 x i8], ptr %11, i64 %10
+  store i32 %7, ptr %12, align 4, !tbaa !14
+  br label %13
+
+13:                                               ; preds = %2, %9
+  ret void
+}
+
+; Function Attrs: mustprogress nocallback nofree nosync nounwind speculatable willreturn memory(none)
+declare noundef range(i32 1, 1025) i32 @llvm.nvvm.read.ptx.sreg.ntid.x() #1
+
+; Function Attrs: mustprogress nocallback nofree nosync nounwind speculatable willreturn memory(none)
+declare noundef range(i32 0, 2147483647) i32 @llvm.nvvm.read.ptx.sreg.ctaid.x() #1
+
+; Function Attrs: mustprogress nocallback nofree nosync nounwind speculatable willreturn memory(none)
+declare noundef range(i32 0, 1024) i32 @llvm.nvvm.read.ptx.sreg.tid.x() #1
+
+; Function Attrs: mustprogress nofree noinline norecurse nosync nounwind memory(readwrite, inaccessiblemem: none, target_mem: none)
+define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_12SparseMatrix7GetDiagERNS_6VectorEEUliE_EEviT_(i32 noundef %0, ptr nofree noundef readonly byval(%class.anon.0) align 8 captures(none) %1) local_unnamed_addr #2 comdat {
+  %3 = tail call noundef i32 @llvm.nvvm.read.ptx.sreg.ntid.x()
+  %4 = tail call noundef i32 @llvm.nvvm.read.ptx.sreg.ctaid.x()
+  %5 = mul i32 %3, %4
+  %6 = tail call noundef i32 @llvm.nvvm.read.ptx.sreg.tid.x()
+  %7 = add i32 %5, %6
+  %8 = icmp slt i32 %7, %0
+  br i1 %8, label %9, label %44
+
+9:                                                ; preds = %2
+  %10 = load ptr, ptr %1, align 8, !tbaa !15
+  %11 = sext i32 %7 to i64
+  %12 = getelementptr inbounds [4 x i8], ptr %10, i64 %11
+  %13 = load i32, ptr %12, align 4, !tbaa !14
+  %14 = getelementptr i8, ptr %12, i64 4
+  %15 = load i32, ptr %14, align 4, !tbaa !14
+  %16 = icmp slt i32 %13, %15
+  br i1 %16, label %17, label %37
+
+17:                                               ; preds = %9
+  %18 = getelementptr inbounds nuw i8, ptr %1, i64 8
+  %19 = load ptr, ptr %18, align 8, !tbaa !18
+  br label %20
+
+20:                                               ; preds = %34, %17
+  %21 = phi i32 [ %13, %17 ], [ %35, %34 ]
+  %22 = sext i32 %21 to i64
+  %23 = getelementptr inbounds [4 x i8], ptr %19, i64 %22
+  %24 = load i32, ptr %23, align 4, !tbaa !14
+  %25 = icmp eq i32 %24, %7
+  br i1 %25, label %26, label %34
+
+26:                                               ; preds = %20
+  %27 = getelementptr inbounds nuw i8, ptr %1, i64 24
+  %28 = load ptr, ptr %27, align 8, !tbaa !19
+  %29 = getelementptr inbounds [8 x i8], ptr %28, i64 %22
+  %30 = load double, ptr %29, align 8, !tbaa !20
+  %31 = getelementptr inbounds nuw i8, ptr %1, i64 16
+  %32 = load ptr, ptr %31, align 8, !tbaa !22
+  %33 = getelementptr inbounds [8 x i8], ptr %32, i64 %11
+  store double %30, ptr %33, align 8, !tbaa !20
+  br label %37
+
+34:                                               ; preds = %20
+  %35 = add i32 %21, 1
+  %36 = icmp eq i32 %35, %15
+  br i1 %36, label %37, label %20, !llvm.loop !23
+
+37:                                               ; preds = %34, %26, %9
+  %38 = phi i32 [ %21, %26 ], [ %13, %9 ], [ %15, %34 ]
+  %39 = icmp eq i32 %38, %15
+  br i1 %39, label %40, label %44
+
+40:                                               ; preds = %37
+  %41 = getelementptr inbounds nuw i8, ptr %1, i64 16
+  %42 = load ptr, ptr %41, align 8, !tbaa !22
+  %43 = getelementptr inbounds [8 x i8], ptr %42, i64 %11
+  store double 0.000000e+00, ptr %43, align 8, !tbaa !20
+  br label %44
+
+44:                                               ; preds = %40, %37, %2
+  ret void
+}
+
+; Function Attrs: mustprogress nofree noinline norecurse nosync nounwind memory(readwrite, inaccessiblemem: none, target_mem: none)
+define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_12SparseMatrix7AddMultERKNS_6VectorERS2_dEUliE_EEviT_(i32 noundef %0, ptr nofree noundef readonly byval(%class.anon.1) align 8 captures(none) %1) local_unnamed_addr #2 comdat {
+  %3 = tail call noundef i32 @llvm.nvvm.read.ptx.sreg.ntid.x()
+  %4 = tail call noundef i32 @llvm.nvvm.read.ptx.sreg.ctaid.x()
+  %5 = mul i32 %3, %4
+  %6 = tail call noundef i32 @llvm.nvvm.read.ptx.sreg.tid.x()
+  %7 = add i32 %5, %6
+  %8 = icmp slt i32 %7, %0
+  br i1 %8, label %9, label %49
+
+9:                                                ; preds = %2
+  %10 = load ptr, ptr %1, align 8, !tbaa !25
+  %11 = sext i32 %7 to i64
+  %12 = getelementptr [4 x i8], ptr %10, i64 %11
+  %13 = getelementptr i8, ptr %12, i64 4
+  %14 = load i32, ptr %13, align 4, !tbaa !14
+  %15 = load i32, ptr %12, align 4, !tbaa !14
+  %16 = icmp slt i32 %15, %14
+  br i1 %16, label %17, label %39
+
+17:                                               ; preds = %9
+  %18 = getelementptr inbounds nuw i8, ptr %1, i64 8
+  %19 = load ptr, ptr %18, align 8, !tbaa !27
+  %20 = getelementptr inbounds nuw i8, ptr %1, i64 16
+  %21 = load ptr, ptr %20, align 8, !tbaa !28
+  %22 = getelementptr inbounds nuw i8, ptr %1, i64 24
+  %23 = load ptr, ptr %22, align 8, !tbaa !29
+  br label %24
+
+24:                                               ; preds = %24, %17
+  %25 = phi i32 [ %15, %17 ], [ %37, %24 ]
+  %26 = phi double [ 0.000000e+00, %17 ], [ %36, %24 ]
+  %27 = sext i32 %25 to i64
+  %28 = getelementptr inbounds [8 x i8], ptr %19, i64 %27
+  %29 = load double, ptr %28, align 8, !tbaa !20
+  %30 = getelementptr inbounds [4 x i8], ptr %23, i64 %27
+  %31 = load i32, ptr %30, align 4, !tbaa !14
+  %32 = sext i32 %31 to i64
+  %33 = getelementptr inbounds [8 x i8], ptr %21, i64 %32
+  %34 = load double, ptr %33, align 8, !tbaa !20
+  %35 = fmul contract double %29, %34
+  %36 = fadd contract double %26, %35
+  %37 = add nsw i32 %25, 1
+  %38 = icmp eq i32 %37, %14
+  br i1 %38, label %39, label %24, !llvm.loop !30
+
+39:                                               ; preds = %24, %9
+  %40 = phi double [ 0.000000e+00, %9 ], [ %36, %24 ]
+  %41 = getelementptr inbounds nuw i8, ptr %1, i64 40
+  %42 = load double, ptr %41, align 8, !tbaa !31
+  %43 = fmul contract double %40, %42
+  %44 = getelementptr inbounds nuw i8, ptr %1, i64 32
+  %45 = load ptr, ptr %44, align 8, !tbaa !32
+  %46 = getelementptr inbounds [8 x i8], ptr %45, i64 %11
+  %47 = load double, ptr %46, align 8, !tbaa !20
+  %48 = fadd contract double %43, %47
+  store double %48, ptr %46, align 8, !tbaa !20
+  br label %49
+
+49:                                               ; preds = %2, %39
+  ret void
+}
+
+; Function Attrs: mustprogress nofree noinline norecurse nosync nounwind memory(readwrite, inaccessiblemem: none, target_mem: none)
+define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_12SparseMatrix8PartMultERKNS_5ArrayIiEERKNS_6VectorERS6_EUliE_EEviT_(i32 noundef %0, ptr nofree noundef readonly byval(%class.anon.2) align 8 captures(none) %1) local_unnamed_addr #2 comdat {
+  %3 = tail call noundef i32 @llvm.nvvm.read.ptx.sreg.ntid.x()
+  %4 = tail call noundef i32 @llvm.nvvm.read.ptx.sreg.ctaid.x()
+  %5 = mul i32 %3, %4
+  %6 = tail call noundef i32 @llvm.nvvm.read.ptx.sreg.tid.x()
+  %7 = add i32 %5, %6
+  %8 = icmp slt i32 %7, %0
+  br i1 %8, label %9, label %49
+
+9:                                                ; preds = %2
+  %10 = load ptr, ptr %1, align 8, !tbaa !33
+  %11 = sext i32 %7 to i64
+  %12 = getelementptr inbounds [4 x i8], ptr %10, i64 %11
+  %13 = load i32, ptr %12, align 4, !tbaa !14
+  %14 = getelementptr inbounds nuw i8, ptr %1, i64 8
+  %15 = load ptr, ptr %14, align 8, !tbaa !35
+  %16 = sext i32 %13 to i64
+  %17 = getelementptr [4 x i8], ptr %15, i64 %16
+  %18 = getelementptr i8, ptr %17, i64 4
+  %19 = load i32, ptr %18, align 4, !tbaa !14
+  %20 = load i32, ptr %17, align 4, !tbaa !14
+  %21 = icmp slt i32 %20, %19
+  br i1 %21, label %22, label %44
+
+22:                                               ; preds = %9
+  %23 = getelementptr inbounds nuw i8, ptr %1, i64 16
+  %24 = load ptr, ptr %23, align 8, !tbaa !36
+  %25 = getelementptr inbounds nuw i8, ptr %1, i64 24
+  %26 = load ptr, ptr %25, align 8, !tbaa !37
+  %27 = getelementptr inbounds nuw i8, ptr %1, i64 32
+  %28 = load ptr, ptr %27, align 8, !tbaa !38
+  br label %29
+
+29:                                               ; preds = %29, %22
+  %30 = phi i32 [ %20, %22 ], [ %42, %29 ]
+  %31 = phi double [ 0.000000e+00, %22 ], [ %41, %29 ]
+  %32 = sext i32 %30 to i64
+  %33 = getelementptr inbounds [8 x i8], ptr %24, i64 %32
+  %34 = load double, ptr %33, align 8, !tbaa !20
+  %35 = getelementptr inbounds [4 x i8], ptr %28, i64 %32
+  %36 = load i32, ptr %35, align 4, !tbaa !14
+  %37 = sext i32 %36 to i64
+  %38 = getelementptr inbounds [8 x i8], ptr %26, i64 %37
+  %39 = load double, ptr %38, align 8, !tbaa !20
+  %40 = fmul contract double %34, %39
+  %41 = fadd contract double %31, %40
+  %42 = add nsw i32 %30, 1
+  %43 = icmp eq i32 %42, %19
+  br i1 %43, label %44, label %29, !llvm.loop !39
+
+44:                                               ; preds = %29, %9
+  %45 = phi double [ 0.000000e+00, %9 ], [ %41, %29 ]
+  %46 = getelementptr inbounds nuw i8, ptr %1, i64 40
+  %47 = load ptr, ptr %46, align 8, !tbaa !40
+  %48 = getelementptr inbounds [8 x i8], ptr %47, i64 %16
+  store double %45, ptr %48, align 8, !tbaa !20
+  br label %49
+
+49:                                               ; preds = %2, %44
+  ret void
+}
+
+; Function Attrs: mustprogress nofree noinline norecurse nosync nounwind memory(readwrite, inaccessiblemem: none, target_mem: none)
+define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_12SparseMatrix11BooleanMultERKNS_5ArrayIiEERS3_EUliE_EEviT_(i32 noundef %0, ptr nofree noundef readonly byval(%class.anon.3) align 8 captures(none) %1) local_unnamed_addr #2 comdat {
+  %3 = tail call noundef i32 @llvm.nvvm.read.ptx.sreg.ntid.x()
+  %4 = tail call noundef i32 @llvm.nvvm.read.ptx.sreg.ctaid.x()
+  %5 = mul i32 %3, %4
+  %6 = tail call noundef i32 @llvm.nvvm.read.ptx.sreg.tid.x()
+  %7 = add i32 %5, %6
+  %8 = icmp slt i32 %7, %0
+  br i1 %8, label %9, label %39
+
+9:                                                ; preds = %2
+  %10 = load ptr, ptr %1, align 8, !tbaa !41
+  %11 = sext i32 %7 to i64
+  %12 = getelementptr [4 x i8], ptr %10, i64 %11
+  %13 = getelementptr i8, ptr %12, i64 4
+  %14 = load i32, ptr %13, align 4, !tbaa !14
+  %15 = load i32, ptr %12, align 4, !tbaa !14
+  %16 = icmp slt i32 %15, %14
+  br i1 %16, label %17, label %34
+
+17:                                               ; preds = %9
+  %18 = getelementptr inbounds nuw i8, ptr %1, i64 8
+  %19 = load ptr, ptr %18, align 8, !tbaa !43
+  %20 = getelementptr inbounds nuw i8, ptr %1, i64 16
+  %21 = load ptr, ptr %20, align 8, !tbaa !44
+  br label %25
+
+22:                                               ; preds = %25
+  %23 = add i32 %26, 1
+  %24 = icmp eq i32 %23, %14
+  br i1 %24, label %34, label %25, !llvm.loop !45
+
+25:                                               ; preds = %22, %17
+  %26 = phi i32 [ %15, %17 ], [ %23, %22 ]
+  %27 = sext i32 %26 to i64
+  %28 = getelementptr inbounds [4 x i8], ptr %21, i64 %27
+  %29 = load i32, ptr %28, align 4, !tbaa !14
+  %30 = sext i32 %29 to i64
+  %31 = getelementptr inbounds [4 x i8], ptr %19, i64 %30
+  %32 = load i32, ptr %31, align 4, !tbaa !14
+  %33 = icmp eq i32 %32, 0
+  br i1 %33, label %22, label %34
+
+34:                                               ; preds = %22, %25, %9
+  %35 = phi i32 [ 0, %9 ], [ 0, %22 ], [ 1, %25 ]
+  %36 = getelementptr inbounds nuw i8, ptr %1, i64 24
+  %37 = load ptr, ptr %36, align 8, !tbaa !46
+  %38 = getelementptr inbounds [4 x i8], ptr %37, i64 %11
+  store i32 %35, ptr %38, align 4, !tbaa !14
+  br label %39
+
+39:                                               ; preds = %2, %34
+  ret void
+}
+
+; Function Attrs: mustprogress nofree noinline norecurse nosync nounwind memory(readwrite, inaccessiblemem: none, target_mem: none)
+define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_12SparseMatrix7AbsMultERKNS_6VectorERS2_EUliE_EEviT_(i32 noundef %0, ptr nofree noundef readonly byval(%class.anon.4) align 8 captures(none) %1) local_unnamed_addr #2 comdat {
+  %3 = tail call noundef i32 @llvm.nvvm.read.ptx.sreg.ntid.x()
+  %4 = tail call noundef i32 @llvm.nvvm.read.ptx.sreg.ctaid.x()
+  %5 = mul i32 %3, %4
+  %6 = tail call noundef i32 @llvm.nvvm.read.ptx.sreg.tid.x()
+  %7 = add i32 %5, %6
+  %8 = icmp slt i32 %7, %0
+  br i1 %8, label %9, label %47
+
+9:                                                ; preds = %2
+  %10 = load ptr, ptr %1, align 8, !tbaa !47
+  %11 = sext i32 %7 to i64
+  %12 = getelementptr [4 x i8], ptr %10, i64 %11
+  %13 = getelementptr i8, ptr %12, i64 4
+  %14 = load i32, ptr %13, align 4, !tbaa !14
+  %15 = load i32, ptr %12, align 4, !tbaa !14
+  %16 = icmp slt i32 %15, %14
+  br i1 %16, label %17, label %40
+
+17:                                               ; preds = %9
+  %18 = getelementptr inbounds nuw i8, ptr %1, i64 8
+  %19 = load ptr, ptr %18, align 8, !tbaa !49
+  %20 = getelementptr inbounds nuw i8, ptr %1, i64 16
+  %21 = load ptr, ptr %20, align 8, !tbaa !50
+  %22 = getelementptr inbounds nuw i8, ptr %1, i64 24
+  %23 = load ptr, ptr %22, align 8, !tbaa !51
+  br label %24
+
+24:                                               ; preds = %24, %17
+  %25 = phi i32 [ %15, %17 ], [ %38, %24 ]
+  %26 = phi double [ 0.000000e+00, %17 ], [ %37, %24 ]
+  %27 = sext i32 %25 to i64
+  %28 = getelementptr inbounds [8 x i8], ptr %19, i64 %27
+  %29 = load double, ptr %28, align 8, !tbaa !20
+  %30 = tail call contract noundef double @__nv_fabs(double noundef %29) #6
+  %31 = getelementptr inbounds [4 x i8], ptr %23, i64 %27
+  %32 = load i32, ptr %31, align 4, !tbaa !14
+  %33 = sext i32 %32 to i64
+  %34 = getelementptr inbounds [8 x i8], ptr %21, i64 %33
+  %35 = load double, ptr %34, align 8, !tbaa !20
+  %36 = fmul contract double %30, %35
+  %37 = fadd contract double %26, %36
+  %38 = add nsw i32 %25, 1
+  %39 = icmp eq i32 %38, %14
+  br i1 %39, label %40, label %24, !llvm.loop !52
+
+40:                                               ; preds = %24, %9
+  %41 = phi double [ 0.000000e+00, %9 ], [ %37, %24 ]
+  %42 = getelementptr inbounds nuw i8, ptr %1, i64 32
+  %43 = load ptr, ptr %42, align 8, !tbaa !53
+  %44 = getelementptr inbounds [8 x i8], ptr %43, i64 %11
+  %45 = load double, ptr %44, align 8, !tbaa !20
+  %46 = fadd contract double %41, %45
+  store double %46, ptr %44, align 8, !tbaa !20
+  br label %47
+
+47:                                               ; preds = %2, %40
+  ret void
+}
+
+; Function Attrs: mustprogress nofree noinline norecurse nosync nounwind memory(readwrite, inaccessiblemem: none, target_mem: none)
+define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_12SparseMatrix10GetRowSumsERNS_6VectorEEUliE_EEviT_(i32 noundef %0, ptr nofree noundef readonly byval(%class.anon.5) align 8 captures(none) %1) local_unnamed_addr #2 comdat {
+  %3 = tail call noundef i32 @llvm.nvvm.read.ptx.sreg.ntid.x()
+  %4 = tail call noundef i32 @llvm.nvvm.read.ptx.sreg.ctaid.x()
+  %5 = mul i32 %3, %4
+  %6 = tail call noundef i32 @llvm.nvvm.read.ptx.sreg.tid.x()
+  %7 = add i32 %5, %6
+  %8 = icmp slt i32 %7, %0
+  br i1 %8, label %9, label %34
+
+9:                                                ; preds = %2
+  %10 = load ptr, ptr %1, align 8, !tbaa !54
+  %11 = sext i32 %7 to i64
+  %12 = getelementptr inbounds [4 x i8], ptr %10, i64 %11
+  %13 = load i32, ptr %12, align 4, !tbaa !14
+  %14 = getelementptr i8, ptr %12, i64 4
+  %15 = load i32, ptr %14, align 4, !tbaa !14
+  %16 = icmp slt i32 %13, %15
+  br i1 %16, label %17, label %29
+
+17:                                               ; preds = %9
+  %18 = getelementptr inbounds nuw i8, ptr %1, i64 8
+  %19 = load ptr, ptr %18, align 8, !tbaa !56
+  br label %20
+
+20:                                               ; preds = %20, %17
+  %21 = phi double [ 0.000000e+00, %17 ], [ %26, %20 ]
+  %22 = phi i32 [ %13, %17 ], [ %27, %20 ]
+  %23 = sext i32 %22 to i64
+  %24 = getelementptr inbounds [8 x i8], ptr %19, i64 %23
+  %25 = load double, ptr %24, align 8, !tbaa !20
+  %26 = fadd contract double %21, %25
+  %27 = add nsw i32 %22, 1
+  %28 = icmp eq i32 %27, %15
+  br i1 %28, label %29, label %20, !llvm.loop !57
+
+29:                                               ; preds = %20, %9
+  %30 = phi double [ 0.000000e+00, %9 ], [ %26, %20 ]
+  %31 = getelementptr inbounds nuw i8, ptr %1, i64 16
+  %32 = load ptr, ptr %31, align 8, !tbaa !58
+  %33 = getelementptr inbounds [8 x i8], ptr %32, i64 %11
+  store double %30, ptr %33, align 8, !tbaa !20
+  br label %34
+
+34:                                               ; preds = %2, %29
+  ret void
+}
+
+; Function Attrs: mustprogress nofree noinline norecurse nosync nounwind memory(readwrite, inaccessiblemem: none, target_mem: none)
+define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNS_12SparseMatrix11EliminateBCERKNS_5ArrayIiEENS_8Operator14DiagonalPolicyEEUliE_EEviT_(i32 noundef %0, ptr nofree noundef readonly byval(%class.anon.6) align 8 captures(none) %1) local_unnamed_addr #2 comdat {
+  %3 = tail call noundef i32 @llvm.nvvm.read.ptx.sreg.ntid.x()
+  %4 = tail call noundef i32 @llvm.nvvm.read.ptx.sreg.ctaid.x()
+  %5 = mul i32 %3, %4
+  %6 = tail call noundef i32 @llvm.nvvm.read.ptx.sreg.tid.x()
+  %7 = add i32 %5, %6
+  %8 = icmp slt i32 %7, %0
+  br i1 %8, label %9, label %61
+
+9:                                                ; preds = %2
+  %10 = load ptr, ptr %1, align 8, !tbaa !59
+  %11 = sext i32 %7 to i64
+  %12 = getelementptr inbounds [4 x i8], ptr %10, i64 %11
+  %13 = load i32, ptr %12, align 4, !tbaa !14
+  %14 = getelementptr inbounds nuw i8, ptr %1, i64 8
+  %15 = load ptr, ptr %14, align 8, !tbaa !62
+  %16 = sext i32 %13 to i64
+  %17 = getelementptr inbounds [4 x i8], ptr %15, i64 %16
+  %18 = load i32, ptr %17, align 4, !tbaa !14
+  %19 = getelementptr i8, ptr %17, i64 4
+  %20 = load i32, ptr %19, align 4, !tbaa !14
+  %21 = icmp slt i32 %18, %20
+  br i1 %21, label %22, label %61
+
+22:                                               ; preds = %9
+  %23 = getelementptr inbounds nuw i8, ptr %1, i64 16
+  %24 = load ptr, ptr %23, align 8, !tbaa !63
+  %25 = getelementptr inbounds nuw i8, ptr %1, i64 24
+  %26 = load ptr, ptr %25, align 8
+  %27 = getelementptr inbounds nuw i8, ptr %1, i64 32
+  %28 = load i32, ptr %27, align 8
+  br label %29
+
+29:                                               ; preds = %58, %22
+  %30 = phi i32 [ %18, %22 ], [ %59, %58 ]
+  %31 = sext i32 %30 to i64
+  %32 = getelementptr inbounds [4 x i8], ptr %24, i64 %31
+  %33 = load i32, ptr %32, align 4, !tbaa !14
+  %34 = icmp eq i32 %33, %13
+  br i1 %34, label %52, label %35
+
+35:                                               ; preds = %29
+  %36 = getelementptr inbounds [8 x i8], ptr %26, i64 %31
+  store double 0.000000e+00, ptr %36, align 8, !tbaa !20
+  %37 = sext i32 %33 to i64
+  %38 = getelementptr inbounds [4 x i8], ptr %15, i64 %37
+  %39 = load i32, ptr %38, align 4, !tbaa !14
+  %40 = getelementptr i8, ptr %38, i64 4
+  %41 = load i32, ptr %40, align 4, !tbaa !14
+  %42 = icmp slt i32 %39, %41
+  br i1 %42, label %46, label %58
+
+43:                                               ; preds = %46
+  %44 = add i32 %47, 1
+  %45 = icmp eq i32 %44, %41
+  br i1 %45, label %58, label %46, !llvm.loop !64
+
+46:                                               ; preds = %35, %43
+  %47 = phi i32 [ %44, %43 ], [ %39, %35 ]
+  %48 = sext i32 %47 to i64
+  %49 = getelementptr inbounds [4 x i8], ptr %24, i64 %48
+  %50 = load i32, ptr %49, align 4, !tbaa !14
+  %51 = icmp eq i32 %50, %13
+  br i1 %51, label %54, label %43
+
+52:                                               ; preds = %29
+  switch i32 %28, label %58 [
+    i32 1, label %54
+    i32 0, label %53
+  ]
+
+53:                                               ; preds = %52
+  br label %54
+
+54:                                               ; preds = %46, %53, %52
+  %55 = phi i64 [ %31, %53 ], [ %31, %52 ], [ %48, %46 ]
+  %56 = phi double [ 0.000000e+00, %53 ], [ 1.000000e+00, %52 ], [ 0.000000e+00, %46 ]
+  %57 = getelementptr inbounds [8 x i8], ptr %26, i64 %55
+  store double %56, ptr %57, align 8, !tbaa !20
+  br label %58
+
+58:                                               ; preds = %43, %54, %52, %35
+  %59 = add nsw i32 %30, 1
+  %60 = icmp eq i32 %59, %20
+  br i1 %60, label %61, label %29, !llvm.loop !65
+
+61:                                               ; preds = %58, %9, %2
+  ret void
+}
+
+; Function Attrs: convergent mustprogress noinline norecurse nounwind
+define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_12SparseMatrix9DiagScaleERKNS_6VectorERS2_dbEUliE_EEviT_(i32 noundef %0, ptr nofree noundef readonly byval(%class.anon.7) align 8 captures(none) %1) local_unnamed_addr #3 comdat {
+  %3 = tail call noundef i32 @llvm.nvvm.read.ptx.sreg.ntid.x()
+  %4 = tail call noundef i32 @llvm.nvvm.read.ptx.sreg.ctaid.x()
+  %5 = mul i32 %3, %4
+  %6 = tail call noundef i32 @llvm.nvvm.read.ptx.sreg.tid.x()
+  %7 = add i32 %5, %6
+  %8 = icmp slt i32 %7, %0
+  br i1 %8, label %9, label %56
+
+9:                                                ; preds = %2
+  %10 = load ptr, ptr %1, align 8, !tbaa !66
+  %11 = sext i32 %7 to i64
+  %12 = getelementptr [4 x i8], ptr %10, i64 %11
+  %13 = getelementptr i8, ptr %12, i64 4
+  %14 = load i32, ptr %13, align 4, !tbaa !14
+  %15 = load i32, ptr %12, align 4, !tbaa !14
+  %16 = getelementptr inbounds nuw i8, ptr %1, i64 8
+  %17 = load ptr, ptr %16, align 8
+  br label %18
+
+18:                                               ; preds = %23, %9
+  %19 = phi i32 [ %15, %9 ], [ %28, %23 ]
+  %20 = icmp eq i32 %19, %14
+  br i1 %20, label %21, label %23
+
+21:                                               ; preds = %18
+  %22 = tail call i32 @vprintf(ptr nonnull @.str, ptr null) #7
+  tail call void asm sideeffect "trap;", ""() #8, !srcloc !69
+  br label %23
+
+23:                                               ; preds = %21, %18
+  %24 = sext i32 %19 to i64
+  %25 = getelementptr inbounds [4 x i8], ptr %17, i64 %24
+  %26 = load i32, ptr %25, align 4, !tbaa !14
+  %27 = icmp eq i32 %26, %7
+  %28 = add nsw i32 %19, 1
+  br i1 %27, label %29, label %18, !llvm.loop !70
+
+29:                                               ; preds = %23
+  %30 = getelementptr inbounds nuw i8, ptr %1, i64 16
+  %31 = load i8, ptr %30, align 8, !tbaa !71, !range !72, !noundef !73
+  %32 = trunc nuw i8 %31 to i1
+  %33 = getelementptr inbounds nuw i8, ptr %1, i64 24
+  %34 = load ptr, ptr %33, align 8, !tbaa !74
+  %35 = getelementptr inbounds [8 x i8], ptr %34, i64 %24
+  %36 = load double, ptr %35, align 8, !tbaa !20
+  br i1 %32, label %37, label %39
+
+37:                                               ; preds = %29
+  %38 = tail call contract noundef double @__nv_fabs(double noundef %36) #6
+  br label %39
+
+39:                                               ; preds = %37, %29
+  %40 = phi contract double [ %38, %37 ], [ %36, %29 ]
+  %41 = fcmp contract oeq double %40, 0.000000e+00
+  br i1 %41, label %42, label %44
+
+42:                                               ; preds = %39
+  %43 = tail call i32 @vprintf(ptr nonnull @.str1, ptr null) #7
+  tail call void asm sideeffect "trap;", ""() #8, !srcloc !75
+  br label %44
+
+44:                                               ; preds = %39, %42
+  %45 = getelementptr inbounds nuw i8, ptr %1, i64 40
+  %46 = load double, ptr %45, align 8, !tbaa !76
+  %47 = getelementptr inbounds nuw i8, ptr %1, i64 48
+  %48 = load ptr, ptr %47, align 8, !tbaa !77
+  %49 = getelementptr inbounds [8 x i8], ptr %48, i64 %11
+  %50 = load double, ptr %49, align 8, !tbaa !20
+  %51 = fmul contract double %46, %50
+  %52 = fdiv contract double %51, %40
+  %53 = getelementptr inbounds nuw i8, ptr %1, i64 32
+  %54 = load ptr, ptr %53, align 8, !tbaa !78
+  %55 = getelementptr inbounds [8 x i8], ptr %54, i64 %11
+  store double %52, ptr %55, align 8, !tbaa !20
+  br label %56
+
+56:                                               ; preds = %2, %44
+  ret void
+}
+
+declare i32 @vprintf(ptr, ptr) local_unnamed_addr
+
+; Function Attrs: convergent mustprogress noinline norecurse nounwind
+define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNS_L14JacobiDispatchILb1EEEvRKNS_6VectorES4_RS2_RKNS_6MemoryIiEES9_RKNS6_IdEEidEUliE_EEviT_(i32 noundef %0, ptr nofree noundef readonly byval(%class.anon.8) align 8 captures(none) %1) local_unnamed_addr #3 comdat {
+  %3 = tail call noundef i32 @llvm.nvvm.read.ptx.sreg.ntid.x()
+  %4 = tail call noundef i32 @llvm.nvvm.read.ptx.sreg.ctaid.x()
+  %5 = mul i32 %3, %4
+  %6 = tail call noundef i32 @llvm.nvvm.read.ptx.sreg.tid.x()
+  %7 = add i32 %5, %6
+  %8 = icmp slt i32 %7, %0
+  br i1 %8, label %9, label %65
+
+9:                                                ; preds = %2
+  %10 = load ptr, ptr %1, align 8, !tbaa !79
+  %11 = sext i32 %7 to i64
+  %12 = getelementptr inbounds [8 x i8], ptr %10, i64 %11
+  %13 = load double, ptr %12, align 8, !tbaa !20
+  %14 = getelementptr inbounds nuw i8, ptr %1, i64 8
+  %15 = load ptr, ptr %14, align 8, !tbaa !81
+  %16 = getelementptr inbounds [4 x i8], ptr %15, i64 %11
+  %17 = load i32, ptr %16, align 4, !tbaa !14
+  %18 = getelementptr i8, ptr %16, i64 4
+  %19 = load i32, ptr %18, align 4, !tbaa !14
+  %20 = icmp slt i32 %17, %19
+  br i1 %20, label %21, label %28
+
+21:                                               ; preds = %9
+  %22 = getelementptr inbounds nuw i8, ptr %1, i64 16
+  %23 = load ptr, ptr %22, align 8, !tbaa !82
+  %24 = getelementptr inbounds nuw i8, ptr %1, i64 24
+  %25 = load ptr, ptr %24, align 8, !tbaa !83
+  %26 = getelementptr inbounds nuw i8, ptr %1, i64 32
+  %27 = load ptr, ptr %26, align 8, !tbaa !84
+  br label %32
+
+28:                                               ; preds = %32, %9
+  %29 = phi double [ %13, %9 ], [ %45, %32 ]
+  %30 = phi double [ 0.000000e+00, %9 ], [ %47, %32 ]
+  %31 = fcmp contract ogt double %30, 0.000000e+00
+  br i1 %31, label %50, label %63
+
+32:                                               ; preds = %32, %21
+  %33 = phi i32 [ %17, %21 ], [ %48, %32 ]
+  %34 = phi double [ 0.000000e+00, %21 ], [ %47, %32 ]
+  %35 = phi double [ %13, %21 ], [ %45, %32 ]
+  %36 = sext i32 %33 to i64
+  %37 = getelementptr inbounds [8 x i8], ptr %23, i64 %36
+  %38 = load double, ptr %37, align 8, !tbaa !20
+  %39 = getelementptr inbounds [4 x i8], ptr %27, i64 %36
+  %40 = load i32, ptr %39, align 4, !tbaa !14
+  %41 = sext i32 %40 to i64
+  %42 = getelementptr inbounds [8 x i8], ptr %25, i64 %41
+  %43 = load double, ptr %42, align 8, !tbaa !20
+  %44 = fmul contract double %38, %43
+  %45 = fsub contract double %35, %44
+  %46 = tail call contract noundef double @__nv_fabs(double noundef %38) #6
+  %47 = fadd contract double %34, %46
+  %48 = add nsw i32 %33, 1
+  %49 = icmp eq i32 %48, %19
+  br i1 %49, label %28, label %32, !llvm.loop !85
+
+50:                                               ; preds = %28
+  %51 = getelementptr inbounds nuw i8, ptr %1, i64 24
+  %52 = load ptr, ptr %51, align 8, !tbaa !83
+  %53 = getelementptr inbounds [8 x i8], ptr %52, i64 %11
+  %54 = load double, ptr %53, align 8, !tbaa !20
+  %55 = getelementptr inbounds nuw i8, ptr %1, i64 48
+  %56 = load double, ptr %55, align 8, !tbaa !86
+  %57 = fmul contract double %29, %56
+  %58 = fdiv contract double %57, %30
+  %59 = fadd contract double %54, %58
+  %60 = getelementptr inbounds nuw i8, ptr %1, i64 40
+  %61 = load ptr, ptr %60, align 8, !tbaa !87
+  %62 = getelementptr inbounds [8 x i8], ptr %61, i64 %11
+  store double %59, ptr %62, align 8, !tbaa !20
+  br label %65
+
+63:                                               ; preds = %28
+  %64 = tail call i32 @vprintf(ptr nonnull @.str2, ptr null) #7
+  tail call void asm sideeffect "trap;", ""() #8, !srcloc !88
+  br label %65
+
+65:                                               ; preds = %63, %50, %2
+  ret void
+}
+
+; Function Attrs: convergent mustprogress noinline norecurse nounwind
+define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNS_L14JacobiDispatchILb0EEEvRKNS_6VectorES4_RS2_RKNS_6MemoryIiEES9_RKNS6_IdEEidEUliE_EEviT_(i32 noundef %0, ptr nofree noundef readonly byval(%class.anon.9) align 8 captures(none) %1) local_unnamed_addr #3 comdat {
+  %3 = tail call noundef i32 @llvm.nvvm.read.ptx.sreg.ntid.x()
+  %4 = tail call noundef i32 @llvm.nvvm.read.ptx.sreg.ctaid.x()
+  %5 = mul i32 %3, %4
+  %6 = tail call noundef i32 @llvm.nvvm.read.ptx.sreg.tid.x()
+  %7 = add i32 %5, %6
+  %8 = icmp slt i32 %7, %0
+  br i1 %8, label %9, label %64
+
+9:                                                ; preds = %2
+  %10 = load ptr, ptr %1, align 8, !tbaa !89
+  %11 = sext i32 %7 to i64
+  %12 = getelementptr inbounds [8 x i8], ptr %10, i64 %11
+  %13 = load double, ptr %12, align 8, !tbaa !20
+  %14 = getelementptr inbounds nuw i8, ptr %1, i64 8
+  %15 = load ptr, ptr %14, align 8, !tbaa !91
+  %16 = getelementptr inbounds [4 x i8], ptr %15, i64 %11
+  %17 = load i32, ptr %16, align 4, !tbaa !14
+  %18 = getelementptr i8, ptr %16, i64 4
+  %19 = load i32, ptr %18, align 4, !tbaa !14
+  %20 = icmp slt i32 %17, %19
+  br i1 %20, label %21, label %28
+
+21:                                               ; preds = %9
+  %22 = getelementptr inbounds nuw i8, ptr %1, i64 16
+  %23 = load ptr, ptr %22, align 8, !tbaa !92
+  %24 = getelementptr inbounds nuw i8, ptr %1, i64 24
+  %25 = load ptr, ptr %24, align 8, !tbaa !93
+  %26 = getelementptr inbounds nuw i8, ptr %1, i64 32
+  %27 = load ptr, ptr %26, align 8, !tbaa !94
+  br label %32
+
+28:                                               ; preds = %32, %9
+  %29 = phi double [ %13, %9 ], [ %45, %32 ]
+  %30 = phi double [ 0.000000e+00, %9 ], [ %46, %32 ]
+  %31 = fcmp contract ogt double %30, 0.000000e+00
+  br i1 %31, label %49, label %62
+
+32:                                               ; preds = %32, %21
+  %33 = phi i32 [ %17, %21 ], [ %47, %32 ]
+  %34 = phi double [ 0.000000e+00, %21 ], [ %46, %32 ]
+  %35 = phi double [ %13, %21 ], [ %45, %32 ]
+  %36 = sext i32 %33 to i64
+  %37 = getelementptr inbounds [8 x i8], ptr %23, i64 %36
+  %38 = load double, ptr %37, align 8, !tbaa !20
+  %39 = getelementptr inbounds [4 x i8], ptr %27, i64 %36
+  %40 = load i32, ptr %39, align 4, !tbaa !14
+  %41 = sext i32 %40 to i64
+  %42 = getelementptr inbounds [8 x i8], ptr %25, i64 %41
+  %43 = load double, ptr %42, align 8, !tbaa !20
+  %44 = fmul contract double %38, %43
+  %45 = fsub contract double %35, %44
+  %46 = fadd contract double %34, %38
+  %47 = add nsw i32 %33, 1
+  %48 = icmp eq i32 %47, %19
+  br i1 %48, label %28, label %32, !llvm.loop !95
+
+49:                                               ; preds = %28
+  %50 = getelementptr inbounds nuw i8, ptr %1, i64 24
+  %51 = load ptr, ptr %50, align 8, !tbaa !93
+  %52 = getelementptr inbounds [8 x i8], ptr %51, i64 %11
+  %53 = load double, ptr %52, align 8, !tbaa !20
+  %54 = getelementptr inbounds nuw i8, ptr %1, i64 48
+  %55 = load double, ptr %54, align 8, !tbaa !96
+  %56 = fmul contract double %29, %55
+  %57 = fdiv contract double %56, %30
+  %58 = fadd contract double %53, %57
+  %59 = getelementptr inbounds nuw i8, ptr %1, i64 40
+  %60 = load ptr, ptr %59, align 8, !tbaa !97
+  %61 = getelementptr inbounds [8 x i8], ptr %60, i64 %11
+  store double %58, ptr %61, align 8, !tbaa !20
+  br label %64
+
+62:                                               ; preds = %28
+  %63 = tail call i32 @vprintf(ptr nonnull @.str3, ptr null) #7
+  tail call void asm sideeffect "trap;", ""() #8, !srcloc !98
+  br label %64
+
+64:                                               ; preds = %62, %49, %2
+  ret void
+}
+
+; Function Attrs: mustprogress nofree noinline norecurse nosync nounwind willreturn memory(none)
+define dso_local double @__nv_fabs(double %0) local_unnamed_addr #4 {
+  %2 = tail call double @llvm.nvvm.fabs.f64(double %0)
+  ret double %2
+}
+
+; Function Attrs: mustprogress nocallback nocreateundeforpoison nofree nosync nounwind speculatable willreturn memory(none)
+declare double @llvm.nvvm.fabs.f64(double) #5
+
+attributes #0 = { mustprogress nofree noinline norecurse nosync nounwind willreturn memory(write, argmem: readwrite, inaccessiblemem: none, target_mem: none) "frame-pointer"="all" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="sm_120" "target-features"="+ptx88,+sm_120" "uniform-work-group-size" }
+attributes #1 = { mustprogress nocallback nofree nosync nounwind speculatable willreturn memory(none) }
+attributes #2 = { mustprogress nofree noinline norecurse nosync nounwind memory(readwrite, inaccessiblemem: none, target_mem: none) "frame-pointer"="all" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="sm_120" "target-features"="+ptx88,+sm_120" "uniform-work-group-size" }
+attributes #3 = { convergent mustprogress noinline norecurse nounwind "frame-pointer"="all" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="sm_120" "target-features"="+ptx88,+sm_120" "uniform-work-group-size" }
+attributes #4 = { mustprogress nofree noinline norecurse nosync nounwind willreturn memory(none) "disable-tail-calls"="false" "enzyme_math"="fabs" "frame-pointer"="all" "implements"="llvm.fabs.f64" "implements2"="fabs" "less-precise-fpmad"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "no-trapping-math"="true" "prev_always_inline" "prev_fixup" "prev_linkage"="7" "stack-protector-buffer-size"="8" "target-cpu"="sm_120" "target-features"="+ptx88,+sm_120" "unsafe-fp-math"="false" "use-soft-float"="false" }
+attributes #5 = { mustprogress nocallback nocreateundeforpoison nofree nosync nounwind speculatable willreturn memory(none) }
+attributes #6 = { nounwind "uniform-work-group-size" }
+attributes #7 = { nounwind }
+attributes #8 = { convergent nounwind }
+
+!llvm.module.flags = !{!0, !1, !2}
+!llvm.ident = !{!3, !4}
+!llvm.errno.tbaa = !{!5}
+
+!0 = !{i32 2, !"SDK Version", [2 x i32] [i32 12, i32 9]}
+!1 = !{i32 4, !"nvvm-reflect-ftz", i32 0}
+!2 = !{i32 7, !"frame-pointer", i32 2}
+!3 = !{!"clang version 24.0.0git (git@github.com:llvm/llvm-project 0220c07a94012b9dce9250addac6a8ee1f674b21)"}
+!4 = !{!"clang version 3.8.0 (tags/RELEASE_380/final)"}
+!5 = !{!6, !7, i64 0}
+!6 = !{!"__libc_errno", !7, i64 0}
+!7 = !{!"int", !8, i64 0}
+!8 = !{!"omnipotent char", !9, i64 0}
+!9 = !{!"Simple C++ TBAA"}
+!10 = !{!11, !12, i64 0}
+!11 = !{!"_ZTSZN4mfem12SparseMatrix17SortColumnIndicesEvEUliE_", !12, i64 0}
+!12 = !{!"p1 int", !13, i64 0}
+!13 = !{!"any pointer", !8, i64 0}
+!14 = !{!7, !7, i64 0}
+!15 = !{!16, !12, i64 0}
+!16 = !{!"_ZTSZNK4mfem12SparseMatrix7GetDiagERNS_6VectorEEUliE_", !12, i64 0, !12, i64 8, !17, i64 16, !17, i64 24}
+!17 = !{!"p1 double", !13, i64 0}
+!18 = !{!16, !12, i64 8}
+!19 = !{!16, !17, i64 24}
+!20 = !{!21, !21, i64 0}
+!21 = !{!"double", !8, i64 0}
+!22 = !{!16, !17, i64 16}
+!23 = distinct !{!23, !24}
+!24 = !{!"llvm.loop.mustprogress"}
+!25 = !{!26, !12, i64 0}
+!26 = !{!"_ZTSZNK4mfem12SparseMatrix7AddMultERKNS_6VectorERS1_dEUliE_", !12, i64 0, !17, i64 8, !17, i64 16, !12, i64 24, !17, i64 32, !21, i64 40}
+!27 = !{!26, !17, i64 8}
+!28 = !{!26, !17, i64 16}
+!29 = !{!26, !12, i64 24}
+!30 = distinct !{!30, !24}
+!31 = !{!26, !21, i64 40}
+!32 = !{!26, !17, i64 32}
+!33 = !{!34, !12, i64 0}
+!34 = !{!"_ZTSZNK4mfem12SparseMatrix8PartMultERKNS_5ArrayIiEERKNS_6VectorERS5_EUliE_", !12, i64 0, !12, i64 8, !17, i64 16, !17, i64 24, !12, i64 32, !17, i64 40}
+!35 = !{!34, !12, i64 8}
+!36 = !{!34, !17, i64 16}
+!37 = !{!34, !17, i64 24}
+!38 = !{!34, !12, i64 32}
+!39 = distinct !{!39, !24}
+!40 = !{!34, !17, i64 40}
+!41 = !{!42, !12, i64 0}
+!42 = !{!"_ZTSZNK4mfem12SparseMatrix11BooleanMultERKNS_5ArrayIiEERS2_EUliE_", !12, i64 0, !12, i64 8, !12, i64 16, !12, i64 24}
+!43 = !{!42, !12, i64 8}
+!44 = !{!42, !12, i64 16}
+!45 = distinct !{!45, !24}
+!46 = !{!42, !12, i64 24}
+!47 = !{!48, !12, i64 0}
+!48 = !{!"_ZTSZNK4mfem12SparseMatrix7AbsMultERKNS_6VectorERS1_EUliE_", !12, i64 0, !17, i64 8, !17, i64 16, !12, i64 24, !17, i64 32}
+!49 = !{!48, !17, i64 8}
+!50 = !{!48, !17, i64 16}
+!51 = !{!48, !12, i64 24}
+!52 = distinct !{!52, !24}
+!53 = !{!48, !17, i64 32}
+!54 = !{!55, !12, i64 0}
+!55 = !{!"_ZTSZNK4mfem12SparseMatrix10GetRowSumsERNS_6VectorEEUliE_", !12, i64 0, !17, i64 8, !17, i64 16}
+!56 = !{!55, !17, i64 8}
+!57 = distinct !{!57, !24}
+!58 = !{!55, !17, i64 16}
+!59 = !{!60, !12, i64 0}
+!60 = !{!"_ZTSZN4mfem12SparseMatrix11EliminateBCERKNS_5ArrayIiEENS_8Operator14DiagonalPolicyEEUliE_", !12, i64 0, !12, i64 8, !12, i64 16, !17, i64 24, !61, i64 32}
+!61 = !{!"_ZTSN4mfem8Operator14DiagonalPolicyE", !8, i64 0}
+!62 = !{!60, !12, i64 8}
+!63 = !{!60, !12, i64 16}
+!64 = distinct !{!64, !24}
+!65 = distinct !{!65, !24}
+!66 = !{!67, !12, i64 0}
+!67 = !{!"_ZTSZNK4mfem12SparseMatrix9DiagScaleERKNS_6VectorERS1_dbEUliE_", !12, i64 0, !12, i64 8, !68, i64 16, !17, i64 24, !17, i64 32, !21, i64 40, !17, i64 48}
+!68 = !{!"bool", !8, i64 0}
+!69 = !{i64 2171180448}
+!70 = distinct !{!70, !24}
+!71 = !{!67, !68, i64 16}
+!72 = !{i8 0, i8 2}
+!73 = !{}
+!74 = !{!67, !17, i64 24}
+!75 = !{i64 2171180597}
+!76 = !{!67, !21, i64 40}
+!77 = !{!67, !17, i64 48}
+!78 = !{!67, !17, i64 32}
+!79 = !{!80, !17, i64 0}
+!80 = !{!"_ZTSZN4mfemL14JacobiDispatchILb1EEEvRKNS_6VectorES3_RS1_RKNS_6MemoryIiEES8_RKNS5_IdEEidEUliE_", !17, i64 0, !12, i64 8, !17, i64 16, !17, i64 24, !12, i64 32, !17, i64 40, !21, i64 48}
+!81 = !{!80, !12, i64 8}
+!82 = !{!80, !17, i64 16}
+!83 = !{!80, !17, i64 24}
+!84 = !{!80, !12, i64 32}
+!85 = distinct !{!85, !24}
+!86 = !{!80, !21, i64 48}
+!87 = !{!80, !17, i64 40}
+!88 = !{i64 2171180895}
+!89 = !{!90, !17, i64 0}
+!90 = !{!"_ZTSZN4mfemL14JacobiDispatchILb0EEEvRKNS_6VectorES3_RS1_RKNS_6MemoryIiEES8_RKNS5_IdEEidEUliE_", !17, i64 0, !12, i64 8, !17, i64 16, !17, i64 24, !12, i64 32, !17, i64 40, !21, i64 48}
+!91 = !{!90, !12, i64 8}
+!92 = !{!90, !17, i64 16}
+!93 = !{!90, !17, i64 24}
+!94 = !{!90, !12, i64 32}
+!95 = distinct !{!95, !24}
+!96 = !{!90, !21, i64 48}
+!97 = !{!90, !17, i64 40}
+!98 = !{i64 2171181022}

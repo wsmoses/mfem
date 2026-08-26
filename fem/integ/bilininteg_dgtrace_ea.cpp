@@ -81,8 +81,8 @@ static void EADGTraceAssemble2DInt(const int NF,
                                    const int d1d = 0,
                                    const int q1d = 0)
 {
-   const int D1D = T_D1D ? T_D1D : d1d;
-   const int Q1D = T_Q1D ? T_Q1D : q1d;
+   const int D1D = T_D1D ? T_D1D : (d1d < DofQuadLimits::MAX_D1D ? d1d : DofQuadLimits::MAX_D1D);
+   const int Q1D = T_Q1D ? T_Q1D : (q1d < DofQuadLimits::MAX_Q1D ? q1d : DofQuadLimits::MAX_Q1D);
    MFEM_VERIFY(D1D <= DeviceDofQuadLimits::Get().MAX_D1D, "");
    MFEM_VERIFY(Q1D <= DeviceDofQuadLimits::Get().MAX_Q1D, "");
    auto B = Reshape(basis.Read(), Q1D, D1D);
@@ -91,8 +91,8 @@ static void EADGTraceAssemble2DInt(const int NF,
    auto A_ext = Reshape(eadata_ext.ReadWrite(), D1D, D1D, 2, NF);
    mfem::forall_2D(NF, D1D, D1D, [=] MFEM_HOST_DEVICE (int f)
    {
-      const int D1D = T_D1D ? T_D1D : d1d;
-      const int Q1D = T_Q1D ? T_Q1D : q1d;
+      const int D1D = T_D1D ? T_D1D : (d1d < DofQuadLimits::MAX_D1D ? d1d : DofQuadLimits::MAX_D1D);
+      const int Q1D = T_Q1D ? T_Q1D : (q1d < DofQuadLimits::MAX_Q1D ? q1d : DofQuadLimits::MAX_Q1D);
       MFEM_FOREACH_THREAD(i1,x,D1D)
       {
          MFEM_FOREACH_THREAD(j1,y,D1D)
@@ -136,8 +136,8 @@ static void EADGTraceAssemble2DBdr(const int NF,
                                    const int d1d = 0,
                                    const int q1d = 0)
 {
-   const int D1D = T_D1D ? T_D1D : d1d;
-   const int Q1D = T_Q1D ? T_Q1D : q1d;
+   const int D1D = T_D1D ? T_D1D : (d1d < DofQuadLimits::MAX_D1D ? d1d : DofQuadLimits::MAX_D1D);
+   const int Q1D = T_Q1D ? T_Q1D : (q1d < DofQuadLimits::MAX_Q1D ? q1d : DofQuadLimits::MAX_Q1D);
    MFEM_VERIFY(D1D <= DeviceDofQuadLimits::Get().MAX_D1D, "");
    MFEM_VERIFY(Q1D <= DeviceDofQuadLimits::Get().MAX_Q1D, "");
    auto B = Reshape(basis.Read(), Q1D, D1D);
@@ -145,8 +145,8 @@ static void EADGTraceAssemble2DBdr(const int NF,
    auto A_bdr = Reshape(eadata_bdr.ReadWrite(), D1D, D1D, NF);
    mfem::forall_2D(NF, D1D, D1D, [=] MFEM_HOST_DEVICE (int f)
    {
-      const int D1D = T_D1D ? T_D1D : d1d;
-      const int Q1D = T_Q1D ? T_Q1D : q1d;
+      const int D1D = T_D1D ? T_D1D : (d1d < DofQuadLimits::MAX_D1D ? d1d : DofQuadLimits::MAX_D1D);
+      const int Q1D = T_Q1D ? T_Q1D : (q1d < DofQuadLimits::MAX_Q1D ? q1d : DofQuadLimits::MAX_Q1D);
       MFEM_FOREACH_THREAD(i1,x,D1D)
       {
          MFEM_FOREACH_THREAD(j1,y,D1D)
@@ -179,8 +179,8 @@ static void EADGTraceAssemble3DInt(const int NF,
                                    const int d1d = 0,
                                    const int q1d = 0)
 {
-   const int D1D = T_D1D ? T_D1D : d1d;
-   const int Q1D = T_Q1D ? T_Q1D : q1d;
+   const int D1D = T_D1D ? T_D1D : (d1d < DofQuadLimits::MAX_D1D ? d1d : DofQuadLimits::MAX_D1D);
+   const int Q1D = T_Q1D ? T_Q1D : (q1d < DofQuadLimits::MAX_Q1D ? q1d : DofQuadLimits::MAX_Q1D);
    MFEM_VERIFY(D1D <= DeviceDofQuadLimits::Get().MAX_D1D, "");
    MFEM_VERIFY(Q1D <= DeviceDofQuadLimits::Get().MAX_Q1D, "");
    auto B = Reshape(basis.Read(), Q1D, D1D);
@@ -189,8 +189,8 @@ static void EADGTraceAssemble3DInt(const int NF,
    auto A_ext = Reshape(eadata_ext.ReadWrite(), D1D, D1D, D1D, D1D, 2, NF);
    mfem::forall_2D(NF, D1D, D1D, [=] MFEM_HOST_DEVICE (int f)
    {
-      const int D1D = T_D1D ? T_D1D : d1d;
-      const int Q1D = T_Q1D ? T_Q1D : q1d;
+      const int D1D = T_D1D ? T_D1D : (d1d < DofQuadLimits::MAX_D1D ? d1d : DofQuadLimits::MAX_D1D);
+      const int Q1D = T_Q1D ? T_Q1D : (q1d < DofQuadLimits::MAX_Q1D ? q1d : DofQuadLimits::MAX_Q1D);
       constexpr int MD1 = T_D1D ? T_D1D : DofQuadLimits::MAX_D1D;
       constexpr int MQ1 = T_Q1D ? T_Q1D : DofQuadLimits::MAX_Q1D;
       real_t r_B[MQ1][MD1];
@@ -276,8 +276,8 @@ static void EADGTraceAssemble3DBdr(const int NF,
                                    const int d1d = 0,
                                    const int q1d = 0)
 {
-   const int D1D = T_D1D ? T_D1D : d1d;
-   const int Q1D = T_Q1D ? T_Q1D : q1d;
+   const int D1D = T_D1D ? T_D1D : (d1d < DofQuadLimits::MAX_D1D ? d1d : DofQuadLimits::MAX_D1D);
+   const int Q1D = T_Q1D ? T_Q1D : (q1d < DofQuadLimits::MAX_Q1D ? q1d : DofQuadLimits::MAX_Q1D);
    MFEM_VERIFY(D1D <= DeviceDofQuadLimits::Get().MAX_D1D, "");
    MFEM_VERIFY(Q1D <= DeviceDofQuadLimits::Get().MAX_Q1D, "");
    auto B = Reshape(basis.Read(), Q1D, D1D);
@@ -285,8 +285,8 @@ static void EADGTraceAssemble3DBdr(const int NF,
    auto A_bdr = Reshape(eadata_bdr.ReadWrite(), D1D, D1D, D1D, D1D, NF);
    mfem::forall_2D(NF, D1D, D1D, [=] MFEM_HOST_DEVICE (int f)
    {
-      const int D1D = T_D1D ? T_D1D : d1d;
-      const int Q1D = T_Q1D ? T_Q1D : q1d;
+      const int D1D = T_D1D ? T_D1D : (d1d < DofQuadLimits::MAX_D1D ? d1d : DofQuadLimits::MAX_D1D);
+      const int Q1D = T_Q1D ? T_Q1D : (q1d < DofQuadLimits::MAX_Q1D ? q1d : DofQuadLimits::MAX_Q1D);
       constexpr int MD1 = T_D1D ? T_D1D : DofQuadLimits::MAX_D1D;
       constexpr int MQ1 = T_Q1D ? T_Q1D : DofQuadLimits::MAX_Q1D;
       real_t r_B[MQ1][MD1];

@@ -1,0 +1,575 @@
+; ModuleID = '/mnt3/wmoses/git/mfem/linalg/operator.cpp'
+source_filename = "/mnt3/wmoses/git/mfem/linalg/operator.cpp"
+target datalayout = "e-p6:32:32-i64:64-i128:128-i256:256-v16:16-v32:32-n16:32:64"
+target triple = "nvptx64-nvidia-cuda"
+
+%class.anon = type { ptr, ptr }
+%class.anon.0 = type { ptr, ptr }
+%class.anon.1 = type { ptr, ptr, ptr }
+%class.anon.2 = type { ptr, ptr, ptr }
+%class.anon.3 = type { ptr, ptr }
+%class.anon.4 = type { ptr, ptr, ptr }
+%class.anon.5 = type { ptr, ptr }
+%class.anon.6 = type { ptr, ptr }
+%class.anon.7 = type { ptr, ptr, ptr }
+%class.anon.8 = type { ptr, ptr }
+%class.anon.9 = type { ptr, ptr, ptr }
+%class.anon.10 = type { ptr, ptr }
+%class.anon.11 = type { ptr, ptr }
+%class.anon.12 = type { ptr, ptr }
+%class.anon.13 = type { ptr, ptr }
+%class.anon.14 = type { ptr, ptr }
+
+$_ZN4mfemL10CuKernel1DIZNKS_19ConstrainedOperator16AssembleDiagonalERNS_6VectorEEUliE_EEviT_ = comdat any
+
+$_ZN4mfemL10CuKernel1DIZNKS_19ConstrainedOperator16AssembleDiagonalERNS_6VectorEEUliE0_EEviT_ = comdat any
+
+$_ZN4mfemL10CuKernel1DIZNKS_19ConstrainedOperator12EliminateRHSERKNS_6VectorERS2_EUliE_EEviT_ = comdat any
+
+$_ZN4mfemL10CuKernel1DIZNKS_19ConstrainedOperator12EliminateRHSERKNS_6VectorERS2_EUliE0_EEviT_ = comdat any
+
+$_ZN4mfemL10CuKernel1DIZNKS_19ConstrainedOperator15ConstrainedMultERKNS_6VectorERS2_bEUliE_EEviT_ = comdat any
+
+$_ZN4mfemL10CuKernel1DIZNKS_19ConstrainedOperator15ConstrainedMultERKNS_6VectorERS2_bEUliE0_EEviT_ = comdat any
+
+$_ZN4mfemL10CuKernel1DIZNKS_19ConstrainedOperator15ConstrainedMultERKNS_6VectorERS2_bEUliE1_EEviT_ = comdat any
+
+$_ZN4mfemL10CuKernel1DIZNKS_19ConstrainedOperator18ConstrainedAbsMultERKNS_6VectorERS2_bEUliE_EEviT_ = comdat any
+
+$_ZN4mfemL10CuKernel1DIZNKS_19ConstrainedOperator18ConstrainedAbsMultERKNS_6VectorERS2_bEUliE0_EEviT_ = comdat any
+
+$_ZN4mfemL10CuKernel1DIZNKS_19ConstrainedOperator18ConstrainedAbsMultERKNS_6VectorERS2_bEUliE1_EEviT_ = comdat any
+
+$_ZN4mfemL10CuKernel1DIZNKS_30RectangularConstrainedOperator12EliminateRHSERKNS_6VectorERS2_EUliE_EEviT_ = comdat any
+
+$_ZN4mfemL10CuKernel1DIZNKS_30RectangularConstrainedOperator12EliminateRHSERKNS_6VectorERS2_EUliE0_EEviT_ = comdat any
+
+$_ZN4mfemL10CuKernel1DIZNKS_30RectangularConstrainedOperator4MultERKNS_6VectorERS2_EUliE_EEviT_ = comdat any
+
+$_ZN4mfemL10CuKernel1DIZNKS_30RectangularConstrainedOperator4MultERKNS_6VectorERS2_EUliE0_EEviT_ = comdat any
+
+$_ZN4mfemL10CuKernel1DIZNKS_30RectangularConstrainedOperator13MultTransposeERKNS_6VectorERS2_EUliE_EEviT_ = comdat any
+
+$_ZN4mfemL10CuKernel1DIZNKS_30RectangularConstrainedOperator13MultTransposeERKNS_6VectorERS2_EUliE0_EEviT_ = comdat any
+
+; Function Attrs: mustprogress nofree noinline norecurse nosync nounwind willreturn memory(readwrite, inaccessiblemem: none, target_mem: none)
+define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_19ConstrainedOperator16AssembleDiagonalERNS_6VectorEEUliE_EEviT_(i32 noundef %0, ptr nofree noundef readonly byval(%class.anon) align 8 captures(none) %1) local_unnamed_addr #0 comdat {
+  %3 = tail call noundef i32 @llvm.nvvm.read.ptx.sreg.ntid.x()
+  %4 = tail call noundef i32 @llvm.nvvm.read.ptx.sreg.ctaid.x()
+  %5 = mul i32 %3, %4
+  %6 = tail call noundef i32 @llvm.nvvm.read.ptx.sreg.tid.x()
+  %7 = add i32 %5, %6
+  %8 = icmp slt i32 %7, %0
+  br i1 %8, label %9, label %18
+
+9:                                                ; preds = %2
+  %10 = load ptr, ptr %1, align 8, !tbaa !10
+  %11 = getelementptr inbounds nuw i8, ptr %1, i64 8
+  %12 = load ptr, ptr %11, align 8, !tbaa !15
+  %13 = sext i32 %7 to i64
+  %14 = getelementptr inbounds [4 x i8], ptr %10, i64 %13
+  %15 = load i32, ptr %14, align 4, !tbaa !16
+  %16 = sext i32 %15 to i64
+  %17 = getelementptr inbounds [8 x i8], ptr %12, i64 %16
+  store double 1.000000e+00, ptr %17, align 8, !tbaa !17
+  br label %18
+
+18:                                               ; preds = %2, %9
+  ret void
+}
+
+; Function Attrs: mustprogress nocallback nofree nosync nounwind speculatable willreturn memory(none)
+declare noundef range(i32 1, 1025) i32 @llvm.nvvm.read.ptx.sreg.ntid.x() #1
+
+; Function Attrs: mustprogress nocallback nofree nosync nounwind speculatable willreturn memory(none)
+declare noundef range(i32 0, 2147483647) i32 @llvm.nvvm.read.ptx.sreg.ctaid.x() #1
+
+; Function Attrs: mustprogress nocallback nofree nosync nounwind speculatable willreturn memory(none)
+declare noundef range(i32 0, 1024) i32 @llvm.nvvm.read.ptx.sreg.tid.x() #1
+
+; Function Attrs: mustprogress nofree noinline norecurse nosync nounwind willreturn memory(readwrite, inaccessiblemem: none, target_mem: none)
+define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_19ConstrainedOperator16AssembleDiagonalERNS_6VectorEEUliE0_EEviT_(i32 noundef %0, ptr nofree noundef readonly byval(%class.anon.0) align 8 captures(none) %1) local_unnamed_addr #0 comdat {
+  %3 = tail call noundef i32 @llvm.nvvm.read.ptx.sreg.ntid.x()
+  %4 = tail call noundef i32 @llvm.nvvm.read.ptx.sreg.ctaid.x()
+  %5 = mul i32 %3, %4
+  %6 = tail call noundef i32 @llvm.nvvm.read.ptx.sreg.tid.x()
+  %7 = add i32 %5, %6
+  %8 = icmp slt i32 %7, %0
+  br i1 %8, label %9, label %18
+
+9:                                                ; preds = %2
+  %10 = load ptr, ptr %1, align 8, !tbaa !19
+  %11 = getelementptr inbounds nuw i8, ptr %1, i64 8
+  %12 = load ptr, ptr %11, align 8, !tbaa !21
+  %13 = sext i32 %7 to i64
+  %14 = getelementptr inbounds [4 x i8], ptr %10, i64 %13
+  %15 = load i32, ptr %14, align 4, !tbaa !16
+  %16 = sext i32 %15 to i64
+  %17 = getelementptr inbounds [8 x i8], ptr %12, i64 %16
+  store double 0.000000e+00, ptr %17, align 8, !tbaa !17
+  br label %18
+
+18:                                               ; preds = %2, %9
+  ret void
+}
+
+; Function Attrs: mustprogress nofree noinline norecurse nosync nounwind willreturn memory(readwrite, inaccessiblemem: none, target_mem: none)
+define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_19ConstrainedOperator12EliminateRHSERKNS_6VectorERS2_EUliE_EEviT_(i32 noundef %0, ptr nofree noundef readonly byval(%class.anon.1) align 8 captures(none) %1) local_unnamed_addr #0 comdat {
+  %3 = tail call noundef i32 @llvm.nvvm.read.ptx.sreg.ntid.x()
+  %4 = tail call noundef i32 @llvm.nvvm.read.ptx.sreg.ctaid.x()
+  %5 = mul i32 %3, %4
+  %6 = tail call noundef i32 @llvm.nvvm.read.ptx.sreg.tid.x()
+  %7 = add i32 %5, %6
+  %8 = icmp slt i32 %7, %0
+  br i1 %8, label %9, label %22
+
+9:                                                ; preds = %2
+  %10 = load ptr, ptr %1, align 8, !tbaa !22
+  %11 = sext i32 %7 to i64
+  %12 = getelementptr inbounds [4 x i8], ptr %10, i64 %11
+  %13 = load i32, ptr %12, align 4, !tbaa !16
+  %14 = getelementptr inbounds nuw i8, ptr %1, i64 16
+  %15 = load ptr, ptr %14, align 8, !tbaa !24
+  %16 = sext i32 %13 to i64
+  %17 = getelementptr inbounds [8 x i8], ptr %15, i64 %16
+  %18 = load double, ptr %17, align 8, !tbaa !17
+  %19 = getelementptr inbounds nuw i8, ptr %1, i64 8
+  %20 = load ptr, ptr %19, align 8, !tbaa !25
+  %21 = getelementptr inbounds [8 x i8], ptr %20, i64 %16
+  store double %18, ptr %21, align 8, !tbaa !17
+  br label %22
+
+22:                                               ; preds = %2, %9
+  ret void
+}
+
+; Function Attrs: mustprogress nofree noinline norecurse nosync nounwind willreturn memory(readwrite, inaccessiblemem: none, target_mem: none)
+define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_19ConstrainedOperator12EliminateRHSERKNS_6VectorERS2_EUliE0_EEviT_(i32 noundef %0, ptr nofree noundef readonly byval(%class.anon.2) align 8 captures(none) %1) local_unnamed_addr #0 comdat {
+  %3 = tail call noundef i32 @llvm.nvvm.read.ptx.sreg.ntid.x()
+  %4 = tail call noundef i32 @llvm.nvvm.read.ptx.sreg.ctaid.x()
+  %5 = mul i32 %3, %4
+  %6 = tail call noundef i32 @llvm.nvvm.read.ptx.sreg.tid.x()
+  %7 = add i32 %5, %6
+  %8 = icmp slt i32 %7, %0
+  br i1 %8, label %9, label %22
+
+9:                                                ; preds = %2
+  %10 = load ptr, ptr %1, align 8, !tbaa !26
+  %11 = sext i32 %7 to i64
+  %12 = getelementptr inbounds [4 x i8], ptr %10, i64 %11
+  %13 = load i32, ptr %12, align 4, !tbaa !16
+  %14 = getelementptr inbounds nuw i8, ptr %1, i64 16
+  %15 = load ptr, ptr %14, align 8, !tbaa !28
+  %16 = sext i32 %13 to i64
+  %17 = getelementptr inbounds [8 x i8], ptr %15, i64 %16
+  %18 = load double, ptr %17, align 8, !tbaa !17
+  %19 = getelementptr inbounds nuw i8, ptr %1, i64 8
+  %20 = load ptr, ptr %19, align 8, !tbaa !29
+  %21 = getelementptr inbounds [8 x i8], ptr %20, i64 %16
+  store double %18, ptr %21, align 8, !tbaa !17
+  br label %22
+
+22:                                               ; preds = %2, %9
+  ret void
+}
+
+; Function Attrs: mustprogress nofree noinline norecurse nosync nounwind willreturn memory(readwrite, inaccessiblemem: none, target_mem: none)
+define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_19ConstrainedOperator15ConstrainedMultERKNS_6VectorERS2_bEUliE_EEviT_(i32 noundef %0, ptr nofree noundef readonly byval(%class.anon.3) align 8 captures(none) %1) local_unnamed_addr #0 comdat {
+  %3 = tail call noundef i32 @llvm.nvvm.read.ptx.sreg.ntid.x()
+  %4 = tail call noundef i32 @llvm.nvvm.read.ptx.sreg.ctaid.x()
+  %5 = mul i32 %3, %4
+  %6 = tail call noundef i32 @llvm.nvvm.read.ptx.sreg.tid.x()
+  %7 = add i32 %5, %6
+  %8 = icmp slt i32 %7, %0
+  br i1 %8, label %9, label %18
+
+9:                                                ; preds = %2
+  %10 = load ptr, ptr %1, align 8, !tbaa !30
+  %11 = getelementptr inbounds nuw i8, ptr %1, i64 8
+  %12 = load ptr, ptr %11, align 8, !tbaa !32
+  %13 = sext i32 %7 to i64
+  %14 = getelementptr inbounds [4 x i8], ptr %12, i64 %13
+  %15 = load i32, ptr %14, align 4, !tbaa !16
+  %16 = sext i32 %15 to i64
+  %17 = getelementptr inbounds [8 x i8], ptr %10, i64 %16
+  store double 0.000000e+00, ptr %17, align 8, !tbaa !17
+  br label %18
+
+18:                                               ; preds = %2, %9
+  ret void
+}
+
+; Function Attrs: mustprogress nofree noinline norecurse nosync nounwind willreturn memory(readwrite, inaccessiblemem: none, target_mem: none)
+define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_19ConstrainedOperator15ConstrainedMultERKNS_6VectorERS2_bEUliE0_EEviT_(i32 noundef %0, ptr nofree noundef readonly byval(%class.anon.4) align 8 captures(none) %1) local_unnamed_addr #0 comdat {
+  %3 = tail call noundef i32 @llvm.nvvm.read.ptx.sreg.ntid.x()
+  %4 = tail call noundef i32 @llvm.nvvm.read.ptx.sreg.ctaid.x()
+  %5 = mul i32 %3, %4
+  %6 = tail call noundef i32 @llvm.nvvm.read.ptx.sreg.tid.x()
+  %7 = add i32 %5, %6
+  %8 = icmp slt i32 %7, %0
+  br i1 %8, label %9, label %22
+
+9:                                                ; preds = %2
+  %10 = load ptr, ptr %1, align 8, !tbaa !33
+  %11 = sext i32 %7 to i64
+  %12 = getelementptr inbounds [4 x i8], ptr %10, i64 %11
+  %13 = load i32, ptr %12, align 4, !tbaa !16
+  %14 = getelementptr inbounds nuw i8, ptr %1, i64 16
+  %15 = load ptr, ptr %14, align 8, !tbaa !35
+  %16 = sext i32 %13 to i64
+  %17 = getelementptr inbounds [8 x i8], ptr %15, i64 %16
+  %18 = load double, ptr %17, align 8, !tbaa !17
+  %19 = getelementptr inbounds nuw i8, ptr %1, i64 8
+  %20 = load ptr, ptr %19, align 8, !tbaa !36
+  %21 = getelementptr inbounds [8 x i8], ptr %20, i64 %16
+  store double %18, ptr %21, align 8, !tbaa !17
+  br label %22
+
+22:                                               ; preds = %2, %9
+  ret void
+}
+
+; Function Attrs: mustprogress nofree noinline norecurse nosync nounwind willreturn memory(readwrite, inaccessiblemem: none, target_mem: none)
+define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_19ConstrainedOperator15ConstrainedMultERKNS_6VectorERS2_bEUliE1_EEviT_(i32 noundef %0, ptr nofree noundef readonly byval(%class.anon.5) align 8 captures(none) %1) local_unnamed_addr #0 comdat {
+  %3 = tail call noundef i32 @llvm.nvvm.read.ptx.sreg.ntid.x()
+  %4 = tail call noundef i32 @llvm.nvvm.read.ptx.sreg.ctaid.x()
+  %5 = mul i32 %3, %4
+  %6 = tail call noundef i32 @llvm.nvvm.read.ptx.sreg.tid.x()
+  %7 = add i32 %5, %6
+  %8 = icmp slt i32 %7, %0
+  br i1 %8, label %9, label %18
+
+9:                                                ; preds = %2
+  %10 = load ptr, ptr %1, align 8, !tbaa !37
+  %11 = getelementptr inbounds nuw i8, ptr %1, i64 8
+  %12 = load ptr, ptr %11, align 8, !tbaa !39
+  %13 = sext i32 %7 to i64
+  %14 = getelementptr inbounds [4 x i8], ptr %10, i64 %13
+  %15 = load i32, ptr %14, align 4, !tbaa !16
+  %16 = sext i32 %15 to i64
+  %17 = getelementptr inbounds [8 x i8], ptr %12, i64 %16
+  store double 0.000000e+00, ptr %17, align 8, !tbaa !17
+  br label %18
+
+18:                                               ; preds = %2, %9
+  ret void
+}
+
+; Function Attrs: mustprogress nofree noinline norecurse nosync nounwind willreturn memory(readwrite, inaccessiblemem: none, target_mem: none)
+define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_19ConstrainedOperator18ConstrainedAbsMultERKNS_6VectorERS2_bEUliE_EEviT_(i32 noundef %0, ptr nofree noundef readonly byval(%class.anon.6) align 8 captures(none) %1) local_unnamed_addr #0 comdat {
+  %3 = tail call noundef i32 @llvm.nvvm.read.ptx.sreg.ntid.x()
+  %4 = tail call noundef i32 @llvm.nvvm.read.ptx.sreg.ctaid.x()
+  %5 = mul i32 %3, %4
+  %6 = tail call noundef i32 @llvm.nvvm.read.ptx.sreg.tid.x()
+  %7 = add i32 %5, %6
+  %8 = icmp slt i32 %7, %0
+  br i1 %8, label %9, label %18
+
+9:                                                ; preds = %2
+  %10 = load ptr, ptr %1, align 8, !tbaa !40
+  %11 = getelementptr inbounds nuw i8, ptr %1, i64 8
+  %12 = load ptr, ptr %11, align 8, !tbaa !42
+  %13 = sext i32 %7 to i64
+  %14 = getelementptr inbounds [4 x i8], ptr %12, i64 %13
+  %15 = load i32, ptr %14, align 4, !tbaa !16
+  %16 = sext i32 %15 to i64
+  %17 = getelementptr inbounds [8 x i8], ptr %10, i64 %16
+  store double 0.000000e+00, ptr %17, align 8, !tbaa !17
+  br label %18
+
+18:                                               ; preds = %2, %9
+  ret void
+}
+
+; Function Attrs: mustprogress nofree noinline norecurse nosync nounwind willreturn memory(readwrite, inaccessiblemem: none, target_mem: none)
+define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_19ConstrainedOperator18ConstrainedAbsMultERKNS_6VectorERS2_bEUliE0_EEviT_(i32 noundef %0, ptr nofree noundef readonly byval(%class.anon.7) align 8 captures(none) %1) local_unnamed_addr #0 comdat {
+  %3 = tail call noundef i32 @llvm.nvvm.read.ptx.sreg.ntid.x()
+  %4 = tail call noundef i32 @llvm.nvvm.read.ptx.sreg.ctaid.x()
+  %5 = mul i32 %3, %4
+  %6 = tail call noundef i32 @llvm.nvvm.read.ptx.sreg.tid.x()
+  %7 = add i32 %5, %6
+  %8 = icmp slt i32 %7, %0
+  br i1 %8, label %9, label %22
+
+9:                                                ; preds = %2
+  %10 = load ptr, ptr %1, align 8, !tbaa !43
+  %11 = sext i32 %7 to i64
+  %12 = getelementptr inbounds [4 x i8], ptr %10, i64 %11
+  %13 = load i32, ptr %12, align 4, !tbaa !16
+  %14 = getelementptr inbounds nuw i8, ptr %1, i64 16
+  %15 = load ptr, ptr %14, align 8, !tbaa !45
+  %16 = sext i32 %13 to i64
+  %17 = getelementptr inbounds [8 x i8], ptr %15, i64 %16
+  %18 = load double, ptr %17, align 8, !tbaa !17
+  %19 = getelementptr inbounds nuw i8, ptr %1, i64 8
+  %20 = load ptr, ptr %19, align 8, !tbaa !46
+  %21 = getelementptr inbounds [8 x i8], ptr %20, i64 %16
+  store double %18, ptr %21, align 8, !tbaa !17
+  br label %22
+
+22:                                               ; preds = %2, %9
+  ret void
+}
+
+; Function Attrs: mustprogress nofree noinline norecurse nosync nounwind willreturn memory(readwrite, inaccessiblemem: none, target_mem: none)
+define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_19ConstrainedOperator18ConstrainedAbsMultERKNS_6VectorERS2_bEUliE1_EEviT_(i32 noundef %0, ptr nofree noundef readonly byval(%class.anon.8) align 8 captures(none) %1) local_unnamed_addr #0 comdat {
+  %3 = tail call noundef i32 @llvm.nvvm.read.ptx.sreg.ntid.x()
+  %4 = tail call noundef i32 @llvm.nvvm.read.ptx.sreg.ctaid.x()
+  %5 = mul i32 %3, %4
+  %6 = tail call noundef i32 @llvm.nvvm.read.ptx.sreg.tid.x()
+  %7 = add i32 %5, %6
+  %8 = icmp slt i32 %7, %0
+  br i1 %8, label %9, label %18
+
+9:                                                ; preds = %2
+  %10 = load ptr, ptr %1, align 8, !tbaa !47
+  %11 = getelementptr inbounds nuw i8, ptr %1, i64 8
+  %12 = load ptr, ptr %11, align 8, !tbaa !49
+  %13 = sext i32 %7 to i64
+  %14 = getelementptr inbounds [4 x i8], ptr %10, i64 %13
+  %15 = load i32, ptr %14, align 4, !tbaa !16
+  %16 = sext i32 %15 to i64
+  %17 = getelementptr inbounds [8 x i8], ptr %12, i64 %16
+  store double 0.000000e+00, ptr %17, align 8, !tbaa !17
+  br label %18
+
+18:                                               ; preds = %2, %9
+  ret void
+}
+
+; Function Attrs: mustprogress nofree noinline norecurse nosync nounwind willreturn memory(readwrite, inaccessiblemem: none, target_mem: none)
+define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_30RectangularConstrainedOperator12EliminateRHSERKNS_6VectorERS2_EUliE_EEviT_(i32 noundef %0, ptr nofree noundef readonly byval(%class.anon.9) align 8 captures(none) %1) local_unnamed_addr #0 comdat {
+  %3 = tail call noundef i32 @llvm.nvvm.read.ptx.sreg.ntid.x()
+  %4 = tail call noundef i32 @llvm.nvvm.read.ptx.sreg.ctaid.x()
+  %5 = mul i32 %3, %4
+  %6 = tail call noundef i32 @llvm.nvvm.read.ptx.sreg.tid.x()
+  %7 = add i32 %5, %6
+  %8 = icmp slt i32 %7, %0
+  br i1 %8, label %9, label %22
+
+9:                                                ; preds = %2
+  %10 = load ptr, ptr %1, align 8, !tbaa !50
+  %11 = sext i32 %7 to i64
+  %12 = getelementptr inbounds [4 x i8], ptr %10, i64 %11
+  %13 = load i32, ptr %12, align 4, !tbaa !16
+  %14 = getelementptr inbounds nuw i8, ptr %1, i64 16
+  %15 = load ptr, ptr %14, align 8, !tbaa !52
+  %16 = sext i32 %13 to i64
+  %17 = getelementptr inbounds [8 x i8], ptr %15, i64 %16
+  %18 = load double, ptr %17, align 8, !tbaa !17
+  %19 = getelementptr inbounds nuw i8, ptr %1, i64 8
+  %20 = load ptr, ptr %19, align 8, !tbaa !53
+  %21 = getelementptr inbounds [8 x i8], ptr %20, i64 %16
+  store double %18, ptr %21, align 8, !tbaa !17
+  br label %22
+
+22:                                               ; preds = %2, %9
+  ret void
+}
+
+; Function Attrs: mustprogress nofree noinline norecurse nosync nounwind willreturn memory(readwrite, inaccessiblemem: none, target_mem: none)
+define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_30RectangularConstrainedOperator12EliminateRHSERKNS_6VectorERS2_EUliE0_EEviT_(i32 noundef %0, ptr nofree noundef readonly byval(%class.anon.10) align 8 captures(none) %1) local_unnamed_addr #0 comdat {
+  %3 = tail call noundef i32 @llvm.nvvm.read.ptx.sreg.ntid.x()
+  %4 = tail call noundef i32 @llvm.nvvm.read.ptx.sreg.ctaid.x()
+  %5 = mul i32 %3, %4
+  %6 = tail call noundef i32 @llvm.nvvm.read.ptx.sreg.tid.x()
+  %7 = add i32 %5, %6
+  %8 = icmp slt i32 %7, %0
+  br i1 %8, label %9, label %18
+
+9:                                                ; preds = %2
+  %10 = load ptr, ptr %1, align 8, !tbaa !54
+  %11 = getelementptr inbounds nuw i8, ptr %1, i64 8
+  %12 = load ptr, ptr %11, align 8, !tbaa !56
+  %13 = sext i32 %7 to i64
+  %14 = getelementptr inbounds [4 x i8], ptr %12, i64 %13
+  %15 = load i32, ptr %14, align 4, !tbaa !16
+  %16 = sext i32 %15 to i64
+  %17 = getelementptr inbounds [8 x i8], ptr %10, i64 %16
+  store double 0.000000e+00, ptr %17, align 8, !tbaa !17
+  br label %18
+
+18:                                               ; preds = %2, %9
+  ret void
+}
+
+; Function Attrs: mustprogress nofree noinline norecurse nosync nounwind willreturn memory(readwrite, inaccessiblemem: none, target_mem: none)
+define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_30RectangularConstrainedOperator4MultERKNS_6VectorERS2_EUliE_EEviT_(i32 noundef %0, ptr nofree noundef readonly byval(%class.anon.11) align 8 captures(none) %1) local_unnamed_addr #0 comdat {
+  %3 = tail call noundef i32 @llvm.nvvm.read.ptx.sreg.ntid.x()
+  %4 = tail call noundef i32 @llvm.nvvm.read.ptx.sreg.ctaid.x()
+  %5 = mul i32 %3, %4
+  %6 = tail call noundef i32 @llvm.nvvm.read.ptx.sreg.tid.x()
+  %7 = add i32 %5, %6
+  %8 = icmp slt i32 %7, %0
+  br i1 %8, label %9, label %18
+
+9:                                                ; preds = %2
+  %10 = load ptr, ptr %1, align 8, !tbaa !57
+  %11 = getelementptr inbounds nuw i8, ptr %1, i64 8
+  %12 = load ptr, ptr %11, align 8, !tbaa !59
+  %13 = sext i32 %7 to i64
+  %14 = getelementptr inbounds [4 x i8], ptr %12, i64 %13
+  %15 = load i32, ptr %14, align 4, !tbaa !16
+  %16 = sext i32 %15 to i64
+  %17 = getelementptr inbounds [8 x i8], ptr %10, i64 %16
+  store double 0.000000e+00, ptr %17, align 8, !tbaa !17
+  br label %18
+
+18:                                               ; preds = %2, %9
+  ret void
+}
+
+; Function Attrs: mustprogress nofree noinline norecurse nosync nounwind willreturn memory(readwrite, inaccessiblemem: none, target_mem: none)
+define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_30RectangularConstrainedOperator4MultERKNS_6VectorERS2_EUliE0_EEviT_(i32 noundef %0, ptr nofree noundef readonly byval(%class.anon.12) align 8 captures(none) %1) local_unnamed_addr #0 comdat {
+  %3 = tail call noundef i32 @llvm.nvvm.read.ptx.sreg.ntid.x()
+  %4 = tail call noundef i32 @llvm.nvvm.read.ptx.sreg.ctaid.x()
+  %5 = mul i32 %3, %4
+  %6 = tail call noundef i32 @llvm.nvvm.read.ptx.sreg.tid.x()
+  %7 = add i32 %5, %6
+  %8 = icmp slt i32 %7, %0
+  br i1 %8, label %9, label %18
+
+9:                                                ; preds = %2
+  %10 = load ptr, ptr %1, align 8, !tbaa !60
+  %11 = getelementptr inbounds nuw i8, ptr %1, i64 8
+  %12 = load ptr, ptr %11, align 8, !tbaa !62
+  %13 = sext i32 %7 to i64
+  %14 = getelementptr inbounds [4 x i8], ptr %12, i64 %13
+  %15 = load i32, ptr %14, align 4, !tbaa !16
+  %16 = sext i32 %15 to i64
+  %17 = getelementptr inbounds [8 x i8], ptr %10, i64 %16
+  store double 0.000000e+00, ptr %17, align 8, !tbaa !17
+  br label %18
+
+18:                                               ; preds = %2, %9
+  ret void
+}
+
+; Function Attrs: mustprogress nofree noinline norecurse nosync nounwind willreturn memory(readwrite, inaccessiblemem: none, target_mem: none)
+define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_30RectangularConstrainedOperator13MultTransposeERKNS_6VectorERS2_EUliE_EEviT_(i32 noundef %0, ptr nofree noundef readonly byval(%class.anon.13) align 8 captures(none) %1) local_unnamed_addr #0 comdat {
+  %3 = tail call noundef i32 @llvm.nvvm.read.ptx.sreg.ntid.x()
+  %4 = tail call noundef i32 @llvm.nvvm.read.ptx.sreg.ctaid.x()
+  %5 = mul i32 %3, %4
+  %6 = tail call noundef i32 @llvm.nvvm.read.ptx.sreg.tid.x()
+  %7 = add i32 %5, %6
+  %8 = icmp slt i32 %7, %0
+  br i1 %8, label %9, label %18
+
+9:                                                ; preds = %2
+  %10 = load ptr, ptr %1, align 8, !tbaa !63
+  %11 = getelementptr inbounds nuw i8, ptr %1, i64 8
+  %12 = load ptr, ptr %11, align 8, !tbaa !65
+  %13 = sext i32 %7 to i64
+  %14 = getelementptr inbounds [4 x i8], ptr %12, i64 %13
+  %15 = load i32, ptr %14, align 4, !tbaa !16
+  %16 = sext i32 %15 to i64
+  %17 = getelementptr inbounds [8 x i8], ptr %10, i64 %16
+  store double 0.000000e+00, ptr %17, align 8, !tbaa !17
+  br label %18
+
+18:                                               ; preds = %2, %9
+  ret void
+}
+
+; Function Attrs: mustprogress nofree noinline norecurse nosync nounwind willreturn memory(readwrite, inaccessiblemem: none, target_mem: none)
+define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_30RectangularConstrainedOperator13MultTransposeERKNS_6VectorERS2_EUliE0_EEviT_(i32 noundef %0, ptr nofree noundef readonly byval(%class.anon.14) align 8 captures(none) %1) local_unnamed_addr #0 comdat {
+  %3 = tail call noundef i32 @llvm.nvvm.read.ptx.sreg.ntid.x()
+  %4 = tail call noundef i32 @llvm.nvvm.read.ptx.sreg.ctaid.x()
+  %5 = mul i32 %3, %4
+  %6 = tail call noundef i32 @llvm.nvvm.read.ptx.sreg.tid.x()
+  %7 = add i32 %5, %6
+  %8 = icmp slt i32 %7, %0
+  br i1 %8, label %9, label %18
+
+9:                                                ; preds = %2
+  %10 = load ptr, ptr %1, align 8, !tbaa !66
+  %11 = getelementptr inbounds nuw i8, ptr %1, i64 8
+  %12 = load ptr, ptr %11, align 8, !tbaa !68
+  %13 = sext i32 %7 to i64
+  %14 = getelementptr inbounds [4 x i8], ptr %12, i64 %13
+  %15 = load i32, ptr %14, align 4, !tbaa !16
+  %16 = sext i32 %15 to i64
+  %17 = getelementptr inbounds [8 x i8], ptr %10, i64 %16
+  store double 0.000000e+00, ptr %17, align 8, !tbaa !17
+  br label %18
+
+18:                                               ; preds = %2, %9
+  ret void
+}
+
+attributes #0 = { mustprogress nofree noinline norecurse nosync nounwind willreturn memory(readwrite, inaccessiblemem: none, target_mem: none) "frame-pointer"="all" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="sm_120" "target-features"="+ptx88,+sm_120" "uniform-work-group-size" }
+attributes #1 = { mustprogress nocallback nofree nosync nounwind speculatable willreturn memory(none) }
+
+!llvm.module.flags = !{!0, !1, !2}
+!llvm.ident = !{!3, !4}
+!llvm.errno.tbaa = !{!5}
+
+!0 = !{i32 2, !"SDK Version", [2 x i32] [i32 12, i32 9]}
+!1 = !{i32 4, !"nvvm-reflect-ftz", i32 0}
+!2 = !{i32 7, !"frame-pointer", i32 2}
+!3 = !{!"clang version 24.0.0git (git@github.com:llvm/llvm-project 0220c07a94012b9dce9250addac6a8ee1f674b21)"}
+!4 = !{!"clang version 3.8.0 (tags/RELEASE_380/final)"}
+!5 = !{!6, !7, i64 0}
+!6 = !{!"__libc_errno", !7, i64 0}
+!7 = !{!"int", !8, i64 0}
+!8 = !{!"omnipotent char", !9, i64 0}
+!9 = !{!"Simple C++ TBAA"}
+!10 = !{!11, !12, i64 0}
+!11 = !{!"_ZTSZNK4mfem19ConstrainedOperator16AssembleDiagonalERNS_6VectorEEUliE_", !12, i64 0, !14, i64 8}
+!12 = !{!"p1 int", !13, i64 0}
+!13 = !{!"any pointer", !8, i64 0}
+!14 = !{!"p1 double", !13, i64 0}
+!15 = !{!11, !14, i64 8}
+!16 = !{!7, !7, i64 0}
+!17 = !{!18, !18, i64 0}
+!18 = !{!"double", !8, i64 0}
+!19 = !{!20, !12, i64 0}
+!20 = !{!"_ZTSZNK4mfem19ConstrainedOperator16AssembleDiagonalERNS_6VectorEEUliE0_", !12, i64 0, !14, i64 8}
+!21 = !{!20, !14, i64 8}
+!22 = !{!23, !12, i64 0}
+!23 = !{!"_ZTSZNK4mfem19ConstrainedOperator12EliminateRHSERKNS_6VectorERS1_EUliE_", !12, i64 0, !14, i64 8, !14, i64 16}
+!24 = !{!23, !14, i64 16}
+!25 = !{!23, !14, i64 8}
+!26 = !{!27, !12, i64 0}
+!27 = !{!"_ZTSZNK4mfem19ConstrainedOperator12EliminateRHSERKNS_6VectorERS1_EUliE0_", !12, i64 0, !14, i64 8, !14, i64 16}
+!28 = !{!27, !14, i64 16}
+!29 = !{!27, !14, i64 8}
+!30 = !{!31, !14, i64 0}
+!31 = !{!"_ZTSZNK4mfem19ConstrainedOperator15ConstrainedMultERKNS_6VectorERS1_bEUliE_", !14, i64 0, !12, i64 8}
+!32 = !{!31, !12, i64 8}
+!33 = !{!34, !12, i64 0}
+!34 = !{!"_ZTSZNK4mfem19ConstrainedOperator15ConstrainedMultERKNS_6VectorERS1_bEUliE0_", !12, i64 0, !14, i64 8, !14, i64 16}
+!35 = !{!34, !14, i64 16}
+!36 = !{!34, !14, i64 8}
+!37 = !{!38, !12, i64 0}
+!38 = !{!"_ZTSZNK4mfem19ConstrainedOperator15ConstrainedMultERKNS_6VectorERS1_bEUliE1_", !12, i64 0, !14, i64 8}
+!39 = !{!38, !14, i64 8}
+!40 = !{!41, !14, i64 0}
+!41 = !{!"_ZTSZNK4mfem19ConstrainedOperator18ConstrainedAbsMultERKNS_6VectorERS1_bEUliE_", !14, i64 0, !12, i64 8}
+!42 = !{!41, !12, i64 8}
+!43 = !{!44, !12, i64 0}
+!44 = !{!"_ZTSZNK4mfem19ConstrainedOperator18ConstrainedAbsMultERKNS_6VectorERS1_bEUliE0_", !12, i64 0, !14, i64 8, !14, i64 16}
+!45 = !{!44, !14, i64 16}
+!46 = !{!44, !14, i64 8}
+!47 = !{!48, !12, i64 0}
+!48 = !{!"_ZTSZNK4mfem19ConstrainedOperator18ConstrainedAbsMultERKNS_6VectorERS1_bEUliE1_", !12, i64 0, !14, i64 8}
+!49 = !{!48, !14, i64 8}
+!50 = !{!51, !12, i64 0}
+!51 = !{!"_ZTSZNK4mfem30RectangularConstrainedOperator12EliminateRHSERKNS_6VectorERS1_EUliE_", !12, i64 0, !14, i64 8, !14, i64 16}
+!52 = !{!51, !14, i64 16}
+!53 = !{!51, !14, i64 8}
+!54 = !{!55, !14, i64 0}
+!55 = !{!"_ZTSZNK4mfem30RectangularConstrainedOperator12EliminateRHSERKNS_6VectorERS1_EUliE0_", !14, i64 0, !12, i64 8}
+!56 = !{!55, !12, i64 8}
+!57 = !{!58, !14, i64 0}
+!58 = !{!"_ZTSZNK4mfem30RectangularConstrainedOperator4MultERKNS_6VectorERS1_EUliE_", !14, i64 0, !12, i64 8}
+!59 = !{!58, !12, i64 8}
+!60 = !{!61, !14, i64 0}
+!61 = !{!"_ZTSZNK4mfem30RectangularConstrainedOperator4MultERKNS_6VectorERS1_EUliE0_", !14, i64 0, !12, i64 8}
+!62 = !{!61, !12, i64 8}
+!63 = !{!64, !14, i64 0}
+!64 = !{!"_ZTSZNK4mfem30RectangularConstrainedOperator13MultTransposeERKNS_6VectorERS1_EUliE_", !14, i64 0, !12, i64 8}
+!65 = !{!64, !12, i64 8}
+!66 = !{!67, !14, i64 0}
+!67 = !{!"_ZTSZNK4mfem30RectangularConstrainedOperator13MultTransposeERKNS_6VectorERS1_EUliE0_", !14, i64 0, !12, i64 8}
+!68 = !{!67, !12, i64 8}

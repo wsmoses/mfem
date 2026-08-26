@@ -246,7 +246,7 @@ static void PAGradientApply2D(const int NE,
 {
    const int TR_D1D = T_TR_D1D ? T_TR_D1D : tr_d1d;
    const int TE_D1D = T_TE_D1D ? T_TE_D1D : te_d1d;
-   const int Q1D = T_Q1D ? T_Q1D : q1d;
+   const int Q1D = T_Q1D ? T_Q1D : (q1d < DofQuadLimits::MAX_Q1D ? q1d : DofQuadLimits::MAX_Q1D);
    MFEM_VERIFY(TR_D1D <= DeviceDofQuadLimits::Get().MAX_D1D, "");
    MFEM_VERIFY(TE_D1D <= DeviceDofQuadLimits::Get().MAX_D1D, "");
    MFEM_VERIFY(Q1D <= DeviceDofQuadLimits::Get().MAX_Q1D, "");
@@ -260,7 +260,7 @@ static void PAGradientApply2D(const int NE,
    {
       const int TR_D1D = T_TR_D1D ? T_TR_D1D : tr_d1d;
       const int TE_D1D = T_TE_D1D ? T_TE_D1D : te_d1d;
-      const int Q1D = T_Q1D ? T_Q1D : q1d;
+      const int Q1D = T_Q1D ? T_Q1D : (q1d < DofQuadLimits::MAX_Q1D ? q1d : DofQuadLimits::MAX_Q1D);
       const int VDIM = 2;
       // the following variables are evaluated at compile time
       constexpr int max_TE_D1D = T_TE_D1D ? T_TE_D1D : DofQuadLimits::MAX_D1D;
@@ -359,7 +359,7 @@ static void PAGradientApplyTranspose2D(const int NE,
 {
    const int TR_D1D = T_TR_D1D ? T_TR_D1D : tr_d1d;
    const int TE_D1D = T_TE_D1D ? T_TE_D1D : te_d1d;
-   const int Q1D = T_Q1D ? T_Q1D : q1d;
+   const int Q1D = T_Q1D ? T_Q1D : (q1d < DofQuadLimits::MAX_Q1D ? q1d : DofQuadLimits::MAX_Q1D);
    MFEM_VERIFY(TR_D1D <= DeviceDofQuadLimits::Get().MAX_D1D, "");
    MFEM_VERIFY(TE_D1D <= DeviceDofQuadLimits::Get().MAX_D1D, "");
    MFEM_VERIFY(Q1D <= DeviceDofQuadLimits::Get().MAX_Q1D, "");
@@ -373,7 +373,7 @@ static void PAGradientApplyTranspose2D(const int NE,
    {
       const int TR_D1D = T_TR_D1D ? T_TR_D1D : tr_d1d;
       const int TE_D1D = T_TE_D1D ? T_TE_D1D : te_d1d;
-      const int Q1D = T_Q1D ? T_Q1D : q1d;
+      const int Q1D = T_Q1D ? T_Q1D : (q1d < DofQuadLimits::MAX_Q1D ? q1d : DofQuadLimits::MAX_Q1D);
       const int VDIM = 2;
       // the following variables are evaluated at compile time
       constexpr int max_TR_D1D = T_TR_D1D ? T_TR_D1D : DofQuadLimits::MAX_D1D;
@@ -472,7 +472,7 @@ static void PAGradientApply3D(const int NE,
 {
    const int TR_D1D = T_TR_D1D ? T_TR_D1D : tr_d1d;
    const int TE_D1D = T_TE_D1D ? T_TE_D1D : te_d1d;
-   const int Q1D = T_Q1D ? T_Q1D : q1d;
+   const int Q1D = T_Q1D ? T_Q1D : (q1d < DofQuadLimits::MAX_Q1D ? q1d : DofQuadLimits::MAX_Q1D);
    MFEM_VERIFY(TR_D1D <= DeviceDofQuadLimits::Get().MAX_D1D, "");
    MFEM_VERIFY(TE_D1D <= DeviceDofQuadLimits::Get().MAX_D1D, "");
    MFEM_VERIFY(Q1D <= DeviceDofQuadLimits::Get().MAX_Q1D, "");
@@ -486,7 +486,7 @@ static void PAGradientApply3D(const int NE,
    {
       const int TR_D1D = T_TR_D1D ? T_TR_D1D : tr_d1d;
       const int TE_D1D = T_TE_D1D ? T_TE_D1D : te_d1d;
-      const int Q1D = T_Q1D ? T_Q1D : q1d;
+      const int Q1D = T_Q1D ? T_Q1D : (q1d < DofQuadLimits::MAX_Q1D ? q1d : DofQuadLimits::MAX_Q1D);
       const int VDIM = 3;
       // the following variables are evaluated at compile time
       constexpr int max_TE_D1D = T_TE_D1D ? T_TE_D1D : DofQuadLimits::MAX_D1D;
@@ -651,7 +651,7 @@ static void PAGradientApplyTranspose3D(const int NE,
 {
    const int TR_D1D = T_TR_D1D ? T_TR_D1D : tr_d1d;
    const int TE_D1D = T_TE_D1D ? T_TE_D1D : te_d1d;
-   const int Q1D = T_Q1D ? T_Q1D : q1d;
+   const int Q1D = T_Q1D ? T_Q1D : (q1d < DofQuadLimits::MAX_Q1D ? q1d : DofQuadLimits::MAX_Q1D);
    MFEM_VERIFY(TR_D1D <= DeviceDofQuadLimits::Get().MAX_D1D, "");
    MFEM_VERIFY(TE_D1D <= DeviceDofQuadLimits::Get().MAX_D1D, "");
    MFEM_VERIFY(Q1D <= DeviceDofQuadLimits::Get().MAX_Q1D, "");
@@ -665,7 +665,7 @@ static void PAGradientApplyTranspose3D(const int NE,
    {
       const int TR_D1D = T_TR_D1D ? T_TR_D1D : tr_d1d;
       const int TE_D1D = T_TE_D1D ? T_TE_D1D : te_d1d;
-      const int Q1D = T_Q1D ? T_Q1D : q1d;
+      const int Q1D = T_Q1D ? T_Q1D : (q1d < DofQuadLimits::MAX_Q1D ? q1d : DofQuadLimits::MAX_Q1D);
       const int VDIM = 3;
       // the following variables are evaluated at compile time
       constexpr int max_TR_D1D = T_TR_D1D ? T_TR_D1D : DofQuadLimits::MAX_D1D;
@@ -834,7 +834,7 @@ static void SmemPAGradientApply3D(const int NE,
 {
    const int TR_D1D = T_TR_D1D ? T_TR_D1D : tr_d1d;
    const int TE_D1D = T_TE_D1D ? T_TE_D1D : te_d1d;
-   const int Q1D = T_Q1D ? T_Q1D : q1d;
+   const int Q1D = T_Q1D ? T_Q1D : (q1d < DofQuadLimits::MAX_Q1D ? q1d : DofQuadLimits::MAX_Q1D);
 
    MFEM_VERIFY(TR_D1D <= DeviceDofQuadLimits::Get().MAX_D1D, "");
    MFEM_VERIFY(TE_D1D <= DeviceDofQuadLimits::Get().MAX_D1D, "");
@@ -855,7 +855,7 @@ static void SmemPAGradientApply3D(const int NE,
       const int tidz = MFEM_THREAD_ID(z);
       const int D1DR = T_TR_D1D ? T_TR_D1D : tr_d1d;
       const int D1DE = T_TE_D1D ? T_TE_D1D : te_d1d;
-      const int Q1D = T_Q1D ? T_Q1D : q1d;
+      const int Q1D = T_Q1D ? T_Q1D : (q1d < DofQuadLimits::MAX_Q1D ? q1d : DofQuadLimits::MAX_Q1D);
       constexpr int MQ1 = T_Q1D ? T_Q1D : DofQuadLimits::MAX_Q1D;
       constexpr int MD1R = T_TR_D1D ? T_TR_D1D : DofQuadLimits::MAX_D1D;
       constexpr int MD1E = T_TE_D1D ? T_TE_D1D : DofQuadLimits::MAX_D1D;

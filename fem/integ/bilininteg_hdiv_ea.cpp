@@ -35,8 +35,8 @@ static void EAHdivAssemble2D(const int NE,
                              const int d1d = 0,
                              const int q1d = 0)
 {
-   const int D1D = T_D1D ? T_D1D : d1d;
-   const int Q1D = T_Q1D ? T_Q1D : q1d;
+   const int D1D = T_D1D ? T_D1D : (d1d < DofQuadLimits::MAX_D1D ? d1d : DofQuadLimits::MAX_D1D);
+   const int Q1D = T_Q1D ? T_Q1D : (q1d < DofQuadLimits::MAX_Q1D ? q1d : DofQuadLimits::MAX_Q1D);
    MFEM_VERIFY(D1D <= DeviceDofQuadLimits::Get().HDIV_MAX_D1D, "");
    MFEM_VERIFY(Q1D <= DeviceDofQuadLimits::Get().HDIV_MAX_Q1D, "");
    const int NDOF = 2*(D1D-1)*D1D;
@@ -142,8 +142,8 @@ static void EAHdivAssemble3D(const int NE,
                              const int d1d = 0,
                              const int q1d = 0)
 {
-   const int D1D = T_D1D ? T_D1D : d1d;
-   const int Q1D = T_Q1D ? T_Q1D : q1d;
+   const int D1D = T_D1D ? T_D1D : (d1d < DofQuadLimits::MAX_D1D ? d1d : DofQuadLimits::MAX_D1D);
+   const int Q1D = T_Q1D ? T_Q1D : (q1d < DofQuadLimits::MAX_Q1D ? q1d : DofQuadLimits::MAX_Q1D);
    MFEM_VERIFY(D1D <= DeviceDofQuadLimits::Get().HDIV_MAX_D1D, "");
    MFEM_VERIFY(Q1D <= DeviceDofQuadLimits::Get().HDIV_MAX_Q1D, "");
    const int NDOF_C = (D1D-1)*(D1D-1)*D1D;

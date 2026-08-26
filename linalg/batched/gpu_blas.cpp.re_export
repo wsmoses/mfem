@@ -1,0 +1,168 @@
+; ModuleID = '/mnt3/wmoses/git/mfem/linalg/batched/gpu_blas.cpp'
+source_filename = "/mnt3/wmoses/git/mfem/linalg/batched/gpu_blas.cpp"
+target datalayout = "e-p6:32:32-i64:64-i128:128-i256:256-v16:16-v32:32-n16:32:64"
+target triple = "nvptx64-nvidia-cuda"
+
+%class.anon = type <{ ptr, ptr, i32, [4 x i8] }>
+%class.anon.0 = type <{ ptr, ptr, i32, [4 x i8], ptr, ptr, i32, [4 x i8] }>
+%class.anon.2 = type { ptr, ptr, i32, ptr, ptr }
+
+$_ZN4mfemL10CuKernel1DIZNKS_20GPUBlasBatchedLinAlg8LUFactorERNS_11DenseTensorERNS_5ArrayIiEEEUliE_EEviT_ = comdat any
+
+$_ZN4mfemL10CuKernel1DIZNKS_20GPUBlasBatchedLinAlg7LUSolveERKNS_11DenseTensorERKNS_5ArrayIiEERNS_6VectorEEUliE_EEviT_ = comdat any
+
+$_ZN4mfemL10CuKernel1DIZNKS_20GPUBlasBatchedLinAlg6InvertERNS_11DenseTensorEEUliE_EEviT_ = comdat any
+
+; Function Attrs: mustprogress nofree noinline norecurse nosync nounwind willreturn memory(write, argmem: readwrite, inaccessiblemem: none, target_mem: none)
+define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_20GPUBlasBatchedLinAlg8LUFactorERNS_11DenseTensorERNS_5ArrayIiEEEUliE_EEviT_(i32 noundef %0, ptr nofree noundef readonly byval(%class.anon) align 8 captures(none) %1) local_unnamed_addr #0 comdat {
+  %3 = tail call noundef i32 @llvm.nvvm.read.ptx.sreg.ntid.x()
+  %4 = tail call noundef i32 @llvm.nvvm.read.ptx.sreg.ctaid.x()
+  %5 = mul i32 %3, %4
+  %6 = tail call noundef i32 @llvm.nvvm.read.ptx.sreg.tid.x()
+  %7 = add i32 %5, %6
+  %8 = icmp slt i32 %7, %0
+  br i1 %8, label %9, label %21
+
+9:                                                ; preds = %2
+  %10 = getelementptr inbounds nuw i8, ptr %1, i64 8
+  %11 = load ptr, ptr %10, align 8, !tbaa !10
+  %12 = getelementptr inbounds nuw i8, ptr %1, i64 16
+  %13 = load i32, ptr %12, align 8, !tbaa !16
+  %14 = mul nsw i32 %13, %7
+  %15 = mul nsw i32 %14, %13
+  %16 = sext i32 %15 to i64
+  %17 = getelementptr inbounds [8 x i8], ptr %11, i64 %16
+  %18 = load ptr, ptr %1, align 8, !tbaa !17
+  %19 = sext i32 %7 to i64
+  %20 = getelementptr inbounds [8 x i8], ptr %18, i64 %19
+  store ptr %17, ptr %20, align 8, !tbaa !18
+  br label %21
+
+21:                                               ; preds = %2, %9
+  ret void
+}
+
+; Function Attrs: mustprogress nocallback nofree nosync nounwind speculatable willreturn memory(none)
+declare noundef range(i32 1, 1025) i32 @llvm.nvvm.read.ptx.sreg.ntid.x() #1
+
+; Function Attrs: mustprogress nocallback nofree nosync nounwind speculatable willreturn memory(none)
+declare noundef range(i32 0, 2147483647) i32 @llvm.nvvm.read.ptx.sreg.ctaid.x() #1
+
+; Function Attrs: mustprogress nocallback nofree nosync nounwind speculatable willreturn memory(none)
+declare noundef range(i32 0, 1024) i32 @llvm.nvvm.read.ptx.sreg.tid.x() #1
+
+; Function Attrs: mustprogress nofree noinline norecurse nosync nounwind willreturn memory(write, argmem: readwrite, inaccessiblemem: none, target_mem: none)
+define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_20GPUBlasBatchedLinAlg7LUSolveERKNS_11DenseTensorERKNS_5ArrayIiEERNS_6VectorEEUliE_EEviT_(i32 noundef %0, ptr nofree noundef readonly byval(%class.anon.0) align 8 captures(none) %1) local_unnamed_addr #0 comdat {
+  %3 = tail call noundef i32 @llvm.nvvm.read.ptx.sreg.ntid.x()
+  %4 = tail call noundef i32 @llvm.nvvm.read.ptx.sreg.ctaid.x()
+  %5 = mul i32 %3, %4
+  %6 = tail call noundef i32 @llvm.nvvm.read.ptx.sreg.tid.x()
+  %7 = add i32 %5, %6
+  %8 = icmp slt i32 %7, %0
+  br i1 %8, label %9, label %31
+
+9:                                                ; preds = %2
+  %10 = getelementptr inbounds nuw i8, ptr %1, i64 8
+  %11 = load ptr, ptr %10, align 8, !tbaa !19
+  %12 = getelementptr inbounds nuw i8, ptr %1, i64 16
+  %13 = load i32, ptr %12, align 8, !tbaa !21
+  %14 = mul nsw i32 %13, %7
+  %15 = mul nsw i32 %14, %13
+  %16 = sext i32 %15 to i64
+  %17 = getelementptr inbounds [8 x i8], ptr %11, i64 %16
+  %18 = load ptr, ptr %1, align 8, !tbaa !22
+  %19 = sext i32 %7 to i64
+  %20 = getelementptr inbounds [8 x i8], ptr %18, i64 %19
+  store ptr %17, ptr %20, align 8, !tbaa !18
+  %21 = getelementptr inbounds nuw i8, ptr %1, i64 32
+  %22 = load ptr, ptr %21, align 8, !tbaa !23
+  %23 = getelementptr inbounds nuw i8, ptr %1, i64 40
+  %24 = load i32, ptr %23, align 8, !tbaa !24
+  %25 = mul nsw i32 %24, %14
+  %26 = sext i32 %25 to i64
+  %27 = getelementptr inbounds [8 x i8], ptr %22, i64 %26
+  %28 = getelementptr inbounds nuw i8, ptr %1, i64 24
+  %29 = load ptr, ptr %28, align 8, !tbaa !25
+  %30 = getelementptr inbounds [8 x i8], ptr %29, i64 %19
+  store ptr %27, ptr %30, align 8, !tbaa !18
+  br label %31
+
+31:                                               ; preds = %2, %9
+  ret void
+}
+
+; Function Attrs: mustprogress nofree noinline norecurse nosync nounwind willreturn memory(write, argmem: readwrite, inaccessiblemem: none, target_mem: none)
+define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_20GPUBlasBatchedLinAlg6InvertERNS_11DenseTensorEEUliE_EEviT_(i32 noundef %0, ptr nofree noundef readonly byval(%class.anon.2) align 8 captures(none) %1) local_unnamed_addr #0 comdat {
+  %3 = tail call noundef i32 @llvm.nvvm.read.ptx.sreg.ntid.x()
+  %4 = tail call noundef i32 @llvm.nvvm.read.ptx.sreg.ctaid.x()
+  %5 = mul i32 %3, %4
+  %6 = tail call noundef i32 @llvm.nvvm.read.ptx.sreg.tid.x()
+  %7 = add i32 %5, %6
+  %8 = icmp slt i32 %7, %0
+  br i1 %8, label %9, label %27
+
+9:                                                ; preds = %2
+  %10 = getelementptr inbounds nuw i8, ptr %1, i64 8
+  %11 = load ptr, ptr %10, align 8, !tbaa !26
+  %12 = getelementptr inbounds nuw i8, ptr %1, i64 16
+  %13 = load i32, ptr %12, align 8, !tbaa !28
+  %14 = mul nsw i32 %13, %7
+  %15 = mul nsw i32 %14, %13
+  %16 = sext i32 %15 to i64
+  %17 = getelementptr inbounds [8 x i8], ptr %11, i64 %16
+  %18 = load ptr, ptr %1, align 8, !tbaa !29
+  %19 = sext i32 %7 to i64
+  %20 = getelementptr inbounds [8 x i8], ptr %18, i64 %19
+  store ptr %17, ptr %20, align 8, !tbaa !18
+  %21 = getelementptr inbounds nuw i8, ptr %1, i64 32
+  %22 = load ptr, ptr %21, align 8, !tbaa !30
+  %23 = getelementptr inbounds [8 x i8], ptr %22, i64 %16
+  %24 = getelementptr inbounds nuw i8, ptr %1, i64 24
+  %25 = load ptr, ptr %24, align 8, !tbaa !31
+  %26 = getelementptr inbounds [8 x i8], ptr %25, i64 %19
+  store ptr %23, ptr %26, align 8, !tbaa !18
+  br label %27
+
+27:                                               ; preds = %2, %9
+  ret void
+}
+
+attributes #0 = { mustprogress nofree noinline norecurse nosync nounwind willreturn memory(write, argmem: readwrite, inaccessiblemem: none, target_mem: none) "frame-pointer"="all" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="sm_120" "target-features"="+ptx88,+sm_120" "uniform-work-group-size" }
+attributes #1 = { mustprogress nocallback nofree nosync nounwind speculatable willreturn memory(none) }
+
+!llvm.module.flags = !{!0, !1, !2}
+!llvm.ident = !{!3, !4}
+!llvm.errno.tbaa = !{!5}
+
+!0 = !{i32 2, !"SDK Version", [2 x i32] [i32 12, i32 9]}
+!1 = !{i32 4, !"nvvm-reflect-ftz", i32 0}
+!2 = !{i32 7, !"frame-pointer", i32 2}
+!3 = !{!"clang version 24.0.0git (git@github.com:llvm/llvm-project 0220c07a94012b9dce9250addac6a8ee1f674b21)"}
+!4 = !{!"clang version 3.8.0 (tags/RELEASE_380/final)"}
+!5 = !{!6, !7, i64 0}
+!6 = !{!"__libc_errno", !7, i64 0}
+!7 = !{!"int", !8, i64 0}
+!8 = !{!"omnipotent char", !9, i64 0}
+!9 = !{!"Simple C++ TBAA"}
+!10 = !{!11, !15, i64 8}
+!11 = !{!"_ZTSZNK4mfem20GPUBlasBatchedLinAlg8LUFactorERNS_11DenseTensorERNS_5ArrayIiEEEUliE_", !12, i64 0, !15, i64 8, !7, i64 16}
+!12 = !{!"p2 double", !13, i64 0}
+!13 = !{!"any p2 pointer", !14, i64 0}
+!14 = !{!"any pointer", !8, i64 0}
+!15 = !{!"p1 double", !14, i64 0}
+!16 = !{!11, !7, i64 16}
+!17 = !{!11, !12, i64 0}
+!18 = !{!15, !15, i64 0}
+!19 = !{!20, !15, i64 8}
+!20 = !{!"_ZTSZNK4mfem20GPUBlasBatchedLinAlg7LUSolveERKNS_11DenseTensorERKNS_5ArrayIiEERNS_6VectorEEUliE_", !12, i64 0, !15, i64 8, !7, i64 16, !12, i64 24, !15, i64 32, !7, i64 40}
+!21 = !{!20, !7, i64 16}
+!22 = !{!20, !12, i64 0}
+!23 = !{!20, !15, i64 32}
+!24 = !{!20, !7, i64 40}
+!25 = !{!20, !12, i64 24}
+!26 = !{!27, !15, i64 8}
+!27 = !{!"_ZTSZNK4mfem20GPUBlasBatchedLinAlg6InvertERNS_11DenseTensorEEUliE_", !12, i64 0, !15, i64 8, !7, i64 16, !12, i64 24, !15, i64 32}
+!28 = !{!27, !7, i64 16}
+!29 = !{!27, !12, i64 0}
+!30 = !{!27, !15, i64 32}
+!31 = !{!27, !12, i64 24}

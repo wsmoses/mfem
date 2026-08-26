@@ -39,8 +39,8 @@ void SmemPAVectorMassApply2D(const int NE,
                              const int q1d = 0)
 {
    static constexpr int DIM = 2, VDIM = 2;
-   const int D1D = T_D1D ? T_D1D : d1d;
-   const int Q1D = T_Q1D ? T_Q1D : q1d;
+   const int D1D = T_D1D ? T_D1D : (d1d < DofQuadLimits::MAX_D1D ? d1d : DofQuadLimits::MAX_D1D);
+   const int Q1D = T_Q1D ? T_Q1D : (q1d < DofQuadLimits::MAX_Q1D ? q1d : DofQuadLimits::MAX_Q1D);
 
    const bool const_coeff = coeff_vdim == 1;
    const bool vector_coeff = coeff_vdim == DIM;
@@ -107,8 +107,8 @@ void SmemPAVectorMassApply3D(const int NE,
                              const int q1d = 0)
 {
    static constexpr int VDIM = 3;
-   const int D1D = T_D1D ? T_D1D : d1d;
-   const int Q1D = T_Q1D ? T_Q1D : q1d;
+   const int D1D = T_D1D ? T_D1D : (d1d < DofQuadLimits::MAX_D1D ? d1d : DofQuadLimits::MAX_D1D);
+   const int Q1D = T_Q1D ? T_Q1D : (q1d < DofQuadLimits::MAX_Q1D ? q1d : DofQuadLimits::MAX_Q1D);
 
    const bool const_coeff = coeff_vdim == 1;
    const bool vector_coeff = coeff_vdim == VDIM;
@@ -187,7 +187,7 @@ static void SmemPAVectorMassAssembleDiagonal2D(const int ne,
    constexpr int VDIM = 2;
 
    const int D1D = d1d;
-   const int Q1D = T_Q1D ? T_Q1D : q1d;
+   const int Q1D = T_Q1D ? T_Q1D : (q1d < DofQuadLimits::MAX_Q1D ? q1d : DofQuadLimits::MAX_Q1D);
 
    MFEM_VERIFY(Q1D <= T_MDQ && D1D <= Q1D, "");
 
@@ -244,7 +244,7 @@ static void SmemPAVectorMassAssembleDiagonal3D(const int ne,
    constexpr int VDIM = 3;
 
    const int D1D = d1d;
-   const int Q1D = T_Q1D ? T_Q1D : q1d;
+   const int Q1D = T_Q1D ? T_Q1D : (q1d < DofQuadLimits::MAX_Q1D ? q1d : DofQuadLimits::MAX_Q1D);
 
    MFEM_VERIFY(Q1D <= T_MDQ && D1D <= Q1D, "");
 

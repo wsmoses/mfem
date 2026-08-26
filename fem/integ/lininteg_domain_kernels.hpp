@@ -42,7 +42,7 @@ static void DLFEvalAssemble1D(const int vdim, const int ne, const int d,
    const auto C = cst ? Reshape(F, vdim, 1, 1) : Reshape(F, vdim, q, ne);
    auto Y = Reshape(y, d, vdim, ne);
 
-   mfem::forall_2D(ne, d, 1, [=] MFEM_HOST_DEVICE(int e)
+   mfem::forall_2D(ne, d < DofQuadLimits::MAX_D1D ? d : DofQuadLimits::MAX_D1D, 1, [=] MFEM_HOST_DEVICE(int e)
    {
       if (markers[e] == 0)
       {
@@ -97,7 +97,7 @@ static void DLFEvalAssemble2D(const int vdim, const int ne, const int d,
    const auto C = cst ? Reshape(F, vdim, 1, 1, 1) : Reshape(F, vdim, q, q, ne);
    auto Y = Reshape(y, d, d, vdim, ne);
 
-   mfem::forall_2D(ne, q, q, [=] MFEM_HOST_DEVICE(int e)
+   mfem::forall_2D(ne, q < DofQuadLimits::MAX_Q1D ? q : DofQuadLimits::MAX_Q1D, q < DofQuadLimits::MAX_Q1D ? q : DofQuadLimits::MAX_Q1D, [=] MFEM_HOST_DEVICE(int e)
    {
       if (markers[e] == 0)
       {
@@ -185,7 +185,7 @@ static void DLFEvalAssemble3D(const int vdim, const int ne, const int d,
 
    auto Y = Reshape(y, d, d, d, vdim, ne);
 
-   mfem::forall_2D(ne, q, q, [=] MFEM_HOST_DEVICE(int e)
+   mfem::forall_2D(ne, q < DofQuadLimits::MAX_Q1D ? q : DofQuadLimits::MAX_Q1D, q < DofQuadLimits::MAX_Q1D ? q : DofQuadLimits::MAX_Q1D, [=] MFEM_HOST_DEVICE(int e)
    {
       if (markers[e] == 0)
       {
@@ -331,7 +331,7 @@ static void HdivDLFAssemble2D(const int ne, const Array<int> &markers,
    const auto C = cst ? Reshape(F,vdim,1,1,1) : Reshape(F,vdim,q,q,ne);
    auto Y = y.ReadWrite();
 
-   mfem::forall_3D(ne, q, q, vdim, [=] MFEM_HOST_DEVICE (int e)
+   mfem::forall_3D(ne, q < DofQuadLimits::MAX_Q1D ? q : DofQuadLimits::MAX_Q1D, q < DofQuadLimits::MAX_Q1D ? q : DofQuadLimits::MAX_Q1D, vdim < 4 ? vdim : 4, [=] MFEM_HOST_DEVICE (int e)
    {
       constexpr int vdim = 2;
       if (M[e] == 0) { return; } // ignore
@@ -435,7 +435,7 @@ static void HdivDLFAssemble3D(const int ne, const Array<int> &markers,
    const auto C = cst ? Reshape(F,vdim,1,1,1,1) : Reshape(F,vdim,q,q,q,ne);
    auto Y = y.ReadWrite();
 
-   mfem::forall_3D(ne, q, q, vdim, [=] MFEM_HOST_DEVICE (int e)
+   mfem::forall_3D(ne, q < DofQuadLimits::MAX_Q1D ? q : DofQuadLimits::MAX_Q1D, q < DofQuadLimits::MAX_Q1D ? q : DofQuadLimits::MAX_Q1D, vdim < 4 ? vdim : 4, [=] MFEM_HOST_DEVICE (int e)
    {
       constexpr int vdim = 3;
       if (M[e] == 0) { return; } // ignore
@@ -604,7 +604,7 @@ static void HcurlDLFAssemble3D(const int ne, const Array<int> &markers,
    const auto C = cst ? Reshape(F,vdim,1,1,1,1) : Reshape(F,vdim,q,q,q,ne);
    auto Y = y.ReadWrite();
 
-   mfem::forall_3D(ne, q, q, vdim, [=] MFEM_HOST_DEVICE(int e)
+   mfem::forall_3D(ne, q < DofQuadLimits::MAX_Q1D ? q : DofQuadLimits::MAX_Q1D, q < DofQuadLimits::MAX_Q1D ? q : DofQuadLimits::MAX_Q1D, vdim < 4 ? vdim : 4, [=] MFEM_HOST_DEVICE(int e)
    {
       if (M[e] == 0)
       {

@@ -42,8 +42,8 @@ void SmemPAVectorDiffusionApply2D(const int NE,
 {
    static constexpr int DIM = 2;
    const int SDIM = T_SDIM ? T_SDIM : sdim;
-   const int D1D = T_D1D ? T_D1D : d1d;
-   const int Q1D = T_Q1D ? T_Q1D : q1d;
+   const int D1D = T_D1D ? T_D1D : (d1d < DofQuadLimits::MAX_D1D ? d1d : DofQuadLimits::MAX_D1D);
+   const int Q1D = T_Q1D ? T_Q1D : (q1d < DofQuadLimits::MAX_Q1D ? q1d : DofQuadLimits::MAX_Q1D);
 
    const int PA_SIZE = DIM*DIM;
    const bool matrix_coeff = coeff_vdim == DIM*DIM;
@@ -108,8 +108,8 @@ void SmemPAVectorDiffusionApply3D(const int NE,
    static constexpr int DIM = 3;
    const int SDIM = T_SDIM ? T_SDIM : sdim;
    MFEM_VERIFY(SDIM == 3, "SDIM must be 3");
-   const int D1D = T_D1D ? T_D1D : d1d;
-   const int Q1D = T_Q1D ? T_Q1D : q1d;
+   const int D1D = T_D1D ? T_D1D : (d1d < DofQuadLimits::MAX_D1D ? d1d : DofQuadLimits::MAX_D1D);
+   const int Q1D = T_Q1D ? T_Q1D : (q1d < DofQuadLimits::MAX_Q1D ? q1d : DofQuadLimits::MAX_Q1D);
 
    const int PA_SIZE = DIM*DIM;
    const bool matrix_coeff = coeff_vdim == DIM*DIM;

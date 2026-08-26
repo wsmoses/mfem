@@ -66,7 +66,7 @@ void ParNCH1FaceRestriction::NonconformingInterpolation(Vector& y) const
                            nface_dofs, nface_dofs, nc_size);
    static constexpr int max_nd = 16*16;
    MFEM_VERIFY(nface_dofs<=max_nd, "Too many degrees of freedom.");
-   mfem::forall_2D(num_nc_faces, nface_dofs, 1, [=] MFEM_HOST_DEVICE (int nc_face)
+   mfem::forall_2D(num_nc_faces, nface_dofs < max_nd ? nface_dofs : max_nd, 1, [=] MFEM_HOST_DEVICE (int nc_face)
    {
       MFEM_SHARED real_t dof_values[max_nd];
       const NCInterpConfig conf = interp_config_ptr[nc_face];
@@ -142,7 +142,7 @@ void ParNCH1FaceRestriction::NonconformingTransposeInterpolationInPlace(
                               nface_dofs, nface_dofs, nc_size);
       static constexpr int max_nd = 1024;
       MFEM_VERIFY(nface_dofs<=max_nd, "Too many degrees of freedom.");
-      mfem::forall_2D(num_nc_faces, nface_dofs, 1,
+      mfem::forall_2D(num_nc_faces, nface_dofs < max_nd ? nface_dofs : max_nd, 1,
                       [=] MFEM_HOST_DEVICE (int nc_face)
       {
          MFEM_SHARED real_t dof_values[max_nd];
@@ -690,7 +690,7 @@ void ParNCL2FaceRestriction::SingleValuedNonconformingMult(
    auto d_interp = Reshape(interpolators, nface_dofs, nface_dofs, nc_size);
    static constexpr int max_nd = 16*16;
    MFEM_VERIFY(nface_dofs<=max_nd, "Too many degrees of freedom.");
-   mfem::forall_2D(nf, nface_dofs, 1, [=] MFEM_HOST_DEVICE (int face)
+   mfem::forall_2D(nf, nface_dofs < max_nd ? nface_dofs : max_nd, 1, [=] MFEM_HOST_DEVICE (int face)
    {
       MFEM_SHARED real_t dof_values[max_nd];
       const InterpConfig conf = interp_config_ptr[face];

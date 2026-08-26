@@ -31,8 +31,8 @@ void TMOP_DatcSize_2D(const int NE,
                       const int q1d = 0)
 {
    static constexpr int DIM = 2;
-   const int D1D = T_D1D ? T_D1D : d1d;
-   const int Q1D = T_Q1D ? T_Q1D : q1d;
+   const int D1D = T_D1D ? T_D1D : (d1d < DofQuadLimits::MAX_D1D ? d1d : DofQuadLimits::MAX_D1D);
+   const int Q1D = T_Q1D ? T_Q1D : (q1d < DofQuadLimits::MAX_Q1D ? q1d : DofQuadLimits::MAX_Q1D);
    MFEM_VERIFY(D1D <= Q1D, "");
 
    const real_t infinity = std::numeric_limits<real_t>::infinity();
@@ -114,8 +114,8 @@ void TMOP_DatcSize_3D(const int NE,
                       const int q1d = 0)
 {
    static constexpr int DIM = 3;
-   const int D1D = T_D1D ? T_D1D : d1d;
-   const int Q1D = T_Q1D ? T_Q1D : q1d;
+   const int D1D = T_D1D ? T_D1D : (d1d < DofQuadLimits::MAX_D1D ? d1d : DofQuadLimits::MAX_D1D);
+   const int Q1D = T_Q1D ? T_Q1D : (q1d < DofQuadLimits::MAX_Q1D ? q1d : DofQuadLimits::MAX_Q1D);
 
    const real_t infinity = std::numeric_limits<real_t>::infinity();
 

@@ -36,8 +36,8 @@ inline void SmemPAConvectionNLApply2D(const int NE,
                                       const int q1d = 0)
 {
    static constexpr int VDIM = 2, DIM = 2;
-   const int D1D = T_D1D ? T_D1D : d1d;
-   const int Q1D = T_Q1D ? T_Q1D : q1d;
+   const int D1D = T_D1D ? T_D1D : (d1d < DofQuadLimits::MAX_D1D ? d1d : DofQuadLimits::MAX_D1D);
+   const int Q1D = T_Q1D ? T_Q1D : (q1d < DofQuadLimits::MAX_Q1D ? q1d : DofQuadLimits::MAX_Q1D);
 
    const auto B = Reshape(b, Q1D, D1D);
    const auto G = Reshape(g, Q1D, D1D);
@@ -105,8 +105,8 @@ inline void SmemPAConvectionNLApply3D(const int NE,
                                       const int q1d = 0)
 {
    static constexpr int VDIM = 3, DIM = 3;
-   const int D1D = T_D1D ? T_D1D : d1d;
-   const int Q1D = T_Q1D ? T_Q1D : q1d;
+   const int D1D = T_D1D ? T_D1D : (d1d < DofQuadLimits::MAX_D1D ? d1d : DofQuadLimits::MAX_D1D);
+   const int Q1D = T_Q1D ? T_Q1D : (q1d < DofQuadLimits::MAX_Q1D ? q1d : DofQuadLimits::MAX_Q1D);
 
    const auto B = Reshape(b, Q1D, D1D);
    const auto G = Reshape(g, Q1D, D1D);

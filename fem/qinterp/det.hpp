@@ -69,8 +69,8 @@ inline void Det1DSurface(const int NE,
    MFEM_CONTRACT_VAR(b);
    MFEM_CONTRACT_VAR(d_buff);
 
-   const int D1D = T_D1D ? T_D1D : d1d;
-   const int Q1D = T_Q1D ? T_Q1D : q1d;
+   const int D1D = T_D1D ? T_D1D : (d1d < DofQuadLimits::MAX_D1D ? d1d : DofQuadLimits::MAX_D1D);
+   const int Q1D = T_Q1D ? T_Q1D : (q1d < DofQuadLimits::MAX_Q1D ? q1d : DofQuadLimits::MAX_Q1D);
 
    const auto G = Reshape(g, Q1D, D1D);
    const auto X = Reshape(x, D1D, T_SDIM, NE);
@@ -114,8 +114,8 @@ inline void Det2D(const int NE,
    static constexpr int SDIM = 2;
    static constexpr int NBZ = 1;
 
-   const int D1D = T_D1D ? T_D1D : d1d;
-   const int Q1D = T_Q1D ? T_Q1D : q1d;
+   const int D1D = T_D1D ? T_D1D : (d1d < DofQuadLimits::MAX_D1D ? d1d : DofQuadLimits::MAX_D1D);
+   const int Q1D = T_Q1D ? T_Q1D : (q1d < DofQuadLimits::MAX_Q1D ? q1d : DofQuadLimits::MAX_Q1D);
 
    const auto B = Reshape(b, Q1D, D1D);
    const auto G = Reshape(g, Q1D, D1D);
@@ -126,8 +126,8 @@ inline void Det2D(const int NE,
    {
       constexpr int MQ1 = T_Q1D ? T_Q1D : DofQuadLimits::MAX_Q1D;
       constexpr int MD1 = T_D1D ? T_D1D : DofQuadLimits::MAX_D1D;
-      const int D1D = T_D1D ? T_D1D : d1d;
-      const int Q1D = T_Q1D ? T_Q1D : q1d;
+      const int D1D = T_D1D ? T_D1D : (d1d < DofQuadLimits::MAX_D1D ? d1d : DofQuadLimits::MAX_D1D);
+      const int Q1D = T_Q1D ? T_Q1D : (q1d < DofQuadLimits::MAX_Q1D ? q1d : DofQuadLimits::MAX_Q1D);
 
       MFEM_SHARED real_t BG[2][MQ1*MD1];
       MFEM_SHARED real_t XY[SDIM][NBZ][MD1*MD1];
@@ -167,8 +167,8 @@ inline void Det2DSurface(const int NE,
    static constexpr int SDIM = 3;
    static constexpr int NBZ = 1;
 
-   const int D1D = T_D1D ? T_D1D : d1d;
-   const int Q1D = T_Q1D ? T_Q1D : q1d;
+   const int D1D = T_D1D ? T_D1D : (d1d < DofQuadLimits::MAX_D1D ? d1d : DofQuadLimits::MAX_D1D);
+   const int Q1D = T_Q1D ? T_Q1D : (q1d < DofQuadLimits::MAX_Q1D ? q1d : DofQuadLimits::MAX_Q1D);
 
    const auto B = Reshape(b, Q1D, D1D);
    const auto G = Reshape(g, Q1D, D1D);
@@ -179,8 +179,8 @@ inline void Det2DSurface(const int NE,
    {
       constexpr int MQ1 = T_Q1D ? T_Q1D : DofQuadLimits::MAX_Q1D;
       constexpr int MD1 = T_D1D ? T_D1D : DofQuadLimits::MAX_D1D;
-      const int D1D = T_D1D ? T_D1D : d1d;
-      const int Q1D = T_Q1D ? T_Q1D : q1d;
+      const int D1D = T_D1D ? T_D1D : (d1d < DofQuadLimits::MAX_D1D ? d1d : DofQuadLimits::MAX_D1D);
+      const int Q1D = T_Q1D ? T_Q1D : (q1d < DofQuadLimits::MAX_Q1D ? q1d : DofQuadLimits::MAX_Q1D);
       const int tidz = MFEM_THREAD_ID(z);
 
       MFEM_SHARED real_t BG[2][MQ1*MD1];
@@ -263,8 +263,8 @@ inline void Det3D(const int NE,
    constexpr int DIM = 3;
    static constexpr int GRID = SMEM ? 0 : 128;
 
-   const int D1D = T_D1D ? T_D1D : d1d;
-   const int Q1D = T_Q1D ? T_Q1D : q1d;
+   const int D1D = T_D1D ? T_D1D : (d1d < DofQuadLimits::MAX_D1D ? d1d : DofQuadLimits::MAX_D1D);
+   const int Q1D = T_Q1D ? T_Q1D : (q1d < DofQuadLimits::MAX_Q1D ? q1d : DofQuadLimits::MAX_Q1D);
 
    const auto B = Reshape(b, Q1D, D1D);
    const auto G = Reshape(g, Q1D, D1D);
