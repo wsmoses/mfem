@@ -18,6 +18,8 @@
 #include <cmath>
 #include <limits>
 #include <type_traits>
+#include "cuda.hpp"
+#include <memory>
 
 namespace mfem
 {
@@ -448,12 +450,81 @@ namespace internal
  @tparam R Reducer capable of combining values of type value_type. See reducers.hpp for
  pre-defined reducers.
  */
+#if defined(REACTANT_XLA_BACKEND)
+/** Splits struct-valued reduction partials into one plain buffer per field
+    type: a raised kernel buffer must have a single element type. */
+template <class T> struct xla_work_split
+{
+   using first_type = T;
+   using second_type = char;
+   static constexpr int n1 = 1, n2 = 0;
+   static MFEM_HOST_DEVICE void write(first_type *w1, second_type *, int i,
+                                      const T &v)
+   {
+      w1[i] = v;
+   }
+   static void read(const first_type *w1, const second_type *, int i, T &v)
+   {
+      v = w1[i];
+   }
+};
+
+template <class A, class B> struct xla_work_split<DevicePair<A, B>>
+{
+   using first_type = A;
+   using second_type = B;
+   static constexpr int n1 = 1, n2 = 1;
+   static MFEM_HOST_DEVICE void write(first_type *w1, second_type *w2, int i,
+                                      const DevicePair<A, B> &v)
+   {
+      w1[i] = v.first;
+      w2[i] = v.second;
+   }
+   static void read(const first_type *w1, const second_type *w2, int i,
+                    DevicePair<A, B> &v)
+   {
+      v.first = w1[i];
+      v.second = w2[i];
+   }
+};
+
+template <class A, class B> struct xla_work_split<MinMaxLocScalar<A, B>>
+{
+   using first_type = A;
+   using second_type = B;
+   static constexpr int n1 = 2, n2 = 2;
+   static MFEM_HOST_DEVICE void write(first_type *w1, second_type *w2, int i,
+                                      const MinMaxLocScalar<A, B> &v)
+   {
+      w1[2 * i] = v.min_val;
+      w1[2 * i + 1] = v.max_val;
+      w2[2 * i] = v.min_loc;
+      w2[2 * i + 1] = v.max_loc;
+   }
+   static void read(const first_type *w1, const second_type *w2, int i,
+                    MinMaxLocScalar<A, B> &v)
+   {
+      v.min_val = w1[2 * i];
+      v.max_val = w1[2 * i + 1];
+      v.min_loc = w2[2 * i];
+      v.max_loc = w2[2 * i + 1];
+   }
+};
+#endif
+
 template<class B, class R> struct reduction_kernel
 {
    /// value type body and reducer operate on.
    using value_type = typename R::value_type;
+#if defined(REACTANT_XLA_BACKEND)
+   using split_type = xla_work_split<value_type>;
+   /// per-field workspaces for the intermediate reduction results
+   mutable typename split_type::first_type *work1;
+   mutable typename split_type::second_type *work2;
+#else
    /// workspace for the intermediate reduction results
    mutable value_type *work;
+#endif
    B body;
    R reducer;
    /// Length of sequence to reduce over.
@@ -510,7 +581,11 @@ template<class B, class R> struct reduction_kernel
       }
       if (MFEM_THREAD_ID(x) == 0)
       {
+#if defined(REACTANT_XLA_BACKEND)
+         split_type::write(work1, work2, work_idx, buffer[0]);
+#else
          work[work_idx] = buffer[0];
+#endif
       }
    }
 };
@@ -565,16 +640,44 @@ void reduce(int N, T &res, B &&body, const R &reducer, bool use_dev,
       int items_per_thread =
          (N + block_size * nblocks - 1) / (block_size * nblocks);
 
-      red_type red{nullptr, std::forward<B>(body), reducer, N, items_per_thread};
 #if defined(REACTANT_XLA_BACKEND)
-      // A kernel cannot write host-pinned memory under the xla backends:
-      // reduce into a device workspace and read the partials back.
-      workspace.SetSize(nblocks, MemoryType::DEVICE);
-      red.work = workspace.Write();
+      // A kernel cannot write host-pinned memory under the xla backends,
+      // and the memory manager resolves its device pointer through runtime
+      // branches the raising path cannot follow: reduce into raw per-field
+      // device workspaces and read the partials back.
+      red_type red{nullptr, nullptr, std::forward<B>(body), reducer, N,
+                   items_per_thread};
+      using split_type = typename red_type::split_type;
+      using first_type = typename split_type::first_type;
+      using second_type = typename split_type::second_type;
+      const size_t bytes1 =
+         (size_t)nblocks * split_type::n1 * sizeof(first_type);
+      const size_t bytes2 =
+         (size_t)nblocks * split_type::n2 * sizeof(second_type);
+      void *w1 = nullptr, *w2 = nullptr;
+      red.work1 = (first_type *)CuMemAlloc(&w1, bytes1);
+      red.work2 = bytes2 ? (second_type *)CuMemAlloc(&w2, bytes2) : nullptr;
       forall_2D(nblocks, block_size, 1, std::move(red));
       MFEM_DEVICE_SYNC;
-      auto work = workspace.HostRead();
+      std::unique_ptr<first_type[]> h1(new first_type[nblocks * split_type::n1]);
+      CuMemcpyDtoH(h1.get(), w1, bytes1);
+      CuMemFree(w1);
+      std::unique_ptr<second_type[]> h2;
+      if (bytes2)
+      {
+         h2.reset(new second_type[nblocks * split_type::n2]);
+         CuMemcpyDtoH(h2.get(), w2, bytes2);
+         CuMemFree(w2);
+      }
+      for (int i = 0; i < nblocks; ++i)
+      {
+         T v;
+         split_type::read(h1.get(), h2.get(), i, v);
+         reducer.Join(res, v);
+      }
+      return;
 #else
+      red_type red{nullptr, std::forward<B>(body), reducer, N, items_per_thread};
       // allocate res to fit block_size entries
       auto mt = workspace.GetMemory().GetMemoryType();
       if (mt != MemoryType::HOST_PINNED && mt != MemoryType::MANAGED)
@@ -587,12 +690,12 @@ void reduce(int N, T &res, B &&body, const R &reducer, bool use_dev,
       forall_2D(nblocks, block_size, 1, std::move(red));
       // wait for results
       MFEM_DEVICE_SYNC;
-#endif
       for (int i = 0; i < nblocks; ++i)
       {
          reducer.Join(res, work[i]);
       }
       return;
+#endif
    }
 #endif
 
