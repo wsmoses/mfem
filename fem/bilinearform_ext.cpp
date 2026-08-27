@@ -19,6 +19,15 @@
 #include "fe/face_map_utils.hpp"
 #include "ceed/interface/util.hpp"
 
+#if defined(REACTANT_XLA_BACKEND)
+// Element-matrix extraction scatters through data-dependent dof maps and
+// claims slots with atomicAdd, which the raising path cannot express; run
+// it on the host.
+static constexpr bool rxla_assembly_dev = false;
+#else
+static constexpr bool rxla_assembly_dev = true;
+#endif
+
 namespace mfem
 {
 
@@ -1266,8 +1275,9 @@ void EABilinearFormExtension::GetElementMatrices(
    element_matrices.SetSize(ndofs, ndofs, ne);
    const int N = element_matrices.TotalSize();
 
-   const auto d_ea_data = Reshape(ea_data.Read(), ndofs, ndofs, ne);
-   auto d_element_matrices = Reshape(element_matrices.Write(),
+   const auto d_ea_data = Reshape(ea_data.Read(rxla_assembly_dev), ndofs, ndofs,
+                                  ne);
+   auto d_element_matrices = Reshape(element_matrices.Write(rxla_assembly_dev),
                                      ndofs, ndofs,
                                      ne);
 
@@ -1282,14 +1292,14 @@ void EABilinearFormExtension::GetElementMatrices(
          // Deep copy to avoid issues with host device (see similar comment in
          // HybridizationExtension::ConstructC).
          dof_map = tbe->GetDofMap();
-         d_dof_map = dof_map.Read();
+         d_dof_map = dof_map.Read(rxla_assembly_dev);
       }
    }
 
    if (d_dof_map)
    {
       // Reordering required
-      mfem::forall(N, [=] MFEM_HOST_DEVICE (int idx)
+      mfem::forall_switch(rxla_assembly_dev, N, [=] MFEM_HOST_DEVICE (int idx)
       {
          const int e = idx / ndofs / ndofs;
          const int i = idx % ndofs;
@@ -1306,7 +1316,7 @@ void EABilinearFormExtension::GetElementMatrices(
    else
    {
       // No reordering required
-      mfem::forall(N, [=] MFEM_HOST_DEVICE (int idx)
+      mfem::forall_switch(rxla_assembly_dev, N, [=] MFEM_HOST_DEVICE (int idx)
       {
          const int e = idx / ndofs / ndofs;
          const int i = idx % ndofs;
@@ -1318,7 +1328,7 @@ void EABilinearFormExtension::GetElementMatrices(
    if (add_bdr && ea_data_bdr.Size() > 0)
    {
       const int ndof_face = faceDofs;
-      const auto d_ea_bdr = Reshape(ea_data_bdr.Read(),
+      const auto d_ea_bdr = Reshape(ea_data_bdr.Read(rxla_assembly_dev),
                                     ndof_face, ndof_face, nf_bdr);
 
       // Get all the local face maps (mapping from lexicographic face index to
@@ -1350,12 +1360,14 @@ void EABilinearFormExtension::GetElementMatrices(
          }
       }
 
-      const auto d_face_maps = Reshape(face_maps.Read(), ndof_face, n_faces_per_el);
-      const auto d_face_info = Reshape(face_info.Read(), 2, nf_bdr);
+      const auto d_face_maps = Reshape(face_maps.Read(rxla_assembly_dev),
+                                       ndof_face, n_faces_per_el);
+      const auto d_face_info = Reshape(face_info.Read(rxla_assembly_dev), 2,
+                                       nf_bdr);
 
       const bool reorder = (ordering == ElementDofOrdering::NATIVE);
 
-      mfem::forall_2D(nf_bdr, ndof_face, ndof_face, [=] MFEM_HOST_DEVICE (int f)
+      ForallWrap<2>(rxla_assembly_dev, nf_bdr, [=] MFEM_HOST_DEVICE (int f)
       {
          const int lf_i = d_face_info(0, f);
          const int e = d_face_info(1, f);
@@ -1386,7 +1398,7 @@ void EABilinearFormExtension::GetElementMatrices(
                          s_i*s_j*d_ea_bdr(i_lex_face, j_lex_face, f));
             }
          }
-      });
+      }, ndof_face, ndof_face, 1);
    }
 }
 
