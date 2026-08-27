@@ -82,7 +82,13 @@ void * SparseMatrix::dBuffer = nullptr;
 #endif
 #endif // MFEM_USE_CUDA_OR_HIP
 
+#if defined(REACTANT_XLA_BACKEND)
+// cuSPARSE consumes raw device pointers, which the XLA backend does not
+// provide; use the native kernels instead.
+bool SparseMatrix::use_gpu_vendor_sparse_if_available = false;
+#else
 bool SparseMatrix::use_gpu_vendor_sparse_if_available = true;
+#endif
 
 void SparseMatrix::InitGPUSparse()
 {

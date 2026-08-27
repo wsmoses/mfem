@@ -171,11 +171,16 @@ __device__ void abort_msg(T & msg)
 
 // Abort inside a device kernel
 #if defined(__CUDA_ARCH__)
+#if defined(REACTANT_XLA_BACKEND)
+// The raising path cannot express device printf or trap; drop the abort.
+#define MFEM_ABORT_KERNEL(...) { }
+#else
 #define MFEM_ABORT_KERNEL(...) \
    {                           \
       printf(__VA_ARGS__);     \
       asm("trap;");            \
    }
+#endif
 #elif defined(__HIP_DEVICE_COMPILE__)
 #define MFEM_ABORT_KERNEL(...) \
    {                           \
