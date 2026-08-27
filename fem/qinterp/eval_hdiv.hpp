@@ -20,6 +20,15 @@
 #include "../../linalg/dtensor.hpp"
 #include "../../linalg/kernels.hpp"
 
+#if defined(REACTANT_XLA_BACKEND)
+// The H(div) tensor eval kernels use component-selected shared buffers and
+// while-form loops the raising path cannot express yet; run them on the
+// host.
+static constexpr bool rxla_hdiv_dev = false;
+#else
+static constexpr bool rxla_hdiv_dev = true;
+#endif
+
 namespace mfem
 {
 
@@ -58,7 +67,7 @@ inline void EvalHDiv2D(const int NE,
              Reshape(y_, DIM, Q1D, Q1D, NE)) :
             Reshape(y_, Q1D, Q1D, 1, NE);
 
-   mfem::forall_3D(NE, M1D, M1D, DIM, [=] MFEM_HOST_DEVICE (int e)
+   ForallWrap<3>(rxla_hdiv_dev, NE, [=] MFEM_HOST_DEVICE (int e)
    {
       const int tidz = MFEM_THREAD_ID(z);
 
@@ -202,7 +211,7 @@ inline void EvalHDiv2D(const int NE,
          }
          MFEM_SYNC_THREAD;
       }
-   });
+   }, M1D, M1D, DIM);
 }
 
 // Evaluate values in H(div) on hexes: DIM = SDIM = 3
@@ -234,7 +243,7 @@ inline void EvalHDiv3D(const int NE,
              Reshape(y_, DIM, Q1D, Q1D, Q1D, NE)) :
             Reshape(y_, Q1D, Q1D, Q1D, 1, NE);
 
-   mfem::forall_3D(NE, Q1D, Q1D, DIM, [=] MFEM_HOST_DEVICE (int e)
+   ForallWrap<3>(rxla_hdiv_dev, NE, [=] MFEM_HOST_DEVICE (int e)
    {
       const int tidz = MFEM_THREAD_ID(z);
 
@@ -439,7 +448,7 @@ inline void EvalHDiv3D(const int NE,
          }
          MFEM_SYNC_THREAD;
       }
-   });
+   }, Q1D, Q1D, DIM);
 }
 
 } // namespace quadrature_interpolator

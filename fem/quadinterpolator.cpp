@@ -18,6 +18,13 @@
 #include "../linalg/dtensor.hpp"
 #include "../linalg/kernels.hpp"
 
+#if defined(REACTANT_XLA_BACKEND)
+// The H(div) tensor eval kernels run on the host (see eval_hdiv.hpp).
+static constexpr bool rxla_hdiv_dev = false;
+#else
+static constexpr bool rxla_hdiv_dev = true;
+#endif
+
 namespace mfem
 {
 
@@ -413,8 +420,9 @@ void QuadratureInterpolator::MultHDiv(const Vector &e_vec,
          // dispatch params: dim + the template params of EvalHDiv2D/3D:
          dim, q_l, value_eval_mode, nd, nq,
          // runtime params, see the arguments of EvalHDiv2D/3D:
-         ne, maps_o.B.Read(), maps_c.B.Read(), geom ? geom->J.Read() : nullptr,
-         e_vec.Read(), q_val.Write(), nd, nq);
+         ne, maps_o.B.Read(rxla_hdiv_dev), maps_c.B.Read(rxla_hdiv_dev),
+         geom ? geom->J.Read(rxla_hdiv_dev) : nullptr,
+         e_vec.Read(rxla_hdiv_dev), q_val.Write(rxla_hdiv_dev), nd, nq);
    }
    MFEM_CONTRACT_VAR(q_div);
 }
