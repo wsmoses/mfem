@@ -20,6 +20,14 @@
 
 #include <climits>
 
+
+#if defined(REACTANT_XLA_BACKEND)
+// Sparse-assembly kernels claim slots with atomicAdd and use the old
+// value, which the raising path cannot express; run them on the host.
+static constexpr bool rxla_assembly_dev = false;
+#else
+static constexpr bool rxla_assembly_dev = true;
+#endif
 namespace mfem
 {
 
@@ -361,19 +369,19 @@ int ElementRestriction::FillI(SparseMatrix &mat) const
    const int all_dofs = ndofs;
    const int vd = vdim;
    const int elt_dofs = dof;
-   auto I = mat.ReadWriteI();
-   auto d_offsets = offsets.Read();
-   auto d_indices = indices.Read();
-   auto d_gather_map = gather_map.Read();
+   auto I = mat.ReadWriteI(rxla_assembly_dev);
+   auto d_offsets = offsets.Read(rxla_assembly_dev);
+   auto d_indices = indices.Read(rxla_assembly_dev);
+   auto d_gather_map = gather_map.Read(rxla_assembly_dev);
 
    Array<int> ij_elts(indices.Size() * 2);
-   auto d_ij_elts = Reshape(ij_elts.Write(), indices.Size(), 2);
+   auto d_ij_elts = Reshape(ij_elts.Write(rxla_assembly_dev), indices.Size(), 2);
 
-   mfem::forall(vd*all_dofs+1, [=] MFEM_HOST_DEVICE (int i_L)
+   mfem::forall_switch(rxla_assembly_dev, vd*all_dofs+1, [=] MFEM_HOST_DEVICE (int i_L)
    {
       I[i_L] = 0;
    });
-   mfem::forall(ne*elt_dofs, [=] MFEM_HOST_DEVICE (int l_dof)
+   mfem::forall_switch(rxla_assembly_dev, ne*elt_dofs, [=] MFEM_HOST_DEVICE (int l_dof)
    {
       const int e = l_dof/elt_dofs;
       const int i = l_dof%elt_dofs;
@@ -444,24 +452,24 @@ int ElementRestriction::FillI(SparseMatrix &mat,
    const int test_elt_dofs = dof;
    const int trial_elt_dofs = trial_restr.dof;
    const bool test_byvdim = byvdim;
-   auto I = mat.ReadWriteI();
-   auto test_offsets = offsets.Read();
-   auto test_indices = indices.Read();
-   auto test_gather_map = gather_map.Read();
-   auto trial_offsets = trial_restr.offsets.Read();
-   auto trial_indices = trial_restr.indices.Read();
-   auto trial_gather_map = trial_restr.gather_map.Read();
+   auto I = mat.ReadWriteI(rxla_assembly_dev);
+   auto test_offsets = offsets.Read(rxla_assembly_dev);
+   auto test_indices = indices.Read(rxla_assembly_dev);
+   auto test_gather_map = gather_map.Read(rxla_assembly_dev);
+   auto trial_offsets = trial_restr.offsets.Read(rxla_assembly_dev);
+   auto trial_indices = trial_restr.indices.Read(rxla_assembly_dev);
+   auto trial_gather_map = trial_restr.gather_map.Read(rxla_assembly_dev);
 
    Array<int> test_elts(indices.Size());
    Array<int> trial_elts(trial_restr.indices.Size());
-   auto d_test_elts = test_elts.Write();
-   auto d_trial_elts = trial_elts.Write();
+   auto d_test_elts = test_elts.Write(rxla_assembly_dev);
+   auto d_trial_elts = trial_elts.Write(rxla_assembly_dev);
 
-   mfem::forall(test_vd*test_all_dofs+1, [=] MFEM_HOST_DEVICE (int i_L)
+   mfem::forall_switch(rxla_assembly_dev, test_vd*test_all_dofs+1, [=] MFEM_HOST_DEVICE (int i_L)
    {
       I[i_L] = 0;
    });
-   mfem::forall(ne*test_elt_dofs*test_vd, [=] MFEM_HOST_DEVICE (int iE)
+   mfem::forall_switch(rxla_assembly_dev, ne*test_elt_dofs*test_vd, [=] MFEM_HOST_DEVICE (int iE)
    {
       const int e = iE/(test_elt_dofs*test_vd);
       const int it = iE%(test_elt_dofs*test_vd);
@@ -531,18 +539,18 @@ void ElementRestriction::FillJAndData(const Vector &ea_data,
    const int all_dofs = ndofs;
    const int vd = vdim;
    const int elt_dofs = dof;
-   auto I = mat.ReadWriteI();
-   auto J = mat.WriteJ();
-   auto Data = mat.WriteData();
-   auto d_offsets = offsets.Read();
-   auto d_indices = indices.Read();
-   auto d_gather_map = gather_map.Read();
-   auto mat_ea = Reshape(ea_data.Read(), elt_dofs, elt_dofs, ne);
+   auto I = mat.ReadWriteI(rxla_assembly_dev);
+   auto J = mat.WriteJ(rxla_assembly_dev);
+   auto Data = mat.WriteData(rxla_assembly_dev);
+   auto d_offsets = offsets.Read(rxla_assembly_dev);
+   auto d_indices = indices.Read(rxla_assembly_dev);
+   auto d_gather_map = gather_map.Read(rxla_assembly_dev);
+   auto mat_ea = Reshape(ea_data.Read(rxla_assembly_dev), elt_dofs, elt_dofs, ne);
 
    Array<int> ij_B_el(indices.Size() * 4);
-   auto d_ij_B_el = Reshape(ij_B_el.Write(), indices.Size(), 4);
+   auto d_ij_B_el = Reshape(ij_B_el.Write(rxla_assembly_dev), indices.Size(), 4);
 
-   mfem::forall(ne*elt_dofs, [=] MFEM_HOST_DEVICE (int l_dof)
+   mfem::forall_switch(rxla_assembly_dev, ne*elt_dofs, [=] MFEM_HOST_DEVICE (int l_dof)
    {
       const int e = l_dof/elt_dofs;
       const int i = l_dof%elt_dofs;
@@ -635,24 +643,24 @@ void ElementRestriction::FillJAndData(
    const int trial_elt_dofs = trial_restr.dof;
    const bool test_byvdim = byvdim;
    const bool trial_byvdim = trial_restr.byvdim;
-   auto I = mat.ReadWriteI();
-   auto J = mat.WriteJ();
-   auto Data = mat.WriteData();
-   auto test_offsets = offsets.Read();
-   auto test_indices = indices.Read();
-   auto test_gather_map = gather_map.Read();
-   auto trial_offsets = trial_restr.offsets.Read();
-   auto trial_indices = trial_restr.indices.Read();
-   auto trial_gather_map = trial_restr.gather_map.Read();
-   auto mat_ea = Reshape(ea_data.Read(), test_elt_dofs, test_vd,
+   auto I = mat.ReadWriteI(rxla_assembly_dev);
+   auto J = mat.WriteJ(rxla_assembly_dev);
+   auto Data = mat.WriteData(rxla_assembly_dev);
+   auto test_offsets = offsets.Read(rxla_assembly_dev);
+   auto test_indices = indices.Read(rxla_assembly_dev);
+   auto test_gather_map = gather_map.Read(rxla_assembly_dev);
+   auto trial_offsets = trial_restr.offsets.Read(rxla_assembly_dev);
+   auto trial_indices = trial_restr.indices.Read(rxla_assembly_dev);
+   auto trial_gather_map = trial_restr.gather_map.Read(rxla_assembly_dev);
+   auto mat_ea = Reshape(ea_data.Read(rxla_assembly_dev), test_elt_dofs, test_vd,
                          trial_elt_dofs, trial_vd, ne);
 
    Array<int> test_el(indices.Size() * 3);
    Array<int> trial_el(trial_restr.indices.Size() * 3);
-   auto d_test_el = Reshape(test_el.Write(), indices.Size(), 3);
-   auto d_trial_el = Reshape(trial_el.Write(), trial_restr.indices.Size(), 3);
+   auto d_test_el = Reshape(test_el.Write(rxla_assembly_dev), indices.Size(), 3);
+   auto d_trial_el = Reshape(trial_el.Write(rxla_assembly_dev), trial_restr.indices.Size(), 3);
 
-   mfem::forall(ne*test_elt_dofs*test_vd, [=] MFEM_HOST_DEVICE (int iE)
+   mfem::forall_switch(rxla_assembly_dev, ne*test_elt_dofs*test_vd, [=] MFEM_HOST_DEVICE (int iE)
    {
       const int e = iE/(test_elt_dofs*test_vd);
       const int it = iE%(test_elt_dofs*test_vd);
@@ -822,7 +830,7 @@ void L2ElementRestriction::FillI(SparseMatrix &mat) const
    auto I = mat.WriteI();
    const int isize = mat.Height() + 1;
    const int interior_dofs = ne*elem_dofs*vd;
-   mfem::forall(isize, [=] MFEM_HOST_DEVICE (int dof)
+   mfem::forall_switch(rxla_assembly_dev, isize, [=] MFEM_HOST_DEVICE (int dof)
    {
       I[dof] = dof<interior_dofs ? elem_dofs : 0;
    });
@@ -839,11 +847,11 @@ void L2ElementRestriction::FillJAndData(const Vector &ea_data,
 {
    const int elem_dofs = ndof;
    const int vd = vdim;
-   auto I = mat.ReadWriteI();
-   auto J = mat.WriteJ();
-   auto Data = mat.WriteData();
-   auto mat_ea = Reshape(ea_data.Read(), elem_dofs, elem_dofs, ne);
-   mfem::forall(ne*elem_dofs*vd, [=] MFEM_HOST_DEVICE (int iE)
+   auto I = mat.ReadWriteI(rxla_assembly_dev);
+   auto J = mat.WriteJ(rxla_assembly_dev);
+   auto Data = mat.WriteData(rxla_assembly_dev);
+   auto mat_ea = Reshape(ea_data.Read(rxla_assembly_dev), elem_dofs, elem_dofs, ne);
+   mfem::forall_switch(rxla_assembly_dev, ne*elem_dofs*vd, [=] MFEM_HOST_DEVICE (int iE)
    {
       const int offset = AddNnz(iE,I,elem_dofs);
       const int e = iE/elem_dofs;
@@ -1370,10 +1378,10 @@ void L2FaceRestriction::FillI(SparseMatrix &mat,
                               const bool keep_nbr_block) const
 {
    const int nface_dofs = face_dofs;
-   auto d_indices1 = scatter_indices1.Read();
-   auto d_indices2 = scatter_indices2.Read();
-   auto I = mat.ReadWriteI();
-   mfem::forall(nf*nface_dofs, [=] MFEM_HOST_DEVICE (int fdof)
+   auto d_indices1 = scatter_indices1.Read(rxla_assembly_dev);
+   auto d_indices2 = scatter_indices2.Read(rxla_assembly_dev);
+   auto I = mat.ReadWriteI(rxla_assembly_dev);
+   mfem::forall_switch(rxla_assembly_dev, nf*nface_dofs, [=] MFEM_HOST_DEVICE (int fdof)
    {
       const int iE1 = d_indices1[fdof];
       const int iE2 = d_indices2[fdof];
@@ -1387,13 +1395,13 @@ void L2FaceRestriction::FillJAndData(const Vector &fea_data,
                                      const bool keep_nbr_block) const
 {
    const int nface_dofs = face_dofs;
-   auto d_indices1 = scatter_indices1.Read();
-   auto d_indices2 = scatter_indices2.Read();
-   auto I = mat.ReadWriteI();
-   auto mat_fea = Reshape(fea_data.Read(), nface_dofs, nface_dofs, 2, nf);
-   auto J = mat.WriteJ();
-   auto Data = mat.WriteData();
-   mfem::forall(nf*nface_dofs, [=] MFEM_HOST_DEVICE (int fdof)
+   auto d_indices1 = scatter_indices1.Read(rxla_assembly_dev);
+   auto d_indices2 = scatter_indices2.Read(rxla_assembly_dev);
+   auto I = mat.ReadWriteI(rxla_assembly_dev);
+   auto mat_fea = Reshape(fea_data.Read(rxla_assembly_dev), nface_dofs, nface_dofs, 2, nf);
+   auto J = mat.WriteJ(rxla_assembly_dev);
+   auto Data = mat.WriteData(rxla_assembly_dev);
+   mfem::forall_switch(rxla_assembly_dev, nf*nface_dofs, [=] MFEM_HOST_DEVICE (int fdof)
    {
       const int f  = fdof/nface_dofs;
       const int iF = fdof%nface_dofs;
@@ -1421,11 +1429,11 @@ void L2FaceRestriction::AddFaceMatricesToElementMatrices(const Vector &fea_data,
    const int NE = ne;
    if (m==L2FaceValues::DoubleValued)
    {
-      auto d_indices1 = scatter_indices1.Read();
-      auto d_indices2 = scatter_indices2.Read();
-      auto mat_fea = Reshape(fea_data.Read(), nface_dofs, nface_dofs, 2, nf);
-      auto mat_ea = Reshape(ea_data.ReadWrite(), nelem_dofs, nelem_dofs, ne);
-      mfem::forall(nf, [=] MFEM_HOST_DEVICE (int f)
+      auto d_indices1 = scatter_indices1.Read(rxla_assembly_dev);
+      auto d_indices2 = scatter_indices2.Read(rxla_assembly_dev);
+      auto mat_fea = Reshape(fea_data.Read(rxla_assembly_dev), nface_dofs, nface_dofs, 2, nf);
+      auto mat_ea = Reshape(ea_data.ReadWrite(rxla_assembly_dev), nelem_dofs, nelem_dofs, ne);
+      mfem::forall_switch(rxla_assembly_dev, nf, [=] MFEM_HOST_DEVICE (int f)
       {
          const int e1 = d_indices1[f*nface_dofs]/nelem_dofs;
          const int e2 = d_indices2[f*nface_dofs]/nelem_dofs;
@@ -1454,10 +1462,10 @@ void L2FaceRestriction::AddFaceMatricesToElementMatrices(const Vector &fea_data,
    }
    else
    {
-      auto d_indices = scatter_indices1.Read();
-      auto mat_fea = Reshape(fea_data.Read(), nface_dofs, nface_dofs, nf);
-      auto mat_ea = Reshape(ea_data.ReadWrite(), nelem_dofs, nelem_dofs, ne);
-      mfem::forall(nf, [=] MFEM_HOST_DEVICE (int f)
+      auto d_indices = scatter_indices1.Read(rxla_assembly_dev);
+      auto mat_fea = Reshape(fea_data.Read(rxla_assembly_dev), nface_dofs, nface_dofs, nf);
+      auto mat_ea = Reshape(ea_data.ReadWrite(rxla_assembly_dev), nelem_dofs, nelem_dofs, ne);
+      mfem::forall_switch(rxla_assembly_dev, nf, [=] MFEM_HOST_DEVICE (int f)
       {
          const int e = d_indices[f*nface_dofs]/nelem_dofs;
          for (int j = 0; j < nface_dofs; j++)
@@ -2219,10 +2227,10 @@ void NCL2FaceRestriction::FillI(SparseMatrix &mat,
                                 const bool keep_nbr_block) const
 {
    const int nface_dofs = face_dofs;
-   auto d_indices1 = scatter_indices1.Read();
-   auto d_indices2 = scatter_indices2.Read();
-   auto I = mat.ReadWriteI();
-   mfem::forall(nf*nface_dofs, [=] MFEM_HOST_DEVICE (int fdof)
+   auto d_indices1 = scatter_indices1.Read(rxla_assembly_dev);
+   auto d_indices2 = scatter_indices2.Read(rxla_assembly_dev);
+   auto I = mat.ReadWriteI(rxla_assembly_dev);
+   mfem::forall_switch(rxla_assembly_dev, nf*nface_dofs, [=] MFEM_HOST_DEVICE (int fdof)
    {
       const int iE1 = d_indices1[fdof];
       const int iE2 = d_indices2[fdof];
@@ -2236,17 +2244,17 @@ void NCL2FaceRestriction::FillJAndData(const Vector &fea_data,
                                        const bool keep_nbr_block) const
 {
    const int nface_dofs = face_dofs;
-   auto d_indices1 = scatter_indices1.Read();
-   auto d_indices2 = scatter_indices2.Read();
-   auto I = mat.ReadWriteI();
-   auto mat_fea = Reshape(fea_data.Read(), nface_dofs, nface_dofs, 2, nf);
-   auto J = mat.WriteJ();
-   auto Data = mat.WriteData();
-   auto interp_config_ptr = interpolations.GetFaceInterpConfig().Read();
-   auto interpolators = interpolations.GetInterpolators().Read();
+   auto d_indices1 = scatter_indices1.Read(rxla_assembly_dev);
+   auto d_indices2 = scatter_indices2.Read(rxla_assembly_dev);
+   auto I = mat.ReadWriteI(rxla_assembly_dev);
+   auto mat_fea = Reshape(fea_data.Read(rxla_assembly_dev), nface_dofs, nface_dofs, 2, nf);
+   auto J = mat.WriteJ(rxla_assembly_dev);
+   auto Data = mat.WriteData(rxla_assembly_dev);
+   auto interp_config_ptr = interpolations.GetFaceInterpConfig().Read(rxla_assembly_dev);
+   auto interpolators = interpolations.GetInterpolators().Read(rxla_assembly_dev);
    const int nc_size = interpolations.GetNumInterpolators();
    auto d_interp = Reshape(interpolators, nface_dofs, nface_dofs, nc_size);
-   mfem::forall(nf*nface_dofs, [=] MFEM_HOST_DEVICE (int fdof)
+   mfem::forall_switch(rxla_assembly_dev, nf*nface_dofs, [=] MFEM_HOST_DEVICE (int fdof)
    {
       const int f  = fdof/nface_dofs;
       const InterpConfig conf = interp_config_ptr[f];
@@ -2302,15 +2310,15 @@ const
    const int NE = ne;
    if (m==L2FaceValues::DoubleValued)
    {
-      auto d_indices1 = scatter_indices1.Read();
-      auto d_indices2 = scatter_indices2.Read();
-      auto mat_fea = Reshape(fea_data.Read(), nface_dofs, nface_dofs, 2, nf);
-      auto mat_ea = Reshape(ea_data.ReadWrite(), nelem_dofs, nelem_dofs, ne);
-      auto interp_config_ptr = interpolations.GetFaceInterpConfig().Read();
-      auto interpolators = interpolations.GetInterpolators().Read();
+      auto d_indices1 = scatter_indices1.Read(rxla_assembly_dev);
+      auto d_indices2 = scatter_indices2.Read(rxla_assembly_dev);
+      auto mat_fea = Reshape(fea_data.Read(rxla_assembly_dev), nface_dofs, nface_dofs, 2, nf);
+      auto mat_ea = Reshape(ea_data.ReadWrite(rxla_assembly_dev), nelem_dofs, nelem_dofs, ne);
+      auto interp_config_ptr = interpolations.GetFaceInterpConfig().Read(rxla_assembly_dev);
+      auto interpolators = interpolations.GetInterpolators().Read(rxla_assembly_dev);
       const int nc_size = interpolations.GetNumInterpolators();
       auto d_interp = Reshape(interpolators, nface_dofs, nface_dofs, nc_size);
-      mfem::forall(nf, [=] MFEM_HOST_DEVICE (int f)
+      mfem::forall_switch(rxla_assembly_dev, nf, [=] MFEM_HOST_DEVICE (int f)
       {
          const InterpConfig conf = interp_config_ptr[f];
          const int master_side = conf.master_side;
@@ -2376,14 +2384,14 @@ const
    }
    else
    {
-      auto d_indices = scatter_indices1.Read();
-      auto mat_fea = Reshape(fea_data.Read(), nface_dofs, nface_dofs, nf);
-      auto mat_ea = Reshape(ea_data.ReadWrite(), nelem_dofs, nelem_dofs, ne);
-      auto interp_config_ptr = interpolations.GetFaceInterpConfig().Read();
-      auto interpolators = interpolations.GetInterpolators().Read();
+      auto d_indices = scatter_indices1.Read(rxla_assembly_dev);
+      auto mat_fea = Reshape(fea_data.Read(rxla_assembly_dev), nface_dofs, nface_dofs, nf);
+      auto mat_ea = Reshape(ea_data.ReadWrite(rxla_assembly_dev), nelem_dofs, nelem_dofs, ne);
+      auto interp_config_ptr = interpolations.GetFaceInterpConfig().Read(rxla_assembly_dev);
+      auto interpolators = interpolations.GetInterpolators().Read(rxla_assembly_dev);
       const int nc_size = interpolations.GetNumInterpolators();
       auto d_interp = Reshape(interpolators, nface_dofs, nface_dofs, nc_size);
-      mfem::forall(nf, [=] MFEM_HOST_DEVICE (int f)
+      mfem::forall_switch(rxla_assembly_dev, nf, [=] MFEM_HOST_DEVICE (int f)
       {
          const InterpConfig conf = interp_config_ptr[f];
          const int master_side = conf.master_side;

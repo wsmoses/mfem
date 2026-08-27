@@ -21,6 +21,14 @@
 #include "fe/face_map_utils.hpp"
 #include "../general/forall.hpp"
 
+
+#if defined(REACTANT_XLA_BACKEND)
+// Sparse-assembly kernels claim slots with atomicAdd and use the old
+// value, which the raising path cannot express; run them on the host.
+static constexpr bool rxla_assembly_dev = false;
+#else
+static constexpr bool rxla_assembly_dev = true;
+#endif
 namespace mfem
 {
 
@@ -390,10 +398,10 @@ void ParL2FaceRestriction::FillI(SparseMatrix &mat,
    }
    const int nface_dofs = face_dofs;
    const int Ndofs = ndofs;
-   auto d_indices1 = scatter_indices1.Read();
-   auto d_indices2 = scatter_indices2.Read();
-   auto I = mat.ReadWriteI();
-   mfem::forall(nf*nface_dofs, [=] MFEM_HOST_DEVICE (int fdof)
+   auto d_indices1 = scatter_indices1.Read(rxla_assembly_dev);
+   auto d_indices2 = scatter_indices2.Read(rxla_assembly_dev);
+   auto I = mat.ReadWriteI(rxla_assembly_dev);
+   mfem::forall_switch(rxla_assembly_dev, nf*nface_dofs, [=] MFEM_HOST_DEVICE (int fdof)
    {
       const int f  = fdof/nface_dofs;
       const int iF = fdof%nface_dofs;
@@ -415,15 +423,15 @@ void ParL2FaceRestriction::FillI(SparseMatrix &mat,
 {
    const int nface_dofs = face_dofs;
    const int Ndofs = ndofs;
-   auto d_indices1 = scatter_indices1.Read();
-   auto d_indices2 = scatter_indices2.Read();
-   auto I = mat.ReadWriteI();
-   auto I_face = face_mat.ReadWriteI();
-   mfem::forall(ne*elem_dofs*vdim+1, [=] MFEM_HOST_DEVICE (int i)
+   auto d_indices1 = scatter_indices1.Read(rxla_assembly_dev);
+   auto d_indices2 = scatter_indices2.Read(rxla_assembly_dev);
+   auto I = mat.ReadWriteI(rxla_assembly_dev);
+   auto I_face = face_mat.ReadWriteI(rxla_assembly_dev);
+   mfem::forall_switch(rxla_assembly_dev, ne*elem_dofs*vdim+1, [=] MFEM_HOST_DEVICE (int i)
    {
       I_face[i] = 0;
    });
-   mfem::forall(nf*nface_dofs, [=] MFEM_HOST_DEVICE (int fdof)
+   mfem::forall_switch(rxla_assembly_dev, nf*nface_dofs, [=] MFEM_HOST_DEVICE (int fdof)
    {
       const int f  = fdof/nface_dofs;
       const int iF = fdof%nface_dofs;
@@ -472,13 +480,13 @@ void ParL2FaceRestriction::FillJAndData(const Vector &ea_data,
    }
    const int nface_dofs = face_dofs;
    const int Ndofs = ndofs;
-   auto d_indices1 = scatter_indices1.Read();
-   auto d_indices2 = scatter_indices2.Read();
-   auto mat_fea = Reshape(ea_data.Read(), nface_dofs, nface_dofs, 2, nf);
-   auto I = mat.ReadWriteI();
-   auto J = mat.WriteJ();
-   auto Data = mat.WriteData();
-   mfem::forall(nf*nface_dofs, [=] MFEM_HOST_DEVICE (int fdof)
+   auto d_indices1 = scatter_indices1.Read(rxla_assembly_dev);
+   auto d_indices2 = scatter_indices2.Read(rxla_assembly_dev);
+   auto mat_fea = Reshape(ea_data.Read(rxla_assembly_dev), nface_dofs, nface_dofs, 2, nf);
+   auto I = mat.ReadWriteI(rxla_assembly_dev);
+   auto J = mat.WriteJ(rxla_assembly_dev);
+   auto Data = mat.WriteData(rxla_assembly_dev);
+   mfem::forall_switch(rxla_assembly_dev, nf*nface_dofs, [=] MFEM_HOST_DEVICE (int fdof)
    {
       const int f  = fdof/nface_dofs;
       const int iF = fdof%nface_dofs;
@@ -513,16 +521,16 @@ void ParL2FaceRestriction::FillJAndData(const Vector &ea_data,
 {
    const int nface_dofs = face_dofs;
    const int Ndofs = ndofs;
-   auto d_indices1 = scatter_indices1.Read();
-   auto d_indices2 = scatter_indices2.Read();
-   auto mat_fea = Reshape(ea_data.Read(), nface_dofs, nface_dofs, 2, nf);
-   auto I = mat.ReadWriteI();
-   auto I_face = face_mat.ReadWriteI();
-   auto J = mat.WriteJ();
-   auto J_face = face_mat.WriteJ();
-   auto Data = mat.WriteData();
-   auto Data_face = face_mat.WriteData();
-   mfem::forall(nf*nface_dofs, [=] MFEM_HOST_DEVICE (int fdof)
+   auto d_indices1 = scatter_indices1.Read(rxla_assembly_dev);
+   auto d_indices2 = scatter_indices2.Read(rxla_assembly_dev);
+   auto mat_fea = Reshape(ea_data.Read(rxla_assembly_dev), nface_dofs, nface_dofs, 2, nf);
+   auto I = mat.ReadWriteI(rxla_assembly_dev);
+   auto I_face = face_mat.ReadWriteI(rxla_assembly_dev);
+   auto J = mat.WriteJ(rxla_assembly_dev);
+   auto J_face = face_mat.WriteJ(rxla_assembly_dev);
+   auto Data = mat.WriteData(rxla_assembly_dev);
+   auto Data_face = face_mat.WriteData(rxla_assembly_dev);
+   mfem::forall_switch(rxla_assembly_dev, nf*nface_dofs, [=] MFEM_HOST_DEVICE (int fdof)
    {
       const int f  = fdof/nface_dofs;
       const int iF = fdof%nface_dofs;
@@ -852,10 +860,10 @@ void ParNCL2FaceRestriction::FillI(SparseMatrix &mat,
    }
    const int nface_dofs = face_dofs;
    const int Ndofs = ndofs;
-   auto d_indices1 = scatter_indices1.Read();
-   auto d_indices2 = scatter_indices2.Read();
-   auto I = mat.ReadWriteI();
-   mfem::forall(nf*nface_dofs, [=] MFEM_HOST_DEVICE (int fdof)
+   auto d_indices1 = scatter_indices1.Read(rxla_assembly_dev);
+   auto d_indices2 = scatter_indices2.Read(rxla_assembly_dev);
+   auto I = mat.ReadWriteI(rxla_assembly_dev);
+   mfem::forall_switch(rxla_assembly_dev, nf*nface_dofs, [=] MFEM_HOST_DEVICE (int fdof)
    {
       const int f  = fdof/nface_dofs;
       const int iF = fdof%nface_dofs;
@@ -888,17 +896,17 @@ void ParNCL2FaceRestriction::FillJAndData(const Vector &fea_data,
    }
    const int nface_dofs = face_dofs;
    const int Ndofs = ndofs;
-   auto d_indices1 = scatter_indices1.Read();
-   auto d_indices2 = scatter_indices2.Read();
-   auto I = mat.ReadWriteI();
-   auto mat_fea = Reshape(fea_data.Read(), nface_dofs, nface_dofs, 2, nf);
-   auto J = mat.WriteJ();
-   auto Data = mat.WriteData();
-   auto interp_config_ptr = interpolations.GetFaceInterpConfig().Read();
-   auto interpolators = interpolations.GetInterpolators().Read();
+   auto d_indices1 = scatter_indices1.Read(rxla_assembly_dev);
+   auto d_indices2 = scatter_indices2.Read(rxla_assembly_dev);
+   auto I = mat.ReadWriteI(rxla_assembly_dev);
+   auto mat_fea = Reshape(fea_data.Read(rxla_assembly_dev), nface_dofs, nface_dofs, 2, nf);
+   auto J = mat.WriteJ(rxla_assembly_dev);
+   auto Data = mat.WriteData(rxla_assembly_dev);
+   auto interp_config_ptr = interpolations.GetFaceInterpConfig().Read(rxla_assembly_dev);
+   auto interpolators = interpolations.GetInterpolators().Read(rxla_assembly_dev);
    const int nc_size = interpolations.GetNumInterpolators();
    auto d_interp = Reshape(interpolators, nface_dofs, nface_dofs, nc_size);
-   mfem::forall(nf*nface_dofs, [=] MFEM_HOST_DEVICE (int fdof)
+   mfem::forall_switch(rxla_assembly_dev, nf*nface_dofs, [=] MFEM_HOST_DEVICE (int fdof)
    {
       const int f  = fdof/nface_dofs;
       const InterpConfig conf = interp_config_ptr[f];
