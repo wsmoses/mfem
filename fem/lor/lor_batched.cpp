@@ -12,6 +12,14 @@
 #include "lor_batched.hpp"
 #include "../../fem/quadinterpolator.hpp"
 #include "../../general/forall.hpp"
+
+#if defined(REACTANT_XLA_BACKEND)
+// Sparse-assembly kernels claim slots with atomicAdd and use the old
+// value, which the raising path cannot express; run them on the host.
+static constexpr bool rxla_assembly_dev = false;
+#else
+static constexpr bool rxla_assembly_dev = true;
+#endif
 #include <climits>
 #include "../pbilinearform.hpp"
 #include "../../fem/fe/face_map_utils.hpp"
@@ -160,16 +168,16 @@ int BatchedLORAssembly::FillI(SparseMatrix &A) const
    const Array<int> &dof_glob2loc_ = el_restr->Indices();
    const Array<int> &dof_glob2loc_offsets_ = el_restr->Offsets();
 
-   const auto el_dof_lex = Reshape(el_dof_lex_.Read(), ndof_per_el, nel_ho);
-   const auto dof_glob2loc = dof_glob2loc_.Read();
-   const auto K = dof_glob2loc_offsets_.Read();
-   const auto map = Reshape(sparse_mapping.Read(), nnz_per_row, ndof_per_el);
+   const auto el_dof_lex = Reshape(el_dof_lex_.Read(rxla_assembly_dev), ndof_per_el, nel_ho);
+   const auto dof_glob2loc = dof_glob2loc_.Read(rxla_assembly_dev);
+   const auto K = dof_glob2loc_offsets_.Read(rxla_assembly_dev);
+   const auto map = Reshape(sparse_mapping.Read(rxla_assembly_dev), nnz_per_row, ndof_per_el);
 
 
-   auto I = A.WriteI();
+   auto I = A.WriteI(rxla_assembly_dev);
 
-   mfem::forall(nvdof + 1, [=] MFEM_HOST_DEVICE (int ii) { I[ii] = 0; });
-   mfem::forall(ndof_per_el*nel_ho, [=] MFEM_HOST_DEVICE (int i)
+   mfem::forall_switch(rxla_assembly_dev, nvdof + 1, [=] MFEM_HOST_DEVICE (int ii) { I[ii] = 0; });
+   mfem::forall_switch(rxla_assembly_dev, ndof_per_el*nel_ho, [=] MFEM_HOST_DEVICE (int i)
    {
       const int ii_el = i%ndof_per_el;
       const int iel_ho = i/ndof_per_el;
@@ -251,27 +259,27 @@ void BatchedLORAssembly::FillJAndData(SparseMatrix &A) const
    const Array<int> &dof_glob2loc_ = el_restr->Indices();
    const Array<int> &dof_glob2loc_offsets_ = el_restr->Offsets();
 
-   const auto el_dof_lex = Reshape(el_dof_lex_.Read(), ndof_per_el, nel_ho);
-   const auto dof_glob2loc = dof_glob2loc_.Read();
-   const auto K = dof_glob2loc_offsets_.Read();
+   const auto el_dof_lex = Reshape(el_dof_lex_.Read(rxla_assembly_dev), ndof_per_el, nel_ho);
+   const auto dof_glob2loc = dof_glob2loc_.Read(rxla_assembly_dev);
+   const auto K = dof_glob2loc_offsets_.Read(rxla_assembly_dev);
 
-   const auto V = Reshape(sparse_ij.Read(), nnz_per_row, ndof_per_el, nel_ho);
-   const auto map = Reshape(sparse_mapping.Read(), nnz_per_row, ndof_per_el);
+   const auto V = Reshape(sparse_ij.Read(rxla_assembly_dev), nnz_per_row, ndof_per_el, nel_ho);
+   const auto map = Reshape(sparse_mapping.Read(rxla_assembly_dev), nnz_per_row, ndof_per_el);
 
    Array<int> I_(nvdof + 1);
-   const auto I = I_.Write();
-   const auto J = A.WriteJ();
-   auto AV = A.WriteData();
+   const auto I = I_.Write(rxla_assembly_dev);
+   const auto J = A.WriteJ(rxla_assembly_dev);
+   auto AV = A.WriteData(rxla_assembly_dev);
 
    // Copy A.I into I, use it as a temporary buffer
    {
-      const auto I2 = A.ReadI();
-      mfem::forall(nvdof + 1, [=] MFEM_HOST_DEVICE (int i) { I[i] = I2[i]; });
+      const auto I2 = A.ReadI(rxla_assembly_dev);
+      mfem::forall_switch(rxla_assembly_dev, nvdof + 1, [=] MFEM_HOST_DEVICE (int i) { I[i] = I2[i]; });
    }
 
    static constexpr int Max = 16;
 
-   mfem::forall(ndof_per_el*nel_ho, [=] MFEM_HOST_DEVICE (int i)
+   mfem::forall_switch(rxla_assembly_dev, ndof_per_el*nel_ho, [=] MFEM_HOST_DEVICE (int i)
    {
       const int ii_el = i%ndof_per_el;
       const int iel_ho = i/ndof_per_el;
@@ -469,13 +477,13 @@ void BatchedLORAssembly::SparseIJToCSR_DG(OperatorHandle &A) const
       h_I[i+1] = h_I[i] + (nnz_per_row - bdr_count);
    }
 
-   const auto V = Reshape(sparse_ij.Read(), nnz_per_row, ndof_per_el, nel_ho);
+   const auto V = Reshape(sparse_ij.Read(rxla_assembly_dev), nnz_per_row, ndof_per_el, nel_ho);
    auto J = A_mat->WriteJ();
    auto AV = A_mat->WriteData();
    auto I = A_mat->ReadI();
 
-   auto d_nbr_info = Reshape(nbr_info.Read(), nel_ho, 2*dim, 3);
-   mfem::forall(nrows, [=] MFEM_HOST_DEVICE (int i)
+   auto d_nbr_info = Reshape(nbr_info.Read(rxla_assembly_dev), nel_ho, 2*dim, 3);
+   mfem::forall_switch(rxla_assembly_dev, nrows, [=] MFEM_HOST_DEVICE (int i)
    {
       const int e = i / ndof_per_el;
       const int iloc = i % ndof_per_el;
@@ -661,11 +669,11 @@ void BatchedLORAssembly::ParAssemble_DG(SparseMatrix &A_local,
    const int nnz_local = A_local.NumNonZeroElems();
    Array<HYPRE_BigInt> glob_J(nnz_local);
 
-   const HYPRE_BigInt *d_face_nbr_glob_ldof = face_nbr_glob_ldof.Read();
-   const int *d_J = A_local.ReadJ();
-   HYPRE_BigInt *d_glob_J = glob_J.Write();
+   const HYPRE_BigInt *d_face_nbr_glob_ldof = face_nbr_glob_ldof.Read(rxla_assembly_dev);
+   const int *d_J = A_local.ReadJ(rxla_assembly_dev);
+   HYPRE_BigInt *d_glob_J = glob_J.Write(rxla_assembly_dev);
 
-   mfem::forall(nnz_local, [=] MFEM_HOST_DEVICE (int i)
+   mfem::forall_switch(rxla_assembly_dev, nnz_local, [=] MFEM_HOST_DEVICE (int i)
    {
       if (d_J[i] < lvsize)
       {

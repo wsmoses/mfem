@@ -31,17 +31,17 @@ void BatchedLOR_H1::Assemble2D()
 
    const bool const_mq = c1.Size() == 1;
    const auto MQ = const_mq
-                   ? Reshape(c1.Read(), 1, 1, 1)
-                   : Reshape(c1.Read(), nd1d, nd1d, nel_ho);
+                   ? Reshape(c1.Vector::Read(), 1, 1, 1)
+                   : Reshape(c1.Vector::Read(), nd1d, nd1d, nel_ho);
    const bool const_dq = c2.Size() == 1;
    const auto DQ = const_dq
-                   ? Reshape(c2.Read(), 1, 1, 1)
-                   : Reshape(c2.Read(), nd1d, nd1d, nel_ho);
+                   ? Reshape(c2.Vector::Read(), 1, 1, 1)
+                   : Reshape(c2.Vector::Read(), nd1d, nd1d, nel_ho);
 
    sparse_ij.SetSize(nnz_per_row*ndof_per_el*nel_ho);
-   auto V = Reshape(sparse_ij.Write(), nnz_per_row, nd1d, nd1d, nel_ho);
+   auto V = Reshape(sparse_ij.Vector::Write(), nnz_per_row, nd1d, nd1d, nel_ho);
 
-   auto X = X_vert.Read();
+   auto X = X_vert.Vector::Read();
 
    mfem::forall_2D(nel_ho, ORDER, ORDER, [=] MFEM_HOST_DEVICE (int iel_ho)
    {
@@ -199,17 +199,17 @@ void BatchedLOR_H1::Assemble3D()
 
    const bool const_mq = c1.Size() == 1;
    const auto MQ = const_mq
-                   ? Reshape(c1.Read(), 1, 1, 1, 1)
-                   : Reshape(c1.Read(), nd1d, nd1d, nd1d, nel_ho);
+                   ? Reshape(c1.Vector::Read(), 1, 1, 1, 1)
+                   : Reshape(c1.Vector::Read(), nd1d, nd1d, nd1d, nel_ho);
    const bool const_dq = c2.Size() == 1;
    const auto DQ = const_dq
-                   ? Reshape(c2.Read(), 1, 1, 1, 1)
-                   : Reshape(c2.Read(), nd1d, nd1d, nd1d, nel_ho);
+                   ? Reshape(c2.Vector::Read(), 1, 1, 1, 1)
+                   : Reshape(c2.Vector::Read(), nd1d, nd1d, nd1d, nel_ho);
 
    sparse_ij.SetSize(nel_ho*ndof_per_el*nnz_per_row);
-   auto V = Reshape(sparse_ij.Write(), nnz_per_row, nd1d, nd1d, nd1d, nel_ho);
+   auto V = Reshape(sparse_ij.Vector::Write(), nnz_per_row, nd1d, nd1d, nd1d, nel_ho);
 
-   auto X = X_vert.Read();
+   auto X = X_vert.Vector::Read();
 
    // Last thread dimension is lowered to avoid "too many resources" error
    mfem::forall_3D(nel_ho, ORDER, ORDER, (ORDER>6)?4:ORDER,

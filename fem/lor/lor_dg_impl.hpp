@@ -152,7 +152,7 @@ void BatchedLOR_DG::AssembleFaceTerms()
 
    // Get diffusion coefficient
    const bool const_dq = c2.Size() == 1;
-   const auto DQ = const_dq?Reshape(c2.Read(),1,1):Reshape(c2.Read(),nd,nel_ho);
+   const auto DQ = const_dq?Reshape(c2.Vector::Read(),1,1):Reshape(c2.Vector::Read(),nd,nel_ho);
 
    // Sparse matrix entries
    auto V = Reshape(sparse_ij.ReadWrite(), nnz_per_row, nd, nel_ho);
@@ -219,12 +219,12 @@ void BatchedLOR_DG::Assemble2D()
    // Get coefficients for mass and diffusion
    const bool const_mq = c1.Size() == 1;
    const auto MQ = const_mq
-                   ? Reshape(c1.Read(), 1, 1, 1)
-                   : Reshape(c1.Read(), pp1, pp1, nel_ho);
+                   ? Reshape(c1.Vector::Read(), 1, 1, 1)
+                   : Reshape(c1.Vector::Read(), pp1, pp1, nel_ho);
    const bool const_dq = c2.Size() == 1;
    const auto DQ = const_dq
-                   ? Reshape(c2.Read(), 1, 1, 1)
-                   : Reshape(c2.Read(), pp1, pp1, nel_ho);
+                   ? Reshape(c2.Vector::Read(), 1, 1, 1)
+                   : Reshape(c2.Vector::Read(), pp1, pp1, nel_ho);
 
    const auto detJ = Reshape(geom->detJ.Read(), pp1, pp1, nel_ho);
    const auto J = Reshape(geom->J.Read(), pp1, pp1, 2, 2, nel_ho);
@@ -294,7 +294,7 @@ void BatchedLOR_DG::Assemble3D()
    sparse_ij.SetSize(nnz_per_row*ndof_per_el*nel_ho);
    sparse_ij.UseDevice(true);
    sparse_ij = 0.0;
-   auto V = Reshape(sparse_ij.Write(), nnz_per_row, pp1, pp1, pp1, nel_ho);
+   auto V = Reshape(sparse_ij.Vector::Write(), nnz_per_row, pp1, pp1, pp1, nel_ho);
 
    AssembleFaceTerms();
 
@@ -312,12 +312,12 @@ void BatchedLOR_DG::Assemble3D()
 
    const bool const_mq = c1.Size() == 1;
    const auto MQ = const_mq
-                   ? Reshape(c1.Read(), 1, 1, 1, 1)
-                   : Reshape(c1.Read(), pp1, pp1, pp1, nel_ho);
+                   ? Reshape(c1.Vector::Read(), 1, 1, 1, 1)
+                   : Reshape(c1.Vector::Read(), pp1, pp1, pp1, nel_ho);
    const bool const_dq = c2.Size() == 1;
    const auto DQ = const_dq
-                   ? Reshape(c2.Read(), 1, 1, 1, 1)
-                   : Reshape(c2.Read(), pp1, pp1, pp1, nel_ho);
+                   ? Reshape(c2.Vector::Read(), 1, 1, 1, 1)
+                   : Reshape(c2.Vector::Read(), pp1, pp1, pp1, nel_ho);
    const auto W = Reshape(ir.GetWeights().Read(), pp1, pp1, pp1);
 
    const auto detJ = Reshape(geom->detJ.Read(), pp1, pp1, pp1, nel_ho);
