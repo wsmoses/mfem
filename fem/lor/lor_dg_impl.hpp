@@ -16,6 +16,18 @@
 #include "../../linalg/dtensor.hpp"
 #include "../../general/forall.hpp"
 
+#ifndef MFEM_RXLA_LOR_DEV_DEFINED
+#define MFEM_RXLA_LOR_DEV_DEFINED
+#if defined(REACTANT_XLA_BACKEND)
+// LOR assembly scatters with atomicAdd into buffer-selected sparse data;
+// run it on the host with the rest of the sparse assembly.
+static constexpr bool rxla_lor_dev = false;
+#else
+static constexpr bool rxla_lor_dev = true;
+#endif
+#endif
+
+
 namespace mfem
 {
 
@@ -110,12 +122,12 @@ Vector BatchedLOR_DG::GetBdrPenaltyFactor() const
       Vector detJ_r(nq * m * nft);
       r->Mult(geom->detJ, detJ_r);
 
-      const auto *d_i = (ft == FaceType::Interior) ? f_int.Read() : f_bdr.Read();
-      const auto d_detJ_face = Reshape(geom_face->detJ.Read(), nq, nft);
-      const auto d_detJ_r = Reshape(detJ_r.Read(), nq, m, nft);
-      auto d_face_Jh = Reshape(face_Jh.Write(), nq, nf);
+      const auto *d_i = (ft == FaceType::Interior) ? f_int.Read(rxla_lor_dev) : f_bdr.Read(rxla_lor_dev);
+      const auto d_detJ_face = Reshape(geom_face->detJ.Read(rxla_lor_dev), nq, nft);
+      const auto d_detJ_r = Reshape(detJ_r.Read(rxla_lor_dev), nq, m, nft);
+      auto d_face_Jh = Reshape(face_Jh.Write(rxla_lor_dev), nq, nf);
 
-      mfem::forall(nft * nq, [=] MFEM_HOST_DEVICE (int ii)
+      mfem::forall_switch(rxla_lor_dev, nft * nq, [=] MFEM_HOST_DEVICE (int ii)
       {
          const int i = ii % nq;
          const int f = ii / nq;
@@ -140,24 +152,24 @@ void BatchedLOR_DG::AssembleFaceTerms()
    const int dim = mesh.Dimension();
 
    Array<int> face_info = GetFaceInfo();
-   const auto d_face_info = Reshape(face_info.Read(), 6, nf);
+   const auto d_face_info = Reshape(face_info.Read(rxla_lor_dev), 6, nf);
 
    Vector face_Jh = GetBdrPenaltyFactor();
-   const auto d_face_Jh = Reshape(face_Jh.Read(), nd_face, nf);
+   const auto d_face_Jh = Reshape(face_Jh.Read(rxla_lor_dev), nd_face, nf);
 
-   const auto *w_face = ir_face.GetWeights().Read();
+   const auto *w_face = ir_face.GetWeights().Read(rxla_lor_dev);
 
    // Penalty parameter (avoid capturing *this in lambda)
    const real_t d_kappa = kappa;
 
    // Get diffusion coefficient
    const bool const_dq = c2.Size() == 1;
-   const auto DQ = const_dq?Reshape(c2.Vector::Read(),1,1):Reshape(c2.Vector::Read(),nd,nel_ho);
+   const auto DQ = const_dq?Reshape(c2.Vector::Read(rxla_lor_dev),1,1):Reshape(c2.Vector::Read(rxla_lor_dev),nd,nel_ho);
 
    // Sparse matrix entries
-   auto V = Reshape(sparse_ij.ReadWrite(), nnz_per_row, nd, nel_ho);
+   auto V = Reshape(sparse_ij.ReadWrite(rxla_lor_dev), nnz_per_row, nd, nel_ho);
 
-   mfem::forall(nf, [=] MFEM_HOST_DEVICE (int f)
+   mfem::forall_switch(rxla_lor_dev, nf, [=] MFEM_HOST_DEVICE (int f)
    {
       const int f_0 = d_face_info(1, f);
       const int f_1 = d_face_info(4, f);
@@ -200,7 +212,7 @@ void BatchedLOR_DG::Assemble2D()
    sparse_ij.SetSize(nnz_per_row*ndof_per_el*nel_ho);
    sparse_ij.UseDevice(true);
    sparse_ij = 0.0;
-   auto V = Reshape(sparse_ij.ReadWrite(), nnz_per_row, pp1, pp1, nel_ho);
+   auto V = Reshape(sparse_ij.ReadWrite(rxla_lor_dev), nnz_per_row, pp1, pp1, nel_ho);
 
    AssembleFaceTerms();
 
@@ -213,24 +225,24 @@ void BatchedLOR_DG::Assemble2D()
       glx_pp1[i] = ir_pp1[i].x;
       glw_pp1[i] = ir_pp1[i].weight;
    }
-   const auto *x_pp1 = glx_pp1.Read();
-   const auto *w_1d = glw_pp1.Read();
+   const auto *x_pp1 = glx_pp1.Read(rxla_lor_dev);
+   const auto *w_1d = glw_pp1.Read(rxla_lor_dev);
 
    // Get coefficients for mass and diffusion
    const bool const_mq = c1.Size() == 1;
    const auto MQ = const_mq
-                   ? Reshape(c1.Vector::Read(), 1, 1, 1)
-                   : Reshape(c1.Vector::Read(), pp1, pp1, nel_ho);
+                   ? Reshape(c1.Vector::Read(rxla_lor_dev), 1, 1, 1)
+                   : Reshape(c1.Vector::Read(rxla_lor_dev), pp1, pp1, nel_ho);
    const bool const_dq = c2.Size() == 1;
    const auto DQ = const_dq
-                   ? Reshape(c2.Vector::Read(), 1, 1, 1)
-                   : Reshape(c2.Vector::Read(), pp1, pp1, nel_ho);
+                   ? Reshape(c2.Vector::Read(rxla_lor_dev), 1, 1, 1)
+                   : Reshape(c2.Vector::Read(rxla_lor_dev), pp1, pp1, nel_ho);
 
-   const auto detJ = Reshape(geom->detJ.Read(), pp1, pp1, nel_ho);
-   const auto J = Reshape(geom->J.Read(), pp1, pp1, 2, 2, nel_ho);
-   const auto W = Reshape(ir.GetWeights().Read(), pp1, pp1);
+   const auto detJ = Reshape(geom->detJ.Read(rxla_lor_dev), pp1, pp1, nel_ho);
+   const auto J = Reshape(geom->J.Read(rxla_lor_dev), pp1, pp1, 2, 2, nel_ho);
+   const auto W = Reshape(ir.GetWeights().Read(rxla_lor_dev), pp1, pp1);
 
-   mfem::forall(nel_ho, [=] MFEM_HOST_DEVICE (int iel_ho)
+   mfem::forall_switch(rxla_lor_dev, nel_ho, [=] MFEM_HOST_DEVICE (int iel_ho)
    {
       for (int iy = 0; iy < pp1; ++iy)
       {
@@ -294,7 +306,7 @@ void BatchedLOR_DG::Assemble3D()
    sparse_ij.SetSize(nnz_per_row*ndof_per_el*nel_ho);
    sparse_ij.UseDevice(true);
    sparse_ij = 0.0;
-   auto V = Reshape(sparse_ij.Vector::Write(), nnz_per_row, pp1, pp1, pp1, nel_ho);
+   auto V = Reshape(sparse_ij.Vector::Write(rxla_lor_dev), nnz_per_row, pp1, pp1, pp1, nel_ho);
 
    AssembleFaceTerms();
 
@@ -307,23 +319,23 @@ void BatchedLOR_DG::Assemble3D()
       glx_pp1[i] = ir_pp1[i].x;
       glw_pp1[i] = ir_pp1[i].weight;
    }
-   const auto *x_pp1 = glx_pp1.Read();
-   const auto *w_1d = glw_pp1.Read();
+   const auto *x_pp1 = glx_pp1.Read(rxla_lor_dev);
+   const auto *w_1d = glw_pp1.Read(rxla_lor_dev);
 
    const bool const_mq = c1.Size() == 1;
    const auto MQ = const_mq
-                   ? Reshape(c1.Vector::Read(), 1, 1, 1, 1)
-                   : Reshape(c1.Vector::Read(), pp1, pp1, pp1, nel_ho);
+                   ? Reshape(c1.Vector::Read(rxla_lor_dev), 1, 1, 1, 1)
+                   : Reshape(c1.Vector::Read(rxla_lor_dev), pp1, pp1, pp1, nel_ho);
    const bool const_dq = c2.Size() == 1;
    const auto DQ = const_dq
-                   ? Reshape(c2.Vector::Read(), 1, 1, 1, 1)
-                   : Reshape(c2.Vector::Read(), pp1, pp1, pp1, nel_ho);
-   const auto W = Reshape(ir.GetWeights().Read(), pp1, pp1, pp1);
+                   ? Reshape(c2.Vector::Read(rxla_lor_dev), 1, 1, 1, 1)
+                   : Reshape(c2.Vector::Read(rxla_lor_dev), pp1, pp1, pp1, nel_ho);
+   const auto W = Reshape(ir.GetWeights().Read(rxla_lor_dev), pp1, pp1, pp1);
 
-   const auto detJ = Reshape(geom->detJ.Read(), pp1, pp1, pp1, nel_ho);
-   const auto J = Reshape(geom->J.Read(), pp1, pp1, pp1, 3, 3, nel_ho);
+   const auto detJ = Reshape(geom->detJ.Read(rxla_lor_dev), pp1, pp1, pp1, nel_ho);
+   const auto J = Reshape(geom->J.Read(rxla_lor_dev), pp1, pp1, pp1, 3, 3, nel_ho);
 
-   mfem::forall(nel_ho, [=] MFEM_HOST_DEVICE (int iel_ho)
+   mfem::forall_switch(rxla_lor_dev, nel_ho, [=] MFEM_HOST_DEVICE (int iel_ho)
    {
       for (int iz = 0; iz < pp1; ++iz)
       {

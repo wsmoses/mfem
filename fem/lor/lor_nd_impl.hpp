@@ -13,6 +13,18 @@
 #include "../../linalg/dtensor.hpp"
 #include "../../general/forall.hpp"
 
+#ifndef MFEM_RXLA_LOR_DEV_DEFINED
+#define MFEM_RXLA_LOR_DEV_DEFINED
+#if defined(REACTANT_XLA_BACKEND)
+// LOR assembly scatters with atomicAdd into buffer-selected sparse data;
+// run it on the host with the rest of the sparse assembly.
+static constexpr bool rxla_lor_dev = false;
+#else
+static constexpr bool rxla_lor_dev = true;
+#endif
+#endif
+
+
 namespace mfem
 {
 
@@ -34,19 +46,19 @@ void BatchedLOR_ND::Assemble2D()
 
    const bool const_mq = c1.Size() == 1;
    const auto MQ = const_mq
-                   ? Reshape(c1.Vector::Read(), 1, 1, 1)
-                   : Reshape(c1.Vector::Read(), op1, op1, nel_ho);
+                   ? Reshape(c1.Vector::Read(rxla_lor_dev), 1, 1, 1)
+                   : Reshape(c1.Vector::Read(rxla_lor_dev), op1, op1, nel_ho);
    const bool const_dq = c2.Size() == 1;
    const auto DQ = const_dq
-                   ? Reshape(c2.Vector::Read(), 1, 1, 1)
-                   : Reshape(c2.Vector::Read(), op1, op1, nel_ho);
+                   ? Reshape(c2.Vector::Read(rxla_lor_dev), 1, 1, 1)
+                   : Reshape(c2.Vector::Read(rxla_lor_dev), op1, op1, nel_ho);
 
    sparse_ij.SetSize(nnz_per_row*ndof_per_el*nel_ho);
-   auto V = Reshape(sparse_ij.Vector::Write(), nnz_per_row, o*op1, dim, nel_ho);
+   auto V = Reshape(sparse_ij.Vector::Write(rxla_lor_dev), nnz_per_row, o*op1, dim, nel_ho);
 
-   auto X = X_vert.Vector::Read();
+   auto X = X_vert.Vector::Read(rxla_lor_dev);
 
-   mfem::forall_2D(nel_ho, ORDER, ORDER, [=] MFEM_HOST_DEVICE (int iel_ho)
+   ForallWrap<2>(rxla_lor_dev, nel_ho, [=] MFEM_HOST_DEVICE (int iel_ho)
    {
       // Assemble a sparse matrix over the macro-element by looping over each
       // subelement.
@@ -159,7 +171,7 @@ void BatchedLOR_ND::Assemble2D()
             }
          }
       }
-   });
+   }, ORDER, ORDER, 1);
 
    sparse_mapping.SetSize(nnz_per_row*ndof_per_el);
    sparse_mapping = -1;
@@ -211,20 +223,20 @@ void BatchedLOR_ND::Assemble3D()
 
    const bool const_mq = c1.Size() == 1;
    const auto MQ = const_mq
-                   ? Reshape(c1.Vector::Read(), 1, 1, 1, 1)
-                   : Reshape(c1.Vector::Read(), op1, op1, op1, nel_ho);
+                   ? Reshape(c1.Vector::Read(rxla_lor_dev), 1, 1, 1, 1)
+                   : Reshape(c1.Vector::Read(rxla_lor_dev), op1, op1, op1, nel_ho);
    const bool const_dq = c2.Size() == 1;
    const auto DQ = const_dq
-                   ? Reshape(c2.Vector::Read(), 1, 1, 1, 1)
-                   : Reshape(c2.Vector::Read(), op1, op1, op1, nel_ho);
+                   ? Reshape(c2.Vector::Read(rxla_lor_dev), 1, 1, 1, 1)
+                   : Reshape(c2.Vector::Read(rxla_lor_dev), op1, op1, op1, nel_ho);
 
    sparse_ij.SetSize(nnz_per_row*ndof_per_el*nel_ho);
-   auto V = Reshape(sparse_ij.Vector::Write(), nnz_per_row, o*op1*op1, dim, nel_ho);
+   auto V = Reshape(sparse_ij.Vector::Write(rxla_lor_dev), nnz_per_row, o*op1*op1, dim, nel_ho);
 
-   auto X = X_vert.Vector::Read();
+   auto X = X_vert.Vector::Read(rxla_lor_dev);
 
    // Last thread dimension is lowered to avoid "too many resources" error
-   mfem::forall_3D(nel_ho, ORDER, ORDER, (ORDER>6)?4:ORDER,
+   ForallWrap<3>(rxla_lor_dev, nel_ho,
                    [=] MFEM_HOST_DEVICE (int iel_ho)
    {
       MFEM_FOREACH_THREAD(iz,z,o)
@@ -465,7 +477,7 @@ void BatchedLOR_ND::Assemble3D()
             }
          }
       }
-   });
+   }, ORDER, ORDER, (ORDER>6)?4:ORDER);
 
    sparse_mapping.SetSize(nnz_per_row*ndof_per_el);
    sparse_mapping = -1;
