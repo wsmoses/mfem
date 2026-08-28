@@ -72,24 +72,6 @@ void DiffusionIntegrator::AddMultPA(const Vector &x, Vector &y) const
       if (fespace->UsesRaggedTensorBasis())
       {
          const auto *rmaps = static_cast<const RaggedDofToQuad*>(maps);
-#if defined(REACTANT_XLA_BACKEND)
-         // The shared-memory simplex apply unions its scratch under several
-         // shapes and raises incorrectly; use the per-element fallback.
-         return ApplySimplexPAKernels::Fallback(dim, 0, 0)(
-                   ne, symmetric,
-                   rmaps->lex_map,
-                   rmaps->forward_map2d_diff,
-                   rmaps->inverse_map2d_diff,
-                   rmaps->forward_map3d_diff,
-                   rmaps->inverse_map3d_diff,
-                   rmaps->Ga1,
-                   rmaps->Ga2,
-                   rmaps->Ga3,
-                   rmaps->Ga1t,
-                   rmaps->Ga2t,
-                   rmaps->Ga3t,
-                   Dv, x, y, dofs1D, quad1D);
-#endif
          return ApplySimplexPAKernels::Run(dim, dofs1D, quad1D, ne, symmetric,
                                            rmaps->lex_map,
                                            rmaps->forward_map2d_diff,
