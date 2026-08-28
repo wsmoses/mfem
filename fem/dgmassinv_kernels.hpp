@@ -17,6 +17,14 @@
 #include "integ/bilininteg_mass_kernels.hpp"
 #include "dgmassinv.hpp"
 
+#if defined(REACTANT_XLA_BACKEND)
+// The CG iteration is a full iterative solver inside one kernel (data
+// dependent trip counts, early exits, tree reductions); run it on the host.
+static constexpr bool rxla_dgmi_dev = false;
+#else
+static constexpr bool rxla_dgmi_dev = true;
+#endif
+
 namespace mfem
 {
 
@@ -345,14 +353,14 @@ void DGMassInverse::DGMassCGIteration(const Vector &b_, Vector &u_) const
 
    const int ND = static_cast<int>(pow(d1d, DIM));
 
-   const auto B = m->maps->B.Read();
-   const auto Bt = m->maps->Bt.Read();
-   const auto pa_data = m->pa_data.Read();
-   const auto dinv = diag_inv.Read();
-   auto r = r_.Write();
-   auto d = d_.Write();
-   auto z = z_.Write();
-   auto u = u_.ReadWrite();
+   const auto B = m->maps->B.Read(rxla_dgmi_dev);
+   const auto Bt = m->maps->Bt.Read(rxla_dgmi_dev);
+   const auto pa_data = m->pa_data.Read(rxla_dgmi_dev);
+   const auto dinv = diag_inv.Read(rxla_dgmi_dev);
+   auto r = r_.Write(rxla_dgmi_dev);
+   auto d = d_.Write(rxla_dgmi_dev);
+   auto z = z_.Write(rxla_dgmi_dev);
+   auto u = u_.ReadWrite(rxla_dgmi_dev);
 
    const real_t RELTOL = rel_tol;
    const real_t ABSTOL = abs_tol;
@@ -372,22 +380,22 @@ void DGMassInverse::DGMassCGIteration(const Vector &b_, Vector &u_) const
    const real_t *q2d_Bt = nullptr; // matrix to transform RHS
    if (CHANGE_BASIS)
    {
-      d2q_B = d2q->B.Read();
-      q2d_B = B_.Read();
-      q2d_Bt = Bt_.Read();
+      d2q_B = d2q->B.Read(rxla_dgmi_dev);
+      q2d_B = B_.Read(rxla_dgmi_dev);
+      q2d_Bt = Bt_.Read(rxla_dgmi_dev);
 
-      b2 = b2_.Write();
-      b_orig = b_.Read();
+      b2 = b2_.Write(rxla_dgmi_dev);
+      b_orig = b_.Read(rxla_dgmi_dev);
       b = b2;
    }
    else
    {
-      b = b_.Read();
+      b = b_.Read(rxla_dgmi_dev);
    }
 
    static constexpr int NB = Q1D ? Q1D : 1; // block size
 
-   mfem::forall_2D<NB*NB>(NE, NB, NB, [=] MFEM_HOST_DEVICE (int e)
+   ForallWrap<2, NB*NB>(rxla_dgmi_dev, NE, [=] MFEM_HOST_DEVICE (int e)
    {
       // Perform change of basis if needed
       if (CHANGE_BASIS)
@@ -476,7 +484,7 @@ void DGMassInverse::DGMassCGIteration(const Vector &b_, Vector &u_) const
       {
          DGMassBasis<DIM,D1D>(e, NE, q2d_B, u, u, d1d);
       }
-   });
+   }, NB, NB, 1);
 }
 
 /// @cond Suppress_Doxygen_warnings
