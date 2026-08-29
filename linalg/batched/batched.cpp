@@ -32,7 +32,11 @@ BatchedLinAlg::BatchedLinAlg()
       backends[MAGMA].reset(new MagmaBatchedLinAlg);
 #endif
 
-#if defined(MFEM_USE_MAGMA)
+#if defined(REACTANT_XLA_BACKEND)
+      // Vendor batched BLAS takes raw device pointer tables the XLA
+      // allocator cannot serve; the native kernels raise and run fine.
+      active_backend = NATIVE;
+#elif defined(MFEM_USE_MAGMA)
       active_backend = MAGMA;
 #elif defined(MFEM_USE_CUDA_OR_HIP)
       active_backend = GPU_BLAS;

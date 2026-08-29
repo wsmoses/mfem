@@ -81,6 +81,33 @@ void GPUBlas::DisableAtomics()
    MFEM_VERIFY(status == MFEM_BLAS_SUCCESS, "GPU BLAS error.");
 }
 
+#if defined(REACTANT_XLA_BACKEND)
+// Vendor batched BLAS is never dispatched under the XLA backend (batched.cpp
+// forces the native kernels): building its device pointer tables would put
+// raw device pointers into tensors no raise can represent, so the methods
+// abort instead of existing as unraisable kernels.
+void GPUBlasBatchedLinAlg::AddMult(const DenseTensor &, const Vector &,
+                                   Vector &, real_t, real_t, Op) const
+{
+   MFEM_ABORT("GPU BLAS is disabled under the XLA backend");
+}
+
+void GPUBlasBatchedLinAlg::LUFactor(DenseTensor &, Array<int> &) const
+{
+   MFEM_ABORT("GPU BLAS is disabled under the XLA backend");
+}
+
+void GPUBlasBatchedLinAlg::LUSolve(const DenseTensor &, const Array<int> &,
+                                   Vector &) const
+{
+   MFEM_ABORT("GPU BLAS is disabled under the XLA backend");
+}
+
+void GPUBlasBatchedLinAlg::Invert(DenseTensor &) const
+{
+   MFEM_ABORT("GPU BLAS is disabled under the XLA backend");
+}
+#else
 void GPUBlasBatchedLinAlg::AddMult(const DenseTensor &A, const Vector &x,
                                    Vector &y, real_t alpha, real_t beta,
                                    Op op) const
@@ -199,6 +226,7 @@ void GPUBlasBatchedLinAlg::Invert(DenseTensor &A) const
    MFEM_VERIFY(status == MFEM_BLAS_SUCCESS, "GPU BLAS error.");
    VerifyBatchedLUInfo(info_array, "Batch matrix inversion failed");
 }
+#endif // REACTANT_XLA_BACKEND
 
 #endif
 
