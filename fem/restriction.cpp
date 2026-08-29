@@ -827,7 +827,7 @@ void L2ElementRestriction::FillI(SparseMatrix &mat) const
 {
    const int elem_dofs = ndof;
    const int vd = vdim;
-   auto I = mat.WriteI();
+   auto I = mat.WriteI(rxla_assembly_dev);
    const int isize = mat.Height() + 1;
    const int interior_dofs = ne*elem_dofs*vd;
    mfem::forall_switch(rxla_assembly_dev, isize, [=] MFEM_HOST_DEVICE (int dof)

@@ -24,7 +24,10 @@ BatchedLinAlg::BatchedLinAlg()
 
    if (Device::Allows(mfem::Backend::CUDA_MASK | mfem::Backend::HIP_MASK))
    {
-#ifdef MFEM_USE_CUDA_OR_HIP
+#if defined(MFEM_USE_CUDA_OR_HIP) && !defined(REACTANT_XLA_BACKEND)
+      // Vendor batched BLAS takes raw device pointer tables the XLA
+      // allocator cannot serve; leave the backend unregistered so
+      // IsAvailable steers callers (and the unit test) to NATIVE.
       backends[GPU_BLAS].reset(new GPUBlasBatchedLinAlg);
 #endif
 
