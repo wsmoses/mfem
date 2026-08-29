@@ -157,6 +157,18 @@ void CurlCurlIntegrator::AssemblePA(const FiniteElementSpace &fes)
 
 void CurlCurlIntegrator::AssembleDiagonalPA(Vector& diag)
 {
+#if defined(REACTANT_XLA_BACKEND)
+   // The shared-memory diagonal kernel mis-raises its asymmetric slice
+   // combination; the sequential kernel raises exactly but carries much
+   // larger per-lane scratch, so only asymmetric coefficients take it.
+   if (dim == 3 && !symmetric)
+   {
+      internal::PACurlCurlAssembleDiagonal3D(dofs1D, quad1D, symmetric, ne,
+                                             mapsO->B, mapsC->B, mapsO->G,
+                                             mapsC->G, pa_data, diag);
+      return;
+   }
+#endif
    DiagonalPAKernels::Run(dim, dofs1D, quad1D, dofs1D, quad1D, symmetric, ne,
                           mapsO->B, mapsC->B, mapsO->G, mapsC->G, pa_data,
                           diag);
