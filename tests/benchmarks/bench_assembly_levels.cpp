@@ -124,6 +124,7 @@ struct Problem: public BakeOff
    {
       if (is_runnable())
       {
+         x.Randomize(1); // FormLinearSystem takes the Dirichlet values from x
          ess_bdr = 1;
          fes.GetEssentialTrueDofs(ess_bdr,ess_tdof_list);
          b.AddDomainIntegrator(new DomainLFIntegrator(one));

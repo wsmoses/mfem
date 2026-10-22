@@ -63,6 +63,29 @@ struct TMOP
       nlfi.AssemblePA(fes);
       nlfi.AssembleGradPA(xe,fes);
 
+      // MFEM_BENCH_CHECK: one call of each kernel, norms of what it computes.
+      if (getenv("MFEM_BENCH_CHECK"))
+      {
+         // A perturbed state, so the gradient is not that of the ideal mesh.
+         Vector xp(xe.Size(), Device::GetMemoryType());
+         xp = xe;
+         {
+            double *h = xp.HostReadWrite();
+            for (int i = 0; i < xp.Size(); i++) { h[i] += 1e-4 * std::sin(1.0 + i); }
+         }
+         nlfi.AssembleGradPA(xp, fes);
+         Vector y1(xe.Size(), Device::GetMemoryType()); y1 = 0.0;
+         nlfi.AddMultPA(xp, y1);
+         Vector y2(xe.Size(), Device::GetMemoryType()); y2 = 0.0;
+         nlfi.AddMultGradPA(xp, y2);
+         Vector d(R->Height(), Device::GetMemoryType()); d = 0.0;
+         nlfi.AssembleGradDiagonalPA(d);
+         const double e = nlfi.GetLocalStateEnergyPA(xp);
+         printf("CHECK p=%d q=%d addmult=%.15e grad=%.15e diag=%.15e energy=%.15e\n",
+                p, q, y1.Norml2(), y2.Norml2(), d.Norml2(), e);
+         nlfi.AssembleGradPA(xe, fes);
+      }
+
       tic_toc.Clear();
    }
 
