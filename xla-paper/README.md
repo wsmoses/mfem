@@ -119,6 +119,26 @@ elasticity 1.74, nlvc 1.13, tmop 0.86, vector 0.98, virtuals 1.06. Per case with
 all three repetitions: `results/paper20.json`; the method and the notes:
 `results/meta_paper20.json`.
 
+### 5a. Dot formation (the TPU-oriented form) on this GPU
+
+The table runs with the runtime's dot formation off (`REACTANT_EXEC_DOT_FORMATION=0`:
+contractions stay `reduce(multiply)` and XLA-GPU fuses them). With it on, every
+sum-factorization stage is a `dot_general`, which is the form a TPU wants; XLA-GPU
+runs each of these small f64 dots as its own kernel (nothing fuses across a dot), and
+with its Triton GEMM off (it miscompiles BP6) they are 2–9x slower here. Measured
+2026-10-21 23:00–00:10 on the same binaries and runtime, three repetitions, with and
+without the runtime's barrier round (`REACTANT_EXEC_NOBARRIER=1`); XLA-GPU dots-on over
+the table's dots-off numbers, geometric mean per suite (no barrier round):
+assembly_levels 2.82, ceed 4.73, dg_amr 5.88, elasticity 0.98 (no contractions),
+nlvc 2.30, tmop 2.35; 92 cases 2.72 (2.61 with the barrier round, which only matters
+without dots). Per case: `results/dots_on/{nobarrier,barrier}_vs_paper20.txt`
+(paper20 ms, dots-on ms, ratio) and the raw `results/dots_on/*.json`. nlvc and tmop
+ran next to a compiler build (load 60–90) and are coarser than the rest.
+
+    XLA_FLAGS=--xla_gpu_enable_triton_gemm=false REACTANT_EXEC_NOBARRIER=1 \
+      LD_LIBRARY_PATH=<work>/rt CUDA_VISIBLE_DEVICES=0 REACTANT_EXEC_UNROLL=8 \
+      build-xla/tests/benchmarks/bench_ceed --benchmark_context=device=cuda --benchmark_filter='^BP1/2/96$'
+
 ## 6. Checking results between the backends
 
     MFEM_BENCH_CHECK=1 build-xla/tests/benchmarks/bench_tmop --benchmark_context=device=cuda --benchmark_filter='^AddMultPA/0/2$' --benchmark_min_time=1x
