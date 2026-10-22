@@ -1,19 +1,19 @@
-; ModuleID = '/mnt3/wmoses/git/mfem/fem/tmop/pa.cpp'
-source_filename = "/mnt3/wmoses/git/mfem/fem/tmop/pa.cpp"
+; ModuleID = '/home/wmoses/git/mfem/fem/tmop/pa.cpp'
+source_filename = "/home/wmoses/git/mfem/fem/tmop/pa.cpp"
 target datalayout = "e-p6:32:32-i64:64-i128:128-i256:256-v16:16-v32:32-n16:32:64"
 target triple = "nvptx64-nvidia-cuda"
 
-!llvm.module.flags = !{!0, !1, !2}
-!llvm.ident = !{!3, !4}
-!llvm.errno.tbaa = !{!5}
+!llvm.module.flags = !{!7, !8, !9}
+!llvm.ident = !{!10, !1}
+!llvm.errno.tbaa = !{!15}
 
-!0 = !{i32 2, !"SDK Version", [2 x i32] [i32 12, i32 9]}
-!1 = !{i32 4, !"nvvm-reflect-ftz", i32 0}
-!2 = !{i32 7, !"frame-pointer", i32 2}
-!3 = !{!"clang version 24.0.0git (git@github.com:llvm/llvm-project 0220c07a94012b9dce9250addac6a8ee1f674b21)"}
-!4 = !{!"clang version 3.8.0 (tags/RELEASE_380/final)"}
-!5 = !{!6, !7, i64 0}
-!6 = !{!"__libc_errno", !7, i64 0}
-!7 = !{!"int", !8, i64 0}
-!8 = !{!"omnipotent char", !9, i64 0}
-!9 = !{!"Simple C++ TBAA"}
+!1 = !{!"clang version 3.8.0 (tags/RELEASE_380/final)"}
+!7 = !{i32 2, !"SDK Version", [2 x i32] [i32 12, i32 9]}
+!8 = !{i32 4, !"nvvm-reflect-ftz", i32 0}
+!9 = !{i32 7, !"frame-pointer", i32 2}
+!10 = !{!"clang version 24.0.0git (git@github.com:llvm/llvm-project b08e005995ed29a2f89aa9a3f599a9d45db65523)"}
+!11 = !{!"Simple C++ TBAA"}
+!12 = !{!"omnipotent char", !11, i64 0}
+!13 = !{!"int", !12, i64 0}
+!14 = !{!"__libc_errno", !13, i64 0}
+!15 = !{!14, !13, i64 0}

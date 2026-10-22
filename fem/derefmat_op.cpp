@@ -157,7 +157,7 @@ DerefineMatrixOp::DerefineMatrixOp(FiniteElementSpace &fespace_, int old_ndofs,
       int ridx = 0;
       int cidx = 0;
       int num_marked = 0;
-      for (int k = 0; k < dtrans.embeddings.Size(); k++)
+      for (int k = 0, nemb = dtrans.embeddings.Size(); k < nemb; k++)
       {
          const Embedding &emb = dtrans.embeddings[k];
          Geometry::Type geom =

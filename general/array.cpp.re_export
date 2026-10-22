@@ -1,5 +1,5 @@
-; ModuleID = '/mnt3/wmoses/git/mfem/general/array.cpp'
-source_filename = "/mnt3/wmoses/git/mfem/general/array.cpp"
+; ModuleID = '/home/wmoses/git/mfem/general/array.cpp'
+source_filename = "/home/wmoses/git/mfem/general/array.cpp"
 target datalayout = "e-p6:32:32-i64:64-i128:128-i256:256-v16:16-v32:32-n16:32:64"
 target triple = "nvptx64-nvidia-cuda"
 
@@ -27,12 +27,12 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNS_7AbsImplIcEEvSt17int
   br i1 %8, label %9, label %15
 
 9:                                                ; preds = %2
-  %10 = load ptr, ptr %1, align 8, !tbaa !10
+  %10 = load ptr, ptr %1, align 8, !tbaa !19
   %11 = sext i32 %7 to i64
   %12 = getelementptr inbounds i8, ptr %10, i64 %11
-  %13 = load i8, ptr %12, align 1, !tbaa !14
+  %13 = load i8, ptr %12, align 1, !tbaa !20
   %14 = tail call noundef i8 @llvm.abs.i8(i8 %13, i1 false)
-  store i8 %14, ptr %12, align 1, !tbaa !14
+  store i8 %14, ptr %12, align 1, !tbaa !20
   br label %15
 
 15:                                               ; preds = %2, %9
@@ -59,12 +59,12 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNS_7AbsImplIiEEvSt17int
   br i1 %8, label %9, label %15
 
 9:                                                ; preds = %2
-  %10 = load ptr, ptr %1, align 8, !tbaa !15
+  %10 = load ptr, ptr %1, align 8, !tbaa !23
   %11 = sext i32 %7 to i64
   %12 = getelementptr inbounds [4 x i8], ptr %10, i64 %11
-  %13 = load i32, ptr %12, align 4, !tbaa !18
+  %13 = load i32, ptr %12, align 4, !tbaa !11
   %14 = tail call noundef i32 @llvm.abs.i32(i32 %13, i1 true)
-  store i32 %14, ptr %12, align 4, !tbaa !18
+  store i32 %14, ptr %12, align 4, !tbaa !11
   br label %15
 
 15:                                               ; preds = %2, %9
@@ -82,12 +82,12 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNS_7AbsImplIxEEvSt17int
   br i1 %8, label %9, label %15
 
 9:                                                ; preds = %2
-  %10 = load ptr, ptr %1, align 8, !tbaa !19
+  %10 = load ptr, ptr %1, align 8, !tbaa !27
   %11 = sext i32 %7 to i64
   %12 = getelementptr inbounds [8 x i8], ptr %10, i64 %11
-  %13 = load i64, ptr %12, align 8, !tbaa !22
+  %13 = load i64, ptr %12, align 8, !tbaa !28
   %14 = tail call noundef i64 @llvm.abs.i64(i64 %13, i1 true)
-  store i64 %14, ptr %12, align 8, !tbaa !22
+  store i64 %14, ptr %12, align 8, !tbaa !28
   br label %15
 
 15:                                               ; preds = %2, %9
@@ -105,14 +105,14 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNS_7AbsImplIdEEvSt17int
   br i1 %8, label %9, label %17
 
 9:                                                ; preds = %2
-  %10 = load ptr, ptr %1, align 8, !tbaa !24
+  %10 = load ptr, ptr %1, align 8, !tbaa !32
   %11 = sext i32 %7 to i64
   %12 = getelementptr inbounds [8 x i8], ptr %10, i64 %11
-  %13 = load double, ptr %12, align 8, !tbaa !27
+  %13 = load double, ptr %12, align 8, !tbaa !33
   %14 = fcmp contract olt double %13, 0.000000e+00
   %15 = fneg contract double %13
   %16 = select contract i1 %14, double %15, double %13
-  store double %16, ptr %12, align 8, !tbaa !27
+  store double %16, ptr %12, align 8, !tbaa !33
   br label %17
 
 17:                                               ; preds = %2, %9
@@ -128,40 +128,40 @@ declare i8 @llvm.abs.i8(i8, i1 immarg) #2
 ; Function Attrs: nocallback nofree nosync nounwind speculatable willreturn memory(none)
 declare i64 @llvm.abs.i64(i64, i1 immarg) #2
 
-attributes #0 = { mustprogress nofree noinline norecurse nosync nounwind willreturn memory(readwrite, inaccessiblemem: none, target_mem: none) "frame-pointer"="all" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="sm_120" "target-features"="+ptx88,+sm_120" "uniform-work-group-size" }
+attributes #0 = { mustprogress nofree noinline norecurse nosync nounwind willreturn memory(readwrite, inaccessiblemem: none, target_mem: none) "frame-pointer"="all" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="sm_120" "target-features"="+ptx88" "uniform-work-group-size" }
 attributes #1 = { mustprogress nocallback nofree nosync nounwind speculatable willreturn memory(none) }
 attributes #2 = { nocallback nofree nosync nounwind speculatable willreturn memory(none) }
 
-!llvm.module.flags = !{!0, !1, !2}
-!llvm.ident = !{!3, !4}
-!llvm.errno.tbaa = !{!5}
+!llvm.module.flags = !{!7, !34, !35}
+!llvm.ident = !{!36, !1}
+!llvm.errno.tbaa = !{!38}
 
-!0 = !{i32 2, !"SDK Version", [2 x i32] [i32 12, i32 9]}
-!1 = !{i32 4, !"nvvm-reflect-ftz", i32 0}
-!2 = !{i32 7, !"frame-pointer", i32 2}
-!3 = !{!"clang version 24.0.0git (git@github.com:llvm/llvm-project 0220c07a94012b9dce9250addac6a8ee1f674b21)"}
-!4 = !{!"clang version 3.8.0 (tags/RELEASE_380/final)"}
-!5 = !{!6, !7, i64 0}
-!6 = !{!"__libc_errno", !7, i64 0}
-!7 = !{!"int", !8, i64 0}
-!8 = !{!"omnipotent char", !9, i64 0}
-!9 = !{!"Simple C++ TBAA"}
-!10 = !{!11, !12, i64 0}
-!11 = !{!"_ZTSZN4mfem7AbsImplIcEEvSt17integral_constantIbLb1EEPT_ibEUliE_", !12, i64 0}
-!12 = !{!"p1 omnipotent char", !13, i64 0}
-!13 = !{!"any pointer", !8, i64 0}
-!14 = !{!8, !8, i64 0}
-!15 = !{!16, !17, i64 0}
-!16 = !{!"_ZTSZN4mfem7AbsImplIiEEvSt17integral_constantIbLb1EEPT_ibEUliE_", !17, i64 0}
-!17 = !{!"p1 int", !13, i64 0}
-!18 = !{!7, !7, i64 0}
-!19 = !{!20, !21, i64 0}
-!20 = !{!"_ZTSZN4mfem7AbsImplIxEEvSt17integral_constantIbLb1EEPT_ibEUliE_", !21, i64 0}
-!21 = !{!"p1 long long", !13, i64 0}
-!22 = !{!23, !23, i64 0}
-!23 = !{!"long long", !8, i64 0}
-!24 = !{!25, !26, i64 0}
-!25 = !{!"_ZTSZN4mfem7AbsImplIdEEvSt17integral_constantIbLb1EEPT_ibEUliE_", !26, i64 0}
-!26 = !{!"p1 double", !13, i64 0}
-!27 = !{!28, !28, i64 0}
-!28 = !{!"double", !8, i64 0}
+!1 = !{!"clang version 3.8.0 (tags/RELEASE_380/final)"}
+!7 = !{i32 2, !"SDK Version", [2 x i32] [i32 12, i32 9]}
+!8 = !{!"Simple C++ TBAA"}
+!9 = !{!"omnipotent char", !8, i64 0}
+!10 = !{!"int", !9, i64 0}
+!11 = !{!10, !10, i64 0}
+!12 = !{!"any pointer", !9, i64 0}
+!13 = !{!"p1 omnipotent char", !12, i64 0}
+!14 = !{!"_ZTSZN4mfem7AbsImplIcEEvSt17integral_constantIbLb1EEPT_ibEUliE_", !13, i64 0}
+!19 = !{!14, !13, i64 0}
+!20 = !{!9, !9, i64 0}
+!21 = !{!"p1 int", !12, i64 0}
+!22 = !{!"_ZTSZN4mfem7AbsImplIiEEvSt17integral_constantIbLb1EEPT_ibEUliE_", !21, i64 0}
+!23 = !{!22, !21, i64 0}
+!24 = !{!"long long", !9, i64 0}
+!25 = !{!"p1 long long", !12, i64 0}
+!26 = !{!"_ZTSZN4mfem7AbsImplIxEEvSt17integral_constantIbLb1EEPT_ibEUliE_", !25, i64 0}
+!27 = !{!26, !25, i64 0}
+!28 = !{!24, !24, i64 0}
+!29 = !{!"double", !9, i64 0}
+!30 = !{!"p1 double", !12, i64 0}
+!31 = !{!"_ZTSZN4mfem7AbsImplIdEEvSt17integral_constantIbLb1EEPT_ibEUliE_", !30, i64 0}
+!32 = !{!31, !30, i64 0}
+!33 = !{!29, !29, i64 0}
+!34 = !{i32 4, !"nvvm-reflect-ftz", i32 0}
+!35 = !{i32 7, !"frame-pointer", i32 2}
+!36 = !{!"clang version 24.0.0git (git@github.com:llvm/llvm-project b08e005995ed29a2f89aa9a3f599a9d45db65523)"}
+!37 = !{!"__libc_errno", !10, i64 0}
+!38 = !{!37, !10, i64 0}

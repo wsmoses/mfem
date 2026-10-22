@@ -1,5 +1,5 @@
-; ModuleID = '/mnt3/wmoses/git/mfem/fem/lor/lor_ams.cpp'
-source_filename = "/mnt3/wmoses/git/mfem/fem/lor/lor_ams.cpp"
+; ModuleID = '/home/wmoses/git/mfem/fem/lor/lor_ams.cpp'
+source_filename = "/home/wmoses/git/mfem/fem/lor/lor_ams.cpp"
 target datalayout = "e-p6:32:32-i64:64-i128:128-i256:256-v16:16-v32:32-n16:32:64"
 target triple = "nvptx64-nvidia-cuda"
 
@@ -24,9 +24,9 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNS_14BatchedLOR_AMS18Fo
 9:                                                ; preds = %2
   %10 = sext i32 %7 to i64
   %11 = shl nsw i32 %7, 1
-  %12 = load ptr, ptr %1, align 8, !tbaa !10
+  %12 = load ptr, ptr %1, align 8, !tbaa !19
   %13 = getelementptr inbounds [4 x i8], ptr %12, i64 %10
-  store i32 %11, ptr %13, align 4, !tbaa !14
+  store i32 %11, ptr %13, align 4, !tbaa !11
   br label %14
 
 14:                                               ; preds = %2, %9
@@ -53,102 +53,102 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNS_14BatchedLOR_AMS18Fo
   br i1 %8, label %9, label %65
 
 9:                                                ; preds = %2
-  %10 = load ptr, ptr %1, align 8, !tbaa !15
+  %10 = load ptr, ptr %1, align 8, !tbaa !24
   %11 = getelementptr inbounds nuw i8, ptr %1, i64 8
-  %12 = load ptr, ptr %11, align 8, !tbaa !19
+  %12 = load ptr, ptr %11, align 8, !tbaa !25
   %13 = sext i32 %7 to i64
   %14 = getelementptr inbounds [4 x i8], ptr %12, i64 %13
-  %15 = load i32, ptr %14, align 4, !tbaa !14
+  %15 = load i32, ptr %14, align 4, !tbaa !11
   %16 = sext i32 %15 to i64
   %17 = getelementptr inbounds [4 x i8], ptr %10, i64 %16
-  %18 = load i32, ptr %17, align 4, !tbaa !14
+  %18 = load i32, ptr %17, align 4, !tbaa !11
   %19 = ashr i32 %18, 31
   %20 = xor i32 %19, %18
   %21 = icmp sgt i32 %18, -1
   %22 = select i1 %21, i32 -1, i32 1
   %23 = select i1 %21, i32 1, i32 -1
   %24 = getelementptr inbounds nuw i8, ptr %1, i64 16
-  %25 = load i32, ptr %24, align 8, !tbaa !20
+  %25 = load i32, ptr %24, align 8, !tbaa !26
   %26 = srem i32 %20, %25
   %27 = sdiv i32 %20, %25
   %28 = getelementptr inbounds nuw i8, ptr %1, i64 32
-  %29 = load ptr, ptr %28, align 8, !tbaa !21
+  %29 = load ptr, ptr %28, align 8, !tbaa !32
   %30 = getelementptr inbounds nuw i8, ptr %1, i64 40
-  %31 = load i32, ptr %30, align 4, !tbaa !14
+  %31 = load i32, ptr %30, align 4, !tbaa !11
   %32 = mul nsw i32 %31, %26
   %33 = sext i32 %32 to i64
   %34 = getelementptr [4 x i8], ptr %29, i64 %33
-  %35 = load i32, ptr %34, align 4, !tbaa !14
+  %35 = load i32, ptr %34, align 4, !tbaa !11
   %36 = getelementptr i8, ptr %34, i64 4
-  %37 = load i32, ptr %36, align 4, !tbaa !14
+  %37 = load i32, ptr %36, align 4, !tbaa !11
   %38 = getelementptr inbounds nuw i8, ptr %1, i64 64
-  %39 = load ptr, ptr %38, align 8, !tbaa !21
+  %39 = load ptr, ptr %38, align 8, !tbaa !32
   %40 = getelementptr inbounds nuw i8, ptr %1, i64 72
-  %41 = load i32, ptr %40, align 4, !tbaa !14
+  %41 = load i32, ptr %40, align 4, !tbaa !11
   %42 = mul nsw i32 %41, %27
   %43 = add nsw i32 %42, %35
   %44 = sext i32 %43 to i64
   %45 = getelementptr inbounds [4 x i8], ptr %39, i64 %44
-  %46 = load i32, ptr %45, align 4, !tbaa !14
+  %46 = load i32, ptr %45, align 4, !tbaa !11
   %47 = getelementptr inbounds nuw i8, ptr %1, i64 48
-  %48 = load ptr, ptr %47, align 8, !tbaa !22
+  %48 = load ptr, ptr %47, align 8, !tbaa !27
   %49 = shl nsw i32 %7, 1
   %50 = sext i32 %49 to i64
   %51 = getelementptr inbounds [4 x i8], ptr %48, i64 %50
-  store i32 %46, ptr %51, align 4, !tbaa !14
+  store i32 %46, ptr %51, align 4, !tbaa !11
   %52 = add nsw i32 %42, %37
   %53 = sext i32 %52 to i64
   %54 = getelementptr inbounds [4 x i8], ptr %39, i64 %53
-  %55 = load i32, ptr %54, align 4, !tbaa !14
+  %55 = load i32, ptr %54, align 4, !tbaa !11
   %56 = or disjoint i32 %49, 1
   %57 = sext i32 %56 to i64
   %58 = getelementptr inbounds [4 x i8], ptr %48, i64 %57
-  store i32 %55, ptr %58, align 4, !tbaa !14
+  store i32 %55, ptr %58, align 4, !tbaa !11
   %59 = sitofp contract i32 %22 to double
   %60 = getelementptr inbounds nuw i8, ptr %1, i64 80
-  %61 = load ptr, ptr %60, align 8, !tbaa !23
+  %61 = load ptr, ptr %60, align 8, !tbaa !28
   %62 = getelementptr inbounds [8 x i8], ptr %61, i64 %50
-  store double %59, ptr %62, align 8, !tbaa !24
+  store double %59, ptr %62, align 8, !tbaa !29
   %63 = sitofp contract i32 %23 to double
   %64 = getelementptr inbounds [8 x i8], ptr %61, i64 %57
-  store double %63, ptr %64, align 8, !tbaa !24
+  store double %63, ptr %64, align 8, !tbaa !29
   br label %65
 
 65:                                               ; preds = %2, %9
   ret void
 }
 
-attributes #0 = { mustprogress nofree noinline norecurse nosync nounwind willreturn memory(write, argmem: readwrite, inaccessiblemem: none, target_mem: none) "frame-pointer"="all" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="sm_120" "target-features"="+ptx88,+sm_120" "uniform-work-group-size" }
+attributes #0 = { mustprogress nofree noinline norecurse nosync nounwind willreturn memory(write, argmem: readwrite, inaccessiblemem: none, target_mem: none) "frame-pointer"="all" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="sm_120" "target-features"="+ptx88" "uniform-work-group-size" }
 attributes #1 = { mustprogress nocallback nofree nosync nounwind speculatable willreturn memory(none) }
-attributes #2 = { mustprogress nofree noinline norecurse nosync nounwind willreturn memory(readwrite, inaccessiblemem: none, target_mem: none) "frame-pointer"="all" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="sm_120" "target-features"="+ptx88,+sm_120" "uniform-work-group-size" }
+attributes #2 = { mustprogress nofree noinline norecurse nosync nounwind willreturn memory(readwrite, inaccessiblemem: none, target_mem: none) "frame-pointer"="all" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="sm_120" "target-features"="+ptx88" "uniform-work-group-size" }
 
-!llvm.module.flags = !{!0, !1, !2}
-!llvm.ident = !{!3, !4}
-!llvm.errno.tbaa = !{!5}
+!llvm.module.flags = !{!7, !34, !35}
+!llvm.ident = !{!36, !1}
+!llvm.errno.tbaa = !{!38}
 
-!0 = !{i32 2, !"SDK Version", [2 x i32] [i32 12, i32 9]}
-!1 = !{i32 4, !"nvvm-reflect-ftz", i32 0}
-!2 = !{i32 7, !"frame-pointer", i32 2}
-!3 = !{!"clang version 24.0.0git (git@github.com:llvm/llvm-project 0220c07a94012b9dce9250addac6a8ee1f674b21)"}
-!4 = !{!"clang version 3.8.0 (tags/RELEASE_380/final)"}
-!5 = !{!6, !7, i64 0}
-!6 = !{!"__libc_errno", !7, i64 0}
-!7 = !{!"int", !8, i64 0}
-!8 = !{!"omnipotent char", !9, i64 0}
-!9 = !{!"Simple C++ TBAA"}
-!10 = !{!11, !12, i64 0}
-!11 = !{!"_ZTSZN4mfem14BatchedLOR_AMS18FormGradientMatrixEvEUliE_", !12, i64 0}
-!12 = !{!"p1 int", !13, i64 0}
-!13 = !{!"any pointer", !8, i64 0}
-!14 = !{!7, !7, i64 0}
-!15 = !{!16, !12, i64 0}
-!16 = !{!"_ZTSZN4mfem14BatchedLOR_AMS18FormGradientMatrixEvEUliE0_", !12, i64 0, !12, i64 8, !7, i64 16, !17, i64 24, !12, i64 48, !17, i64 56, !18, i64 80}
-!17 = !{!"_ZTSN4mfem12DeviceTensorILi2EKiEE", !7, i64 0, !12, i64 8, !8, i64 16}
-!18 = !{!"p1 double", !13, i64 0}
-!19 = !{!16, !12, i64 8}
-!20 = !{!16, !7, i64 16}
-!21 = !{!17, !12, i64 8}
-!22 = !{!16, !12, i64 48}
-!23 = !{!16, !18, i64 80}
-!24 = !{!25, !25, i64 0}
-!25 = !{!"double", !8, i64 0}
+!1 = !{!"clang version 3.8.0 (tags/RELEASE_380/final)"}
+!7 = !{i32 2, !"SDK Version", [2 x i32] [i32 12, i32 9]}
+!8 = !{!"Simple C++ TBAA"}
+!9 = !{!"omnipotent char", !8, i64 0}
+!10 = !{!"int", !9, i64 0}
+!11 = !{!10, !10, i64 0}
+!12 = !{!"any pointer", !9, i64 0}
+!13 = !{!"p1 int", !12, i64 0}
+!14 = !{!"_ZTSZN4mfem14BatchedLOR_AMS18FormGradientMatrixEvEUliE_", !13, i64 0}
+!19 = !{!14, !13, i64 0}
+!20 = !{!"_ZTSN4mfem12DeviceTensorILi2EKiEE", !10, i64 0, !13, i64 8, !9, i64 16}
+!21 = !{!"double", !9, i64 0}
+!22 = !{!"p1 double", !12, i64 0}
+!23 = !{!"_ZTSZN4mfem14BatchedLOR_AMS18FormGradientMatrixEvEUliE0_", !13, i64 0, !13, i64 8, !10, i64 16, !20, i64 24, !13, i64 48, !20, i64 56, !22, i64 80}
+!24 = !{!23, !13, i64 0}
+!25 = !{!23, !13, i64 8}
+!26 = !{!23, !10, i64 16}
+!27 = !{!23, !13, i64 48}
+!28 = !{!23, !22, i64 80}
+!29 = !{!21, !21, i64 0}
+!32 = !{!20, !13, i64 8}
+!34 = !{i32 4, !"nvvm-reflect-ftz", i32 0}
+!35 = !{i32 7, !"frame-pointer", i32 2}
+!36 = !{!"clang version 24.0.0git (git@github.com:llvm/llvm-project b08e005995ed29a2f89aa9a3f599a9d45db65523)"}
+!37 = !{!"__libc_errno", !10, i64 0}
+!38 = !{!37, !10, i64 0}

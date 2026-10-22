@@ -1,5 +1,5 @@
-; ModuleID = '/mnt3/wmoses/git/mfem/linalg/batched/native.cpp'
-source_filename = "/mnt3/wmoses/git/mfem/linalg/batched/native.cpp"
+; ModuleID = '/home/wmoses/git/mfem/linalg/batched/native.cpp'
+source_filename = "/home/wmoses/git/mfem/linalg/batched/native.cpp"
 target datalayout = "e-p6:32:32-i64:64-i128:128-i256:256-v16:16-v32:32-n16:32:64"
 target triple = "nvptx64-nvidia-cuda"
 
@@ -34,45 +34,45 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_19NativeBatchedLinA
   br i1 %8, label %9, label %111
 
 9:                                                ; preds = %2
-  %10 = load i32, ptr %1, align 8, !tbaa !10
+  %10 = load i32, ptr %1, align 8, !tbaa !22
   %11 = getelementptr inbounds nuw i8, ptr %1, i64 4
-  %12 = load i32, ptr %11, align 4, !tbaa !17
+  %12 = load i32, ptr %11, align 4, !tbaa !23
   %13 = getelementptr inbounds nuw i8, ptr %1, i64 8
-  %14 = load i32, ptr %13, align 8, !tbaa !18
+  %14 = load i32, ptr %13, align 8, !tbaa !24
   %15 = getelementptr inbounds nuw i8, ptr %1, i64 24
-  %16 = load ptr, ptr %15, align 8, !tbaa !19
+  %16 = load ptr, ptr %15, align 8, !tbaa !42
   %17 = getelementptr inbounds nuw i8, ptr %1, i64 32
-  %18 = load i32, ptr %17, align 4, !tbaa !20
+  %18 = load i32, ptr %17, align 4, !tbaa !11
   %19 = getelementptr inbounds nuw i8, ptr %1, i64 36
-  %20 = load i32, ptr %19, align 4, !tbaa !20
+  %20 = load i32, ptr %19, align 4, !tbaa !11
   %21 = mul i32 %18, %7
   %22 = mul i32 %21, %20
   %23 = sext i32 %22 to i64
   %24 = getelementptr inbounds [8 x i8], ptr %16, i64 %23
   %25 = getelementptr inbounds nuw i8, ptr %1, i64 56
-  %26 = load ptr, ptr %25, align 8, !tbaa !19
+  %26 = load ptr, ptr %25, align 8, !tbaa !42
   %27 = getelementptr inbounds nuw i8, ptr %1, i64 64
-  %28 = load i32, ptr %27, align 4, !tbaa !20
+  %28 = load i32, ptr %27, align 4, !tbaa !11
   %29 = getelementptr inbounds nuw i8, ptr %1, i64 68
-  %30 = load i32, ptr %29, align 4, !tbaa !20
+  %30 = load i32, ptr %29, align 4, !tbaa !11
   %31 = mul i32 %28, %7
   %32 = mul i32 %31, %30
   %33 = sext i32 %32 to i64
   %34 = getelementptr inbounds [8 x i8], ptr %26, i64 %33
   %35 = getelementptr inbounds nuw i8, ptr %1, i64 88
-  %36 = load ptr, ptr %35, align 8, !tbaa !21
+  %36 = load ptr, ptr %35, align 8, !tbaa !47
   %37 = getelementptr inbounds nuw i8, ptr %1, i64 96
-  %38 = load i32, ptr %37, align 4, !tbaa !20
+  %38 = load i32, ptr %37, align 4, !tbaa !11
   %39 = getelementptr inbounds nuw i8, ptr %1, i64 100
-  %40 = load i32, ptr %39, align 4, !tbaa !20
+  %40 = load i32, ptr %39, align 4, !tbaa !11
   %41 = mul i32 %38, %7
   %42 = mul i32 %41, %40
   %43 = sext i32 %42 to i64
   %44 = getelementptr inbounds [8 x i8], ptr %36, i64 %43
   %45 = getelementptr inbounds nuw i8, ptr %1, i64 112
-  %46 = load double, ptr %45, align 8, !tbaa !22
+  %46 = load double, ptr %45, align 8, !tbaa !25
   %47 = getelementptr inbounds nuw i8, ptr %1, i64 120
-  %48 = load double, ptr %47, align 8, !tbaa !23
+  %48 = load double, ptr %47, align 8, !tbaa !26
   %49 = mul i32 %14, %12
   %50 = fcmp contract oeq double %48, 0.000000e+00
   br i1 %50, label %51, label %59
@@ -85,10 +85,10 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_19NativeBatchedLinA
   %54 = phi i32 [ %57, %53 ], [ 0, %51 ]
   %55 = zext nneg i32 %54 to i64
   %56 = getelementptr inbounds nuw [8 x i8], ptr %44, i64 %55
-  store double 0.000000e+00, ptr %56, align 8, !tbaa !24
+  store double 0.000000e+00, ptr %56, align 8, !tbaa !28
   %57 = add nuw nsw i32 %54, 1
   %58 = icmp eq i32 %57, %49
-  br i1 %58, label %71, label %53, !llvm.loop !25
+  br i1 %58, label %71, label %53, !llvm.loop !31
 
 59:                                               ; preds = %9
   %60 = fcmp contract une double %48, 1.000000e+00
@@ -100,12 +100,12 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_19NativeBatchedLinA
   %64 = phi i32 [ %69, %63 ], [ 0, %59 ]
   %65 = zext nneg i32 %64 to i64
   %66 = getelementptr inbounds nuw [8 x i8], ptr %44, i64 %65
-  %67 = load double, ptr %66, align 8, !tbaa !24
+  %67 = load double, ptr %66, align 8, !tbaa !28
   %68 = fmul contract double %48, %67
-  store double %68, ptr %66, align 8, !tbaa !24
+  store double %68, ptr %66, align 8, !tbaa !28
   %69 = add nuw nsw i32 %64, 1
   %70 = icmp eq i32 %69, %49
-  br i1 %70, label %71, label %63, !llvm.loop !27
+  br i1 %70, label %71, label %63, !llvm.loop !33
 
 71:                                               ; preds = %63, %53, %59, %51
   %72 = icmp sgt i32 %14, 0
@@ -119,7 +119,7 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_19NativeBatchedLinA
 76:                                               ; preds = %73, %85
   %77 = phi i32 [ %86, %85 ], [ 0, %73 ]
   %78 = phi ptr [ %92, %85 ], [ %44, %73 ]
-  %79 = mul nsw i32 %77, %10
+  %79 = mul nuw nsw i32 %77, %10
   br label %80
 
 80:                                               ; preds = %88, %76
@@ -134,17 +134,17 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_19NativeBatchedLinA
 85:                                               ; preds = %88
   %86 = add nuw nsw i32 %77, 1
   %87 = icmp eq i32 %86, %14
-  br i1 %87, label %111, label %76, !llvm.loop !28
+  br i1 %87, label %111, label %76, !llvm.loop !39
 
 88:                                               ; preds = %95, %80
   %89 = phi double [ 0.000000e+00, %80 ], [ %108, %95 ]
-  %90 = load double, ptr %82, align 8, !tbaa !24
+  %90 = load double, ptr %82, align 8, !tbaa !28
   %91 = fadd contract double %89, %90
-  store double %91, ptr %82, align 8, !tbaa !24
+  store double %91, ptr %82, align 8, !tbaa !28
   %92 = getelementptr inbounds nuw i8, ptr %82, i64 8
   %93 = add nuw nsw i32 %81, 1
   %94 = icmp eq i32 %93, %12
-  br i1 %94, label %85, label %80, !llvm.loop !29
+  br i1 %94, label %85, label %80, !llvm.loop !38
 
 95:                                               ; preds = %95, %83
   %96 = phi i32 [ 0, %83 ], [ %109, %95 ]
@@ -152,17 +152,17 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_19NativeBatchedLinA
   %98 = add nuw nsw i32 %96, %84
   %99 = zext nneg i32 %98 to i64
   %100 = getelementptr inbounds nuw [8 x i8], ptr %24, i64 %99
-  %101 = load double, ptr %100, align 8, !tbaa !24
+  %101 = load double, ptr %100, align 8, !tbaa !28
   %102 = fmul contract double %46, %101
   %103 = add nuw nsw i32 %96, %79
   %104 = zext nneg i32 %103 to i64
   %105 = getelementptr inbounds nuw [8 x i8], ptr %34, i64 %104
-  %106 = load double, ptr %105, align 8, !tbaa !24
+  %106 = load double, ptr %105, align 8, !tbaa !28
   %107 = fmul contract double %102, %106
   %108 = fadd contract double %97, %107
   %109 = add nuw nsw i32 %96, 1
   %110 = icmp eq i32 %109, %10
-  br i1 %110, label %88, label %95, !llvm.loop !30
+  br i1 %110, label %88, label %95, !llvm.loop !37
 
 111:                                              ; preds = %85, %73, %71, %2
   ret void
@@ -188,45 +188,45 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_19NativeBatchedLinA
   br i1 %8, label %9, label %109
 
 9:                                                ; preds = %2
-  %10 = load i32, ptr %1, align 8, !tbaa !31
+  %10 = load i32, ptr %1, align 8, !tbaa !49
   %11 = getelementptr inbounds nuw i8, ptr %1, i64 4
-  %12 = load i32, ptr %11, align 4, !tbaa !33
+  %12 = load i32, ptr %11, align 4, !tbaa !50
   %13 = getelementptr inbounds nuw i8, ptr %1, i64 8
-  %14 = load i32, ptr %13, align 8, !tbaa !34
+  %14 = load i32, ptr %13, align 8, !tbaa !51
   %15 = getelementptr inbounds nuw i8, ptr %1, i64 24
-  %16 = load ptr, ptr %15, align 8, !tbaa !19
+  %16 = load ptr, ptr %15, align 8, !tbaa !42
   %17 = getelementptr inbounds nuw i8, ptr %1, i64 32
-  %18 = load i32, ptr %17, align 4, !tbaa !20
+  %18 = load i32, ptr %17, align 4, !tbaa !11
   %19 = getelementptr inbounds nuw i8, ptr %1, i64 36
-  %20 = load i32, ptr %19, align 4, !tbaa !20
+  %20 = load i32, ptr %19, align 4, !tbaa !11
   %21 = mul i32 %18, %7
   %22 = mul i32 %21, %20
   %23 = sext i32 %22 to i64
   %24 = getelementptr inbounds [8 x i8], ptr %16, i64 %23
   %25 = getelementptr inbounds nuw i8, ptr %1, i64 56
-  %26 = load ptr, ptr %25, align 8, !tbaa !19
+  %26 = load ptr, ptr %25, align 8, !tbaa !42
   %27 = getelementptr inbounds nuw i8, ptr %1, i64 64
-  %28 = load i32, ptr %27, align 4, !tbaa !20
+  %28 = load i32, ptr %27, align 4, !tbaa !11
   %29 = getelementptr inbounds nuw i8, ptr %1, i64 68
-  %30 = load i32, ptr %29, align 4, !tbaa !20
+  %30 = load i32, ptr %29, align 4, !tbaa !11
   %31 = mul i32 %28, %7
   %32 = mul i32 %31, %30
   %33 = sext i32 %32 to i64
   %34 = getelementptr inbounds [8 x i8], ptr %26, i64 %33
   %35 = getelementptr inbounds nuw i8, ptr %1, i64 88
-  %36 = load ptr, ptr %35, align 8, !tbaa !21
+  %36 = load ptr, ptr %35, align 8, !tbaa !47
   %37 = getelementptr inbounds nuw i8, ptr %1, i64 96
-  %38 = load i32, ptr %37, align 4, !tbaa !20
+  %38 = load i32, ptr %37, align 4, !tbaa !11
   %39 = getelementptr inbounds nuw i8, ptr %1, i64 100
-  %40 = load i32, ptr %39, align 4, !tbaa !20
+  %40 = load i32, ptr %39, align 4, !tbaa !11
   %41 = mul i32 %38, %7
   %42 = mul i32 %41, %40
   %43 = sext i32 %42 to i64
   %44 = getelementptr inbounds [8 x i8], ptr %36, i64 %43
   %45 = getelementptr inbounds nuw i8, ptr %1, i64 112
-  %46 = load double, ptr %45, align 8, !tbaa !35
+  %46 = load double, ptr %45, align 8, !tbaa !52
   %47 = getelementptr inbounds nuw i8, ptr %1, i64 120
-  %48 = load double, ptr %47, align 8, !tbaa !36
+  %48 = load double, ptr %47, align 8, !tbaa !53
   %49 = mul i32 %12, %10
   %50 = fcmp contract oeq double %48, 0.000000e+00
   br i1 %50, label %51, label %59
@@ -239,10 +239,10 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_19NativeBatchedLinA
   %54 = phi i32 [ %57, %53 ], [ 0, %51 ]
   %55 = zext nneg i32 %54 to i64
   %56 = getelementptr inbounds nuw [8 x i8], ptr %44, i64 %55
-  store double 0.000000e+00, ptr %56, align 8, !tbaa !24
+  store double 0.000000e+00, ptr %56, align 8, !tbaa !28
   %57 = add nuw nsw i32 %54, 1
   %58 = icmp eq i32 %57, %49
-  br i1 %58, label %71, label %53, !llvm.loop !37
+  br i1 %58, label %71, label %53, !llvm.loop !55
 
 59:                                               ; preds = %9
   %60 = fcmp contract une double %48, 1.000000e+00
@@ -254,12 +254,12 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_19NativeBatchedLinA
   %64 = phi i32 [ %69, %63 ], [ 0, %59 ]
   %65 = zext nneg i32 %64 to i64
   %66 = getelementptr inbounds nuw [8 x i8], ptr %44, i64 %65
-  %67 = load double, ptr %66, align 8, !tbaa !24
+  %67 = load double, ptr %66, align 8, !tbaa !28
   %68 = fmul contract double %48, %67
-  store double %68, ptr %66, align 8, !tbaa !24
+  store double %68, ptr %66, align 8, !tbaa !28
   %69 = add nuw nsw i32 %64, 1
   %70 = icmp eq i32 %69, %49
-  br i1 %70, label %71, label %63, !llvm.loop !38
+  br i1 %70, label %71, label %63, !llvm.loop !57
 
 71:                                               ; preds = %63, %53, %59, %51
   %72 = icmp sgt i32 %12, 0
@@ -280,14 +280,14 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_19NativeBatchedLinA
 81:                                               ; preds = %92
   %82 = add nuw nsw i32 %78, 1
   %83 = icmp eq i32 %82, %12
-  br i1 %83, label %109, label %77, !llvm.loop !39
+  br i1 %83, label %109, label %77, !llvm.loop !63
 
 84:                                               ; preds = %92, %77
   %85 = phi i32 [ 0, %77 ], [ %93, %92 ]
   %86 = add nuw nsw i32 %85, %79
   %87 = zext nneg i32 %86 to i64
   %88 = getelementptr inbounds nuw [8 x i8], ptr %34, i64 %87
-  %89 = load double, ptr %88, align 8, !tbaa !24
+  %89 = load double, ptr %88, align 8, !tbaa !28
   %90 = fmul contract double %46, %89
   %91 = mul nuw nsw i32 %85, %10
   br label %95
@@ -295,24 +295,24 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_19NativeBatchedLinA
 92:                                               ; preds = %95
   %93 = add nuw nsw i32 %85, 1
   %94 = icmp eq i32 %93, %14
-  br i1 %94, label %81, label %84, !llvm.loop !40
+  br i1 %94, label %81, label %84, !llvm.loop !62
 
 95:                                               ; preds = %95, %84
   %96 = phi i32 [ 0, %84 ], [ %107, %95 ]
   %97 = add nuw nsw i32 %96, %91
   %98 = zext nneg i32 %97 to i64
   %99 = getelementptr inbounds nuw [8 x i8], ptr %24, i64 %98
-  %100 = load double, ptr %99, align 8, !tbaa !24
+  %100 = load double, ptr %99, align 8, !tbaa !28
   %101 = fmul contract double %90, %100
   %102 = add nuw nsw i32 %96, %80
   %103 = zext nneg i32 %102 to i64
   %104 = getelementptr inbounds nuw [8 x i8], ptr %44, i64 %103
-  %105 = load double, ptr %104, align 8, !tbaa !24
+  %105 = load double, ptr %104, align 8, !tbaa !28
   %106 = fadd contract double %105, %101
-  store double %106, ptr %104, align 8, !tbaa !24
+  store double %106, ptr %104, align 8, !tbaa !28
   %107 = add nuw nsw i32 %96, 1
   %108 = icmp eq i32 %107, %10
-  br i1 %108, label %92, label %95, !llvm.loop !41
+  br i1 %108, label %92, label %95, !llvm.loop !61
 
 109:                                              ; preds = %81, %73, %71, %2
   ret void
@@ -330,34 +330,34 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_19NativeBatchedLinA
 
 9:                                                ; preds = %2
   %10 = getelementptr inbounds nuw i8, ptr %1, i64 8
-  %11 = load ptr, ptr %10, align 8, !tbaa !21
+  %11 = load ptr, ptr %10, align 8, !tbaa !47
   %12 = getelementptr inbounds nuw i8, ptr %1, i64 16
-  %13 = load i32, ptr %12, align 4, !tbaa !20
+  %13 = load i32, ptr %12, align 4, !tbaa !11
   %14 = getelementptr inbounds nuw i8, ptr %1, i64 20
-  %15 = load i32, ptr %14, align 4, !tbaa !20
+  %15 = load i32, ptr %14, align 4, !tbaa !11
   %16 = mul i32 %13, %7
   %17 = mul i32 %16, %15
   %18 = sext i32 %17 to i64
   %19 = getelementptr inbounds [8 x i8], ptr %11, i64 %18
   %20 = getelementptr inbounds nuw i8, ptr %1, i64 40
-  %21 = load ptr, ptr %20, align 8, !tbaa !19
+  %21 = load ptr, ptr %20, align 8, !tbaa !42
   %22 = getelementptr inbounds nuw i8, ptr %1, i64 48
-  %23 = load i32, ptr %22, align 4, !tbaa !20
+  %23 = load i32, ptr %22, align 4, !tbaa !11
   %24 = getelementptr inbounds nuw i8, ptr %1, i64 52
-  %25 = load i32, ptr %24, align 4, !tbaa !20
+  %25 = load i32, ptr %24, align 4, !tbaa !11
   %26 = mul i32 %23, %7
   %27 = mul i32 %26, %25
   %28 = sext i32 %27 to i64
   %29 = getelementptr inbounds [8 x i8], ptr %21, i64 %28
   %30 = getelementptr inbounds nuw i8, ptr %1, i64 72
-  %31 = load ptr, ptr %30, align 8, !tbaa !42
+  %31 = load ptr, ptr %30, align 8, !tbaa !93
   %32 = getelementptr inbounds nuw i8, ptr %1, i64 80
-  %33 = load i32, ptr %32, align 4, !tbaa !20
+  %33 = load i32, ptr %32, align 4, !tbaa !11
   %34 = mul nsw i32 %33, %7
   %35 = sext i32 %34 to i64
   %36 = getelementptr inbounds [4 x i8], ptr %31, i64 %35
   %37 = getelementptr inbounds nuw i8, ptr %1, i64 88
-  %38 = load i32, ptr %37, align 8, !tbaa !45
+  %38 = load i32, ptr %37, align 8, !tbaa !67
   %39 = icmp sgt i32 %38, 0
   br i1 %39, label %40, label %43
 
@@ -367,32 +367,32 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_19NativeBatchedLinA
   br label %48
 
 43:                                               ; preds = %77, %9
-  %44 = add i32 %38, -1
+  %44 = add nsw i32 %38, -1
   %45 = icmp sgt i32 %38, 1
   br i1 %45, label %46, label %156
 
 46:                                               ; preds = %43
-  %47 = mul nsw i32 %44, %38
+  %47 = mul nuw nsw i32 %44, %38
   br label %116
 
 48:                                               ; preds = %77, %40
   %49 = phi i32 [ -1, %40 ], [ %80, %77 ]
-  %50 = phi ptr [ %19, %40 ], [ %78, %77 ]
-  %51 = phi i32 [ 0, %40 ], [ %79, %77 ]
-  %52 = mul i32 %51, %41
+  %50 = phi i32 [ 0, %40 ], [ %79, %77 ]
+  %51 = phi ptr [ %19, %40 ], [ %78, %77 ]
+  %52 = mul i32 %50, %41
   %53 = sext i32 %52 to i64
   %54 = getelementptr inbounds [8 x i8], ptr %29, i64 %53
-  %55 = load double, ptr %54, align 8, !tbaa !24
+  %55 = load double, ptr %54, align 8, !tbaa !28
   %56 = fdiv contract double 1.000000e+00, %55
-  %57 = zext nneg i32 %51 to i64
-  %58 = getelementptr inbounds nuw [8 x i8], ptr %50, i64 %57
-  store double %56, ptr %58, align 8, !tbaa !24
+  %57 = zext nneg i32 %50 to i64
+  %58 = getelementptr inbounds nuw [8 x i8], ptr %51, i64 %57
+  store double %56, ptr %58, align 8, !tbaa !28
   %59 = fneg contract double %56
-  %60 = icmp eq i32 %51, 0
+  %60 = icmp eq i32 %50, 0
   br i1 %60, label %77, label %61
 
 61:                                               ; preds = %48
-  %62 = mul nuw nsw i32 %51, %38
+  %62 = mul nuw nsw i32 %50, %38
   br label %63
 
 63:                                               ; preds = %63, %61
@@ -400,45 +400,45 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_19NativeBatchedLinA
   %65 = add nuw nsw i32 %64, %62
   %66 = zext nneg i32 %65 to i64
   %67 = getelementptr inbounds nuw [8 x i8], ptr %29, i64 %66
-  %68 = load double, ptr %67, align 8, !tbaa !24
+  %68 = load double, ptr %67, align 8, !tbaa !28
   %69 = fmul contract double %68, %59
   %70 = zext nneg i32 %64 to i64
-  %71 = getelementptr inbounds nuw [8 x i8], ptr %50, i64 %70
-  store double %69, ptr %71, align 8, !tbaa !24
+  %71 = getelementptr inbounds nuw [8 x i8], ptr %51, i64 %70
+  store double %69, ptr %71, align 8, !tbaa !28
   %72 = add nuw nsw i32 %64, 1
-  %73 = icmp eq i32 %72, %51
-  br i1 %73, label %82, label %63, !llvm.loop !47
+  %73 = icmp eq i32 %72, %50
+  br i1 %73, label %82, label %63, !llvm.loop !69
 
 74:                                               ; preds = %97, %82
   %75 = icmp sgt i32 %84, 1
   %76 = add nsw i32 %83, -1
-  br i1 %75, label %82, label %77, !llvm.loop !48
+  br i1 %75, label %82, label %77, !llvm.loop !73
 
 77:                                               ; preds = %74, %48
-  %78 = getelementptr inbounds nuw [8 x i8], ptr %50, i64 %42
-  %79 = add nuw nsw i32 %51, 1
+  %78 = getelementptr inbounds nuw [8 x i8], ptr %51, i64 %42
+  %79 = add nuw nsw i32 %50, 1
   %80 = add nsw i32 %49, 1
   %81 = icmp eq i32 %79, %38
-  br i1 %81, label %43, label %48, !llvm.loop !49
+  br i1 %81, label %43, label %48, !llvm.loop !74
 
 82:                                               ; preds = %63, %74
   %83 = phi i32 [ %76, %74 ], [ %49, %63 ]
-  %84 = phi i32 [ %85, %74 ], [ %51, %63 ]
+  %84 = phi i32 [ %85, %74 ], [ %50, %63 ]
   %85 = add nsw i32 %84, -1
   %86 = mul i32 %85, %41
   %87 = sext i32 %86 to i64
   %88 = getelementptr inbounds [8 x i8], ptr %29, i64 %87
-  %89 = load double, ptr %88, align 8, !tbaa !24
+  %89 = load double, ptr %88, align 8, !tbaa !28
   %90 = zext nneg i32 %85 to i64
-  %91 = getelementptr inbounds nuw [8 x i8], ptr %50, i64 %90
-  %92 = load double, ptr %91, align 8, !tbaa !24
+  %91 = getelementptr inbounds nuw [8 x i8], ptr %51, i64 %90
+  %92 = load double, ptr %91, align 8, !tbaa !28
   %93 = fdiv contract double %92, %89
-  store double %93, ptr %91, align 8, !tbaa !24
+  store double %93, ptr %91, align 8, !tbaa !28
   %94 = icmp samesign ugt i32 %84, 1
   br i1 %94, label %95, label %74
 
 95:                                               ; preds = %82
-  %96 = mul nsw i32 %85, %38
+  %96 = mul nuw nsw i32 %85, %38
   br label %97
 
 97:                                               ; preds = %97, %95
@@ -446,21 +446,21 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_19NativeBatchedLinA
   %99 = add nsw i32 %98, %96
   %100 = sext i32 %99 to i64
   %101 = getelementptr inbounds [8 x i8], ptr %29, i64 %100
-  %102 = load double, ptr %101, align 8, !tbaa !24
+  %102 = load double, ptr %101, align 8, !tbaa !28
   %103 = fmul contract double %93, %102
   %104 = zext nneg i32 %98 to i64
-  %105 = getelementptr inbounds nuw [8 x i8], ptr %50, i64 %104
-  %106 = load double, ptr %105, align 8, !tbaa !24
+  %105 = getelementptr inbounds nuw [8 x i8], ptr %51, i64 %104
+  %106 = load double, ptr %105, align 8, !tbaa !28
   %107 = fsub contract double %106, %103
-  store double %107, ptr %105, align 8, !tbaa !24
+  store double %107, ptr %105, align 8, !tbaa !28
   %108 = add nuw nsw i32 %98, 1
   %109 = icmp eq i32 %108, %83
-  br i1 %109, label %74, label %97, !llvm.loop !50
+  br i1 %109, label %74, label %97, !llvm.loop !72
 
 110:                                              ; preds = %141
   %111 = add nuw nsw i32 %117, 1
   %112 = icmp eq i32 %126, %44
-  br i1 %112, label %113, label %116, !llvm.loop !51
+  br i1 %112, label %113, label %116, !llvm.loop !80
 
 113:                                              ; preds = %110
   %114 = add nsw i32 %38, -2
@@ -474,7 +474,7 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_19NativeBatchedLinA
   %120 = add nsw i32 %119, %44
   %121 = sext i32 %120 to i64
   %122 = getelementptr inbounds [8 x i8], ptr %29, i64 %121
-  %123 = load double, ptr %122, align 8, !tbaa !24
+  %123 = load double, ptr %122, align 8, !tbaa !28
   br label %127
 
 124:                                              ; preds = %127
@@ -487,32 +487,32 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_19NativeBatchedLinA
   %129 = add nsw i32 %128, %47
   %130 = sext i32 %129 to i64
   %131 = getelementptr inbounds [8 x i8], ptr %19, i64 %130
-  %132 = load double, ptr %131, align 8, !tbaa !24
+  %132 = load double, ptr %131, align 8, !tbaa !28
   %133 = add nuw nsw i32 %128, %119
   %134 = zext nneg i32 %133 to i64
   %135 = getelementptr inbounds nuw [8 x i8], ptr %19, i64 %134
-  %136 = load double, ptr %135, align 8, !tbaa !24
+  %136 = load double, ptr %135, align 8, !tbaa !28
   %137 = fmul contract double %123, %132
   %138 = fsub contract double %136, %137
-  store double %138, ptr %135, align 8, !tbaa !24
+  store double %138, ptr %135, align 8, !tbaa !28
   %139 = add nuw nsw i32 %128, 1
   %140 = icmp eq i32 %139, %117
-  br i1 %140, label %124, label %127, !llvm.loop !52
+  br i1 %140, label %124, label %127, !llvm.loop !77
 
 141:                                              ; preds = %141, %124
   %142 = phi i32 [ %151, %141 ], [ %126, %124 ]
   %143 = add nsw i32 %142, %47
   %144 = sext i32 %143 to i64
   %145 = getelementptr inbounds [8 x i8], ptr %19, i64 %144
-  %146 = load double, ptr %145, align 8, !tbaa !24
+  %146 = load double, ptr %145, align 8, !tbaa !28
   %147 = fmul contract double %146, %125
   %148 = add nuw nsw i32 %142, %119
   %149 = zext nneg i32 %148 to i64
   %150 = getelementptr inbounds nuw [8 x i8], ptr %19, i64 %149
-  store double %147, ptr %150, align 8, !tbaa !24
+  store double %147, ptr %150, align 8, !tbaa !28
   %151 = add nuw nsw i32 %142, 1
   %152 = icmp eq i32 %151, %38
-  br i1 %152, label %110, label %141, !llvm.loop !53
+  br i1 %152, label %110, label %141, !llvm.loop !79
 
 153:                                              ; preds = %113, %157
   %154 = phi i32 [ %158, %157 ], [ %114, %113 ]
@@ -525,7 +525,7 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_19NativeBatchedLinA
 157:                                              ; preds = %167
   %158 = add nsw i32 %154, -1
   %159 = icmp eq i32 %158, 0
-  br i1 %159, label %156, label %153, !llvm.loop !54
+  br i1 %159, label %156, label %153, !llvm.loop !86
 
 160:                                              ; preds = %167, %153
   %161 = phi i32 [ %168, %167 ], [ 0, %153 ]
@@ -533,43 +533,43 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_19NativeBatchedLinA
   %163 = add nuw nsw i32 %162, %154
   %164 = zext nneg i32 %163 to i64
   %165 = getelementptr inbounds nuw [8 x i8], ptr %29, i64 %164
-  %166 = load double, ptr %165, align 8, !tbaa !24
+  %166 = load double, ptr %165, align 8, !tbaa !28
   br label %170
 
 167:                                              ; preds = %170
   %168 = add nuw nsw i32 %161, 1
   %169 = icmp eq i32 %168, %154
-  br i1 %169, label %157, label %160, !llvm.loop !55
+  br i1 %169, label %157, label %160, !llvm.loop !85
 
 170:                                              ; preds = %170, %160
   %171 = phi i32 [ 0, %160 ], [ %182, %170 ]
   %172 = add nuw nsw i32 %171, %155
   %173 = zext nneg i32 %172 to i64
   %174 = getelementptr inbounds nuw [8 x i8], ptr %19, i64 %173
-  %175 = load double, ptr %174, align 8, !tbaa !24
+  %175 = load double, ptr %174, align 8, !tbaa !28
   %176 = fmul contract double %166, %175
   %177 = add nuw nsw i32 %171, %162
   %178 = zext nneg i32 %177 to i64
   %179 = getelementptr inbounds nuw [8 x i8], ptr %19, i64 %178
-  %180 = load double, ptr %179, align 8, !tbaa !24
+  %180 = load double, ptr %179, align 8, !tbaa !28
   %181 = fsub contract double %180, %176
-  store double %181, ptr %179, align 8, !tbaa !24
+  store double %181, ptr %179, align 8, !tbaa !28
   %182 = add nuw nsw i32 %171, 1
   %183 = icmp eq i32 %182, %38
-  br i1 %183, label %167, label %170, !llvm.loop !56
+  br i1 %183, label %167, label %170, !llvm.loop !84
 
 184:                                              ; preds = %156, %207
   %185 = phi i32 [ %186, %207 ], [ %38, %156 ]
   %186 = add nsw i32 %185, -1
   %187 = zext nneg i32 %186 to i64
   %188 = getelementptr inbounds nuw [4 x i8], ptr %36, i64 %187
-  %189 = load i32, ptr %188, align 4, !tbaa !20
+  %189 = load i32, ptr %188, align 4, !tbaa !11
   %190 = icmp eq i32 %185, %189
   br i1 %190, label %207, label %191
 
 191:                                              ; preds = %184
   %192 = add nsw i32 %189, -1
-  %193 = mul nsw i32 %186, %38
+  %193 = mul nuw nsw i32 %186, %38
   %194 = mul nsw i32 %192, %38
   br label %195
 
@@ -581,17 +581,17 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_19NativeBatchedLinA
   %200 = add nsw i32 %196, %194
   %201 = sext i32 %200 to i64
   %202 = getelementptr inbounds [8 x i8], ptr %19, i64 %201
-  %203 = load double, ptr %199, align 8, !tbaa !24
-  %204 = load double, ptr %202, align 8, !tbaa !24
-  store double %204, ptr %199, align 8, !tbaa !24
-  store double %203, ptr %202, align 8, !tbaa !24
+  %203 = load double, ptr %199, align 8, !tbaa !28
+  %204 = load double, ptr %202, align 8, !tbaa !28
+  store double %204, ptr %199, align 8, !tbaa !28
+  store double %203, ptr %202, align 8, !tbaa !28
   %205 = add nuw nsw i32 %196, 1
   %206 = icmp eq i32 %205, %38
-  br i1 %206, label %207, label %195, !llvm.loop !57
+  br i1 %206, label %207, label %195, !llvm.loop !89
 
 207:                                              ; preds = %195, %184
   %208 = icmp samesign ugt i32 %185, 1
-  br i1 %208, label %184, label %209, !llvm.loop !58
+  br i1 %208, label %184, label %209, !llvm.loop !90
 
 209:                                              ; preds = %207, %156, %2
   ret void
@@ -609,21 +609,21 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_19NativeBatchedLinA
 
 9:                                                ; preds = %2
   %10 = getelementptr inbounds nuw i8, ptr %1, i64 8
-  %11 = load ptr, ptr %10, align 8, !tbaa !21
+  %11 = load ptr, ptr %10, align 8, !tbaa !47
   %12 = getelementptr inbounds nuw i8, ptr %1, i64 16
-  %13 = load i32, ptr %12, align 4, !tbaa !20
+  %13 = load i32, ptr %12, align 4, !tbaa !11
   %14 = getelementptr inbounds nuw i8, ptr %1, i64 20
-  %15 = load i32, ptr %14, align 4, !tbaa !20
+  %15 = load i32, ptr %14, align 4, !tbaa !11
   %16 = mul i32 %13, %7
   %17 = mul i32 %16, %15
   %18 = sext i32 %17 to i64
   %19 = getelementptr inbounds [8 x i8], ptr %11, i64 %18
   %20 = getelementptr inbounds nuw i8, ptr %1, i64 32
-  %21 = load i32, ptr %20, align 8, !tbaa !59
+  %21 = load i32, ptr %20, align 8, !tbaa !100
   %22 = getelementptr inbounds nuw i8, ptr %1, i64 48
-  %23 = load ptr, ptr %22, align 8, !tbaa !63
+  %23 = load ptr, ptr %22, align 8, !tbaa !118
   %24 = getelementptr inbounds nuw i8, ptr %1, i64 56
-  %25 = load i32, ptr %24, align 4, !tbaa !20
+  %25 = load i32, ptr %24, align 4, !tbaa !11
   %26 = mul nsw i32 %25, %7
   %27 = sext i32 %26 to i64
   %28 = getelementptr inbounds [4 x i8], ptr %23, i64 %27
@@ -632,18 +632,18 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_19NativeBatchedLinA
 
 30:                                               ; preds = %103, %81
   %31 = icmp eq i32 %41, %21
-  br i1 %31, label %120, label %32, !llvm.loop !64
+  br i1 %31, label %120, label %32, !llvm.loop !115
 
 32:                                               ; preds = %9, %30
-  %33 = phi i1 [ %85, %30 ], [ true, %9 ]
-  %34 = phi i32 [ %41, %30 ], [ 0, %9 ]
-  %35 = mul nuw nsw i32 %34, %21
-  %36 = add nuw nsw i32 %35, %34
+  %33 = phi i32 [ %41, %30 ], [ 0, %9 ]
+  %34 = phi i1 [ %85, %30 ], [ true, %9 ]
+  %35 = mul nuw nsw i32 %33, %21
+  %36 = add nuw nsw i32 %35, %33
   %37 = zext nneg i32 %36 to i64
   %38 = getelementptr inbounds nuw [8 x i8], ptr %19, i64 %37
-  %39 = load double, ptr %38, align 8, !tbaa !24
+  %39 = load double, ptr %38, align 8, !tbaa !28
   %40 = tail call contract noundef double @__nv_fabs(double noundef %39) #4
-  %41 = add nuw nsw i32 %34, 1
+  %41 = add nuw nsw i32 %33, 1
   %42 = icmp slt i32 %41, %21
   br i1 %42, label %51, label %45
 
@@ -653,48 +653,48 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_19NativeBatchedLinA
 
 45:                                               ; preds = %43, %32
   %46 = phi i32 [ %44, %43 ], [ %41, %32 ]
-  %47 = phi i32 [ %61, %43 ], [ %34, %32 ]
-  %48 = zext nneg i32 %34 to i64
+  %47 = phi i32 [ %61, %43 ], [ %33, %32 ]
+  %48 = zext nneg i32 %33 to i64
   %49 = getelementptr inbounds nuw [4 x i8], ptr %28, i64 %48
-  store i32 %46, ptr %49, align 4, !tbaa !20
-  %50 = icmp eq i32 %47, %34
+  store i32 %46, ptr %49, align 4, !tbaa !11
+  %50 = icmp eq i32 %47, %33
   br i1 %50, label %81, label %65
 
 51:                                               ; preds = %32, %51
   %52 = phi i32 [ %63, %51 ], [ %41, %32 ]
   %53 = phi double [ %62, %51 ], [ %40, %32 ]
-  %54 = phi i32 [ %61, %51 ], [ %34, %32 ]
+  %54 = phi i32 [ %61, %51 ], [ %33, %32 ]
   %55 = add nuw nsw i32 %52, %35
   %56 = zext nneg i32 %55 to i64
   %57 = getelementptr inbounds nuw [8 x i8], ptr %19, i64 %56
-  %58 = load double, ptr %57, align 8, !tbaa !24
+  %58 = load double, ptr %57, align 8, !tbaa !28
   %59 = tail call contract noundef double @__nv_fabs(double noundef %58) #4
   %60 = fcmp contract ogt double %59, %53
   %61 = select i1 %60, i32 %52, i32 %54
   %62 = select i1 %60, double %59, double %53
   %63 = add nuw nsw i32 %52, 1
   %64 = icmp eq i32 %63, %21
-  br i1 %64, label %43, label %51, !llvm.loop !65
+  br i1 %64, label %43, label %51, !llvm.loop !106
 
 65:                                               ; preds = %45, %65
   %66 = phi i32 [ %76, %65 ], [ 0, %45 ]
   %67 = mul nuw nsw i32 %66, %21
-  %68 = add nuw nsw i32 %67, %34
+  %68 = add nuw nsw i32 %67, %33
   %69 = zext nneg i32 %68 to i64
   %70 = getelementptr inbounds nuw [8 x i8], ptr %19, i64 %69
   %71 = add nsw i32 %67, %47
   %72 = sext i32 %71 to i64
   %73 = getelementptr inbounds [8 x i8], ptr %19, i64 %72
-  %74 = load double, ptr %70, align 8, !tbaa !24
-  %75 = load double, ptr %73, align 8, !tbaa !24
-  store double %75, ptr %70, align 8, !tbaa !24
-  store double %74, ptr %73, align 8, !tbaa !24
+  %74 = load double, ptr %70, align 8, !tbaa !28
+  %75 = load double, ptr %73, align 8, !tbaa !28
+  store double %75, ptr %70, align 8, !tbaa !28
+  store double %74, ptr %73, align 8, !tbaa !28
   %76 = add nuw nsw i32 %66, 1
   %77 = icmp eq i32 %76, %21
-  br i1 %77, label %78, label %65, !llvm.loop !66
+  br i1 %77, label %78, label %65, !llvm.loop !108
 
 78:                                               ; preds = %65
-  %79 = load double, ptr %38, align 8, !tbaa !24
+  %79 = load double, ptr %38, align 8, !tbaa !28
   %80 = tail call contract noundef double @__nv_fabs(double noundef %79) #4
   br label %81
 
@@ -702,7 +702,7 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_19NativeBatchedLinA
   %82 = phi double [ %80, %78 ], [ %40, %45 ]
   %83 = phi double [ %79, %78 ], [ %39, %45 ]
   %84 = fcmp contract ugt double %82, 0.000000e+00
-  %85 = select i1 %84, i1 %33, i1 false
+  %85 = select i1 %84, i1 %34, i1 false
   %86 = fdiv contract double 1.000000e+00, %83
   br i1 %42, label %87, label %30
 
@@ -711,51 +711,51 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_19NativeBatchedLinA
   %89 = add nuw nsw i32 %88, %35
   %90 = zext nneg i32 %89 to i64
   %91 = getelementptr inbounds nuw [8 x i8], ptr %19, i64 %90
-  %92 = load double, ptr %91, align 8, !tbaa !24
+  %92 = load double, ptr %91, align 8, !tbaa !28
   %93 = fmul contract double %86, %92
-  store double %93, ptr %91, align 8, !tbaa !24
+  store double %93, ptr %91, align 8, !tbaa !28
   %94 = add nuw nsw i32 %88, 1
   %95 = icmp eq i32 %94, %21
-  br i1 %95, label %96, label %87, !llvm.loop !67
+  br i1 %95, label %96, label %87, !llvm.loop !110
 
 96:                                               ; preds = %87, %103
   %97 = phi i32 [ %104, %103 ], [ %41, %87 ]
   %98 = mul nuw nsw i32 %97, %21
-  %99 = add nuw nsw i32 %98, %34
+  %99 = add nuw nsw i32 %98, %33
   %100 = zext nneg i32 %99 to i64
   %101 = getelementptr inbounds nuw [8 x i8], ptr %19, i64 %100
-  %102 = load double, ptr %101, align 8, !tbaa !24
+  %102 = load double, ptr %101, align 8, !tbaa !28
   br label %106
 
 103:                                              ; preds = %106
   %104 = add nuw nsw i32 %97, 1
   %105 = icmp eq i32 %104, %21
-  br i1 %105, label %30, label %96, !llvm.loop !68
+  br i1 %105, label %30, label %96, !llvm.loop !114
 
 106:                                              ; preds = %106, %96
   %107 = phi i32 [ %41, %96 ], [ %118, %106 ]
   %108 = add nuw nsw i32 %107, %35
   %109 = zext nneg i32 %108 to i64
   %110 = getelementptr inbounds nuw [8 x i8], ptr %19, i64 %109
-  %111 = load double, ptr %110, align 8, !tbaa !24
+  %111 = load double, ptr %110, align 8, !tbaa !28
   %112 = fmul contract double %102, %111
   %113 = add nuw nsw i32 %107, %98
   %114 = zext nneg i32 %113 to i64
   %115 = getelementptr inbounds nuw [8 x i8], ptr %19, i64 %114
-  %116 = load double, ptr %115, align 8, !tbaa !24
+  %116 = load double, ptr %115, align 8, !tbaa !28
   %117 = fsub contract double %116, %112
-  store double %117, ptr %115, align 8, !tbaa !24
+  store double %117, ptr %115, align 8, !tbaa !28
   %118 = add nuw nsw i32 %107, 1
   %119 = icmp eq i32 %118, %21
-  br i1 %119, label %103, label %106, !llvm.loop !69
+  br i1 %119, label %103, label %106, !llvm.loop !113
 
 120:                                              ; preds = %30
   br i1 %85, label %124, label %121
 
 121:                                              ; preds = %120
   %122 = getelementptr inbounds nuw i8, ptr %1, i64 64
-  %123 = load ptr, ptr %122, align 8, !tbaa !70
-  store i8 0, ptr %123, align 1, !tbaa !71
+  %123 = load ptr, ptr %122, align 8, !tbaa !103
+  store i8 0, ptr %123, align 1, !tbaa !101
   br label %124
 
 124:                                              ; preds = %121, %120, %9, %2
@@ -773,34 +773,34 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_19NativeBatchedLinA
   br i1 %8, label %9, label %122
 
 9:                                                ; preds = %2
-  %10 = load i32, ptr %1, align 8, !tbaa !73
+  %10 = load i32, ptr %1, align 8, !tbaa !120
   %11 = srem i32 %7, %10
   %12 = sdiv i32 %7, %10
   %13 = getelementptr inbounds nuw i8, ptr %1, i64 16
-  %14 = load ptr, ptr %13, align 8, !tbaa !19
+  %14 = load ptr, ptr %13, align 8, !tbaa !42
   %15 = getelementptr inbounds nuw i8, ptr %1, i64 24
-  %16 = load i32, ptr %15, align 4, !tbaa !20
+  %16 = load i32, ptr %15, align 4, !tbaa !11
   %17 = getelementptr inbounds nuw i8, ptr %1, i64 28
-  %18 = load i32, ptr %17, align 4, !tbaa !20
+  %18 = load i32, ptr %17, align 4, !tbaa !11
   %19 = mul i32 %16, %12
   %20 = mul i32 %19, %18
   %21 = sext i32 %20 to i64
   %22 = getelementptr inbounds [8 x i8], ptr %14, i64 %21
   %23 = getelementptr inbounds nuw i8, ptr %1, i64 40
-  %24 = load i32, ptr %23, align 8, !tbaa !75
+  %24 = load i32, ptr %23, align 8, !tbaa !121
   %25 = getelementptr inbounds nuw i8, ptr %1, i64 56
-  %26 = load ptr, ptr %25, align 8, !tbaa !42
+  %26 = load ptr, ptr %25, align 8, !tbaa !93
   %27 = getelementptr inbounds nuw i8, ptr %1, i64 64
-  %28 = load i32, ptr %27, align 4, !tbaa !20
+  %28 = load i32, ptr %27, align 4, !tbaa !11
   %29 = mul nsw i32 %28, %12
   %30 = sext i32 %29 to i64
   %31 = getelementptr inbounds [4 x i8], ptr %26, i64 %30
   %32 = getelementptr inbounds nuw i8, ptr %1, i64 80
-  %33 = load ptr, ptr %32, align 8, !tbaa !21
+  %33 = load ptr, ptr %32, align 8, !tbaa !47
   %34 = getelementptr inbounds nuw i8, ptr %1, i64 88
-  %35 = load i32, ptr %34, align 4, !tbaa !20
+  %35 = load i32, ptr %34, align 4, !tbaa !11
   %36 = getelementptr inbounds nuw i8, ptr %1, i64 92
-  %37 = load i32, ptr %36, align 4, !tbaa !20
+  %37 = load i32, ptr %36, align 4, !tbaa !11
   %38 = mul nsw i32 %37, %12
   %39 = add nsw i32 %38, %11
   %40 = mul nsw i32 %39, %35
@@ -814,34 +814,34 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_19NativeBatchedLinA
   %46 = zext nneg i32 %45 to i64
   %47 = getelementptr inbounds nuw [8 x i8], ptr %42, i64 %46
   %48 = getelementptr inbounds nuw [4 x i8], ptr %31, i64 %46
-  %49 = load i32, ptr %48, align 4, !tbaa !20
+  %49 = load i32, ptr %48, align 4, !tbaa !11
   %50 = sext i32 %49 to i64
   %51 = getelementptr [8 x i8], ptr %42, i64 %50
   %52 = getelementptr i8, ptr %51, i64 -8
-  %53 = load double, ptr %47, align 8, !tbaa !24
-  %54 = load double, ptr %52, align 8, !tbaa !24
-  store double %54, ptr %47, align 8, !tbaa !24
-  store double %53, ptr %52, align 8, !tbaa !24
+  %53 = load double, ptr %47, align 8, !tbaa !28
+  %54 = load double, ptr %52, align 8, !tbaa !28
+  store double %54, ptr %47, align 8, !tbaa !28
+  store double %53, ptr %52, align 8, !tbaa !28
   %55 = add nuw nsw i32 %45, 1
   %56 = icmp eq i32 %55, %24
-  br i1 %56, label %71, label %44, !llvm.loop !76
+  br i1 %56, label %71, label %44, !llvm.loop !123
 
 57:                                               ; preds = %80, %71
   %58 = icmp eq i32 %76, %24
-  br i1 %58, label %59, label %71, !llvm.loop !77
+  br i1 %58, label %59, label %71, !llvm.loop !127
 
 59:                                               ; preds = %57
   %60 = add nsw i32 %24, -1
-  %61 = mul nsw i32 %60, %24
+  %61 = mul nuw nsw i32 %60, %24
   %62 = add nuw nsw i32 %61, %60
   %63 = zext nneg i32 %62 to i64
   %64 = getelementptr inbounds nuw [8 x i8], ptr %22, i64 %63
-  %65 = load double, ptr %64, align 8, !tbaa !24
+  %65 = load double, ptr %64, align 8, !tbaa !28
   %66 = zext nneg i32 %60 to i64
   %67 = getelementptr inbounds nuw [8 x i8], ptr %42, i64 %66
-  %68 = load double, ptr %67, align 8, !tbaa !24
+  %68 = load double, ptr %67, align 8, !tbaa !28
   %69 = fdiv contract double %68, %65
-  store double %69, ptr %67, align 8, !tbaa !24
+  store double %69, ptr %67, align 8, !tbaa !28
   %70 = icmp eq i32 %24, 1
   br i1 %70, label %122, label %105
 
@@ -849,7 +849,7 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_19NativeBatchedLinA
   %72 = phi i32 [ %76, %57 ], [ 0, %44 ]
   %73 = zext nneg i32 %72 to i64
   %74 = getelementptr inbounds nuw [8 x i8], ptr %42, i64 %73
-  %75 = load double, ptr %74, align 8, !tbaa !24
+  %75 = load double, ptr %74, align 8, !tbaa !28
   %76 = add nuw nsw i32 %72, 1
   %77 = icmp slt i32 %76, %24
   br i1 %77, label %78, label %57
@@ -863,31 +863,31 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_19NativeBatchedLinA
   %82 = add nuw nsw i32 %81, %79
   %83 = zext nneg i32 %82 to i64
   %84 = getelementptr inbounds nuw [8 x i8], ptr %22, i64 %83
-  %85 = load double, ptr %84, align 8, !tbaa !24
+  %85 = load double, ptr %84, align 8, !tbaa !28
   %86 = fmul contract double %75, %85
   %87 = zext nneg i32 %81 to i64
   %88 = getelementptr inbounds nuw [8 x i8], ptr %42, i64 %87
-  %89 = load double, ptr %88, align 8, !tbaa !24
+  %89 = load double, ptr %88, align 8, !tbaa !28
   %90 = fsub contract double %89, %86
-  store double %90, ptr %88, align 8, !tbaa !24
+  store double %90, ptr %88, align 8, !tbaa !28
   %91 = add nuw nsw i32 %81, 1
   %92 = icmp eq i32 %91, %24
-  br i1 %92, label %57, label %80, !llvm.loop !78
+  br i1 %92, label %57, label %80, !llvm.loop !126
 
 93:                                               ; preds = %109
   %94 = add nsw i32 %108, -1
-  %95 = mul nsw i32 %94, %24
+  %95 = mul nuw nsw i32 %94, %24
   %96 = add nuw nsw i32 %95, %94
   %97 = zext nneg i32 %96 to i64
   %98 = getelementptr inbounds nuw [8 x i8], ptr %22, i64 %97
-  %99 = load double, ptr %98, align 8, !tbaa !24
+  %99 = load double, ptr %98, align 8, !tbaa !28
   %100 = zext nneg i32 %94 to i64
   %101 = getelementptr inbounds nuw [8 x i8], ptr %42, i64 %100
-  %102 = load double, ptr %101, align 8, !tbaa !24
+  %102 = load double, ptr %101, align 8, !tbaa !28
   %103 = fdiv contract double %102, %99
-  store double %103, ptr %101, align 8, !tbaa !24
+  store double %103, ptr %101, align 8, !tbaa !28
   %104 = icmp samesign ugt i32 %108, 1
-  br i1 %104, label %105, label %122, !llvm.loop !79
+  br i1 %104, label %105, label %122, !llvm.loop !131
 
 105:                                              ; preds = %59, %93
   %106 = phi double [ %103, %93 ], [ %69, %59 ]
@@ -900,16 +900,16 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_19NativeBatchedLinA
   %111 = add nsw i32 %110, %107
   %112 = sext i32 %111 to i64
   %113 = getelementptr inbounds [8 x i8], ptr %22, i64 %112
-  %114 = load double, ptr %113, align 8, !tbaa !24
+  %114 = load double, ptr %113, align 8, !tbaa !28
   %115 = fmul contract double %106, %114
   %116 = zext nneg i32 %110 to i64
   %117 = getelementptr inbounds nuw [8 x i8], ptr %42, i64 %116
-  %118 = load double, ptr %117, align 8, !tbaa !24
+  %118 = load double, ptr %117, align 8, !tbaa !28
   %119 = fsub contract double %118, %115
-  store double %119, ptr %117, align 8, !tbaa !24
+  store double %119, ptr %117, align 8, !tbaa !28
   %120 = add nuw nsw i32 %110, 1
   %121 = icmp eq i32 %120, %108
-  br i1 %121, label %93, label %109, !llvm.loop !80
+  br i1 %121, label %93, label %109, !llvm.loop !130
 
 122:                                              ; preds = %93, %59, %9, %2
   ret void
@@ -924,94 +924,94 @@ define dso_local double @__nv_fabs(double %0) local_unnamed_addr #2 {
 ; Function Attrs: mustprogress nocallback nocreateundeforpoison nofree nosync nounwind speculatable willreturn memory(none)
 declare double @llvm.nvvm.fabs.f64(double) #3
 
-attributes #0 = { mustprogress nofree noinline norecurse nosync nounwind memory(readwrite, inaccessiblemem: none, target_mem: none) "frame-pointer"="all" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="sm_120" "target-features"="+ptx88,+sm_120" "uniform-work-group-size" }
+attributes #0 = { mustprogress nofree noinline norecurse nosync nounwind memory(readwrite, inaccessiblemem: none, target_mem: none) "frame-pointer"="all" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="sm_120" "target-features"="+ptx88" "uniform-work-group-size" }
 attributes #1 = { mustprogress nocallback nofree nosync nounwind speculatable willreturn memory(none) }
 attributes #2 = { mustprogress nofree noinline norecurse nosync nounwind willreturn memory(none) "disable-tail-calls"="false" "enzyme_math"="fabs" "frame-pointer"="all" "implements"="llvm.fabs.f64" "implements2"="fabs" "less-precise-fpmad"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "no-trapping-math"="true" "prev_always_inline" "prev_fixup" "prev_linkage"="7" "stack-protector-buffer-size"="8" "target-cpu"="sm_120" "target-features"="+ptx88,+sm_120" "unsafe-fp-math"="false" "use-soft-float"="false" }
 attributes #3 = { mustprogress nocallback nocreateundeforpoison nofree nosync nounwind speculatable willreturn memory(none) }
 attributes #4 = { nounwind "uniform-work-group-size" }
 
-!llvm.module.flags = !{!0, !1, !2}
-!llvm.ident = !{!3, !4}
-!llvm.errno.tbaa = !{!5}
+!llvm.module.flags = !{!7, !132, !133}
+!llvm.ident = !{!134, !1}
+!llvm.errno.tbaa = !{!136}
 
-!0 = !{i32 2, !"SDK Version", [2 x i32] [i32 12, i32 9]}
-!1 = !{i32 4, !"nvvm-reflect-ftz", i32 0}
-!2 = !{i32 7, !"frame-pointer", i32 2}
-!3 = !{!"clang version 24.0.0git (git@github.com:llvm/llvm-project 0220c07a94012b9dce9250addac6a8ee1f674b21)"}
-!4 = !{!"clang version 3.8.0 (tags/RELEASE_380/final)"}
-!5 = !{!6, !7, i64 0}
-!6 = !{!"__libc_errno", !7, i64 0}
-!7 = !{!"int", !8, i64 0}
-!8 = !{!"omnipotent char", !9, i64 0}
-!9 = !{!"Simple C++ TBAA"}
-!10 = !{!11, !7, i64 0}
-!11 = !{!"_ZTSZNK4mfem19NativeBatchedLinAlg7AddMultERKNS_11DenseTensorERKNS_6VectorERS4_ddNS_13BatchedLinAlg2OpEEUliE_", !7, i64 0, !7, i64 4, !7, i64 8, !12, i64 16, !12, i64 48, !15, i64 80, !16, i64 112, !16, i64 120}
-!12 = !{!"_ZTSN4mfem12DeviceTensorILi3EKdEE", !7, i64 0, !13, i64 8, !8, i64 16}
-!13 = !{!"p1 double", !14, i64 0}
-!14 = !{!"any pointer", !8, i64 0}
-!15 = !{!"_ZTSN4mfem12DeviceTensorILi3EdEE", !7, i64 0, !13, i64 8, !8, i64 16}
-!16 = !{!"double", !8, i64 0}
-!17 = !{!11, !7, i64 4}
-!18 = !{!11, !7, i64 8}
-!19 = !{!12, !13, i64 8}
-!20 = !{!7, !7, i64 0}
-!21 = !{!15, !13, i64 8}
-!22 = !{!11, !16, i64 112}
-!23 = !{!11, !16, i64 120}
-!24 = !{!16, !16, i64 0}
-!25 = distinct !{!25, !26}
-!26 = !{!"llvm.loop.mustprogress"}
-!27 = distinct !{!27, !26}
-!28 = distinct !{!28, !26}
-!29 = distinct !{!29, !26}
-!30 = distinct !{!30, !26}
-!31 = !{!32, !7, i64 0}
-!32 = !{!"_ZTSZNK4mfem19NativeBatchedLinAlg7AddMultERKNS_11DenseTensorERKNS_6VectorERS4_ddNS_13BatchedLinAlg2OpEEUliE0_", !7, i64 0, !7, i64 4, !7, i64 8, !12, i64 16, !12, i64 48, !15, i64 80, !16, i64 112, !16, i64 120}
-!33 = !{!32, !7, i64 4}
-!34 = !{!32, !7, i64 8}
-!35 = !{!32, !16, i64 112}
-!36 = !{!32, !16, i64 120}
-!37 = distinct !{!37, !26}
-!38 = distinct !{!38, !26}
-!39 = distinct !{!39, !26}
-!40 = distinct !{!40, !26}
-!41 = distinct !{!41, !26}
-!42 = !{!43, !44, i64 8}
-!43 = !{!"_ZTSN4mfem12DeviceTensorILi2EKiEE", !7, i64 0, !44, i64 8, !8, i64 16}
-!44 = !{!"p1 int", !14, i64 0}
-!45 = !{!46, !7, i64 88}
-!46 = !{!"_ZTSZNK4mfem19NativeBatchedLinAlg6InvertERNS_11DenseTensorEEUliE_", !15, i64 0, !12, i64 32, !43, i64 64, !7, i64 88}
-!47 = distinct !{!47, !26}
-!48 = distinct !{!48, !26}
-!49 = distinct !{!49, !26}
-!50 = distinct !{!50, !26}
-!51 = distinct !{!51, !26}
-!52 = distinct !{!52, !26}
-!53 = distinct !{!53, !26}
-!54 = distinct !{!54, !26}
-!55 = distinct !{!55, !26}
-!56 = distinct !{!56, !26}
-!57 = distinct !{!57, !26}
-!58 = distinct !{!58, !26}
-!59 = !{!60, !7, i64 32}
-!60 = !{!"_ZTSZNK4mfem19NativeBatchedLinAlg8LUFactorERNS_11DenseTensorERNS_5ArrayIiEEEUliE_", !15, i64 0, !7, i64 32, !61, i64 40, !62, i64 64}
-!61 = !{!"_ZTSN4mfem12DeviceTensorILi2EiEE", !7, i64 0, !44, i64 8, !8, i64 16}
-!62 = !{!"p1 bool", !14, i64 0}
-!63 = !{!61, !44, i64 8}
-!64 = distinct !{!64, !26}
-!65 = distinct !{!65, !26}
-!66 = distinct !{!66, !26}
-!67 = distinct !{!67, !26}
-!68 = distinct !{!68, !26}
-!69 = distinct !{!69, !26}
-!70 = !{!60, !62, i64 64}
-!71 = !{!72, !72, i64 0}
-!72 = !{!"bool", !8, i64 0}
-!73 = !{!74, !7, i64 0}
-!74 = !{!"_ZTSZNK4mfem19NativeBatchedLinAlg7LUSolveERKNS_11DenseTensorERKNS_5ArrayIiEERNS_6VectorEEUliE_", !7, i64 0, !12, i64 8, !7, i64 40, !43, i64 48, !15, i64 72}
-!75 = !{!74, !7, i64 40}
-!76 = distinct !{!76, !26}
-!77 = distinct !{!77, !26}
-!78 = distinct !{!78, !26}
-!79 = distinct !{!79, !26}
-!80 = distinct !{!80, !26}
+!1 = !{!"clang version 3.8.0 (tags/RELEASE_380/final)"}
+!7 = !{i32 2, !"SDK Version", [2 x i32] [i32 12, i32 9]}
+!8 = !{!"Simple C++ TBAA"}
+!9 = !{!"omnipotent char", !8, i64 0}
+!10 = !{!"int", !9, i64 0}
+!11 = !{!10, !10, i64 0}
+!12 = !{!"double", !9, i64 0}
+!13 = !{!"any pointer", !9, i64 0}
+!14 = !{!"p1 double", !13, i64 0}
+!15 = !{!"_ZTSN4mfem12DeviceTensorILi3EKdEE", !10, i64 0, !14, i64 8, !9, i64 16}
+!16 = !{!"_ZTSN4mfem12DeviceTensorILi3EdEE", !10, i64 0, !14, i64 8, !9, i64 16}
+!17 = !{!"_ZTSZNK4mfem19NativeBatchedLinAlg7AddMultERKNS_11DenseTensorERKNS_6VectorERS4_ddNS_13BatchedLinAlg2OpEEUliE_", !10, i64 0, !10, i64 4, !10, i64 8, !15, i64 16, !15, i64 48, !16, i64 80, !12, i64 112, !12, i64 120}
+!22 = !{!17, !10, i64 0}
+!23 = !{!17, !10, i64 4}
+!24 = !{!17, !10, i64 8}
+!25 = !{!17, !12, i64 112}
+!26 = !{!17, !12, i64 120}
+!28 = !{!12, !12, i64 0}
+!30 = !{!"llvm.loop.mustprogress"}
+!31 = distinct !{!31, !30}
+!33 = distinct !{!33, !30}
+!37 = distinct !{!37, !30}
+!38 = distinct !{!38, !30}
+!39 = distinct !{!39, !30}
+!42 = !{!15, !14, i64 8}
+!43 = !{!"p1 int", !13, i64 0}
+!47 = !{!16, !14, i64 8}
+!48 = !{!"_ZTSZNK4mfem19NativeBatchedLinAlg7AddMultERKNS_11DenseTensorERKNS_6VectorERS4_ddNS_13BatchedLinAlg2OpEEUliE0_", !10, i64 0, !10, i64 4, !10, i64 8, !15, i64 16, !15, i64 48, !16, i64 80, !12, i64 112, !12, i64 120}
+!49 = !{!48, !10, i64 0}
+!50 = !{!48, !10, i64 4}
+!51 = !{!48, !10, i64 8}
+!52 = !{!48, !12, i64 112}
+!53 = !{!48, !12, i64 120}
+!55 = distinct !{!55, !30}
+!57 = distinct !{!57, !30}
+!61 = distinct !{!61, !30}
+!62 = distinct !{!62, !30}
+!63 = distinct !{!63, !30}
+!64 = !{!"_ZTSN4mfem12DeviceTensorILi2EKiEE", !10, i64 0, !43, i64 8, !9, i64 16}
+!65 = !{!"_ZTSZNK4mfem19NativeBatchedLinAlg6InvertERNS_11DenseTensorEEUliE_", !16, i64 0, !15, i64 32, !64, i64 64, !10, i64 88}
+!67 = !{!65, !10, i64 88}
+!69 = distinct !{!69, !30}
+!72 = distinct !{!72, !30}
+!73 = distinct !{!73, !30}
+!74 = distinct !{!74, !30}
+!77 = distinct !{!77, !30}
+!79 = distinct !{!79, !30}
+!80 = distinct !{!80, !30}
+!84 = distinct !{!84, !30}
+!85 = distinct !{!85, !30}
+!86 = distinct !{!86, !30}
+!89 = distinct !{!89, !30}
+!90 = distinct !{!90, !30}
+!93 = !{!64, !43, i64 8}
+!96 = !{!"_ZTSN4mfem12DeviceTensorILi2EiEE", !10, i64 0, !43, i64 8, !9, i64 16}
+!97 = !{!"bool", !9, i64 0}
+!98 = !{!"p1 bool", !13, i64 0}
+!99 = !{!"_ZTSZNK4mfem19NativeBatchedLinAlg8LUFactorERNS_11DenseTensorERNS_5ArrayIiEEEUliE_", !16, i64 0, !10, i64 32, !96, i64 40, !98, i64 64}
+!100 = !{!99, !10, i64 32}
+!101 = !{!97, !97, i64 0}
+!103 = !{!99, !98, i64 64}
+!106 = distinct !{!106, !30}
+!108 = distinct !{!108, !30}
+!110 = distinct !{!110, !30}
+!113 = distinct !{!113, !30}
+!114 = distinct !{!114, !30}
+!115 = distinct !{!115, !30}
+!118 = !{!96, !43, i64 8}
+!119 = !{!"_ZTSZNK4mfem19NativeBatchedLinAlg7LUSolveERKNS_11DenseTensorERKNS_5ArrayIiEERNS_6VectorEEUliE_", !10, i64 0, !15, i64 8, !10, i64 40, !64, i64 48, !16, i64 72}
+!120 = !{!119, !10, i64 0}
+!121 = !{!119, !10, i64 40}
+!123 = distinct !{!123, !30}
+!126 = distinct !{!126, !30}
+!127 = distinct !{!127, !30}
+!130 = distinct !{!130, !30}
+!131 = distinct !{!131, !30}
+!132 = !{i32 4, !"nvvm-reflect-ftz", i32 0}
+!133 = !{i32 7, !"frame-pointer", i32 2}
+!134 = !{!"clang version 24.0.0git (git@github.com:llvm/llvm-project b08e005995ed29a2f89aa9a3f599a9d45db65523)"}
+!135 = !{!"__libc_errno", !10, i64 0}
+!136 = !{!135, !10, i64 0}

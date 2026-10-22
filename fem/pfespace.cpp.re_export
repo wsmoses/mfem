@@ -1,5 +1,5 @@
-; ModuleID = '/mnt3/wmoses/git/mfem/fem/pfespace.cpp'
-source_filename = "/mnt3/wmoses/git/mfem/fem/pfespace.cpp"
+; ModuleID = '/home/wmoses/git/mfem/fem/pfespace.cpp'
+source_filename = "/home/wmoses/git/mfem/fem/pfespace.cpp"
 target datalayout = "e-p6:32:32-i64:64-i128:128-i256:256-v16:16-v32:32-n16:32:64"
 target triple = "nvptx64-nvidia-cuda"
 
@@ -25,18 +25,18 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNS_L16ExtractSubVectorE
 
 9:                                                ; preds = %2
   %10 = getelementptr inbounds nuw i8, ptr %1, i64 8
-  %11 = load ptr, ptr %10, align 8, !tbaa !10
+  %11 = load ptr, ptr %10, align 8, !tbaa !21
   %12 = getelementptr inbounds nuw i8, ptr %1, i64 16
-  %13 = load ptr, ptr %12, align 8, !tbaa !15
+  %13 = load ptr, ptr %12, align 8, !tbaa !22
   %14 = sext i32 %7 to i64
   %15 = getelementptr inbounds [4 x i8], ptr %13, i64 %14
-  %16 = load i32, ptr %15, align 4, !tbaa !16
+  %16 = load i32, ptr %15, align 4, !tbaa !11
   %17 = sext i32 %16 to i64
   %18 = getelementptr inbounds [8 x i8], ptr %11, i64 %17
-  %19 = load double, ptr %18, align 8, !tbaa !17
-  %20 = load ptr, ptr %1, align 8, !tbaa !19
+  %19 = load double, ptr %18, align 8, !tbaa !23
+  %20 = load ptr, ptr %1, align 8, !tbaa !24
   %21 = getelementptr inbounds [8 x i8], ptr %20, i64 %14
-  store double %19, ptr %21, align 8, !tbaa !17
+  store double %19, ptr %21, align 8, !tbaa !23
   br label %22
 
 22:                                               ; preds = %2, %9
@@ -64,18 +64,18 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNS_L12SetSubVectorERKNS
 
 9:                                                ; preds = %2
   %10 = getelementptr inbounds nuw i8, ptr %1, i64 16
-  %11 = load ptr, ptr %10, align 8, !tbaa !20
+  %11 = load ptr, ptr %10, align 8, !tbaa !26
   %12 = sext i32 %7 to i64
   %13 = getelementptr inbounds [8 x i8], ptr %11, i64 %12
-  %14 = load double, ptr %13, align 8, !tbaa !17
-  %15 = load ptr, ptr %1, align 8, !tbaa !22
+  %14 = load double, ptr %13, align 8, !tbaa !23
+  %15 = load ptr, ptr %1, align 8, !tbaa !27
   %16 = getelementptr inbounds nuw i8, ptr %1, i64 8
-  %17 = load ptr, ptr %16, align 8, !tbaa !23
+  %17 = load ptr, ptr %16, align 8, !tbaa !28
   %18 = getelementptr inbounds [4 x i8], ptr %17, i64 %12
-  %19 = load i32, ptr %18, align 4, !tbaa !16
+  %19 = load i32, ptr %18, align 4, !tbaa !11
   %20 = sext i32 %19 to i64
   %21 = getelementptr inbounds [8 x i8], ptr %15, i64 %20
-  store double %14, ptr %21, align 8, !tbaa !17
+  store double %14, ptr %21, align 8, !tbaa !23
   br label %22
 
 22:                                               ; preds = %2, %9
@@ -93,29 +93,29 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNS_L12AddSubVectorERKNS
   br i1 %8, label %9, label %45
 
 9:                                                ; preds = %2
-  %10 = load ptr, ptr %1, align 8, !tbaa !24
+  %10 = load ptr, ptr %1, align 8, !tbaa !30
   %11 = sext i32 %7 to i64
   %12 = getelementptr inbounds [4 x i8], ptr %10, i64 %11
-  %13 = load i32, ptr %12, align 4, !tbaa !16
+  %13 = load i32, ptr %12, align 4, !tbaa !11
   %14 = getelementptr inbounds nuw i8, ptr %1, i64 8
-  %15 = load ptr, ptr %14, align 8, !tbaa !26
+  %15 = load ptr, ptr %14, align 8, !tbaa !31
   %16 = sext i32 %13 to i64
   %17 = getelementptr inbounds [8 x i8], ptr %15, i64 %16
-  %18 = load double, ptr %17, align 8, !tbaa !17
+  %18 = load double, ptr %17, align 8, !tbaa !23
   %19 = getelementptr inbounds nuw i8, ptr %1, i64 16
-  %20 = load ptr, ptr %19, align 8, !tbaa !27
+  %20 = load ptr, ptr %19, align 8, !tbaa !32
   %21 = getelementptr [4 x i8], ptr %20, i64 %11
   %22 = getelementptr i8, ptr %21, i64 4
-  %23 = load i32, ptr %22, align 4, !tbaa !16
-  %24 = load i32, ptr %21, align 4, !tbaa !16
+  %23 = load i32, ptr %22, align 4, !tbaa !11
+  %24 = load i32, ptr %21, align 4, !tbaa !11
   %25 = icmp eq i32 %24, %23
   br i1 %25, label %43, label %26
 
 26:                                               ; preds = %9
   %27 = getelementptr inbounds nuw i8, ptr %1, i64 24
-  %28 = load ptr, ptr %27, align 8, !tbaa !28
+  %28 = load ptr, ptr %27, align 8, !tbaa !34
   %29 = getelementptr inbounds nuw i8, ptr %1, i64 32
-  %30 = load ptr, ptr %29, align 8, !tbaa !29
+  %30 = load ptr, ptr %29, align 8, !tbaa !35
   br label %31
 
 31:                                               ; preds = %31, %26
@@ -123,61 +123,61 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNS_L12AddSubVectorERKNS
   %33 = phi double [ %18, %26 ], [ %40, %31 ]
   %34 = sext i32 %32 to i64
   %35 = getelementptr inbounds [4 x i8], ptr %30, i64 %34
-  %36 = load i32, ptr %35, align 4, !tbaa !16
+  %36 = load i32, ptr %35, align 4, !tbaa !11
   %37 = sext i32 %36 to i64
   %38 = getelementptr inbounds [8 x i8], ptr %28, i64 %37
-  %39 = load double, ptr %38, align 8, !tbaa !17
+  %39 = load double, ptr %38, align 8, !tbaa !23
   %40 = fadd contract double %33, %39
   %41 = add nsw i32 %32, 1
   %42 = icmp eq i32 %41, %23
-  br i1 %42, label %43, label %31, !llvm.loop !30
+  br i1 %42, label %43, label %31, !llvm.loop !37
 
 43:                                               ; preds = %31, %9
   %44 = phi double [ %18, %9 ], [ %40, %31 ]
-  store double %44, ptr %17, align 8, !tbaa !17
+  store double %44, ptr %17, align 8, !tbaa !23
   br label %45
 
 45:                                               ; preds = %2, %43
   ret void
 }
 
-attributes #0 = { mustprogress nofree noinline norecurse nosync nounwind willreturn memory(readwrite, inaccessiblemem: none, target_mem: none) "frame-pointer"="all" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="sm_120" "target-features"="+ptx88,+sm_120" "uniform-work-group-size" }
+attributes #0 = { mustprogress nofree noinline norecurse nosync nounwind willreturn memory(readwrite, inaccessiblemem: none, target_mem: none) "frame-pointer"="all" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="sm_120" "target-features"="+ptx88" "uniform-work-group-size" }
 attributes #1 = { mustprogress nocallback nofree nosync nounwind speculatable willreturn memory(none) }
-attributes #2 = { mustprogress nofree noinline norecurse nosync nounwind memory(readwrite, inaccessiblemem: none, target_mem: none) "frame-pointer"="all" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="sm_120" "target-features"="+ptx88,+sm_120" "uniform-work-group-size" }
+attributes #2 = { mustprogress nofree noinline norecurse nosync nounwind memory(readwrite, inaccessiblemem: none, target_mem: none) "frame-pointer"="all" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="sm_120" "target-features"="+ptx88" "uniform-work-group-size" }
 
-!llvm.module.flags = !{!0, !1, !2}
-!llvm.ident = !{!3, !4}
-!llvm.errno.tbaa = !{!5}
+!llvm.module.flags = !{!7, !38, !39}
+!llvm.ident = !{!40, !1}
+!llvm.errno.tbaa = !{!42}
 
-!0 = !{i32 2, !"SDK Version", [2 x i32] [i32 12, i32 9]}
-!1 = !{i32 4, !"nvvm-reflect-ftz", i32 0}
-!2 = !{i32 7, !"frame-pointer", i32 2}
-!3 = !{!"clang version 24.0.0git (git@github.com:llvm/llvm-project 0220c07a94012b9dce9250addac6a8ee1f674b21)"}
-!4 = !{!"clang version 3.8.0 (tags/RELEASE_380/final)"}
-!5 = !{!6, !7, i64 0}
-!6 = !{!"__libc_errno", !7, i64 0}
-!7 = !{!"int", !8, i64 0}
-!8 = !{!"omnipotent char", !9, i64 0}
-!9 = !{!"Simple C++ TBAA"}
-!10 = !{!11, !12, i64 8}
-!11 = !{!"_ZTSZN4mfemL16ExtractSubVectorERKNS_5ArrayIiEERKNS_6VectorERS4_EUliE_", !12, i64 0, !12, i64 8, !14, i64 16}
-!12 = !{!"p1 double", !13, i64 0}
-!13 = !{!"any pointer", !8, i64 0}
-!14 = !{!"p1 int", !13, i64 0}
-!15 = !{!11, !14, i64 16}
-!16 = !{!7, !7, i64 0}
-!17 = !{!18, !18, i64 0}
-!18 = !{!"double", !8, i64 0}
-!19 = !{!11, !12, i64 0}
-!20 = !{!21, !12, i64 16}
-!21 = !{!"_ZTSZN4mfemL12SetSubVectorERKNS_5ArrayIiEERKNS_6VectorERS4_EUliE_", !12, i64 0, !14, i64 8, !12, i64 16}
-!22 = !{!21, !12, i64 0}
-!23 = !{!21, !14, i64 8}
-!24 = !{!25, !14, i64 0}
-!25 = !{!"_ZTSZN4mfemL12AddSubVectorERKNS_5ArrayIiEES3_S3_RKNS_6VectorERS4_EUliE_", !14, i64 0, !12, i64 8, !14, i64 16, !12, i64 24, !14, i64 32}
-!26 = !{!25, !12, i64 8}
-!27 = !{!25, !14, i64 16}
-!28 = !{!25, !12, i64 24}
-!29 = !{!25, !14, i64 32}
-!30 = distinct !{!30, !31}
-!31 = !{!"llvm.loop.mustprogress"}
+!1 = !{!"clang version 3.8.0 (tags/RELEASE_380/final)"}
+!7 = !{i32 2, !"SDK Version", [2 x i32] [i32 12, i32 9]}
+!8 = !{!"Simple C++ TBAA"}
+!9 = !{!"omnipotent char", !8, i64 0}
+!10 = !{!"int", !9, i64 0}
+!11 = !{!10, !10, i64 0}
+!12 = !{!"double", !9, i64 0}
+!13 = !{!"any pointer", !9, i64 0}
+!14 = !{!"p1 double", !13, i64 0}
+!15 = !{!"p1 int", !13, i64 0}
+!16 = !{!"_ZTSZN4mfemL16ExtractSubVectorERKNS_5ArrayIiEERKNS_6VectorERS4_EUliE_", !14, i64 0, !14, i64 8, !15, i64 16}
+!21 = !{!16, !14, i64 8}
+!22 = !{!16, !15, i64 16}
+!23 = !{!12, !12, i64 0}
+!24 = !{!16, !14, i64 0}
+!25 = !{!"_ZTSZN4mfemL12SetSubVectorERKNS_5ArrayIiEERKNS_6VectorERS4_EUliE_", !14, i64 0, !15, i64 8, !14, i64 16}
+!26 = !{!25, !14, i64 16}
+!27 = !{!25, !14, i64 0}
+!28 = !{!25, !15, i64 8}
+!29 = !{!"_ZTSZN4mfemL12AddSubVectorERKNS_5ArrayIiEES3_S3_RKNS_6VectorERS4_EUliE_", !15, i64 0, !14, i64 8, !15, i64 16, !14, i64 24, !15, i64 32}
+!30 = !{!29, !15, i64 0}
+!31 = !{!29, !14, i64 8}
+!32 = !{!29, !15, i64 16}
+!34 = !{!29, !14, i64 24}
+!35 = !{!29, !15, i64 32}
+!36 = !{!"llvm.loop.mustprogress"}
+!37 = distinct !{!37, !36}
+!38 = !{i32 4, !"nvvm-reflect-ftz", i32 0}
+!39 = !{i32 7, !"frame-pointer", i32 2}
+!40 = !{!"clang version 24.0.0git (git@github.com:llvm/llvm-project b08e005995ed29a2f89aa9a3f599a9d45db65523)"}
+!41 = !{!"__libc_errno", !10, i64 0}
+!42 = !{!41, !10, i64 0}

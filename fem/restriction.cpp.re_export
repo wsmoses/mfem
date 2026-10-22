@@ -1,5 +1,5 @@
-; ModuleID = '/mnt3/wmoses/git/mfem/fem/restriction.cpp'
-source_filename = "/mnt3/wmoses/git/mfem/fem/restriction.cpp"
+; ModuleID = '/home/wmoses/git/mfem/fem/restriction.cpp'
+source_filename = "/home/wmoses/git/mfem/fem/restriction.cpp"
 target datalayout = "e-p6:32:32-i64:64-i128:128-i256:256-v16:16-v32:32-n16:32:64"
 target triple = "nvptx64-nvidia-cuda"
 
@@ -138,36 +138,36 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_18ElementRestrictio
   br i1 %8, label %9, label %57
 
 9:                                                ; preds = %2
-  %10 = load ptr, ptr %1, align 8, !tbaa !10
+  %10 = load ptr, ptr %1, align 8, !tbaa !24
   %11 = sext i32 %7 to i64
   %12 = getelementptr inbounds [4 x i8], ptr %10, i64 %11
-  %13 = load i32, ptr %12, align 4, !tbaa !18
+  %13 = load i32, ptr %12, align 4, !tbaa !11
   %14 = icmp slt i32 %13, 0
   %15 = ashr i32 %13, 31
   %16 = xor i32 %15, %13
   %17 = getelementptr inbounds nuw i8, ptr %1, i64 8
-  %18 = load i32, ptr %17, align 8, !tbaa !19
+  %18 = load i32, ptr %17, align 8, !tbaa !29
   %19 = icmp sgt i32 %18, 0
   br i1 %19, label %20, label %57
 
 20:                                               ; preds = %9
   %21 = getelementptr inbounds nuw i8, ptr %1, i64 40
-  %22 = load i8, ptr %21, align 8, !tbaa !20, !range !21, !noundef !22
+  %22 = load i8, ptr %21, align 8, !tbaa !30, !range !26, !noundef !27
   %23 = trunc nuw i8 %22 to i1
   %24 = getelementptr inbounds nuw i8, ptr %1, i64 24
-  %25 = load ptr, ptr %24, align 8, !tbaa !23
+  %25 = load ptr, ptr %24, align 8, !tbaa !37
   %26 = getelementptr inbounds nuw i8, ptr %1, i64 32
-  %27 = load i32, ptr %26, align 4, !tbaa !18
+  %27 = load i32, ptr %26, align 4, !tbaa !11
   %28 = getelementptr inbounds nuw i8, ptr %1, i64 80
-  %29 = load i32, ptr %28, align 8, !tbaa !24
+  %29 = load i32, ptr %28, align 8, !tbaa !32
   %30 = srem i32 %7, %29
   %31 = sdiv i32 %7, %29
   %32 = getelementptr inbounds nuw i8, ptr %1, i64 56
-  %33 = load ptr, ptr %32, align 8, !tbaa !25
+  %33 = load ptr, ptr %32, align 8, !tbaa !41
   %34 = getelementptr inbounds nuw i8, ptr %1, i64 64
-  %35 = load i32, ptr %34, align 4, !tbaa !18
+  %35 = load i32, ptr %34, align 4, !tbaa !11
   %36 = getelementptr inbounds nuw i8, ptr %1, i64 68
-  %37 = load i32, ptr %36, align 4, !tbaa !18
+  %37 = load i32, ptr %36, align 4, !tbaa !11
   %38 = mul nsw i32 %37, %31
   br label %39
 
@@ -179,7 +179,7 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_18ElementRestrictio
   %44 = add nsw i32 %43, %41
   %45 = sext i32 %44 to i64
   %46 = getelementptr inbounds [8 x i8], ptr %25, i64 %45
-  %47 = load double, ptr %46, align 8, !tbaa !26
+  %47 = load double, ptr %46, align 8, !tbaa !31
   %48 = fneg contract double %47
   %49 = select contract i1 %14, double %48, double %47
   %50 = add nsw i32 %40, %38
@@ -187,10 +187,10 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_18ElementRestrictio
   %52 = add nsw i32 %51, %30
   %53 = sext i32 %52 to i64
   %54 = getelementptr inbounds [8 x i8], ptr %33, i64 %53
-  store double %49, ptr %54, align 8, !tbaa !26
+  store double %49, ptr %54, align 8, !tbaa !31
   %55 = add nuw nsw i32 %40, 1
   %56 = icmp eq i32 %55, %18
-  br i1 %56, label %57, label %39, !llvm.loop !28
+  br i1 %56, label %57, label %39, !llvm.loop !34
 
 57:                                               ; preds = %39, %9, %2
   ret void
@@ -216,35 +216,35 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_18ElementRestrictio
   br i1 %8, label %9, label %54
 
 9:                                                ; preds = %2
-  %10 = load ptr, ptr %1, align 8, !tbaa !30
+  %10 = load ptr, ptr %1, align 8, !tbaa !43
   %11 = sext i32 %7 to i64
   %12 = getelementptr inbounds [4 x i8], ptr %10, i64 %11
-  %13 = load i32, ptr %12, align 4, !tbaa !18
+  %13 = load i32, ptr %12, align 4, !tbaa !11
   %14 = ashr i32 %13, 31
   %15 = xor i32 %14, %13
   %16 = getelementptr inbounds nuw i8, ptr %1, i64 8
-  %17 = load i32, ptr %16, align 8, !tbaa !32
+  %17 = load i32, ptr %16, align 8, !tbaa !45
   %18 = icmp sgt i32 %17, 0
   br i1 %18, label %19, label %54
 
 19:                                               ; preds = %9
   %20 = getelementptr inbounds nuw i8, ptr %1, i64 80
-  %21 = load i8, ptr %20, align 8, !tbaa !33, !range !21, !noundef !22
+  %21 = load i8, ptr %20, align 8, !tbaa !46, !range !26, !noundef !27
   %22 = trunc nuw i8 %21 to i1
   %23 = getelementptr inbounds nuw i8, ptr %1, i64 64
-  %24 = load ptr, ptr %23, align 8, !tbaa !23
+  %24 = load ptr, ptr %23, align 8, !tbaa !37
   %25 = getelementptr inbounds nuw i8, ptr %1, i64 72
-  %26 = load i32, ptr %25, align 4, !tbaa !18
+  %26 = load i32, ptr %25, align 4, !tbaa !11
   %27 = getelementptr inbounds nuw i8, ptr %1, i64 48
-  %28 = load i32, ptr %27, align 8, !tbaa !34
+  %28 = load i32, ptr %27, align 8, !tbaa !47
   %29 = srem i32 %7, %28
   %30 = sdiv i32 %7, %28
   %31 = getelementptr inbounds nuw i8, ptr %1, i64 24
-  %32 = load ptr, ptr %31, align 8, !tbaa !25
+  %32 = load ptr, ptr %31, align 8, !tbaa !41
   %33 = getelementptr inbounds nuw i8, ptr %1, i64 32
-  %34 = load i32, ptr %33, align 4, !tbaa !18
+  %34 = load i32, ptr %33, align 4, !tbaa !11
   %35 = getelementptr inbounds nuw i8, ptr %1, i64 36
-  %36 = load i32, ptr %35, align 4, !tbaa !18
+  %36 = load i32, ptr %35, align 4, !tbaa !11
   %37 = mul nsw i32 %36, %30
   br label %38
 
@@ -256,16 +256,16 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_18ElementRestrictio
   %43 = add nsw i32 %42, %40
   %44 = sext i32 %43 to i64
   %45 = getelementptr inbounds [8 x i8], ptr %24, i64 %44
-  %46 = load double, ptr %45, align 8, !tbaa !26
+  %46 = load double, ptr %45, align 8, !tbaa !31
   %47 = add nsw i32 %39, %37
   %48 = mul nsw i32 %47, %34
   %49 = add nsw i32 %48, %29
   %50 = sext i32 %49 to i64
   %51 = getelementptr inbounds [8 x i8], ptr %32, i64 %50
-  store double %46, ptr %51, align 8, !tbaa !26
+  store double %46, ptr %51, align 8, !tbaa !31
   %52 = add nuw nsw i32 %39, 1
   %53 = icmp eq i32 %52, %17
-  br i1 %53, label %54, label %38, !llvm.loop !35
+  br i1 %53, label %54, label %38, !llvm.loop !48
 
 54:                                               ; preds = %38, %9, %2
   ret void
@@ -282,14 +282,14 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_18ElementRestrictio
   br i1 %8, label %9, label %84
 
 9:                                                ; preds = %2
-  %10 = load ptr, ptr %1, align 8, !tbaa !36
+  %10 = load ptr, ptr %1, align 8, !tbaa !52
   %11 = sext i32 %7 to i64
   %12 = getelementptr inbounds [4 x i8], ptr %10, i64 %11
-  %13 = load i32, ptr %12, align 4, !tbaa !18
+  %13 = load i32, ptr %12, align 4, !tbaa !11
   %14 = getelementptr i8, ptr %12, i64 4
-  %15 = load i32, ptr %14, align 4, !tbaa !18
+  %15 = load i32, ptr %14, align 4, !tbaa !11
   %16 = getelementptr inbounds nuw i8, ptr %1, i64 8
-  %17 = load i32, ptr %16, align 8, !tbaa !40
+  %17 = load i32, ptr %16, align 8, !tbaa !54
   %18 = icmp sgt i32 %17, 0
   br i1 %18, label %19, label %84
 
@@ -302,12 +302,12 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_18ElementRestrictio
   %25 = getelementptr inbounds nuw i8, ptr %1, i64 40
   %26 = getelementptr inbounds nuw i8, ptr %1, i64 44
   %27 = getelementptr inbounds nuw i8, ptr %1, i64 88
-  %28 = load i8, ptr %27, align 8, !tbaa !41, !range !21, !noundef !22
+  %28 = load i8, ptr %27, align 8, !tbaa !59, !range !26, !noundef !27
   %29 = trunc nuw i8 %28 to i1
   %30 = getelementptr inbounds nuw i8, ptr %1, i64 72
-  %31 = load ptr, ptr %30, align 8, !tbaa !42
+  %31 = load ptr, ptr %30, align 8, !tbaa !66
   %32 = getelementptr inbounds nuw i8, ptr %1, i64 80
-  %33 = load i32, ptr %32, align 4, !tbaa !18
+  %33 = load i32, ptr %32, align 4, !tbaa !11
   %34 = load i32, ptr %23, align 8
   %35 = load ptr, ptr %24, align 8
   %36 = load i32, ptr %25, align 4
@@ -326,17 +326,17 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_18ElementRestrictio
   %45 = add nsw i32 %44, %42
   %46 = sext i32 %45 to i64
   %47 = getelementptr inbounds [8 x i8], ptr %31, i64 %46
-  store double %41, ptr %47, align 8, !tbaa !26
+  store double %41, ptr %47, align 8, !tbaa !31
   %48 = add nuw nsw i32 %39, 1
   %49 = icmp eq i32 %48, %17
-  br i1 %49, label %84, label %38, !llvm.loop !43
+  br i1 %49, label %84, label %38, !llvm.loop !60
 
 50:                                               ; preds = %38, %79
   %51 = phi i32 [ %82, %79 ], [ %13, %38 ]
   %52 = phi double [ %81, %79 ], [ 0.000000e+00, %38 ]
   %53 = sext i32 %51 to i64
   %54 = getelementptr inbounds [4 x i8], ptr %22, i64 %53
-  %55 = load i32, ptr %54, align 4, !tbaa !18
+  %55 = load i32, ptr %54, align 4, !tbaa !11
   %56 = icmp sgt i32 %55, -1
   br i1 %56, label %57, label %67
 
@@ -349,7 +349,7 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_18ElementRestrictio
   %63 = add nsw i32 %62, %58
   %64 = sext i32 %63 to i64
   %65 = getelementptr inbounds [8 x i8], ptr %35, i64 %64
-  %66 = load double, ptr %65, align 8, !tbaa !26
+  %66 = load double, ptr %65, align 8, !tbaa !31
   br label %79
 
 67:                                               ; preds = %50
@@ -362,7 +362,7 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_18ElementRestrictio
   %74 = add nsw i32 %73, %69
   %75 = sext i32 %74 to i64
   %76 = getelementptr inbounds [8 x i8], ptr %35, i64 %75
-  %77 = load double, ptr %76, align 8, !tbaa !26
+  %77 = load double, ptr %76, align 8, !tbaa !31
   %78 = fneg contract double %77
   br label %79
 
@@ -371,7 +371,7 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_18ElementRestrictio
   %81 = fadd contract double %52, %80
   %82 = add nsw i32 %51, 1
   %83 = icmp eq i32 %82, %15
-  br i1 %83, label %40, label %50, !llvm.loop !44
+  br i1 %83, label %40, label %50, !llvm.loop !58
 
 84:                                               ; preds = %40, %9, %2
   ret void
@@ -388,14 +388,14 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_18ElementRestrictio
   br i1 %8, label %9, label %86
 
 9:                                                ; preds = %2
-  %10 = load ptr, ptr %1, align 8, !tbaa !45
+  %10 = load ptr, ptr %1, align 8, !tbaa !68
   %11 = sext i32 %7 to i64
   %12 = getelementptr inbounds [4 x i8], ptr %10, i64 %11
-  %13 = load i32, ptr %12, align 4, !tbaa !18
+  %13 = load i32, ptr %12, align 4, !tbaa !11
   %14 = getelementptr i8, ptr %12, i64 4
-  %15 = load i32, ptr %14, align 4, !tbaa !18
+  %15 = load i32, ptr %14, align 4, !tbaa !11
   %16 = getelementptr inbounds nuw i8, ptr %1, i64 8
-  %17 = load i32, ptr %16, align 8, !tbaa !47
+  %17 = load i32, ptr %16, align 8, !tbaa !70
   %18 = icmp sgt i32 %17, 0
   br i1 %18, label %19, label %86
 
@@ -408,12 +408,12 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_18ElementRestrictio
   %25 = getelementptr inbounds nuw i8, ptr %1, i64 40
   %26 = getelementptr inbounds nuw i8, ptr %1, i64 44
   %27 = getelementptr inbounds nuw i8, ptr %1, i64 88
-  %28 = load i8, ptr %27, align 8, !tbaa !48, !range !21, !noundef !22
+  %28 = load i8, ptr %27, align 8, !tbaa !75, !range !26, !noundef !27
   %29 = trunc nuw i8 %28 to i1
   %30 = getelementptr inbounds nuw i8, ptr %1, i64 72
-  %31 = load ptr, ptr %30, align 8, !tbaa !42
+  %31 = load ptr, ptr %30, align 8, !tbaa !66
   %32 = getelementptr inbounds nuw i8, ptr %1, i64 80
-  %33 = load i32, ptr %32, align 4, !tbaa !18
+  %33 = load i32, ptr %32, align 4, !tbaa !11
   %34 = load i32, ptr %23, align 8
   %35 = load ptr, ptr %24, align 8
   %36 = load i32, ptr %25, align 4
@@ -432,19 +432,19 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_18ElementRestrictio
   %45 = add nsw i32 %44, %42
   %46 = sext i32 %45 to i64
   %47 = getelementptr inbounds [8 x i8], ptr %31, i64 %46
-  %48 = load double, ptr %47, align 8, !tbaa !26
+  %48 = load double, ptr %47, align 8, !tbaa !31
   %49 = fadd contract double %41, %48
-  store double %49, ptr %47, align 8, !tbaa !26
+  store double %49, ptr %47, align 8, !tbaa !31
   %50 = add nuw nsw i32 %39, 1
   %51 = icmp eq i32 %50, %17
-  br i1 %51, label %86, label %38, !llvm.loop !49
+  br i1 %51, label %86, label %38, !llvm.loop !76
 
 52:                                               ; preds = %38, %81
   %53 = phi i32 [ %84, %81 ], [ %13, %38 ]
   %54 = phi double [ %83, %81 ], [ 0.000000e+00, %38 ]
   %55 = sext i32 %53 to i64
   %56 = getelementptr inbounds [4 x i8], ptr %22, i64 %55
-  %57 = load i32, ptr %56, align 4, !tbaa !18
+  %57 = load i32, ptr %56, align 4, !tbaa !11
   %58 = icmp sgt i32 %57, -1
   br i1 %58, label %59, label %69
 
@@ -457,7 +457,7 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_18ElementRestrictio
   %65 = add nsw i32 %64, %60
   %66 = sext i32 %65 to i64
   %67 = getelementptr inbounds [8 x i8], ptr %35, i64 %66
-  %68 = load double, ptr %67, align 8, !tbaa !26
+  %68 = load double, ptr %67, align 8, !tbaa !31
   br label %81
 
 69:                                               ; preds = %52
@@ -470,7 +470,7 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_18ElementRestrictio
   %76 = add nsw i32 %75, %71
   %77 = sext i32 %76 to i64
   %78 = getelementptr inbounds [8 x i8], ptr %35, i64 %77
-  %79 = load double, ptr %78, align 8, !tbaa !26
+  %79 = load double, ptr %78, align 8, !tbaa !31
   %80 = fneg contract double %79
   br label %81
 
@@ -479,7 +479,7 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_18ElementRestrictio
   %83 = fadd contract double %54, %82
   %84 = add nsw i32 %53, 1
   %85 = icmp eq i32 %84, %15
-  br i1 %85, label %40, label %52, !llvm.loop !50
+  br i1 %85, label %40, label %52, !llvm.loop !74
 
 86:                                               ; preds = %40, %9, %2
   ret void
@@ -496,14 +496,14 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_18ElementRestrictio
   br i1 %8, label %9, label %70
 
 9:                                                ; preds = %2
-  %10 = load ptr, ptr %1, align 8, !tbaa !51
+  %10 = load ptr, ptr %1, align 8, !tbaa !78
   %11 = sext i32 %7 to i64
   %12 = getelementptr inbounds [4 x i8], ptr %10, i64 %11
-  %13 = load i32, ptr %12, align 4, !tbaa !18
+  %13 = load i32, ptr %12, align 4, !tbaa !11
   %14 = getelementptr i8, ptr %12, i64 4
-  %15 = load i32, ptr %14, align 4, !tbaa !18
+  %15 = load i32, ptr %14, align 4, !tbaa !11
   %16 = getelementptr inbounds nuw i8, ptr %1, i64 8
-  %17 = load i32, ptr %16, align 8, !tbaa !53
+  %17 = load i32, ptr %16, align 8, !tbaa !80
   %18 = icmp sgt i32 %17, 0
   br i1 %18, label %19, label %70
 
@@ -520,12 +520,12 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_18ElementRestrictio
   %29 = getelementptr inbounds nuw i8, ptr %1, i64 44
   %30 = load i32, ptr %29, align 4
   %31 = getelementptr inbounds nuw i8, ptr %1, i64 88
-  %32 = load i8, ptr %31, align 8, !tbaa !54, !range !21, !noundef !22
+  %32 = load i8, ptr %31, align 8, !tbaa !85, !range !26, !noundef !27
   %33 = trunc nuw i8 %32 to i1
   %34 = getelementptr inbounds nuw i8, ptr %1, i64 72
-  %35 = load ptr, ptr %34, align 8, !tbaa !42
+  %35 = load ptr, ptr %34, align 8, !tbaa !66
   %36 = getelementptr inbounds nuw i8, ptr %1, i64 80
-  %37 = load i32, ptr %36, align 4, !tbaa !18
+  %37 = load i32, ptr %36, align 4, !tbaa !11
   br label %38
 
 38:                                               ; preds = %40, %19
@@ -540,17 +540,17 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_18ElementRestrictio
   %45 = add nsw i32 %44, %42
   %46 = sext i32 %45 to i64
   %47 = getelementptr inbounds [8 x i8], ptr %35, i64 %46
-  store double %41, ptr %47, align 8, !tbaa !26
+  store double %41, ptr %47, align 8, !tbaa !31
   %48 = add nuw nsw i32 %39, 1
   %49 = icmp eq i32 %48, %17
-  br i1 %49, label %70, label %38, !llvm.loop !55
+  br i1 %49, label %70, label %38, !llvm.loop !86
 
 50:                                               ; preds = %38, %50
   %51 = phi i32 [ %68, %50 ], [ %13, %38 ]
   %52 = phi double [ %67, %50 ], [ 0.000000e+00, %38 ]
   %53 = sext i32 %51 to i64
   %54 = getelementptr inbounds [4 x i8], ptr %22, i64 %53
-  %55 = load i32, ptr %54, align 4, !tbaa !18
+  %55 = load i32, ptr %54, align 4, !tbaa !11
   %56 = ashr i32 %55, 31
   %57 = xor i32 %56, %55
   %58 = srem i32 %57, %24
@@ -561,11 +561,11 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_18ElementRestrictio
   %63 = add nsw i32 %62, %58
   %64 = sext i32 %63 to i64
   %65 = getelementptr inbounds [8 x i8], ptr %26, i64 %64
-  %66 = load double, ptr %65, align 8, !tbaa !26
+  %66 = load double, ptr %65, align 8, !tbaa !31
   %67 = fadd contract double %52, %66
   %68 = add nsw i32 %51, 1
   %69 = icmp eq i32 %68, %15
-  br i1 %69, label %40, label %50, !llvm.loop !56
+  br i1 %69, label %40, label %50, !llvm.loop !84
 
 70:                                               ; preds = %40, %9, %2
   ret void
@@ -583,22 +583,22 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_18ElementRestrictio
 
 9:                                                ; preds = %2
   %10 = getelementptr inbounds nuw i8, ptr %1, i64 8
-  %11 = load i32, ptr %10, align 8, !tbaa !57
+  %11 = load i32, ptr %10, align 8, !tbaa !90
   %12 = icmp sgt i32 %11, 0
   br i1 %12, label %13, label %75
 
 13:                                               ; preds = %9
-  %14 = load ptr, ptr %1, align 8, !tbaa !59
+  %14 = load ptr, ptr %1, align 8, !tbaa !88
   %15 = sext i32 %7 to i64
   %16 = getelementptr [4 x i8], ptr %14, i64 %15
   %17 = getelementptr i8, ptr %16, i64 4
-  %18 = load i32, ptr %17, align 4, !tbaa !18
+  %18 = load i32, ptr %17, align 4, !tbaa !11
   %19 = getelementptr inbounds nuw i8, ptr %1, i64 16
-  %20 = load ptr, ptr %19, align 8, !tbaa !60
+  %20 = load ptr, ptr %19, align 8, !tbaa !91
   %21 = sext i32 %18 to i64
   %22 = getelementptr [4 x i8], ptr %20, i64 %21
   %23 = getelementptr i8, ptr %22, i64 -4
-  %24 = load i32, ptr %23, align 4, !tbaa !18
+  %24 = load i32, ptr %23, align 4, !tbaa !11
   %25 = icmp sgt i32 %24, -1
   %26 = xor i32 %24, -1
   %27 = getelementptr inbounds nuw i8, ptr %1, i64 56
@@ -610,12 +610,12 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_18ElementRestrictio
   %33 = getelementptr inbounds nuw i8, ptr %1, i64 44
   %34 = load i32, ptr %33, align 4
   %35 = getelementptr inbounds nuw i8, ptr %1, i64 88
-  %36 = load i8, ptr %35, align 8, !tbaa !61, !range !21, !noundef !22
+  %36 = load i8, ptr %35, align 8, !tbaa !93, !range !26, !noundef !27
   %37 = trunc nuw i8 %36 to i1
   %38 = getelementptr inbounds nuw i8, ptr %1, i64 72
-  %39 = load ptr, ptr %38, align 8, !tbaa !42
+  %39 = load ptr, ptr %38, align 8, !tbaa !66
   %40 = getelementptr inbounds nuw i8, ptr %1, i64 80
-  %41 = load i32, ptr %40, align 4, !tbaa !18
+  %41 = load i32, ptr %40, align 4, !tbaa !11
   br label %42
 
 42:                                               ; preds = %65, %13
@@ -631,7 +631,7 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_18ElementRestrictio
   %50 = add nsw i32 %49, %45
   %51 = sext i32 %50 to i64
   %52 = getelementptr inbounds [8 x i8], ptr %30, i64 %51
-  %53 = load double, ptr %52, align 8, !tbaa !26
+  %53 = load double, ptr %52, align 8, !tbaa !31
   br label %65
 
 54:                                               ; preds = %42
@@ -643,7 +643,7 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_18ElementRestrictio
   %60 = add nsw i32 %59, %55
   %61 = sext i32 %60 to i64
   %62 = getelementptr inbounds [8 x i8], ptr %30, i64 %61
-  %63 = load double, ptr %62, align 8, !tbaa !26
+  %63 = load double, ptr %62, align 8, !tbaa !31
   %64 = fneg contract double %63
   br label %65
 
@@ -655,10 +655,10 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_18ElementRestrictio
   %70 = add nsw i32 %69, %67
   %71 = sext i32 %70 to i64
   %72 = getelementptr inbounds [8 x i8], ptr %39, i64 %71
-  store double %66, ptr %72, align 8, !tbaa !26
+  store double %66, ptr %72, align 8, !tbaa !31
   %73 = add nuw nsw i32 %43, 1
   %74 = icmp eq i32 %73, %11
-  br i1 %74, label %75, label %42, !llvm.loop !62
+  br i1 %74, label %75, label %42, !llvm.loop !94
 
 75:                                               ; preds = %65, %9, %2
   ret void
@@ -676,9 +676,9 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_18ElementRestrictio
 
 9:                                                ; preds = %2
   %10 = sext i32 %7 to i64
-  %11 = load ptr, ptr %1, align 8, !tbaa !63
+  %11 = load ptr, ptr %1, align 8, !tbaa !96
   %12 = getelementptr inbounds [4 x i8], ptr %11, i64 %10
-  store i32 0, ptr %12, align 4, !tbaa !18
+  store i32 0, ptr %12, align 4, !tbaa !11
   br label %13
 
 13:                                               ; preds = %2, %9
@@ -696,26 +696,26 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_18ElementRestrictio
   br i1 %8, label %9, label %120
 
 9:                                                ; preds = %2
-  %10 = load i32, ptr %1, align 8, !tbaa !65
+  %10 = load i32, ptr %1, align 8, !tbaa !99
   %11 = sdiv i32 %7, %10
   %12 = srem i32 %7, %10
   %13 = mul nsw i32 %11, %10
   %14 = add nsw i32 %13, %12
   %15 = getelementptr inbounds nuw i8, ptr %1, i64 8
-  %16 = load ptr, ptr %15, align 8, !tbaa !68
+  %16 = load ptr, ptr %15, align 8, !tbaa !100
   %17 = sext i32 %14 to i64
   %18 = getelementptr inbounds [4 x i8], ptr %16, i64 %17
-  %19 = load i32, ptr %18, align 4, !tbaa !18
+  %19 = load i32, ptr %18, align 4, !tbaa !11
   %20 = getelementptr inbounds nuw i8, ptr %1, i64 16
-  %21 = load ptr, ptr %20, align 8, !tbaa !69
+  %21 = load ptr, ptr %20, align 8, !tbaa !101
   %22 = sext i32 %19 to i64
   %23 = getelementptr inbounds [4 x i8], ptr %21, i64 %22
-  %24 = load i32, ptr %23, align 4, !tbaa !18
+  %24 = load i32, ptr %23, align 4, !tbaa !11
   %25 = getelementptr i8, ptr %23, i64 4
-  %26 = load i32, ptr %25, align 4, !tbaa !18
+  %26 = load i32, ptr %25, align 4, !tbaa !11
   %27 = sub nsw i32 %26, %24
   %28 = getelementptr inbounds nuw i8, ptr %1, i64 32
-  %29 = load ptr, ptr %28, align 8, !tbaa !70
+  %29 = load ptr, ptr %28, align 8, !tbaa !112
   %30 = getelementptr inbounds nuw i8, ptr %1, i64 40
   %31 = sext i32 %24 to i64
   %32 = getelementptr inbounds [4 x i8], ptr %29, i64 %31
@@ -724,7 +724,7 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_18ElementRestrictio
 
 34:                                               ; preds = %9
   %35 = getelementptr inbounds nuw i8, ptr %1, i64 48
-  %36 = load ptr, ptr %35, align 8, !tbaa !71
+  %36 = load ptr, ptr %35, align 8, !tbaa !103
   br label %47
 
 37:                                               ; preds = %47, %9
@@ -746,26 +746,26 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_18ElementRestrictio
   %49 = add nsw i32 %48, %24
   %50 = sext i32 %49 to i64
   %51 = getelementptr inbounds [4 x i8], ptr %36, i64 %50
-  %52 = load i32, ptr %51, align 4, !tbaa !18
+  %52 = load i32, ptr %51, align 4, !tbaa !11
   %53 = sdiv i32 %52, %10
   %54 = zext nneg i32 %48 to i64
   %55 = getelementptr inbounds nuw [4 x i8], ptr %32, i64 %54
-  store i32 %53, ptr %55, align 4, !tbaa !18
+  store i32 %53, ptr %55, align 4, !tbaa !11
   %56 = add nuw nsw i32 %48, 1
   %57 = icmp eq i32 %56, %27
-  br i1 %57, label %37, label %47, !llvm.loop !72
+  br i1 %57, label %37, label %47, !llvm.loop !104
 
 58:                                               ; preds = %117, %39
   %59 = phi i32 [ 0, %39 ], [ %118, %117 ]
   %60 = add nsw i32 %59, %13
   %61 = sext i32 %60 to i64
   %62 = getelementptr inbounds [4 x i8], ptr %16, i64 %61
-  %63 = load i32, ptr %62, align 4, !tbaa !18
+  %63 = load i32, ptr %62, align 4, !tbaa !11
   %64 = sext i32 %63 to i64
   %65 = getelementptr inbounds [4 x i8], ptr %21, i64 %64
-  %66 = load i32, ptr %65, align 4, !tbaa !18
+  %66 = load i32, ptr %65, align 4, !tbaa !11
   %67 = getelementptr i8, ptr %65, i64 4
-  %68 = load i32, ptr %67, align 4, !tbaa !18
+  %68 = load i32, ptr %67, align 4, !tbaa !11
   %69 = sub i32 %68, %66
   %70 = icmp eq i32 %69, 1
   %71 = select i1 %40, i1 true, i1 %70
@@ -786,33 +786,33 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_18ElementRestrictio
   br label %80
 
 80:                                               ; preds = %97, %78
-  %81 = phi i32 [ 2147483647, %78 ], [ %98, %97 ]
-  %82 = phi i32 [ 0, %78 ], [ %99, %97 ]
-  %83 = zext nneg i32 %82 to i64
+  %81 = phi i32 [ 0, %78 ], [ %99, %97 ]
+  %82 = phi i32 [ 2147483647, %78 ], [ %98, %97 ]
+  %83 = zext nneg i32 %81 to i64
   %84 = getelementptr inbounds nuw [4 x i8], ptr %32, i64 %83
-  %85 = load i32, ptr %84, align 4, !tbaa !18
-  %86 = icmp sge i32 %85, %81
+  %85 = load i32, ptr %84, align 4, !tbaa !11
+  %86 = icmp sge i32 %85, %82
   %87 = or i1 %79, %86
   br i1 %87, label %97, label %91
 
 88:                                               ; preds = %91
   %89 = add nuw nsw i32 %92, 1
   %90 = icmp eq i32 %89, %69
-  br i1 %90, label %97, label %91, !llvm.loop !73
+  br i1 %90, label %97, label %91, !llvm.loop !116
 
 91:                                               ; preds = %80, %88
   %92 = phi i32 [ %89, %88 ], [ 0, %80 ]
   %93 = zext nneg i32 %92 to i64
   %94 = getelementptr inbounds nuw [4 x i8], ptr %75, i64 %93
-  %95 = load i32, ptr %94, align 4, !tbaa !18
+  %95 = load i32, ptr %94, align 4, !tbaa !11
   %96 = icmp eq i32 %85, %95
   br i1 %96, label %97, label %88
 
 97:                                               ; preds = %91, %88, %80
-  %98 = phi i32 [ %81, %80 ], [ %85, %91 ], [ %81, %88 ]
-  %99 = add nuw nsw i32 %82, 1
+  %98 = phi i32 [ %82, %80 ], [ %85, %91 ], [ %82, %88 ]
+  %99 = add nuw nsw i32 %81, 1
   %100 = icmp eq i32 %99, %27
-  br i1 %100, label %101, label %80, !llvm.loop !74
+  br i1 %100, label %101, label %80, !llvm.loop !117
 
 101:                                              ; preds = %97, %77
   %102 = phi i32 [ 2147483647, %77 ], [ %98, %97 ]
@@ -824,14 +824,14 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_18ElementRestrictio
   %106 = add nsw i32 %105, %66
   %107 = sext i32 %106 to i64
   %108 = getelementptr inbounds [4 x i8], ptr %44, i64 %107
-  %109 = load i32, ptr %108, align 4, !tbaa !18
+  %109 = load i32, ptr %108, align 4, !tbaa !11
   %110 = sdiv i32 %109, %10
   %111 = zext nneg i32 %105 to i64
   %112 = getelementptr inbounds nuw [4 x i8], ptr %75, i64 %111
-  store i32 %110, ptr %112, align 4, !tbaa !18
+  store i32 %110, ptr %112, align 4, !tbaa !11
   %113 = add nuw nsw i32 %105, 1
   %114 = icmp eq i32 %113, %69
-  br i1 %114, label %77, label %104, !llvm.loop !75
+  br i1 %114, label %77, label %104, !llvm.loop !108
 
 115:                                              ; preds = %101, %58
   %116 = atomicrmw add ptr %46, i32 1 monotonic, align 4
@@ -840,7 +840,7 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_18ElementRestrictio
 117:                                              ; preds = %115, %101
   %118 = add nuw nsw i32 %59, 1
   %119 = icmp eq i32 %118, %10
-  br i1 %119, label %120, label %58, !llvm.loop !76
+  br i1 %119, label %120, label %58, !llvm.loop !109
 
 120:                                              ; preds = %117, %37, %2
   ret void
@@ -858,9 +858,9 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_18ElementRestrictio
 
 9:                                                ; preds = %2
   %10 = sext i32 %7 to i64
-  %11 = load ptr, ptr %1, align 8, !tbaa !77
+  %11 = load ptr, ptr %1, align 8, !tbaa !119
   %12 = getelementptr inbounds [4 x i8], ptr %11, i64 %10
-  store i32 0, ptr %12, align 4, !tbaa !18
+  store i32 0, ptr %12, align 4, !tbaa !11
   br label %13
 
 13:                                               ; preds = %2, %9
@@ -878,9 +878,9 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_18ElementRestrictio
   br i1 %8, label %9, label %158
 
 9:                                                ; preds = %2
-  %10 = load i32, ptr %1, align 8, !tbaa !79
+  %10 = load i32, ptr %1, align 8, !tbaa !121
   %11 = getelementptr inbounds nuw i8, ptr %1, i64 4
-  %12 = load i32, ptr %11, align 4, !tbaa !81
+  %12 = load i32, ptr %11, align 4, !tbaa !122
   %13 = mul nsw i32 %12, %10
   %14 = sdiv i32 %7, %13
   %15 = srem i32 %7, %13
@@ -889,16 +889,16 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_18ElementRestrictio
   %18 = mul nsw i32 %14, %10
   %19 = add nsw i32 %16, %18
   %20 = getelementptr inbounds nuw i8, ptr %1, i64 8
-  %21 = load ptr, ptr %20, align 8, !tbaa !82
+  %21 = load ptr, ptr %20, align 8, !tbaa !123
   %22 = sext i32 %19 to i64
   %23 = getelementptr inbounds [4 x i8], ptr %21, i64 %22
-  %24 = load i32, ptr %23, align 4, !tbaa !18
+  %24 = load i32, ptr %23, align 4, !tbaa !11
   %25 = ashr i32 %24, 31
   %26 = xor i32 %25, %24
   %27 = getelementptr inbounds nuw i8, ptr %1, i64 16
-  %28 = load i32, ptr %27, align 8, !tbaa !83
+  %28 = load i32, ptr %27, align 8, !tbaa !124
   %29 = getelementptr inbounds nuw i8, ptr %1, i64 20
-  %30 = load i8, ptr %29, align 4, !tbaa !84, !range !21, !noundef !22
+  %30 = load i8, ptr %29, align 4, !tbaa !125, !range !26, !noundef !27
   %31 = trunc nuw i8 %30 to i1
   %32 = mul nsw i32 %26, %12
   %33 = add nsw i32 %32, %17
@@ -906,15 +906,15 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_18ElementRestrictio
   %35 = add nsw i32 %34, %26
   %36 = select i1 %31, i32 %33, i32 %35
   %37 = getelementptr inbounds nuw i8, ptr %1, i64 24
-  %38 = load ptr, ptr %37, align 8, !tbaa !85
+  %38 = load ptr, ptr %37, align 8, !tbaa !126
   %39 = sext i32 %26 to i64
   %40 = getelementptr inbounds [4 x i8], ptr %38, i64 %39
-  %41 = load i32, ptr %40, align 4, !tbaa !18
+  %41 = load i32, ptr %40, align 4, !tbaa !11
   %42 = getelementptr i8, ptr %40, i64 4
-  %43 = load i32, ptr %42, align 4, !tbaa !18
+  %43 = load i32, ptr %42, align 4, !tbaa !11
   %44 = sub nsw i32 %43, %41
   %45 = getelementptr inbounds nuw i8, ptr %1, i64 32
-  %46 = load ptr, ptr %45, align 8, !tbaa !86
+  %46 = load ptr, ptr %45, align 8, !tbaa !127
   %47 = sext i32 %41 to i64
   %48 = getelementptr inbounds [4 x i8], ptr %46, i64 %47
   %49 = icmp sgt i32 %44, 0
@@ -922,12 +922,12 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_18ElementRestrictio
 
 50:                                               ; preds = %9
   %51 = getelementptr inbounds nuw i8, ptr %1, i64 40
-  %52 = load ptr, ptr %51, align 8, !tbaa !87
+  %52 = load ptr, ptr %51, align 8, !tbaa !129
   br label %75
 
 53:                                               ; preds = %75, %9
   %54 = getelementptr inbounds nuw i8, ptr %1, i64 48
-  %55 = load i32, ptr %54, align 8, !tbaa !88
+  %55 = load i32, ptr %54, align 8, !tbaa !132
   %56 = icmp sgt i32 %55, 0
   br i1 %56, label %57, label %158
 
@@ -940,7 +940,7 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_18ElementRestrictio
   %63 = getelementptr inbounds nuw i8, ptr %1, i64 88
   %64 = sext i32 %36 to i64
   %65 = getelementptr inbounds nuw i8, ptr %1, i64 72
-  %66 = load i32, ptr %58, align 4, !tbaa !89
+  %66 = load i32, ptr %58, align 4, !tbaa !134
   %67 = icmp sgt i32 %66, 0
   %68 = mul nsw i32 %66, %14
   %69 = load ptr, ptr %59, align 8
@@ -956,16 +956,16 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_18ElementRestrictio
   %77 = add nsw i32 %76, %41
   %78 = sext i32 %77 to i64
   %79 = getelementptr inbounds [4 x i8], ptr %52, i64 %78
-  %80 = load i32, ptr %79, align 4, !tbaa !18
+  %80 = load i32, ptr %79, align 4, !tbaa !11
   %81 = ashr i32 %80, 31
   %82 = xor i32 %81, %80
   %83 = sdiv i32 %82, %10
   %84 = zext nneg i32 %76 to i64
   %85 = getelementptr inbounds nuw [4 x i8], ptr %48, i64 %84
-  store i32 %83, ptr %85, align 4, !tbaa !18
+  store i32 %83, ptr %85, align 4, !tbaa !11
   %86 = add nuw nsw i32 %76, 1
   %87 = icmp eq i32 %86, %44
-  br i1 %87, label %53, label %75, !llvm.loop !90
+  br i1 %87, label %53, label %75, !llvm.loop !130
 
 88:                                               ; preds = %57, %90
   %89 = phi i32 [ %91, %90 ], [ 0, %57 ]
@@ -974,21 +974,21 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_18ElementRestrictio
 90:                                               ; preds = %155
   %91 = add nuw nsw i32 %89, 1
   %92 = icmp eq i32 %91, %55
-  br i1 %92, label %158, label %88, !llvm.loop !91
+  br i1 %92, label %158, label %88, !llvm.loop !143
 
 93:                                               ; preds = %88, %155
   %94 = phi i32 [ %156, %155 ], [ 0, %88 ]
   %95 = add nsw i32 %94, %68
   %96 = sext i32 %95 to i64
   %97 = getelementptr inbounds [4 x i8], ptr %69, i64 %96
-  %98 = load i32, ptr %97, align 4, !tbaa !18
+  %98 = load i32, ptr %97, align 4, !tbaa !11
   %99 = ashr i32 %98, 31
   %100 = xor i32 %99, %98
   %101 = sext i32 %100 to i64
   %102 = getelementptr inbounds [4 x i8], ptr %70, i64 %101
-  %103 = load i32, ptr %102, align 4, !tbaa !18
+  %103 = load i32, ptr %102, align 4, !tbaa !11
   %104 = getelementptr i8, ptr %102, i64 4
-  %105 = load i32, ptr %104, align 4, !tbaa !18
+  %105 = load i32, ptr %104, align 4, !tbaa !11
   %106 = sub i32 %105, %103
   %107 = icmp eq i32 %106, 1
   %108 = select i1 %61, i1 true, i1 %107
@@ -1008,33 +1008,33 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_18ElementRestrictio
   br label %116
 
 116:                                              ; preds = %133, %114
-  %117 = phi i32 [ 2147483647, %114 ], [ %134, %133 ]
-  %118 = phi i32 [ 0, %114 ], [ %135, %133 ]
-  %119 = zext nneg i32 %118 to i64
+  %117 = phi i32 [ 0, %114 ], [ %135, %133 ]
+  %118 = phi i32 [ 2147483647, %114 ], [ %134, %133 ]
+  %119 = zext nneg i32 %117 to i64
   %120 = getelementptr inbounds nuw [4 x i8], ptr %48, i64 %119
-  %121 = load i32, ptr %120, align 4, !tbaa !18
-  %122 = icmp sge i32 %121, %117
+  %121 = load i32, ptr %120, align 4, !tbaa !11
+  %122 = icmp sge i32 %121, %118
   %123 = or i1 %115, %122
   br i1 %123, label %133, label %127
 
 124:                                              ; preds = %127
   %125 = add nuw nsw i32 %128, 1
   %126 = icmp eq i32 %125, %106
-  br i1 %126, label %133, label %127, !llvm.loop !73
+  br i1 %126, label %133, label %127, !llvm.loop !116
 
 127:                                              ; preds = %116, %124
   %128 = phi i32 [ %125, %124 ], [ 0, %116 ]
   %129 = zext nneg i32 %128 to i64
   %130 = getelementptr inbounds nuw [4 x i8], ptr %111, i64 %129
-  %131 = load i32, ptr %130, align 4, !tbaa !18
+  %131 = load i32, ptr %130, align 4, !tbaa !11
   %132 = icmp eq i32 %121, %131
   br i1 %132, label %133, label %124
 
 133:                                              ; preds = %127, %124, %116
-  %134 = phi i32 [ %117, %116 ], [ %121, %127 ], [ %117, %124 ]
-  %135 = add nuw nsw i32 %118, 1
+  %134 = phi i32 [ %118, %116 ], [ %121, %127 ], [ %118, %124 ]
+  %135 = add nuw nsw i32 %117, 1
   %136 = icmp eq i32 %135, %44
-  br i1 %136, label %137, label %116, !llvm.loop !74
+  br i1 %136, label %137, label %116, !llvm.loop !117
 
 137:                                              ; preds = %133, %113
   %138 = phi i32 [ 2147483647, %113 ], [ %134, %133 ]
@@ -1046,16 +1046,16 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_18ElementRestrictio
   %142 = add nsw i32 %141, %103
   %143 = sext i32 %142 to i64
   %144 = getelementptr inbounds [4 x i8], ptr %72, i64 %143
-  %145 = load i32, ptr %144, align 4, !tbaa !18
+  %145 = load i32, ptr %144, align 4, !tbaa !11
   %146 = ashr i32 %145, 31
   %147 = xor i32 %146, %145
   %148 = sdiv i32 %147, %66
   %149 = zext nneg i32 %141 to i64
   %150 = getelementptr inbounds nuw [4 x i8], ptr %111, i64 %149
-  store i32 %148, ptr %150, align 4, !tbaa !18
+  store i32 %148, ptr %150, align 4, !tbaa !11
   %151 = add nuw nsw i32 %141, 1
   %152 = icmp eq i32 %151, %106
-  br i1 %152, label %113, label %140, !llvm.loop !92
+  br i1 %152, label %113, label %140, !llvm.loop !141
 
 153:                                              ; preds = %137, %93
   %154 = atomicrmw add ptr %74, i32 1 monotonic, align 4
@@ -1064,7 +1064,7 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_18ElementRestrictio
 155:                                              ; preds = %153, %137
   %156 = add nuw nsw i32 %94, 1
   %157 = icmp eq i32 %156, %66
-  br i1 %157, label %90, label %93, !llvm.loop !93
+  br i1 %157, label %90, label %93, !llvm.loop !142
 
 158:                                              ; preds = %90, %57, %53, %2
   ret void
@@ -1081,30 +1081,30 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_18ElementRestrictio
   br i1 %8, label %9, label %196
 
 9:                                                ; preds = %2
-  %10 = load i32, ptr %1, align 8, !tbaa !94
+  %10 = load i32, ptr %1, align 8, !tbaa !145
   %11 = sdiv i32 %7, %10
   %12 = srem i32 %7, %10
   %13 = mul nsw i32 %11, %10
   %14 = add nsw i32 %13, %12
   %15 = getelementptr inbounds nuw i8, ptr %1, i64 8
-  %16 = load ptr, ptr %15, align 8, !tbaa !96
+  %16 = load ptr, ptr %15, align 8, !tbaa !146
   %17 = sext i32 %14 to i64
   %18 = getelementptr inbounds [4 x i8], ptr %16, i64 %17
-  %19 = load i32, ptr %18, align 4, !tbaa !18
+  %19 = load i32, ptr %18, align 4, !tbaa !11
   %20 = getelementptr inbounds nuw i8, ptr %1, i64 16
-  %21 = load ptr, ptr %20, align 8, !tbaa !97
+  %21 = load ptr, ptr %20, align 8, !tbaa !147
   %22 = sext i32 %19 to i64
   %23 = getelementptr inbounds [4 x i8], ptr %21, i64 %22
-  %24 = load i32, ptr %23, align 4, !tbaa !18
+  %24 = load i32, ptr %23, align 4, !tbaa !11
   %25 = getelementptr i8, ptr %23, i64 4
-  %26 = load i32, ptr %25, align 4, !tbaa !18
+  %26 = load i32, ptr %25, align 4, !tbaa !11
   %27 = sub nsw i32 %26, %24
   %28 = getelementptr inbounds nuw i8, ptr %1, i64 32
-  %29 = load ptr, ptr %28, align 8, !tbaa !70
+  %29 = load ptr, ptr %28, align 8, !tbaa !112
   %30 = getelementptr inbounds nuw i8, ptr %1, i64 40
   %31 = sext i32 %24 to i64
   %32 = getelementptr inbounds [4 x i8], ptr %29, i64 %31
-  %33 = load i32, ptr %30, align 4, !tbaa !18
+  %33 = load i32, ptr %30, align 4, !tbaa !11
   %34 = add nsw i32 %33, %24
   %35 = sext i32 %34 to i64
   %36 = getelementptr inbounds [4 x i8], ptr %29, i64 %35
@@ -1113,7 +1113,7 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_18ElementRestrictio
 
 38:                                               ; preds = %9
   %39 = getelementptr inbounds nuw i8, ptr %1, i64 48
-  %40 = load ptr, ptr %39, align 8, !tbaa !98
+  %40 = load ptr, ptr %39, align 8, !tbaa !149
   br label %65
 
 41:                                               ; preds = %65, %9
@@ -1149,29 +1149,29 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_18ElementRestrictio
   %67 = add nsw i32 %66, %24
   %68 = sext i32 %67 to i64
   %69 = getelementptr inbounds [4 x i8], ptr %40, i64 %68
-  %70 = load i32, ptr %69, align 4, !tbaa !18
+  %70 = load i32, ptr %69, align 4, !tbaa !11
   %71 = sdiv i32 %70, %10
   %72 = zext nneg i32 %66 to i64
   %73 = getelementptr inbounds nuw [4 x i8], ptr %32, i64 %72
-  store i32 %71, ptr %73, align 4, !tbaa !18
+  store i32 %71, ptr %73, align 4, !tbaa !11
   %74 = srem i32 %70, %10
   %75 = getelementptr inbounds nuw [4 x i8], ptr %36, i64 %72
-  store i32 %74, ptr %75, align 4, !tbaa !18
+  store i32 %74, ptr %75, align 4, !tbaa !11
   %76 = add nuw nsw i32 %66, 1
   %77 = icmp eq i32 %76, %27
-  br i1 %77, label %41, label %65, !llvm.loop !99
+  br i1 %77, label %41, label %65, !llvm.loop !150
 
 78:                                               ; preds = %193, %43
   %79 = phi i32 [ 0, %43 ], [ %194, %193 ]
   %80 = add nsw i32 %79, %13
   %81 = sext i32 %80 to i64
   %82 = getelementptr inbounds [4 x i8], ptr %16, i64 %81
-  %83 = load i32, ptr %82, align 4, !tbaa !18
+  %83 = load i32, ptr %82, align 4, !tbaa !11
   %84 = sext i32 %83 to i64
   %85 = getelementptr inbounds [4 x i8], ptr %21, i64 %84
-  %86 = load i32, ptr %85, align 4, !tbaa !18
+  %86 = load i32, ptr %85, align 4, !tbaa !11
   %87 = getelementptr i8, ptr %85, i64 4
-  %88 = load i32, ptr %87, align 4, !tbaa !18
+  %88 = load i32, ptr %87, align 4, !tbaa !11
   %89 = sub i32 %88, %86
   %90 = icmp eq i32 %89, 1
   %91 = select i1 %44, i1 true, i1 %90
@@ -1181,11 +1181,11 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_18ElementRestrictio
   %93 = atomicrmw add ptr %59, i32 1 monotonic, align 4
   %94 = sext i32 %93 to i64
   %95 = getelementptr inbounds [4 x i8], ptr %60, i64 %94
-  store i32 %83, ptr %95, align 4, !tbaa !18
+  store i32 %83, ptr %95, align 4, !tbaa !11
   %96 = add nsw i32 %63, %79
   %97 = sext i32 %96 to i64
   %98 = getelementptr inbounds [8 x i8], ptr %55, i64 %97
-  %99 = load double, ptr %98, align 8, !tbaa !26
+  %99 = load double, ptr %98, align 8, !tbaa !31
   br label %189
 
 100:                                              ; preds = %78
@@ -1206,33 +1206,33 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_18ElementRestrictio
   br label %111
 
 111:                                              ; preds = %128, %109
-  %112 = phi i32 [ 2147483647, %109 ], [ %129, %128 ]
-  %113 = phi i32 [ 0, %109 ], [ %130, %128 ]
-  %114 = zext nneg i32 %113 to i64
+  %112 = phi i32 [ 0, %109 ], [ %130, %128 ]
+  %113 = phi i32 [ 2147483647, %109 ], [ %129, %128 ]
+  %114 = zext nneg i32 %112 to i64
   %115 = getelementptr inbounds nuw [4 x i8], ptr %32, i64 %114
-  %116 = load i32, ptr %115, align 4, !tbaa !18
-  %117 = icmp sge i32 %116, %112
+  %116 = load i32, ptr %115, align 4, !tbaa !11
+  %117 = icmp sge i32 %116, %113
   %118 = or i1 %110, %117
   br i1 %118, label %128, label %122
 
 119:                                              ; preds = %122
   %120 = add nuw nsw i32 %123, 1
   %121 = icmp eq i32 %120, %89
-  br i1 %121, label %128, label %122, !llvm.loop !73
+  br i1 %121, label %128, label %122, !llvm.loop !116
 
 122:                                              ; preds = %111, %119
   %123 = phi i32 [ %120, %119 ], [ 0, %111 ]
   %124 = zext nneg i32 %123 to i64
   %125 = getelementptr inbounds nuw [4 x i8], ptr %103, i64 %124
-  %126 = load i32, ptr %125, align 4, !tbaa !18
+  %126 = load i32, ptr %125, align 4, !tbaa !11
   %127 = icmp eq i32 %116, %126
   br i1 %127, label %128, label %119
 
 128:                                              ; preds = %122, %119, %111
-  %129 = phi i32 [ %112, %111 ], [ %116, %122 ], [ %112, %119 ]
-  %130 = add nuw nsw i32 %113, 1
+  %129 = phi i32 [ %113, %111 ], [ %116, %122 ], [ %113, %119 ]
+  %130 = add nuw nsw i32 %112, 1
   %131 = icmp eq i32 %130, %27
-  br i1 %131, label %132, label %111, !llvm.loop !74
+  br i1 %131, label %132, label %111, !llvm.loop !117
 
 132:                                              ; preds = %128, %108
   %133 = phi i32 [ 2147483647, %108 ], [ %129, %128 ]
@@ -1247,64 +1247,64 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_18ElementRestrictio
   %138 = add nsw i32 %137, %86
   %139 = sext i32 %138 to i64
   %140 = getelementptr inbounds [4 x i8], ptr %54, i64 %139
-  %141 = load i32, ptr %140, align 4, !tbaa !18
+  %141 = load i32, ptr %140, align 4, !tbaa !11
   %142 = sdiv i32 %141, %10
   %143 = zext nneg i32 %137 to i64
   %144 = getelementptr inbounds nuw [4 x i8], ptr %103, i64 %143
-  store i32 %142, ptr %144, align 4, !tbaa !18
+  store i32 %142, ptr %144, align 4, !tbaa !11
   %145 = srem i32 %141, %10
   %146 = getelementptr inbounds nuw [4 x i8], ptr %106, i64 %143
-  store i32 %145, ptr %146, align 4, !tbaa !18
+  store i32 %145, ptr %146, align 4, !tbaa !11
   %147 = add nuw nsw i32 %137, 1
   %148 = icmp eq i32 %147, %89
-  br i1 %148, label %108, label %136, !llvm.loop !100
+  br i1 %148, label %108, label %136, !llvm.loop !156
 
 149:                                              ; preds = %166, %135
   %150 = phi double [ 0.000000e+00, %135 ], [ %167, %166 ]
   %151 = atomicrmw add ptr %59, i32 1 monotonic, align 4
   %152 = sext i32 %151 to i64
   %153 = getelementptr inbounds [4 x i8], ptr %60, i64 %152
-  store i32 %83, ptr %153, align 4, !tbaa !18
+  store i32 %83, ptr %153, align 4, !tbaa !11
   br label %189
 
 154:                                              ; preds = %135, %166
-  %155 = phi double [ %167, %166 ], [ 0.000000e+00, %135 ]
-  %156 = phi i32 [ %168, %166 ], [ 0, %135 ]
-  %157 = zext nneg i32 %156 to i64
+  %155 = phi i32 [ %168, %166 ], [ 0, %135 ]
+  %156 = phi double [ %167, %166 ], [ 0.000000e+00, %135 ]
+  %157 = zext nneg i32 %155 to i64
   %158 = getelementptr inbounds nuw [4 x i8], ptr %32, i64 %157
-  %159 = load i32, ptr %158, align 4, !tbaa !18
+  %159 = load i32, ptr %158, align 4, !tbaa !11
   br i1 %107, label %160, label %166
 
 160:                                              ; preds = %154
   %161 = getelementptr inbounds nuw [4 x i8], ptr %36, i64 %157
-  %162 = load i32, ptr %161, align 4, !tbaa !18
+  %162 = load i32, ptr %161, align 4, !tbaa !11
   %163 = mul nsw i32 %57, %159
   %164 = add nsw i32 %163, %162
   %165 = mul nsw i32 %164, %56
   br label %170
 
 166:                                              ; preds = %185, %154
-  %167 = phi double [ %155, %154 ], [ %186, %185 ]
-  %168 = add nuw nsw i32 %156, 1
+  %167 = phi double [ %156, %154 ], [ %186, %185 ]
+  %168 = add nuw nsw i32 %155, 1
   %169 = icmp eq i32 %168, %27
-  br i1 %169, label %149, label %154, !llvm.loop !101
+  br i1 %169, label %149, label %154, !llvm.loop !160
 
 170:                                              ; preds = %160, %185
   %171 = phi i32 [ %187, %185 ], [ 0, %160 ]
-  %172 = phi double [ %186, %185 ], [ %155, %160 ]
+  %172 = phi double [ %186, %185 ], [ %156, %160 ]
   %173 = zext nneg i32 %171 to i64
   %174 = getelementptr inbounds nuw [4 x i8], ptr %103, i64 %173
-  %175 = load i32, ptr %174, align 4, !tbaa !18
+  %175 = load i32, ptr %174, align 4, !tbaa !11
   %176 = icmp eq i32 %159, %175
   br i1 %176, label %177, label %185
 
 177:                                              ; preds = %170
   %178 = getelementptr inbounds nuw [4 x i8], ptr %106, i64 %173
-  %179 = load i32, ptr %178, align 4, !tbaa !18
+  %179 = load i32, ptr %178, align 4, !tbaa !11
   %180 = add nsw i32 %165, %179
   %181 = sext i32 %180 to i64
   %182 = getelementptr inbounds [8 x i8], ptr %55, i64 %181
-  %183 = load double, ptr %182, align 8, !tbaa !26
+  %183 = load double, ptr %182, align 8, !tbaa !31
   %184 = fadd contract double %172, %183
   br label %185
 
@@ -1312,19 +1312,19 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_18ElementRestrictio
   %186 = phi double [ %184, %177 ], [ %172, %170 ]
   %187 = add nuw nsw i32 %171, 1
   %188 = icmp eq i32 %187, %89
-  br i1 %188, label %166, label %170, !llvm.loop !102
+  br i1 %188, label %166, label %170, !llvm.loop !159
 
 189:                                              ; preds = %149, %92
   %190 = phi i64 [ %152, %149 ], [ %94, %92 ]
   %191 = phi double [ %150, %149 ], [ %99, %92 ]
   %192 = getelementptr inbounds [8 x i8], ptr %64, i64 %190
-  store double %191, ptr %192, align 8, !tbaa !26
+  store double %191, ptr %192, align 8, !tbaa !31
   br label %193
 
 193:                                              ; preds = %189, %132
   %194 = add nuw nsw i32 %79, 1
   %195 = icmp eq i32 %194, %10
-  br i1 %195, label %196, label %78, !llvm.loop !103
+  br i1 %195, label %196, label %78, !llvm.loop !161
 
 196:                                              ; preds = %193, %41, %2
   ret void
@@ -1341,9 +1341,9 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_18ElementRestrictio
   br i1 %8, label %9, label %286
 
 9:                                                ; preds = %2
-  %10 = load i32, ptr %1, align 8, !tbaa !104
+  %10 = load i32, ptr %1, align 8, !tbaa !164
   %11 = getelementptr inbounds nuw i8, ptr %1, i64 4
-  %12 = load i32, ptr %11, align 4, !tbaa !107
+  %12 = load i32, ptr %11, align 4, !tbaa !165
   %13 = mul nsw i32 %12, %10
   %14 = sdiv i32 %7, %13
   %15 = srem i32 %7, %13
@@ -1352,16 +1352,16 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_18ElementRestrictio
   %18 = mul nsw i32 %14, %10
   %19 = add nsw i32 %16, %18
   %20 = getelementptr inbounds nuw i8, ptr %1, i64 8
-  %21 = load ptr, ptr %20, align 8, !tbaa !108
+  %21 = load ptr, ptr %20, align 8, !tbaa !166
   %22 = sext i32 %19 to i64
   %23 = getelementptr inbounds [4 x i8], ptr %21, i64 %22
-  %24 = load i32, ptr %23, align 4, !tbaa !18
+  %24 = load i32, ptr %23, align 4, !tbaa !11
   %25 = ashr i32 %24, 31
   %26 = xor i32 %25, %24
   %27 = getelementptr inbounds nuw i8, ptr %1, i64 16
-  %28 = load i32, ptr %27, align 8, !tbaa !109
+  %28 = load i32, ptr %27, align 8, !tbaa !167
   %29 = getelementptr inbounds nuw i8, ptr %1, i64 20
-  %30 = load i8, ptr %29, align 4, !tbaa !110, !range !21, !noundef !22
+  %30 = load i8, ptr %29, align 4, !tbaa !168, !range !26, !noundef !27
   %31 = trunc nuw i8 %30 to i1
   %32 = mul nsw i32 %26, %12
   %33 = add nsw i32 %32, %17
@@ -1369,19 +1369,19 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_18ElementRestrictio
   %35 = add nsw i32 %34, %26
   %36 = select i1 %31, i32 %33, i32 %35
   %37 = getelementptr inbounds nuw i8, ptr %1, i64 24
-  %38 = load ptr, ptr %37, align 8, !tbaa !111
+  %38 = load ptr, ptr %37, align 8, !tbaa !169
   %39 = sext i32 %26 to i64
   %40 = getelementptr inbounds [4 x i8], ptr %38, i64 %39
-  %41 = load i32, ptr %40, align 4, !tbaa !18
+  %41 = load i32, ptr %40, align 4, !tbaa !11
   %42 = getelementptr i8, ptr %40, i64 4
-  %43 = load i32, ptr %42, align 4, !tbaa !18
+  %43 = load i32, ptr %42, align 4, !tbaa !11
   %44 = sub nsw i32 %43, %41
   %45 = getelementptr inbounds nuw i8, ptr %1, i64 40
-  %46 = load ptr, ptr %45, align 8, !tbaa !70
+  %46 = load ptr, ptr %45, align 8, !tbaa !112
   %47 = getelementptr inbounds nuw i8, ptr %1, i64 48
   %48 = sext i32 %41 to i64
   %49 = getelementptr inbounds [4 x i8], ptr %46, i64 %48
-  %50 = load i32, ptr %47, align 4, !tbaa !18
+  %50 = load i32, ptr %47, align 4, !tbaa !11
   %51 = add nsw i32 %50, %41
   %52 = sext i32 %51 to i64
   %53 = getelementptr inbounds [4 x i8], ptr %46, i64 %52
@@ -1394,12 +1394,12 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_18ElementRestrictio
 
 59:                                               ; preds = %9
   %60 = getelementptr inbounds nuw i8, ptr %1, i64 56
-  %61 = load ptr, ptr %60, align 8, !tbaa !112
+  %61 = load ptr, ptr %60, align 8, !tbaa !171
   br label %108
 
 62:                                               ; preds = %108, %9
   %63 = getelementptr inbounds nuw i8, ptr %1, i64 64
-  %64 = load i32, ptr %63, align 8, !tbaa !113
+  %64 = load i32, ptr %63, align 8, !tbaa !174
   %65 = icmp sgt i32 %64, 0
   br i1 %65, label %66, label %286
 
@@ -1423,12 +1423,12 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_18ElementRestrictio
   %83 = getelementptr inbounds nuw i8, ptr %1, i64 104
   %84 = getelementptr inbounds nuw i8, ptr %1, i64 112
   %85 = icmp slt i32 %24, 0
-  %86 = load i32, ptr %67, align 4, !tbaa !114
+  %86 = load i32, ptr %67, align 4, !tbaa !176
   %87 = icmp sgt i32 %86, 0
   %88 = mul nsw i32 %86, %14
   %89 = load ptr, ptr %68, align 8
   %90 = load i32, ptr %69, align 8
-  %91 = load i8, ptr %70, align 4, !range !21
+  %91 = load i8, ptr %70, align 4, !range !26
   %92 = trunc nuw i8 %91 to i1
   %93 = load ptr, ptr %71, align 8
   %94 = load ptr, ptr %73, align 8
@@ -1452,23 +1452,23 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_18ElementRestrictio
   %110 = add nsw i32 %109, %41
   %111 = sext i32 %110 to i64
   %112 = getelementptr inbounds [4 x i8], ptr %61, i64 %111
-  %113 = load i32, ptr %112, align 4, !tbaa !18
+  %113 = load i32, ptr %112, align 4, !tbaa !11
   %114 = ashr i32 %113, 31
   %115 = xor i32 %114, %113
   %116 = sdiv i32 %115, %10
   %117 = zext nneg i32 %109 to i64
   %118 = getelementptr inbounds nuw [4 x i8], ptr %49, i64 %117
-  store i32 %116, ptr %118, align 4, !tbaa !18
+  store i32 %116, ptr %118, align 4, !tbaa !11
   %119 = srem i32 %115, %10
   %120 = getelementptr inbounds nuw [4 x i8], ptr %53, i64 %117
-  store i32 %119, ptr %120, align 4, !tbaa !18
+  store i32 %119, ptr %120, align 4, !tbaa !11
   %121 = icmp sgt i32 %113, -1
   %122 = select i1 %121, i32 1, i32 -1
   %123 = getelementptr inbounds nuw [4 x i8], ptr %57, i64 %117
-  store i32 %122, ptr %123, align 4, !tbaa !18
+  store i32 %122, ptr %123, align 4, !tbaa !11
   %124 = add nuw nsw i32 %109, 1
   %125 = icmp eq i32 %124, %44
-  br i1 %125, label %62, label %108, !llvm.loop !115
+  br i1 %125, label %62, label %108, !llvm.loop !172
 
 126:                                              ; preds = %66, %131
   %127 = phi i32 [ %132, %131 ], [ 0, %66 ]
@@ -1480,14 +1480,14 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_18ElementRestrictio
 131:                                              ; preds = %283
   %132 = add nuw nsw i32 %127, 1
   %133 = icmp eq i32 %132, %64
-  br i1 %133, label %286, label %126, !llvm.loop !116
+  br i1 %133, label %286, label %126, !llvm.loop !192
 
 134:                                              ; preds = %126, %283
   %135 = phi i32 [ %284, %283 ], [ 0, %126 ]
   %136 = add nsw i32 %135, %88
   %137 = sext i32 %136 to i64
   %138 = getelementptr inbounds [4 x i8], ptr %89, i64 %137
-  %139 = load i32, ptr %138, align 4, !tbaa !18
+  %139 = load i32, ptr %138, align 4, !tbaa !11
   %140 = ashr i32 %139, 31
   %141 = xor i32 %140, %139
   %142 = mul nsw i32 %141, %64
@@ -1496,9 +1496,9 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_18ElementRestrictio
   %145 = select i1 %92, i32 %143, i32 %144
   %146 = sext i32 %141 to i64
   %147 = getelementptr inbounds [4 x i8], ptr %93, i64 %146
-  %148 = load i32, ptr %147, align 4, !tbaa !18
+  %148 = load i32, ptr %147, align 4, !tbaa !11
   %149 = getelementptr i8, ptr %147, i64 4
-  %150 = load i32, ptr %149, align 4, !tbaa !18
+  %150 = load i32, ptr %149, align 4, !tbaa !11
   %151 = sub i32 %150, %148
   %152 = icmp eq i32 %151, 1
   %153 = select i1 %72, i1 true, i1 %152
@@ -1510,7 +1510,7 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_18ElementRestrictio
   %157 = atomicrmw add ptr %104, i32 1 monotonic, align 4
   %158 = sext i32 %157 to i64
   %159 = getelementptr inbounds [4 x i8], ptr %105, i64 %158
-  store i32 %145, ptr %159, align 4, !tbaa !18
+  store i32 %145, ptr %159, align 4, !tbaa !11
   %160 = sub nsw i32 0, %156
   %161 = select i1 %85, i32 %160, i32 %156
   %162 = sitofp contract i32 %161 to double
@@ -1521,7 +1521,7 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_18ElementRestrictio
   %167 = add nsw i32 %166, %16
   %168 = sext i32 %167 to i64
   %169 = getelementptr inbounds [8 x i8], ptr %98, i64 %168
-  %170 = load double, ptr %169, align 8, !tbaa !26
+  %170 = load double, ptr %169, align 8, !tbaa !31
   %171 = fmul contract double %170, %162
   br label %279
 
@@ -1545,33 +1545,33 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_18ElementRestrictio
   br label %185
 
 185:                                              ; preds = %202, %183
-  %186 = phi i32 [ 2147483647, %183 ], [ %203, %202 ]
-  %187 = phi i32 [ 0, %183 ], [ %204, %202 ]
-  %188 = zext nneg i32 %187 to i64
+  %186 = phi i32 [ 0, %183 ], [ %204, %202 ]
+  %187 = phi i32 [ 2147483647, %183 ], [ %203, %202 ]
+  %188 = zext nneg i32 %186 to i64
   %189 = getelementptr inbounds nuw [4 x i8], ptr %49, i64 %188
-  %190 = load i32, ptr %189, align 4, !tbaa !18
-  %191 = icmp sge i32 %190, %186
+  %190 = load i32, ptr %189, align 4, !tbaa !11
+  %191 = icmp sge i32 %190, %187
   %192 = or i1 %184, %191
   br i1 %192, label %202, label %196
 
 193:                                              ; preds = %196
   %194 = add nuw nsw i32 %197, 1
   %195 = icmp eq i32 %194, %151
-  br i1 %195, label %202, label %196, !llvm.loop !73
+  br i1 %195, label %202, label %196, !llvm.loop !116
 
 196:                                              ; preds = %185, %193
   %197 = phi i32 [ %194, %193 ], [ 0, %185 ]
   %198 = zext nneg i32 %197 to i64
   %199 = getelementptr inbounds nuw [4 x i8], ptr %174, i64 %198
-  %200 = load i32, ptr %199, align 4, !tbaa !18
+  %200 = load i32, ptr %199, align 4, !tbaa !11
   %201 = icmp eq i32 %190, %200
   br i1 %201, label %202, label %193
 
 202:                                              ; preds = %196, %193, %185
-  %203 = phi i32 [ %186, %185 ], [ %190, %196 ], [ %186, %193 ]
-  %204 = add nuw nsw i32 %187, 1
+  %203 = phi i32 [ %187, %185 ], [ %190, %196 ], [ %187, %193 ]
+  %204 = add nuw nsw i32 %186, 1
   %205 = icmp eq i32 %204, %44
-  br i1 %205, label %206, label %185, !llvm.loop !74
+  br i1 %205, label %206, label %185, !llvm.loop !117
 
 206:                                              ; preds = %202, %182
   %207 = phi i32 [ 2147483647, %182 ], [ %203, %202 ]
@@ -1586,30 +1586,30 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_18ElementRestrictio
   %212 = add nsw i32 %211, %148
   %213 = sext i32 %212 to i64
   %214 = getelementptr inbounds [4 x i8], ptr %97, i64 %213
-  %215 = load i32, ptr %214, align 4, !tbaa !18
+  %215 = load i32, ptr %214, align 4, !tbaa !11
   %216 = ashr i32 %215, 31
   %217 = xor i32 %216, %215
   %218 = sdiv i32 %217, %86
   %219 = zext nneg i32 %211 to i64
   %220 = getelementptr inbounds nuw [4 x i8], ptr %174, i64 %219
-  store i32 %218, ptr %220, align 4, !tbaa !18
+  store i32 %218, ptr %220, align 4, !tbaa !11
   %221 = srem i32 %217, %86
   %222 = getelementptr inbounds nuw [4 x i8], ptr %177, i64 %219
-  store i32 %221, ptr %222, align 4, !tbaa !18
+  store i32 %221, ptr %222, align 4, !tbaa !11
   %223 = icmp sgt i32 %215, -1
   %224 = select i1 %223, i32 1, i32 -1
   %225 = getelementptr inbounds nuw [4 x i8], ptr %180, i64 %219
-  store i32 %224, ptr %225, align 4, !tbaa !18
+  store i32 %224, ptr %225, align 4, !tbaa !11
   %226 = add nuw nsw i32 %211, 1
   %227 = icmp eq i32 %226, %151
-  br i1 %227, label %182, label %210, !llvm.loop !117
+  br i1 %227, label %182, label %210, !llvm.loop !186
 
 228:                                              ; preds = %246, %209
   %229 = phi double [ 0.000000e+00, %209 ], [ %247, %246 ]
   %230 = atomicrmw add ptr %104, i32 1 monotonic, align 4
   %231 = sext i32 %230 to i64
   %232 = getelementptr inbounds [4 x i8], ptr %105, i64 %231
-  store i32 %145, ptr %232, align 4, !tbaa !18
+  store i32 %145, ptr %232, align 4, !tbaa !11
   br label %279
 
 233:                                              ; preds = %209, %246
@@ -1617,9 +1617,9 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_18ElementRestrictio
   %235 = phi double [ %247, %246 ], [ 0.000000e+00, %209 ]
   %236 = zext nneg i32 %234 to i64
   %237 = getelementptr inbounds nuw [4 x i8], ptr %49, i64 %236
-  %238 = load i32, ptr %237, align 4, !tbaa !18
+  %238 = load i32, ptr %237, align 4, !tbaa !11
   %239 = getelementptr inbounds nuw [4 x i8], ptr %53, i64 %236
-  %240 = load i32, ptr %239, align 4, !tbaa !18
+  %240 = load i32, ptr %239, align 4, !tbaa !11
   br i1 %181, label %241, label %246
 
 241:                                              ; preds = %233
@@ -1633,23 +1633,23 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_18ElementRestrictio
   %247 = phi double [ %235, %233 ], [ %276, %275 ]
   %248 = add nuw nsw i32 %234, 1
   %249 = icmp eq i32 %248, %44
-  br i1 %249, label %228, label %233, !llvm.loop !118
+  br i1 %249, label %228, label %233, !llvm.loop !190
 
 250:                                              ; preds = %275, %241
   %251 = phi i32 [ 0, %241 ], [ %277, %275 ]
   %252 = phi double [ %235, %241 ], [ %276, %275 ]
   %253 = zext nneg i32 %251 to i64
   %254 = getelementptr inbounds nuw [4 x i8], ptr %174, i64 %253
-  %255 = load i32, ptr %254, align 4, !tbaa !18
+  %255 = load i32, ptr %254, align 4, !tbaa !11
   %256 = icmp eq i32 %238, %255
   br i1 %256, label %257, label %275
 
 257:                                              ; preds = %250
   %258 = getelementptr inbounds nuw [4 x i8], ptr %177, i64 %253
-  %259 = load i32, ptr %258, align 4, !tbaa !18
-  %260 = load i32, ptr %242, align 4, !tbaa !18
+  %259 = load i32, ptr %258, align 4, !tbaa !11
+  %260 = load i32, ptr %242, align 4, !tbaa !11
   %261 = getelementptr inbounds nuw [4 x i8], ptr %180, i64 %253
-  %262 = load i32, ptr %261, align 4, !tbaa !18
+  %262 = load i32, ptr %261, align 4, !tbaa !11
   %263 = mul nsw i32 %262, %260
   %264 = sitofp contract i32 %263 to double
   %265 = add nsw i32 %245, %259
@@ -1659,7 +1659,7 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_18ElementRestrictio
   %269 = add nsw i32 %268, %240
   %270 = sext i32 %269 to i64
   %271 = getelementptr inbounds [8 x i8], ptr %98, i64 %270
-  %272 = load double, ptr %271, align 8, !tbaa !26
+  %272 = load double, ptr %271, align 8, !tbaa !31
   %273 = fmul contract double %272, %264
   %274 = fadd contract double %252, %273
   br label %275
@@ -1668,19 +1668,19 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_18ElementRestrictio
   %276 = phi double [ %274, %257 ], [ %252, %250 ]
   %277 = add nuw nsw i32 %251, 1
   %278 = icmp eq i32 %277, %151
-  br i1 %278, label %246, label %250, !llvm.loop !119
+  br i1 %278, label %246, label %250, !llvm.loop !189
 
 279:                                              ; preds = %228, %154
   %280 = phi i64 [ %231, %228 ], [ %158, %154 ]
   %281 = phi double [ %229, %228 ], [ %171, %154 ]
   %282 = getelementptr inbounds [8 x i8], ptr %107, i64 %280
-  store double %281, ptr %282, align 8, !tbaa !26
+  store double %281, ptr %282, align 8, !tbaa !31
   br label %283
 
 283:                                              ; preds = %279, %206
   %284 = add nuw nsw i32 %135, 1
   %285 = icmp eq i32 %284, %86
-  br i1 %285, label %131, label %134, !llvm.loop !120
+  br i1 %285, label %131, label %134, !llvm.loop !191
 
 286:                                              ; preds = %131, %66, %62, %2
   ret void
@@ -1697,28 +1697,28 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_20L2ElementRestrict
   br i1 %8, label %9, label %47
 
 9:                                                ; preds = %2
-  %10 = load i32, ptr %1, align 8, !tbaa !121
+  %10 = load i32, ptr %1, align 8, !tbaa !197
   %11 = srem i32 %7, %10
   %12 = getelementptr inbounds nuw i8, ptr %1, i64 4
-  %13 = load i32, ptr %12, align 4, !tbaa !123
+  %13 = load i32, ptr %12, align 4, !tbaa !199
   %14 = icmp sgt i32 %13, 0
   br i1 %14, label %15, label %47
 
 15:                                               ; preds = %9
   %16 = sdiv i32 %7, %10
   %17 = getelementptr inbounds nuw i8, ptr %1, i64 64
-  %18 = load i8, ptr %17, align 8, !tbaa !124, !range !21, !noundef !22
+  %18 = load i8, ptr %17, align 8, !tbaa !200, !range !26, !noundef !27
   %19 = trunc nuw i8 %18 to i1
   %20 = getelementptr inbounds nuw i8, ptr %1, i64 48
-  %21 = load ptr, ptr %20, align 8, !tbaa !23
+  %21 = load ptr, ptr %20, align 8, !tbaa !37
   %22 = getelementptr inbounds nuw i8, ptr %1, i64 56
-  %23 = load i32, ptr %22, align 4, !tbaa !18
+  %23 = load i32, ptr %22, align 4, !tbaa !11
   %24 = getelementptr inbounds nuw i8, ptr %1, i64 16
-  %25 = load ptr, ptr %24, align 8, !tbaa !25
+  %25 = load ptr, ptr %24, align 8, !tbaa !41
   %26 = getelementptr inbounds nuw i8, ptr %1, i64 24
-  %27 = load i32, ptr %26, align 4, !tbaa !18
+  %27 = load i32, ptr %26, align 4, !tbaa !11
   %28 = getelementptr inbounds nuw i8, ptr %1, i64 28
-  %29 = load i32, ptr %28, align 4, !tbaa !18
+  %29 = load i32, ptr %28, align 4, !tbaa !11
   %30 = mul nsw i32 %29, %16
   br label %31
 
@@ -1730,16 +1730,16 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_20L2ElementRestrict
   %36 = add nsw i32 %35, %33
   %37 = sext i32 %36 to i64
   %38 = getelementptr inbounds [8 x i8], ptr %21, i64 %37
-  %39 = load double, ptr %38, align 8, !tbaa !26
+  %39 = load double, ptr %38, align 8, !tbaa !31
   %40 = add nsw i32 %32, %30
   %41 = mul nsw i32 %40, %27
   %42 = add nsw i32 %41, %11
   %43 = sext i32 %42 to i64
   %44 = getelementptr inbounds [8 x i8], ptr %25, i64 %43
-  store double %39, ptr %44, align 8, !tbaa !26
+  store double %39, ptr %44, align 8, !tbaa !31
   %45 = add nuw nsw i32 %32, 1
   %46 = icmp eq i32 %45, %13
-  br i1 %46, label %47, label %31, !llvm.loop !125
+  br i1 %46, label %47, label %31, !llvm.loop !201
 
 47:                                               ; preds = %31, %9, %2
   ret void
@@ -1756,29 +1756,29 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_20L2ElementRestrict
   br i1 %8, label %9, label %47
 
 9:                                                ; preds = %2
-  %10 = load i32, ptr %1, align 8, !tbaa !126
+  %10 = load i32, ptr %1, align 8, !tbaa !203
   %11 = srem i32 %7, %10
   %12 = getelementptr inbounds nuw i8, ptr %1, i64 4
-  %13 = load i32, ptr %12, align 4, !tbaa !128
+  %13 = load i32, ptr %12, align 4, !tbaa !205
   %14 = icmp sgt i32 %13, 0
   br i1 %14, label %15, label %47
 
 15:                                               ; preds = %9
   %16 = sdiv i32 %7, %10
   %17 = getelementptr inbounds nuw i8, ptr %1, i64 48
-  %18 = load ptr, ptr %17, align 8, !tbaa !129
+  %18 = load ptr, ptr %17, align 8, !tbaa !63
   %19 = getelementptr inbounds nuw i8, ptr %1, i64 56
-  %20 = load i32, ptr %19, align 4, !tbaa !18
+  %20 = load i32, ptr %19, align 4, !tbaa !11
   %21 = getelementptr inbounds nuw i8, ptr %1, i64 60
-  %22 = load i32, ptr %21, align 4, !tbaa !18
+  %22 = load i32, ptr %21, align 4, !tbaa !11
   %23 = mul nsw i32 %22, %16
   %24 = getelementptr inbounds nuw i8, ptr %1, i64 32
-  %25 = load i8, ptr %24, align 8, !tbaa !130, !range !21, !noundef !22
+  %25 = load i8, ptr %24, align 8, !tbaa !206, !range !26, !noundef !27
   %26 = trunc nuw i8 %25 to i1
   %27 = getelementptr inbounds nuw i8, ptr %1, i64 16
-  %28 = load ptr, ptr %27, align 8, !tbaa !42
+  %28 = load ptr, ptr %27, align 8, !tbaa !66
   %29 = getelementptr inbounds nuw i8, ptr %1, i64 24
-  %30 = load i32, ptr %29, align 4, !tbaa !18
+  %30 = load i32, ptr %29, align 4, !tbaa !11
   br label %31
 
 31:                                               ; preds = %31, %15
@@ -1788,17 +1788,17 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_20L2ElementRestrict
   %35 = add nsw i32 %34, %11
   %36 = sext i32 %35 to i64
   %37 = getelementptr inbounds [8 x i8], ptr %18, i64 %36
-  %38 = load double, ptr %37, align 8, !tbaa !26
+  %38 = load double, ptr %37, align 8, !tbaa !31
   %39 = select i1 %26, i32 %32, i32 %7
   %40 = select i1 %26, i32 %7, i32 %32
   %41 = mul nsw i32 %40, %30
   %42 = add nsw i32 %41, %39
   %43 = sext i32 %42 to i64
   %44 = getelementptr inbounds [8 x i8], ptr %28, i64 %43
-  store double %38, ptr %44, align 8, !tbaa !26
+  store double %38, ptr %44, align 8, !tbaa !31
   %45 = add nuw nsw i32 %32, 1
   %46 = icmp eq i32 %45, %13
-  br i1 %46, label %47, label %31, !llvm.loop !131
+  br i1 %46, label %47, label %31, !llvm.loop !207
 
 47:                                               ; preds = %31, %9, %2
   ret void
@@ -1815,29 +1815,29 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_20L2ElementRestrict
   br i1 %8, label %9, label %49
 
 9:                                                ; preds = %2
-  %10 = load i32, ptr %1, align 8, !tbaa !132
+  %10 = load i32, ptr %1, align 8, !tbaa !209
   %11 = srem i32 %7, %10
   %12 = getelementptr inbounds nuw i8, ptr %1, i64 4
-  %13 = load i32, ptr %12, align 4, !tbaa !134
+  %13 = load i32, ptr %12, align 4, !tbaa !211
   %14 = icmp sgt i32 %13, 0
   br i1 %14, label %15, label %49
 
 15:                                               ; preds = %9
   %16 = sdiv i32 %7, %10
   %17 = getelementptr inbounds nuw i8, ptr %1, i64 48
-  %18 = load ptr, ptr %17, align 8, !tbaa !129
+  %18 = load ptr, ptr %17, align 8, !tbaa !63
   %19 = getelementptr inbounds nuw i8, ptr %1, i64 56
-  %20 = load i32, ptr %19, align 4, !tbaa !18
+  %20 = load i32, ptr %19, align 4, !tbaa !11
   %21 = getelementptr inbounds nuw i8, ptr %1, i64 60
-  %22 = load i32, ptr %21, align 4, !tbaa !18
+  %22 = load i32, ptr %21, align 4, !tbaa !11
   %23 = mul nsw i32 %22, %16
   %24 = getelementptr inbounds nuw i8, ptr %1, i64 32
-  %25 = load i8, ptr %24, align 8, !tbaa !135, !range !21, !noundef !22
+  %25 = load i8, ptr %24, align 8, !tbaa !212, !range !26, !noundef !27
   %26 = trunc nuw i8 %25 to i1
   %27 = getelementptr inbounds nuw i8, ptr %1, i64 16
-  %28 = load ptr, ptr %27, align 8, !tbaa !42
+  %28 = load ptr, ptr %27, align 8, !tbaa !66
   %29 = getelementptr inbounds nuw i8, ptr %1, i64 24
-  %30 = load i32, ptr %29, align 4, !tbaa !18
+  %30 = load i32, ptr %29, align 4, !tbaa !11
   br label %31
 
 31:                                               ; preds = %31, %15
@@ -1847,19 +1847,19 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_20L2ElementRestrict
   %35 = add nsw i32 %34, %11
   %36 = sext i32 %35 to i64
   %37 = getelementptr inbounds [8 x i8], ptr %18, i64 %36
-  %38 = load double, ptr %37, align 8, !tbaa !26
+  %38 = load double, ptr %37, align 8, !tbaa !31
   %39 = select i1 %26, i32 %32, i32 %7
   %40 = select i1 %26, i32 %7, i32 %32
   %41 = mul nsw i32 %40, %30
   %42 = add nsw i32 %41, %39
   %43 = sext i32 %42 to i64
   %44 = getelementptr inbounds [8 x i8], ptr %28, i64 %43
-  %45 = load double, ptr %44, align 8, !tbaa !26
+  %45 = load double, ptr %44, align 8, !tbaa !31
   %46 = fadd contract double %38, %45
-  store double %46, ptr %44, align 8, !tbaa !26
+  store double %46, ptr %44, align 8, !tbaa !31
   %47 = add nuw nsw i32 %32, 1
   %48 = icmp eq i32 %47, %13
-  br i1 %48, label %49, label %31, !llvm.loop !136
+  br i1 %48, label %49, label %31, !llvm.loop !213
 
 49:                                               ; preds = %31, %9, %2
   ret void
@@ -1877,15 +1877,15 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_20L2ElementRestrict
 
 9:                                                ; preds = %2
   %10 = getelementptr inbounds nuw i8, ptr %1, i64 8
-  %11 = load i32, ptr %10, align 8, !tbaa !137
+  %11 = load i32, ptr %10, align 8, !tbaa !215
   %12 = icmp slt i32 %7, %11
   %13 = getelementptr inbounds nuw i8, ptr %1, i64 12
   %14 = load i32, ptr %13, align 4
   %15 = select i1 %12, i32 %14, i32 0
-  %16 = load ptr, ptr %1, align 8, !tbaa !139
+  %16 = load ptr, ptr %1, align 8, !tbaa !217
   %17 = sext i32 %7 to i64
   %18 = getelementptr inbounds [4 x i8], ptr %16, i64 %17
-  store i32 %15, ptr %18, align 4, !tbaa !18
+  store i32 %15, ptr %18, align 4, !tbaa !11
   br label %19
 
 19:                                               ; preds = %2, %9
@@ -1903,9 +1903,9 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_20L2ElementRestrict
   br i1 %8, label %9, label %47
 
 9:                                                ; preds = %2
-  %10 = load ptr, ptr %1, align 8, !tbaa !140
+  %10 = load ptr, ptr %1, align 8, !tbaa !219
   %11 = getelementptr inbounds nuw i8, ptr %1, i64 8
-  %12 = load i32, ptr %11, align 8, !tbaa !142
+  %12 = load i32, ptr %11, align 8, !tbaa !220
   %13 = sext i32 %7 to i64
   %14 = getelementptr inbounds [4 x i8], ptr %10, i64 %13
   %15 = atomicrmw add ptr %14, i32 %12 monotonic, align 4
@@ -1916,16 +1916,16 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_20L2ElementRestrict
   %18 = srem i32 %7, %12
   %19 = sdiv i32 %7, %12
   %20 = getelementptr inbounds nuw i8, ptr %1, i64 16
-  %21 = load ptr, ptr %20, align 8, !tbaa !143
+  %21 = load ptr, ptr %20, align 8, !tbaa !222
   %22 = getelementptr inbounds nuw i8, ptr %1, i64 40
-  %23 = load ptr, ptr %22, align 8, !tbaa !129
+  %23 = load ptr, ptr %22, align 8, !tbaa !63
   %24 = getelementptr inbounds nuw i8, ptr %1, i64 48
   %25 = getelementptr inbounds nuw i8, ptr %1, i64 52
   %26 = getelementptr inbounds nuw i8, ptr %1, i64 24
-  %27 = load ptr, ptr %26, align 8, !tbaa !144
+  %27 = load ptr, ptr %26, align 8, !tbaa !223
   %28 = mul nsw i32 %19, %12
-  %29 = load i32, ptr %24, align 4, !tbaa !18
-  %30 = load i32, ptr %25, align 4, !tbaa !18
+  %29 = load i32, ptr %24, align 4, !tbaa !11
+  %30 = load i32, ptr %25, align 4, !tbaa !11
   %31 = mul nsw i32 %30, %19
   %32 = add nsw i32 %31, %18
   %33 = mul nsw i32 %32, %29
@@ -1937,16 +1937,16 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_20L2ElementRestrict
   %37 = add nsw i32 %35, %15
   %38 = sext i32 %37 to i64
   %39 = getelementptr inbounds [4 x i8], ptr %21, i64 %38
-  store i32 %36, ptr %39, align 4, !tbaa !18
+  store i32 %36, ptr %39, align 4, !tbaa !11
   %40 = add nsw i32 %33, %35
   %41 = sext i32 %40 to i64
   %42 = getelementptr inbounds [8 x i8], ptr %23, i64 %41
-  %43 = load double, ptr %42, align 8, !tbaa !26
+  %43 = load double, ptr %42, align 8, !tbaa !31
   %44 = getelementptr inbounds [8 x i8], ptr %27, i64 %38
-  store double %43, ptr %44, align 8, !tbaa !26
+  store double %43, ptr %44, align 8, !tbaa !31
   %45 = add nuw nsw i32 %35, 1
   %46 = icmp eq i32 %45, %12
-  br i1 %46, label %47, label %34, !llvm.loop !145
+  br i1 %46, label %47, label %34, !llvm.loop !224
 
 47:                                               ; preds = %34, %9, %2
   ret void
@@ -1963,12 +1963,12 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_25ConformingFaceRes
   br i1 %8, label %9, label %62
 
 9:                                                ; preds = %2
-  %10 = load ptr, ptr %1, align 8, !tbaa !146
+  %10 = load ptr, ptr %1, align 8, !tbaa !226
   %11 = sext i32 %7 to i64
   %12 = getelementptr inbounds [4 x i8], ptr %10, i64 %11
-  %13 = load i32, ptr %12, align 4, !tbaa !18
+  %13 = load i32, ptr %12, align 4, !tbaa !11
   %14 = getelementptr inbounds nuw i8, ptr %1, i64 8
-  %15 = load i8, ptr %14, align 8, !tbaa !148, !range !21, !noundef !22
+  %15 = load i8, ptr %14, align 8, !tbaa !227, !range !26, !noundef !27
   %16 = trunc nuw i8 %15 to i1
   %17 = icmp sgt i32 %13, -1
   %18 = select i1 %16, i1 true, i1 %17
@@ -1976,28 +1976,28 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_25ConformingFaceRes
   %20 = sext i1 %19 to i32
   %21 = xor i32 %13, %20
   %22 = getelementptr inbounds nuw i8, ptr %1, i64 12
-  %23 = load i32, ptr %22, align 4, !tbaa !149
+  %23 = load i32, ptr %22, align 4, !tbaa !228
   %24 = srem i32 %7, %23
   %25 = getelementptr inbounds nuw i8, ptr %1, i64 16
-  %26 = load i32, ptr %25, align 8, !tbaa !150
+  %26 = load i32, ptr %25, align 8, !tbaa !230
   %27 = icmp sgt i32 %26, 0
   br i1 %27, label %28, label %62
 
 28:                                               ; preds = %9
   %29 = sdiv i32 %7, %23
   %30 = getelementptr inbounds nuw i8, ptr %1, i64 80
-  %31 = load i8, ptr %30, align 8, !tbaa !151, !range !21, !noundef !22
+  %31 = load i8, ptr %30, align 8, !tbaa !231, !range !26, !noundef !27
   %32 = trunc nuw i8 %31 to i1
   %33 = getelementptr inbounds nuw i8, ptr %1, i64 64
-  %34 = load ptr, ptr %33, align 8, !tbaa !23
+  %34 = load ptr, ptr %33, align 8, !tbaa !37
   %35 = getelementptr inbounds nuw i8, ptr %1, i64 72
-  %36 = load i32, ptr %35, align 4, !tbaa !18
+  %36 = load i32, ptr %35, align 4, !tbaa !11
   %37 = getelementptr inbounds nuw i8, ptr %1, i64 32
-  %38 = load ptr, ptr %37, align 8, !tbaa !25
+  %38 = load ptr, ptr %37, align 8, !tbaa !41
   %39 = getelementptr inbounds nuw i8, ptr %1, i64 40
-  %40 = load i32, ptr %39, align 4, !tbaa !18
+  %40 = load i32, ptr %39, align 4, !tbaa !11
   %41 = getelementptr inbounds nuw i8, ptr %1, i64 44
-  %42 = load i32, ptr %41, align 4, !tbaa !18
+  %42 = load i32, ptr %41, align 4, !tbaa !11
   %43 = mul nsw i32 %42, %29
   br label %44
 
@@ -2009,7 +2009,7 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_25ConformingFaceRes
   %49 = add nsw i32 %48, %46
   %50 = sext i32 %49 to i64
   %51 = getelementptr inbounds [8 x i8], ptr %34, i64 %50
-  %52 = load double, ptr %51, align 8, !tbaa !26
+  %52 = load double, ptr %51, align 8, !tbaa !31
   %53 = fneg contract double %52
   %54 = select contract i1 %18, double %52, double %53
   %55 = add nsw i32 %45, %43
@@ -2017,10 +2017,10 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_25ConformingFaceRes
   %57 = add nsw i32 %56, %24
   %58 = sext i32 %57 to i64
   %59 = getelementptr inbounds [8 x i8], ptr %38, i64 %58
-  store double %54, ptr %59, align 8, !tbaa !26
+  store double %54, ptr %59, align 8, !tbaa !31
   %60 = add nuw nsw i32 %45, 1
   %61 = icmp eq i32 %60, %26
-  br i1 %61, label %62, label %44, !llvm.loop !152
+  br i1 %61, label %62, label %44, !llvm.loop !232
 
 62:                                               ; preds = %44, %9, %2
   ret void
@@ -2037,14 +2037,14 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNS_L42ConformingFaceRes
   br i1 %8, label %9, label %79
 
 9:                                                ; preds = %2
-  %10 = load ptr, ptr %1, align 8, !tbaa !153
+  %10 = load ptr, ptr %1, align 8, !tbaa !234
   %11 = sext i32 %7 to i64
   %12 = getelementptr inbounds [4 x i8], ptr %10, i64 %11
-  %13 = load i32, ptr %12, align 4, !tbaa !18
+  %13 = load i32, ptr %12, align 4, !tbaa !11
   %14 = getelementptr i8, ptr %12, i64 4
-  %15 = load i32, ptr %14, align 4, !tbaa !18
+  %15 = load i32, ptr %14, align 4, !tbaa !11
   %16 = getelementptr inbounds nuw i8, ptr %1, i64 8
-  %17 = load i32, ptr %16, align 8, !tbaa !155
+  %17 = load i32, ptr %16, align 8, !tbaa !236
   %18 = icmp sgt i32 %17, 0
   br i1 %18, label %19, label %79
 
@@ -2062,13 +2062,13 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNS_L42ConformingFaceRes
   %30 = getelementptr inbounds nuw i8, ptr %1, i64 52
   %31 = load i32, ptr %30, align 4
   %32 = getelementptr inbounds nuw i8, ptr %1, i64 96
-  %33 = load i8, ptr %32, align 8, !tbaa !156, !range !21, !noundef !22
+  %33 = load i8, ptr %32, align 8, !tbaa !242, !range !26, !noundef !27
   %34 = trunc nuw i8 %33 to i1
   %35 = getelementptr inbounds nuw i8, ptr %1, i64 80
-  %36 = load ptr, ptr %35, align 8, !tbaa !42
+  %36 = load ptr, ptr %35, align 8, !tbaa !66
   %37 = getelementptr inbounds nuw i8, ptr %1, i64 88
-  %38 = load i32, ptr %37, align 4, !tbaa !18
-  %39 = load i8, ptr %23, align 8, !range !21
+  %38 = load i32, ptr %37, align 4, !tbaa !11
+  %39 = load i8, ptr %23, align 8, !range !26
   %40 = trunc nuw i8 %39 to i1
   br label %41
 
@@ -2084,19 +2084,19 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNS_L42ConformingFaceRes
   %48 = add nsw i32 %47, %45
   %49 = sext i32 %48 to i64
   %50 = getelementptr inbounds [8 x i8], ptr %36, i64 %49
-  %51 = load double, ptr %50, align 8, !tbaa !26
+  %51 = load double, ptr %50, align 8, !tbaa !31
   %52 = fadd contract double %44, %51
-  store double %52, ptr %50, align 8, !tbaa !26
+  store double %52, ptr %50, align 8, !tbaa !31
   %53 = add nuw nsw i32 %42, 1
   %54 = icmp eq i32 %53, %17
-  br i1 %54, label %79, label %41, !llvm.loop !157
+  br i1 %54, label %79, label %41, !llvm.loop !243
 
 55:                                               ; preds = %41, %55
-  %56 = phi double [ %76, %55 ], [ 0.000000e+00, %41 ]
-  %57 = phi i32 [ %77, %55 ], [ %13, %41 ]
-  %58 = sext i32 %57 to i64
+  %56 = phi i32 [ %77, %55 ], [ %13, %41 ]
+  %57 = phi double [ %76, %55 ], [ 0.000000e+00, %41 ]
+  %58 = sext i32 %56 to i64
   %59 = getelementptr inbounds [4 x i8], ptr %22, i64 %58
-  %60 = load i32, ptr %59, align 4, !tbaa !18
+  %60 = load i32, ptr %59, align 4, !tbaa !11
   %61 = icmp slt i32 %60, 0
   %62 = select i1 %61, i1 %40, i1 false
   %63 = ashr i32 %60, 31
@@ -2109,13 +2109,13 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNS_L42ConformingFaceRes
   %70 = add nsw i32 %69, %65
   %71 = sext i32 %70 to i64
   %72 = getelementptr inbounds [8 x i8], ptr %27, i64 %71
-  %73 = load double, ptr %72, align 8, !tbaa !26
+  %73 = load double, ptr %72, align 8, !tbaa !31
   %74 = fneg contract double %73
   %75 = select contract i1 %62, double %74, double %73
-  %76 = fadd contract double %56, %75
-  %77 = add nsw i32 %57, 1
+  %76 = fadd contract double %57, %75
+  %77 = add nsw i32 %56, 1
   %78 = icmp eq i32 %77, %15
-  br i1 %78, label %43, label %55, !llvm.loop !158
+  br i1 %78, label %43, label %55, !llvm.loop !241
 
 79:                                               ; preds = %43, %9, %2
   ret void
@@ -2132,33 +2132,33 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_17L2FaceRestriction
   br i1 %8, label %9, label %52
 
 9:                                                ; preds = %2
-  %10 = load i32, ptr %1, align 8, !tbaa !159
+  %10 = load i32, ptr %1, align 8, !tbaa !245
   %11 = srem i32 %7, %10
   %12 = getelementptr inbounds nuw i8, ptr %1, i64 8
-  %13 = load ptr, ptr %12, align 8, !tbaa !161
+  %13 = load ptr, ptr %12, align 8, !tbaa !246
   %14 = sext i32 %7 to i64
   %15 = getelementptr inbounds [4 x i8], ptr %13, i64 %14
-  %16 = load i32, ptr %15, align 4, !tbaa !18
+  %16 = load i32, ptr %15, align 4, !tbaa !11
   %17 = getelementptr inbounds nuw i8, ptr %1, i64 16
-  %18 = load i32, ptr %17, align 8, !tbaa !162
+  %18 = load i32, ptr %17, align 8, !tbaa !248
   %19 = icmp sgt i32 %18, 0
   br i1 %19, label %20, label %52
 
 20:                                               ; preds = %9
   %21 = sdiv i32 %7, %10
   %22 = getelementptr inbounds nuw i8, ptr %1, i64 80
-  %23 = load i8, ptr %22, align 8, !tbaa !163, !range !21, !noundef !22
+  %23 = load i8, ptr %22, align 8, !tbaa !249, !range !26, !noundef !27
   %24 = trunc nuw i8 %23 to i1
   %25 = getelementptr inbounds nuw i8, ptr %1, i64 64
-  %26 = load ptr, ptr %25, align 8, !tbaa !23
+  %26 = load ptr, ptr %25, align 8, !tbaa !37
   %27 = getelementptr inbounds nuw i8, ptr %1, i64 72
-  %28 = load i32, ptr %27, align 4, !tbaa !18
+  %28 = load i32, ptr %27, align 4, !tbaa !11
   %29 = getelementptr inbounds nuw i8, ptr %1, i64 32
-  %30 = load ptr, ptr %29, align 8, !tbaa !25
+  %30 = load ptr, ptr %29, align 8, !tbaa !41
   %31 = getelementptr inbounds nuw i8, ptr %1, i64 40
-  %32 = load i32, ptr %31, align 4, !tbaa !18
+  %32 = load i32, ptr %31, align 4, !tbaa !11
   %33 = getelementptr inbounds nuw i8, ptr %1, i64 44
-  %34 = load i32, ptr %33, align 4, !tbaa !18
+  %34 = load i32, ptr %33, align 4, !tbaa !11
   %35 = mul nsw i32 %34, %21
   br label %36
 
@@ -2170,16 +2170,16 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_17L2FaceRestriction
   %41 = add nsw i32 %40, %38
   %42 = sext i32 %41 to i64
   %43 = getelementptr inbounds [8 x i8], ptr %26, i64 %42
-  %44 = load double, ptr %43, align 8, !tbaa !26
+  %44 = load double, ptr %43, align 8, !tbaa !31
   %45 = add nsw i32 %37, %35
   %46 = mul nsw i32 %45, %32
   %47 = add nsw i32 %46, %11
   %48 = sext i32 %47 to i64
   %49 = getelementptr inbounds [8 x i8], ptr %30, i64 %48
-  store double %44, ptr %49, align 8, !tbaa !26
+  store double %44, ptr %49, align 8, !tbaa !31
   %50 = add nuw nsw i32 %37, 1
   %51 = icmp eq i32 %50, %18
-  br i1 %51, label %52, label %36, !llvm.loop !164
+  br i1 %51, label %52, label %36, !llvm.loop !250
 
 52:                                               ; preds = %36, %9, %2
   ret void
@@ -2196,44 +2196,44 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_17L2FaceRestriction
   br i1 %8, label %9, label %82
 
 9:                                                ; preds = %2
-  %10 = load i32, ptr %1, align 8, !tbaa !165
+  %10 = load i32, ptr %1, align 8, !tbaa !253
   %11 = srem i32 %7, %10
   %12 = getelementptr inbounds nuw i8, ptr %1, i64 8
-  %13 = load ptr, ptr %12, align 8, !tbaa !168
+  %13 = load ptr, ptr %12, align 8, !tbaa !254
   %14 = sext i32 %7 to i64
   %15 = getelementptr inbounds [4 x i8], ptr %13, i64 %14
-  %16 = load i32, ptr %15, align 4, !tbaa !18
+  %16 = load i32, ptr %15, align 4, !tbaa !11
   %17 = getelementptr inbounds nuw i8, ptr %1, i64 16
-  %18 = load i32, ptr %17, align 8, !tbaa !169
+  %18 = load i32, ptr %17, align 8, !tbaa !256
   %19 = icmp sgt i32 %18, 0
   br i1 %19, label %20, label %82
 
 20:                                               ; preds = %9
   %21 = sdiv i32 %7, %10
   %22 = getelementptr inbounds nuw i8, ptr %1, i64 80
-  %23 = load i8, ptr %22, align 8, !tbaa !170, !range !21, !noundef !22
+  %23 = load i8, ptr %22, align 8, !tbaa !257, !range !26, !noundef !27
   %24 = trunc nuw i8 %23 to i1
   %25 = getelementptr inbounds nuw i8, ptr %1, i64 64
-  %26 = load ptr, ptr %25, align 8, !tbaa !23
+  %26 = load ptr, ptr %25, align 8, !tbaa !37
   %27 = getelementptr inbounds nuw i8, ptr %1, i64 72
-  %28 = load i32, ptr %27, align 4, !tbaa !18
+  %28 = load i32, ptr %27, align 4, !tbaa !11
   %29 = getelementptr inbounds nuw i8, ptr %1, i64 32
-  %30 = load ptr, ptr %29, align 8, !tbaa !171
+  %30 = load ptr, ptr %29, align 8, !tbaa !264
   %31 = getelementptr inbounds nuw i8, ptr %1, i64 40
-  %32 = load i32, ptr %31, align 4, !tbaa !18
+  %32 = load i32, ptr %31, align 4, !tbaa !11
   %33 = getelementptr inbounds nuw i8, ptr %1, i64 44
-  %34 = load i32, ptr %33, align 4, !tbaa !18
+  %34 = load i32, ptr %33, align 4, !tbaa !11
   %35 = getelementptr inbounds nuw i8, ptr %1, i64 48
-  %36 = load i32, ptr %35, align 4, !tbaa !18
+  %36 = load i32, ptr %35, align 4, !tbaa !11
   %37 = mul i32 %36, %21
   %38 = mul i32 %37, %34
   br label %47
 
 39:                                               ; preds = %47
   %40 = getelementptr inbounds nuw i8, ptr %1, i64 88
-  %41 = load ptr, ptr %40, align 8, !tbaa !172
+  %41 = load ptr, ptr %40, align 8, !tbaa !259
   %42 = getelementptr inbounds [4 x i8], ptr %41, i64 %14
-  %43 = load i32, ptr %42, align 4, !tbaa !18
+  %43 = load i32, ptr %42, align 4, !tbaa !11
   %44 = icmp eq i32 %43, -1
   %45 = add nsw i32 %37, 1
   %46 = mul nsw i32 %45, %34
@@ -2247,16 +2247,16 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_17L2FaceRestriction
   %52 = add nsw i32 %51, %49
   %53 = sext i32 %52 to i64
   %54 = getelementptr inbounds [8 x i8], ptr %26, i64 %53
-  %55 = load double, ptr %54, align 8, !tbaa !26
+  %55 = load double, ptr %54, align 8, !tbaa !31
   %56 = add nsw i32 %48, %38
   %57 = mul nsw i32 %56, %32
   %58 = add nsw i32 %57, %11
   %59 = sext i32 %58 to i64
   %60 = getelementptr inbounds [8 x i8], ptr %30, i64 %59
-  store double %55, ptr %60, align 8, !tbaa !26
+  store double %55, ptr %60, align 8, !tbaa !31
   %61 = add nuw nsw i32 %48, 1
   %62 = icmp eq i32 %61, %18
-  br i1 %62, label %39, label %47, !llvm.loop !173
+  br i1 %62, label %39, label %47, !llvm.loop !258
 
 63:                                               ; preds = %73, %39
   %64 = phi i32 [ 0, %39 ], [ %80, %73 ]
@@ -2269,7 +2269,7 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_17L2FaceRestriction
   %69 = add nsw i32 %67, %68
   %70 = sext i32 %69 to i64
   %71 = getelementptr inbounds [8 x i8], ptr %26, i64 %70
-  %72 = load double, ptr %71, align 8, !tbaa !26
+  %72 = load double, ptr %71, align 8, !tbaa !31
   br label %73
 
 73:                                               ; preds = %65, %63
@@ -2279,10 +2279,10 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_17L2FaceRestriction
   %77 = add nsw i32 %76, %11
   %78 = sext i32 %77 to i64
   %79 = getelementptr inbounds [8 x i8], ptr %30, i64 %78
-  store double %74, ptr %79, align 8, !tbaa !26
+  store double %74, ptr %79, align 8, !tbaa !31
   %80 = add nuw nsw i32 %64, 1
   %81 = icmp eq i32 %80, %18
-  br i1 %81, label %82, label %63, !llvm.loop !174
+  br i1 %81, label %82, label %63, !llvm.loop !261
 
 82:                                               ; preds = %73, %9, %2
   ret void
@@ -2299,14 +2299,14 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_17L2FaceRestriction
   br i1 %8, label %9, label %70
 
 9:                                                ; preds = %2
-  %10 = load ptr, ptr %1, align 8, !tbaa !175
+  %10 = load ptr, ptr %1, align 8, !tbaa !266
   %11 = sext i32 %7 to i64
   %12 = getelementptr inbounds [4 x i8], ptr %10, i64 %11
-  %13 = load i32, ptr %12, align 4, !tbaa !18
+  %13 = load i32, ptr %12, align 4, !tbaa !11
   %14 = getelementptr i8, ptr %12, i64 4
-  %15 = load i32, ptr %14, align 4, !tbaa !18
+  %15 = load i32, ptr %14, align 4, !tbaa !11
   %16 = getelementptr inbounds nuw i8, ptr %1, i64 8
-  %17 = load i32, ptr %16, align 8, !tbaa !177
+  %17 = load i32, ptr %16, align 8, !tbaa !268
   %18 = icmp sgt i32 %17, 0
   br i1 %18, label %19, label %70
 
@@ -2323,12 +2323,12 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_17L2FaceRestriction
   %29 = getelementptr inbounds nuw i8, ptr %1, i64 44
   %30 = load i32, ptr %29, align 4
   %31 = getelementptr inbounds nuw i8, ptr %1, i64 88
-  %32 = load i8, ptr %31, align 8, !tbaa !178, !range !21, !noundef !22
+  %32 = load i8, ptr %31, align 8, !tbaa !273, !range !26, !noundef !27
   %33 = trunc nuw i8 %32 to i1
   %34 = getelementptr inbounds nuw i8, ptr %1, i64 72
-  %35 = load ptr, ptr %34, align 8, !tbaa !42
+  %35 = load ptr, ptr %34, align 8, !tbaa !66
   %36 = getelementptr inbounds nuw i8, ptr %1, i64 80
-  %37 = load i32, ptr %36, align 4, !tbaa !18
+  %37 = load i32, ptr %36, align 4, !tbaa !11
   br label %38
 
 38:                                               ; preds = %40, %19
@@ -2343,19 +2343,19 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_17L2FaceRestriction
   %45 = add nsw i32 %44, %42
   %46 = sext i32 %45 to i64
   %47 = getelementptr inbounds [8 x i8], ptr %35, i64 %46
-  %48 = load double, ptr %47, align 8, !tbaa !26
+  %48 = load double, ptr %47, align 8, !tbaa !31
   %49 = fadd contract double %41, %48
-  store double %49, ptr %47, align 8, !tbaa !26
+  store double %49, ptr %47, align 8, !tbaa !31
   %50 = add nuw nsw i32 %39, 1
   %51 = icmp eq i32 %50, %17
-  br i1 %51, label %70, label %38, !llvm.loop !179
+  br i1 %51, label %70, label %38, !llvm.loop !274
 
 52:                                               ; preds = %38, %52
   %53 = phi i32 [ %68, %52 ], [ %13, %38 ]
   %54 = phi double [ %67, %52 ], [ 0.000000e+00, %38 ]
   %55 = sext i32 %53 to i64
   %56 = getelementptr inbounds [4 x i8], ptr %22, i64 %55
-  %57 = load i32, ptr %56, align 4, !tbaa !18
+  %57 = load i32, ptr %56, align 4, !tbaa !11
   %58 = srem i32 %57, %24
   %59 = sdiv i32 %57, %24
   %60 = mul nsw i32 %59, %30
@@ -2364,11 +2364,11 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_17L2FaceRestriction
   %63 = add nsw i32 %62, %58
   %64 = sext i32 %63 to i64
   %65 = getelementptr inbounds [8 x i8], ptr %26, i64 %64
-  %66 = load double, ptr %65, align 8, !tbaa !26
+  %66 = load double, ptr %65, align 8, !tbaa !31
   %67 = fadd contract double %54, %66
   %68 = add nsw i32 %53, 1
   %69 = icmp eq i32 %68, %15
-  br i1 %69, label %40, label %52, !llvm.loop !180
+  br i1 %69, label %40, label %52, !llvm.loop !272
 
 70:                                               ; preds = %40, %9, %2
   ret void
@@ -2385,14 +2385,14 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_17L2FaceRestriction
   br i1 %8, label %9, label %86
 
 9:                                                ; preds = %2
-  %10 = load ptr, ptr %1, align 8, !tbaa !181
+  %10 = load ptr, ptr %1, align 8, !tbaa !277
   %11 = sext i32 %7 to i64
   %12 = getelementptr inbounds [4 x i8], ptr %10, i64 %11
-  %13 = load i32, ptr %12, align 4, !tbaa !18
+  %13 = load i32, ptr %12, align 4, !tbaa !11
   %14 = getelementptr i8, ptr %12, i64 4
-  %15 = load i32, ptr %14, align 4, !tbaa !18
+  %15 = load i32, ptr %14, align 4, !tbaa !11
   %16 = getelementptr inbounds nuw i8, ptr %1, i64 8
-  %17 = load i32, ptr %16, align 8, !tbaa !184
+  %17 = load i32, ptr %16, align 8, !tbaa !279
   %18 = icmp sgt i32 %17, 0
   br i1 %18, label %19, label %86
 
@@ -2408,12 +2408,12 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_17L2FaceRestriction
   %28 = getelementptr inbounds nuw i8, ptr %1, i64 52
   %29 = getelementptr inbounds nuw i8, ptr %1, i64 56
   %30 = getelementptr inbounds nuw i8, ptr %1, i64 96
-  %31 = load i8, ptr %30, align 8, !tbaa !185, !range !21, !noundef !22
+  %31 = load i8, ptr %30, align 8, !tbaa !285, !range !26, !noundef !27
   %32 = trunc nuw i8 %31 to i1
   %33 = getelementptr inbounds nuw i8, ptr %1, i64 80
-  %34 = load ptr, ptr %33, align 8, !tbaa !42
+  %34 = load ptr, ptr %33, align 8, !tbaa !66
   %35 = getelementptr inbounds nuw i8, ptr %1, i64 88
-  %36 = load i32, ptr %35, align 4, !tbaa !18
+  %36 = load i32, ptr %35, align 4, !tbaa !11
   %37 = load ptr, ptr %26, align 8
   %38 = load i32, ptr %27, align 4
   %39 = load i32, ptr %25, align 8
@@ -2434,19 +2434,19 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_17L2FaceRestriction
   %50 = add nsw i32 %49, %47
   %51 = sext i32 %50 to i64
   %52 = getelementptr inbounds [8 x i8], ptr %34, i64 %51
-  %53 = load double, ptr %52, align 8, !tbaa !26
+  %53 = load double, ptr %52, align 8, !tbaa !31
   %54 = fadd contract double %46, %53
-  store double %54, ptr %52, align 8, !tbaa !26
+  store double %54, ptr %52, align 8, !tbaa !31
   %55 = add nuw nsw i32 %44, 1
   %56 = icmp eq i32 %55, %17
-  br i1 %56, label %86, label %43, !llvm.loop !186
+  br i1 %56, label %86, label %43, !llvm.loop !286
 
 57:                                               ; preds = %43, %73
   %58 = phi i32 [ %84, %73 ], [ %13, %43 ]
   %59 = phi double [ %83, %73 ], [ 0.000000e+00, %43 ]
   %60 = sext i32 %58 to i64
   %61 = getelementptr inbounds [4 x i8], ptr %22, i64 %60
-  %62 = load i32, ptr %61, align 4, !tbaa !18
+  %62 = load i32, ptr %61, align 4, !tbaa !11
   %63 = icmp slt i32 %62, %24
   br i1 %63, label %64, label %67
 
@@ -2472,11 +2472,11 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_17L2FaceRestriction
   %79 = add nsw i32 %78, %76
   %80 = sext i32 %79 to i64
   %81 = getelementptr inbounds [8 x i8], ptr %37, i64 %80
-  %82 = load double, ptr %81, align 8, !tbaa !26
+  %82 = load double, ptr %81, align 8, !tbaa !31
   %83 = fadd contract double %59, %82
   %84 = add nsw i32 %58, 1
   %85 = icmp eq i32 %84, %15
-  br i1 %85, label %45, label %57, !llvm.loop !187
+  br i1 %85, label %45, label %57, !llvm.loop !284
 
 86:                                               ; preds = %45, %9, %2
   ret void
@@ -2493,18 +2493,18 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_17L2FaceRestriction
   br i1 %8, label %9, label %28
 
 9:                                                ; preds = %2
-  %10 = load ptr, ptr %1, align 8, !tbaa !188
+  %10 = load ptr, ptr %1, align 8, !tbaa !291
   %11 = sext i32 %7 to i64
   %12 = getelementptr inbounds [4 x i8], ptr %10, i64 %11
-  %13 = load i32, ptr %12, align 4, !tbaa !18
+  %13 = load i32, ptr %12, align 4, !tbaa !11
   %14 = getelementptr inbounds nuw i8, ptr %1, i64 8
-  %15 = load ptr, ptr %14, align 8, !tbaa !190
+  %15 = load ptr, ptr %14, align 8, !tbaa !292
   %16 = getelementptr inbounds [4 x i8], ptr %15, i64 %11
-  %17 = load i32, ptr %16, align 4, !tbaa !18
+  %17 = load i32, ptr %16, align 4, !tbaa !11
   %18 = getelementptr inbounds nuw i8, ptr %1, i64 16
-  %19 = load ptr, ptr %18, align 8, !tbaa !191
+  %19 = load ptr, ptr %18, align 8, !tbaa !293
   %20 = getelementptr inbounds nuw i8, ptr %1, i64 24
-  %21 = load i32, ptr %20, align 8, !tbaa !192
+  %21 = load i32, ptr %20, align 8, !tbaa !294
   %22 = sext i32 %13 to i64
   %23 = getelementptr inbounds [4 x i8], ptr %19, i64 %22
   %24 = atomicrmw add ptr %23, i32 %21 monotonic, align 4
@@ -2528,22 +2528,22 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_17L2FaceRestriction
   br i1 %8, label %9, label %80
 
 9:                                                ; preds = %2
-  %10 = load i32, ptr %1, align 8, !tbaa !193
+  %10 = load i32, ptr %1, align 8, !tbaa !296
   %11 = sdiv i32 %7, %10
   %12 = srem i32 %7, %10
   %13 = getelementptr inbounds nuw i8, ptr %1, i64 8
-  %14 = load ptr, ptr %13, align 8, !tbaa !195
+  %14 = load ptr, ptr %13, align 8, !tbaa !297
   %15 = mul nsw i32 %11, %10
   %16 = add nsw i32 %15, %12
   %17 = sext i32 %16 to i64
   %18 = getelementptr inbounds [4 x i8], ptr %14, i64 %17
-  %19 = load i32, ptr %18, align 4, !tbaa !18
+  %19 = load i32, ptr %18, align 4, !tbaa !11
   %20 = getelementptr inbounds nuw i8, ptr %1, i64 16
-  %21 = load ptr, ptr %20, align 8, !tbaa !196
+  %21 = load ptr, ptr %20, align 8, !tbaa !298
   %22 = getelementptr inbounds [4 x i8], ptr %21, i64 %17
-  %23 = load i32, ptr %22, align 4, !tbaa !18
+  %23 = load i32, ptr %22, align 4, !tbaa !11
   %24 = getelementptr inbounds nuw i8, ptr %1, i64 24
-  %25 = load ptr, ptr %24, align 8, !tbaa !197
+  %25 = load ptr, ptr %24, align 8, !tbaa !299
   %26 = sext i32 %19 to i64
   %27 = getelementptr inbounds [4 x i8], ptr %25, i64 %26
   %28 = atomicrmw add ptr %27, i32 %10 monotonic, align 4
@@ -2555,17 +2555,17 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_17L2FaceRestriction
 
 33:                                               ; preds = %9
   %34 = getelementptr inbounds nuw i8, ptr %1, i64 32
-  %35 = load ptr, ptr %34, align 8, !tbaa !198
+  %35 = load ptr, ptr %34, align 8, !tbaa !301
   %36 = getelementptr inbounds nuw i8, ptr %1, i64 56
-  %37 = load ptr, ptr %36, align 8, !tbaa !199
+  %37 = load ptr, ptr %36, align 8, !tbaa !289
   %38 = getelementptr inbounds nuw i8, ptr %1, i64 64
   %39 = getelementptr inbounds nuw i8, ptr %1, i64 68
   %40 = getelementptr inbounds nuw i8, ptr %1, i64 72
   %41 = getelementptr inbounds nuw i8, ptr %1, i64 40
-  %42 = load ptr, ptr %41, align 8, !tbaa !200
-  %43 = load i32, ptr %38, align 4, !tbaa !18
-  %44 = load i32, ptr %39, align 4, !tbaa !18
-  %45 = load i32, ptr %40, align 4, !tbaa !18
+  %42 = load ptr, ptr %41, align 8, !tbaa !302
+  %43 = load i32, ptr %38, align 4, !tbaa !11
+  %44 = load i32, ptr %39, align 4, !tbaa !11
+  %45 = load i32, ptr %40, align 4, !tbaa !11
   %46 = mul nsw i32 %45, %11
   %47 = mul nsw i32 %46, %44
   %48 = add nsw i32 %47, %12
@@ -2581,32 +2581,32 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_17L2FaceRestriction
   %56 = add nsw i32 %55, %15
   %57 = sext i32 %56 to i64
   %58 = getelementptr inbounds [4 x i8], ptr %14, i64 %57
-  %59 = load i32, ptr %58, align 4, !tbaa !18
+  %59 = load i32, ptr %58, align 4, !tbaa !11
   %60 = getelementptr inbounds [4 x i8], ptr %21, i64 %57
-  %61 = load i32, ptr %60, align 4, !tbaa !18
+  %61 = load i32, ptr %60, align 4, !tbaa !11
   %62 = add nsw i32 %55, %31
   %63 = sext i32 %62 to i64
   %64 = getelementptr inbounds [4 x i8], ptr %35, i64 %63
-  store i32 %59, ptr %64, align 4, !tbaa !18
+  store i32 %59, ptr %64, align 4, !tbaa !11
   %65 = add nsw i32 %55, %28
   %66 = sext i32 %65 to i64
   %67 = getelementptr inbounds [4 x i8], ptr %35, i64 %66
-  store i32 %61, ptr %67, align 4, !tbaa !18
+  store i32 %61, ptr %67, align 4, !tbaa !11
   %68 = add nsw i32 %49, %55
   %69 = sext i32 %68 to i64
   %70 = getelementptr inbounds [8 x i8], ptr %37, i64 %69
-  %71 = load double, ptr %70, align 8, !tbaa !26
+  %71 = load double, ptr %70, align 8, !tbaa !31
   %72 = getelementptr inbounds [8 x i8], ptr %42, i64 %63
-  store double %71, ptr %72, align 8, !tbaa !26
+  store double %71, ptr %72, align 8, !tbaa !31
   %73 = add nsw i32 %53, %55
   %74 = sext i32 %73 to i64
   %75 = getelementptr inbounds [8 x i8], ptr %37, i64 %74
-  %76 = load double, ptr %75, align 8, !tbaa !26
+  %76 = load double, ptr %75, align 8, !tbaa !31
   %77 = getelementptr inbounds [8 x i8], ptr %42, i64 %66
-  store double %76, ptr %77, align 8, !tbaa !26
+  store double %76, ptr %77, align 8, !tbaa !31
   %78 = add nuw nsw i32 %55, 1
   %79 = icmp eq i32 %78, %10
-  br i1 %79, label %80, label %54, !llvm.loop !201
+  br i1 %79, label %80, label %54, !llvm.loop !303
 
 80:                                               ; preds = %54, %9, %2
   ret void
@@ -2623,24 +2623,24 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_17L2FaceRestriction
   br i1 %8, label %9, label %130
 
 9:                                                ; preds = %2
-  %10 = load ptr, ptr %1, align 8, !tbaa !202
+  %10 = load ptr, ptr %1, align 8, !tbaa !305
   %11 = getelementptr inbounds nuw i8, ptr %1, i64 8
-  %12 = load i32, ptr %11, align 8, !tbaa !204
+  %12 = load i32, ptr %11, align 8, !tbaa !306
   %13 = mul nsw i32 %12, %7
   %14 = sext i32 %13 to i64
   %15 = getelementptr inbounds nuw i8, ptr %1, i64 12
-  %16 = load i32, ptr %15, align 4, !tbaa !205
+  %16 = load i32, ptr %15, align 4, !tbaa !307
   %17 = getelementptr inbounds nuw i8, ptr %1, i64 16
-  %18 = load ptr, ptr %17, align 8, !tbaa !206
+  %18 = load ptr, ptr %17, align 8, !tbaa !308
   %19 = getelementptr inbounds [4 x i8], ptr %18, i64 %14
-  %20 = load i32, ptr %19, align 4, !tbaa !18
+  %20 = load i32, ptr %19, align 4, !tbaa !11
   %21 = sdiv i32 %20, %16
   %22 = icmp sgt i32 %12, 0
   br i1 %22, label %23, label %44
 
 23:                                               ; preds = %9
   %24 = getelementptr inbounds [4 x i8], ptr %10, i64 %14
-  %25 = load i32, ptr %24, align 4, !tbaa !18
+  %25 = load i32, ptr %24, align 4, !tbaa !11
   %26 = sdiv i32 %25, %16
   %27 = getelementptr inbounds nuw i8, ptr %1, i64 32
   %28 = getelementptr inbounds nuw i8, ptr %1, i64 40
@@ -2649,21 +2649,21 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_17L2FaceRestriction
   %31 = getelementptr inbounds nuw i8, ptr %1, i64 72
   %32 = getelementptr inbounds nuw i8, ptr %1, i64 76
   %33 = getelementptr inbounds nuw i8, ptr %1, i64 80
-  %34 = load ptr, ptr %27, align 8, !tbaa !25
-  %35 = load i32, ptr %28, align 4, !tbaa !18
-  %36 = load i32, ptr %29, align 4, !tbaa !18
+  %34 = load ptr, ptr %27, align 8, !tbaa !41
+  %35 = load i32, ptr %28, align 4, !tbaa !11
+  %36 = load i32, ptr %29, align 4, !tbaa !11
   %37 = mul nsw i32 %36, %26
-  %38 = load ptr, ptr %30, align 8, !tbaa !199
-  %39 = load i32, ptr %31, align 4, !tbaa !18
-  %40 = load i32, ptr %32, align 4, !tbaa !18
-  %41 = load i32, ptr %33, align 4, !tbaa !18
+  %38 = load ptr, ptr %30, align 8, !tbaa !289
+  %39 = load i32, ptr %31, align 4, !tbaa !11
+  %40 = load i32, ptr %32, align 4, !tbaa !11
+  %41 = load i32, ptr %33, align 4, !tbaa !11
   %42 = mul i32 %40, %7
   %43 = mul i32 %42, %41
   br label %68
 
 44:                                               ; preds = %79, %9
   %45 = getelementptr inbounds nuw i8, ptr %1, i64 88
-  %46 = load i32, ptr %45, align 8, !tbaa !207
+  %46 = load i32, ptr %45, align 8, !tbaa !313
   %47 = icmp slt i32 %21, %46
   %48 = and i1 %22, %47
   br i1 %48, label %49, label %130
@@ -2676,14 +2676,14 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_17L2FaceRestriction
   %54 = getelementptr inbounds nuw i8, ptr %1, i64 72
   %55 = getelementptr inbounds nuw i8, ptr %1, i64 76
   %56 = getelementptr inbounds nuw i8, ptr %1, i64 80
-  %57 = load ptr, ptr %50, align 8, !tbaa !25
-  %58 = load i32, ptr %51, align 4, !tbaa !18
-  %59 = load i32, ptr %52, align 4, !tbaa !18
+  %57 = load ptr, ptr %50, align 8, !tbaa !41
+  %58 = load i32, ptr %51, align 4, !tbaa !11
+  %59 = load i32, ptr %52, align 4, !tbaa !11
   %60 = mul nsw i32 %59, %21
-  %61 = load ptr, ptr %53, align 8, !tbaa !199
-  %62 = load i32, ptr %54, align 4, !tbaa !18
-  %63 = load i32, ptr %55, align 4, !tbaa !18
-  %64 = load i32, ptr %56, align 4, !tbaa !18
+  %61 = load ptr, ptr %53, align 8, !tbaa !289
+  %62 = load i32, ptr %54, align 4, !tbaa !11
+  %63 = load i32, ptr %55, align 4, !tbaa !11
+  %64 = load i32, ptr %56, align 4, !tbaa !11
   %65 = mul nsw i32 %64, %7
   %66 = add nsw i32 %65, 1
   %67 = mul nsw i32 %66, %63
@@ -2694,7 +2694,7 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_17L2FaceRestriction
   %70 = add nsw i32 %69, %13
   %71 = sext i32 %70 to i64
   %72 = getelementptr inbounds [4 x i8], ptr %10, i64 %71
-  %73 = load i32, ptr %72, align 4, !tbaa !18
+  %73 = load i32, ptr %72, align 4, !tbaa !11
   %74 = srem i32 %73, %16
   %75 = add nsw i32 %37, %74
   %76 = mul nsw i32 %75, %35
@@ -2705,14 +2705,14 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_17L2FaceRestriction
 79:                                               ; preds = %82
   %80 = add nuw nsw i32 %69, 1
   %81 = icmp eq i32 %80, %12
-  br i1 %81, label %44, label %68, !llvm.loop !208
+  br i1 %81, label %44, label %68, !llvm.loop !312
 
 82:                                               ; preds = %68, %82
   %83 = phi i32 [ %97, %82 ], [ 0, %68 ]
   %84 = add nsw i32 %83, %13
   %85 = sext i32 %84 to i64
   %86 = getelementptr inbounds [4 x i8], ptr %10, i64 %85
-  %87 = load i32, ptr %86, align 4, !tbaa !18
+  %87 = load i32, ptr %86, align 4, !tbaa !11
   %88 = srem i32 %87, %16
   %89 = add nsw i32 %76, %88
   %90 = sext i32 %89 to i64
@@ -2720,18 +2720,18 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_17L2FaceRestriction
   %92 = add nsw i32 %78, %83
   %93 = sext i32 %92 to i64
   %94 = getelementptr inbounds [8 x i8], ptr %38, i64 %93
-  %95 = load double, ptr %94, align 8, !tbaa !26
+  %95 = load double, ptr %94, align 8, !tbaa !31
   %96 = atomicrmw fadd ptr %91, double %95 monotonic, align 8
   %97 = add nuw nsw i32 %83, 1
   %98 = icmp eq i32 %97, %12
-  br i1 %98, label %79, label %82, !llvm.loop !209
+  br i1 %98, label %79, label %82, !llvm.loop !311
 
 99:                                               ; preds = %110, %49
   %100 = phi i32 [ 0, %49 ], [ %111, %110 ]
   %101 = add nsw i32 %100, %13
   %102 = sext i32 %101 to i64
   %103 = getelementptr inbounds [4 x i8], ptr %18, i64 %102
-  %104 = load i32, ptr %103, align 4, !tbaa !18
+  %104 = load i32, ptr %103, align 4, !tbaa !11
   %105 = srem i32 %104, %16
   %106 = add nsw i32 %60, %105
   %107 = mul nsw i32 %106, %58
@@ -2742,14 +2742,14 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_17L2FaceRestriction
 110:                                              ; preds = %113
   %111 = add nuw nsw i32 %100, 1
   %112 = icmp eq i32 %111, %12
-  br i1 %112, label %130, label %99, !llvm.loop !210
+  br i1 %112, label %130, label %99, !llvm.loop !317
 
 113:                                              ; preds = %99, %113
   %114 = phi i32 [ %128, %113 ], [ 0, %99 ]
   %115 = add nsw i32 %114, %13
   %116 = sext i32 %115 to i64
   %117 = getelementptr inbounds [4 x i8], ptr %18, i64 %116
-  %118 = load i32, ptr %117, align 4, !tbaa !18
+  %118 = load i32, ptr %117, align 4, !tbaa !11
   %119 = srem i32 %118, %16
   %120 = add nsw i32 %107, %119
   %121 = sext i32 %120 to i64
@@ -2757,11 +2757,11 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_17L2FaceRestriction
   %123 = add nsw i32 %109, %114
   %124 = sext i32 %123 to i64
   %125 = getelementptr inbounds [8 x i8], ptr %61, i64 %124
-  %126 = load double, ptr %125, align 8, !tbaa !26
+  %126 = load double, ptr %125, align 8, !tbaa !31
   %127 = atomicrmw fadd ptr %122, double %126 monotonic, align 8
   %128 = add nuw nsw i32 %114, 1
   %129 = icmp eq i32 %128, %12
-  br i1 %129, label %110, label %113, !llvm.loop !211
+  br i1 %129, label %110, label %113, !llvm.loop !316
 
 130:                                              ; preds = %110, %44, %2
   ret void
@@ -2778,11 +2778,11 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_17L2FaceRestriction
   br i1 %8, label %9, label %67
 
 9:                                                ; preds = %2
-  %10 = load ptr, ptr %1, align 8, !tbaa !212
+  %10 = load ptr, ptr %1, align 8, !tbaa !321
   %11 = getelementptr inbounds nuw i8, ptr %1, i64 8
-  %12 = load i32, ptr %11, align 8, !tbaa !214
+  %12 = load i32, ptr %11, align 8, !tbaa !322
   %13 = getelementptr inbounds nuw i8, ptr %1, i64 12
-  %14 = load i32, ptr %13, align 4, !tbaa !215
+  %14 = load i32, ptr %13, align 4, !tbaa !323
   %15 = icmp sgt i32 %12, 0
   br i1 %15, label %16, label %67
 
@@ -2790,7 +2790,7 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_17L2FaceRestriction
   %17 = mul nsw i32 %12, %7
   %18 = sext i32 %17 to i64
   %19 = getelementptr inbounds [4 x i8], ptr %10, i64 %18
-  %20 = load i32, ptr %19, align 4, !tbaa !18
+  %20 = load i32, ptr %19, align 4, !tbaa !11
   %21 = sdiv i32 %20, %14
   %22 = getelementptr inbounds nuw i8, ptr %1, i64 24
   %23 = getelementptr inbounds nuw i8, ptr %1, i64 32
@@ -2798,13 +2798,13 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_17L2FaceRestriction
   %25 = getelementptr inbounds nuw i8, ptr %1, i64 56
   %26 = getelementptr inbounds nuw i8, ptr %1, i64 64
   %27 = getelementptr inbounds nuw i8, ptr %1, i64 68
-  %28 = load ptr, ptr %22, align 8, !tbaa !25
-  %29 = load i32, ptr %23, align 4, !tbaa !18
-  %30 = load i32, ptr %24, align 4, !tbaa !18
+  %28 = load ptr, ptr %22, align 8, !tbaa !41
+  %29 = load i32, ptr %23, align 4, !tbaa !11
+  %30 = load i32, ptr %24, align 4, !tbaa !11
   %31 = mul nsw i32 %30, %21
-  %32 = load ptr, ptr %25, align 8, !tbaa !129
-  %33 = load i32, ptr %26, align 4, !tbaa !18
-  %34 = load i32, ptr %27, align 4, !tbaa !18
+  %32 = load ptr, ptr %25, align 8, !tbaa !63
+  %33 = load i32, ptr %26, align 4, !tbaa !11
+  %34 = load i32, ptr %27, align 4, !tbaa !11
   %35 = mul nsw i32 %34, %7
   br label %36
 
@@ -2813,7 +2813,7 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_17L2FaceRestriction
   %38 = add nsw i32 %37, %17
   %39 = sext i32 %38 to i64
   %40 = getelementptr inbounds [4 x i8], ptr %10, i64 %39
-  %41 = load i32, ptr %40, align 4, !tbaa !18
+  %41 = load i32, ptr %40, align 4, !tbaa !11
   %42 = srem i32 %41, %14
   %43 = add nsw i32 %31, %42
   %44 = mul nsw i32 %43, %29
@@ -2824,14 +2824,14 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_17L2FaceRestriction
 47:                                               ; preds = %50
   %48 = add nuw nsw i32 %37, 1
   %49 = icmp eq i32 %48, %12
-  br i1 %49, label %67, label %36, !llvm.loop !216
+  br i1 %49, label %67, label %36, !llvm.loop !327
 
 50:                                               ; preds = %36, %50
   %51 = phi i32 [ %65, %50 ], [ 0, %36 ]
   %52 = add nsw i32 %51, %17
   %53 = sext i32 %52 to i64
   %54 = getelementptr inbounds [4 x i8], ptr %10, i64 %53
-  %55 = load i32, ptr %54, align 4, !tbaa !18
+  %55 = load i32, ptr %54, align 4, !tbaa !11
   %56 = srem i32 %55, %14
   %57 = add nsw i32 %44, %56
   %58 = sext i32 %57 to i64
@@ -2839,11 +2839,11 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_17L2FaceRestriction
   %60 = add nsw i32 %46, %51
   %61 = sext i32 %60 to i64
   %62 = getelementptr inbounds [8 x i8], ptr %32, i64 %61
-  %63 = load double, ptr %62, align 8, !tbaa !26
+  %63 = load double, ptr %62, align 8, !tbaa !31
   %64 = atomicrmw fadd ptr %59, double %63 monotonic, align 8
   %65 = add nuw nsw i32 %51, 1
   %66 = icmp eq i32 %65, %12
-  br i1 %66, label %47, label %50, !llvm.loop !217
+  br i1 %66, label %47, label %50, !llvm.loop !326
 
 67:                                               ; preds = %47, %9, %2
   ret void
@@ -2860,19 +2860,19 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel2DIZNKS_19NCL2FaceRestricti
   br i1 %8, label %9, label %95
 
 9:                                                ; preds = %2
-  %10 = load ptr, ptr %1, align 8, !tbaa !218
+  %10 = load ptr, ptr %1, align 8, !tbaa !331
   %11 = sext i32 %7 to i64
   %12 = getelementptr inbounds [8 x i8], ptr %10, i64 %11
-  %13 = load i32, ptr %12, align 4, !tbaa !18
+  %13 = load i32, ptr %12, align 4, !tbaa !11
   %14 = getelementptr inbounds nuw i8, ptr %12, i64 4
-  %15 = load i32, ptr %14, align 4, !tbaa !221
+  %15 = load i32, ptr %14, align 4, !tbaa !332
   %16 = and i32 %15, 1
   %17 = icmp eq i32 %16, 0
   br i1 %17, label %95, label %18
 
 18:                                               ; preds = %9
   %19 = getelementptr inbounds nuw i8, ptr %1, i64 8
-  %20 = load i32, ptr %19, align 8, !tbaa !222
+  %20 = load i32, ptr %19, align 8, !tbaa !336
   %21 = icmp sgt i32 %20, 0
   br i1 %21, label %22, label %95
 
@@ -2890,7 +2890,7 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel2DIZNKS_19NCL2FaceRestricti
   %33 = getelementptr inbounds nuw i8, ptr %1, i64 56
   %34 = getelementptr inbounds nuw i8, ptr %1, i64 64
   %35 = getelementptr inbounds nuw i8, ptr %1, i64 68
-  %36 = load i32, ptr %27, align 4, !tbaa !223
+  %36 = load i32, ptr %27, align 4, !tbaa !338
   %37 = icmp slt i32 %26, %36
   %38 = load ptr, ptr %28, align 8
   %39 = load i32, ptr %29, align 4
@@ -2928,13 +2928,13 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel2DIZNKS_19NCL2FaceRestricti
   %60 = add nsw i32 %59, %53
   %61 = sext i32 %60 to i64
   %62 = getelementptr inbounds [8 x i8], ptr %38, i64 %61
-  %63 = load double, ptr %62, align 8, !tbaa !26
+  %63 = load double, ptr %62, align 8, !tbaa !31
   %64 = sext i32 %59 to i64
   %65 = getelementptr inbounds [8 x i8], ptr addrspacecast (ptr addrspace(3) @_ZZZNK4mfem19NCL2FaceRestriction38DoubleValuedNonconformingInterpolationERNS_6VectorEENKUliE_clEiE10dof_values to ptr), i64 %64
-  store double %63, ptr %65, align 8, !tbaa !26
+  store double %63, ptr %65, align 8, !tbaa !31
   %66 = add i32 %59, %32
   %67 = icmp slt i32 %66, %36
-  br i1 %67, label %58, label %54, !llvm.loop !224
+  br i1 %67, label %58, label %54, !llvm.loop !339
 
 68:                                               ; preds = %73, %55
   %69 = phi i32 [ %26, %55 ], [ %77, %73 ]
@@ -2944,16 +2944,16 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel2DIZNKS_19NCL2FaceRestricti
   tail call void @llvm.nvvm.barrier.cta.sync.aligned.all(i32 0)
   %71 = add nuw nsw i32 %50, 1
   %72 = icmp eq i32 %71, %20
-  br i1 %72, label %95, label %49, !llvm.loop !225
+  br i1 %72, label %95, label %49, !llvm.loop !344
 
 73:                                               ; preds = %79
   %74 = add nsw i32 %69, %57
   %75 = sext i32 %74 to i64
   %76 = getelementptr inbounds [8 x i8], ptr %38, i64 %75
-  store double %92, ptr %76, align 8, !tbaa !26
+  store double %92, ptr %76, align 8, !tbaa !31
   %77 = add i32 %69, %32
   %78 = icmp slt i32 %77, %36
-  br i1 %78, label %68, label %70, !llvm.loop !226
+  br i1 %78, label %68, label %70, !llvm.loop !343
 
 79:                                               ; preds = %79, %68
   %80 = phi i32 [ 0, %68 ], [ %93, %79 ]
@@ -2963,15 +2963,15 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel2DIZNKS_19NCL2FaceRestricti
   %84 = add nsw i32 %83, %69
   %85 = sext i32 %84 to i64
   %86 = getelementptr inbounds [8 x i8], ptr %45, i64 %85
-  %87 = load double, ptr %86, align 8, !tbaa !26
+  %87 = load double, ptr %86, align 8, !tbaa !31
   %88 = zext nneg i32 %80 to i64
   %89 = getelementptr inbounds nuw [8 x i8], ptr addrspacecast (ptr addrspace(3) @_ZZZNK4mfem19NCL2FaceRestriction38DoubleValuedNonconformingInterpolationERNS_6VectorEENKUliE_clEiE10dof_values to ptr), i64 %88
-  %90 = load double, ptr %89, align 8, !tbaa !26
+  %90 = load double, ptr %89, align 8, !tbaa !31
   %91 = fmul contract double %87, %90
   %92 = fadd contract double %81, %91
   %93 = add nuw nsw i32 %80, 1
   %94 = icmp eq i32 %93, %36
-  br i1 %94, label %73, label %79, !llvm.loop !227
+  br i1 %94, label %73, label %79, !llvm.loop !342
 
 95:                                               ; preds = %70, %18, %9, %2
   ret void
@@ -2997,12 +2997,12 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel2DIZNKS_19NCL2FaceRestricti
   br i1 %8, label %9, label %89
 
 9:                                                ; preds = %2
-  %10 = load ptr, ptr %1, align 8, !tbaa !228
+  %10 = load ptr, ptr %1, align 8, !tbaa !346
   %11 = sext i32 %7 to i64
   %12 = getelementptr inbounds [8 x i8], ptr %10, i64 %11
-  %13 = load i32, ptr %12, align 4, !tbaa !18
+  %13 = load i32, ptr %12, align 4, !tbaa !11
   %14 = getelementptr inbounds nuw i8, ptr %12, i64 4
-  %15 = load i32, ptr %14, align 4, !tbaa !221
+  %15 = load i32, ptr %14, align 4, !tbaa !332
   %16 = lshr i32 %15, 2
   %17 = and i32 %15, 3
   %18 = icmp eq i32 %17, 1
@@ -3010,7 +3010,7 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel2DIZNKS_19NCL2FaceRestricti
 
 19:                                               ; preds = %9
   %20 = getelementptr inbounds nuw i8, ptr %1, i64 8
-  %21 = load i32, ptr %20, align 8, !tbaa !230
+  %21 = load i32, ptr %20, align 8, !tbaa !348
   %22 = icmp sgt i32 %21, 0
   br i1 %22, label %23, label %89
 
@@ -3024,7 +3024,7 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel2DIZNKS_19NCL2FaceRestricti
   %30 = getelementptr inbounds nuw i8, ptr %1, i64 56
   %31 = getelementptr inbounds nuw i8, ptr %1, i64 64
   %32 = getelementptr inbounds nuw i8, ptr %1, i64 68
-  %33 = load i32, ptr %25, align 4, !tbaa !231
+  %33 = load i32, ptr %25, align 4, !tbaa !350
   %34 = icmp slt i32 %24, %33
   %35 = load ptr, ptr %26, align 8
   %36 = load i32, ptr %27, align 4
@@ -3059,13 +3059,13 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel2DIZNKS_19NCL2FaceRestricti
   %54 = add nsw i32 %53, %47
   %55 = sext i32 %54 to i64
   %56 = getelementptr inbounds [8 x i8], ptr %35, i64 %55
-  %57 = load double, ptr %56, align 8, !tbaa !26
+  %57 = load double, ptr %56, align 8, !tbaa !31
   %58 = sext i32 %53 to i64
   %59 = getelementptr inbounds [8 x i8], ptr addrspacecast (ptr addrspace(3) @_ZZZNK4mfem19NCL2FaceRestriction54SingleValuedNonconformingTransposeInterpolationInPlaceERNS_6VectorEENKUliE_clEiE10dof_values to ptr), i64 %58
-  store double %57, ptr %59, align 8, !tbaa !26
+  store double %57, ptr %59, align 8, !tbaa !31
   %60 = add i32 %53, %29
   %61 = icmp slt i32 %60, %33
-  br i1 %61, label %52, label %48, !llvm.loop !232
+  br i1 %61, label %52, label %48, !llvm.loop !351
 
 62:                                               ; preds = %69, %49
   %63 = phi i32 [ %24, %49 ], [ %73, %69 ]
@@ -3077,16 +3077,16 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel2DIZNKS_19NCL2FaceRestricti
   tail call void @llvm.nvvm.barrier.cta.sync.aligned.all(i32 0)
   %67 = add nuw nsw i32 %44, 1
   %68 = icmp eq i32 %67, %21
-  br i1 %68, label %89, label %43, !llvm.loop !233
+  br i1 %68, label %89, label %43, !llvm.loop !356
 
 69:                                               ; preds = %75
   %70 = add nsw i32 %63, %51
   %71 = sext i32 %70 to i64
   %72 = getelementptr inbounds [8 x i8], ptr %35, i64 %71
-  store double %86, ptr %72, align 8, !tbaa !26
+  store double %86, ptr %72, align 8, !tbaa !31
   %73 = add i32 %63, %29
   %74 = icmp slt i32 %73, %33
-  br i1 %74, label %62, label %66, !llvm.loop !234
+  br i1 %74, label %62, label %66, !llvm.loop !355
 
 75:                                               ; preds = %75, %62
   %76 = phi i32 [ 0, %62 ], [ %87, %75 ]
@@ -3094,15 +3094,15 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel2DIZNKS_19NCL2FaceRestricti
   %78 = add nsw i32 %76, %65
   %79 = sext i32 %78 to i64
   %80 = getelementptr inbounds [8 x i8], ptr %39, i64 %79
-  %81 = load double, ptr %80, align 8, !tbaa !26
+  %81 = load double, ptr %80, align 8, !tbaa !31
   %82 = zext nneg i32 %76 to i64
   %83 = getelementptr inbounds nuw [8 x i8], ptr addrspacecast (ptr addrspace(3) @_ZZZNK4mfem19NCL2FaceRestriction54SingleValuedNonconformingTransposeInterpolationInPlaceERNS_6VectorEENKUliE_clEiE10dof_values to ptr), i64 %82
-  %84 = load double, ptr %83, align 8, !tbaa !26
+  %84 = load double, ptr %83, align 8, !tbaa !31
   %85 = fmul contract double %81, %84
   %86 = fadd contract double %77, %85
   %87 = add nuw nsw i32 %76, 1
   %88 = icmp eq i32 %87, %33
-  br i1 %88, label %69, label %75, !llvm.loop !235
+  br i1 %88, label %69, label %75, !llvm.loop !354
 
 89:                                               ; preds = %66, %19, %9, %2
   ret void
@@ -3119,12 +3119,12 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel2DIZNKS_19NCL2FaceRestricti
   br i1 %8, label %9, label %95
 
 9:                                                ; preds = %2
-  %10 = load ptr, ptr %1, align 8, !tbaa !236
+  %10 = load ptr, ptr %1, align 8, !tbaa !358
   %11 = sext i32 %7 to i64
   %12 = getelementptr inbounds [8 x i8], ptr %10, i64 %11
-  %13 = load i32, ptr %12, align 4, !tbaa !18
+  %13 = load i32, ptr %12, align 4, !tbaa !11
   %14 = getelementptr inbounds nuw i8, ptr %12, i64 4
-  %15 = load i32, ptr %14, align 4, !tbaa !221
+  %15 = load i32, ptr %14, align 4, !tbaa !332
   %16 = lshr i32 %15, 1
   %17 = and i32 %16, 1
   %18 = lshr i32 %15, 2
@@ -3134,7 +3134,7 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel2DIZNKS_19NCL2FaceRestricti
 
 21:                                               ; preds = %9
   %22 = getelementptr inbounds nuw i8, ptr %1, i64 8
-  %23 = load i32, ptr %22, align 8, !tbaa !238
+  %23 = load i32, ptr %22, align 8, !tbaa !360
   %24 = icmp sgt i32 %23, 0
   br i1 %24, label %25, label %95
 
@@ -3149,7 +3149,7 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel2DIZNKS_19NCL2FaceRestricti
   %33 = getelementptr inbounds nuw i8, ptr %1, i64 56
   %34 = getelementptr inbounds nuw i8, ptr %1, i64 64
   %35 = getelementptr inbounds nuw i8, ptr %1, i64 68
-  %36 = load i32, ptr %27, align 4, !tbaa !239
+  %36 = load i32, ptr %27, align 4, !tbaa !362
   %37 = icmp slt i32 %26, %36
   %38 = load ptr, ptr %28, align 8
   %39 = load i32, ptr %29, align 4
@@ -3187,13 +3187,13 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel2DIZNKS_19NCL2FaceRestricti
   %60 = add nsw i32 %59, %53
   %61 = sext i32 %60 to i64
   %62 = getelementptr inbounds [8 x i8], ptr %38, i64 %61
-  %63 = load double, ptr %62, align 8, !tbaa !26
+  %63 = load double, ptr %62, align 8, !tbaa !31
   %64 = sext i32 %59 to i64
   %65 = getelementptr inbounds [8 x i8], ptr addrspacecast (ptr addrspace(3) @_ZZZNK4mfem19NCL2FaceRestriction54DoubleValuedNonconformingTransposeInterpolationInPlaceERNS_6VectorEENKUliE_clEiE10dof_values to ptr), i64 %64
-  store double %63, ptr %65, align 8, !tbaa !26
+  store double %63, ptr %65, align 8, !tbaa !31
   %66 = add i32 %59, %32
   %67 = icmp slt i32 %66, %36
-  br i1 %67, label %58, label %54, !llvm.loop !240
+  br i1 %67, label %58, label %54, !llvm.loop !363
 
 68:                                               ; preds = %75, %55
   %69 = phi i32 [ %26, %55 ], [ %79, %75 ]
@@ -3205,16 +3205,16 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel2DIZNKS_19NCL2FaceRestricti
   tail call void @llvm.nvvm.barrier.cta.sync.aligned.all(i32 0)
   %73 = add nuw nsw i32 %50, 1
   %74 = icmp eq i32 %73, %23
-  br i1 %74, label %95, label %49, !llvm.loop !241
+  br i1 %74, label %95, label %49, !llvm.loop !368
 
 75:                                               ; preds = %81
   %76 = add nsw i32 %69, %57
   %77 = sext i32 %76 to i64
   %78 = getelementptr inbounds [8 x i8], ptr %38, i64 %77
-  store double %92, ptr %78, align 8, !tbaa !26
+  store double %92, ptr %78, align 8, !tbaa !31
   %79 = add i32 %69, %32
   %80 = icmp slt i32 %79, %36
-  br i1 %80, label %68, label %72, !llvm.loop !242
+  br i1 %80, label %68, label %72, !llvm.loop !367
 
 81:                                               ; preds = %81, %68
   %82 = phi i32 [ 0, %68 ], [ %93, %81 ]
@@ -3222,15 +3222,15 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel2DIZNKS_19NCL2FaceRestricti
   %84 = add nsw i32 %82, %71
   %85 = sext i32 %84 to i64
   %86 = getelementptr inbounds [8 x i8], ptr %45, i64 %85
-  %87 = load double, ptr %86, align 8, !tbaa !26
+  %87 = load double, ptr %86, align 8, !tbaa !31
   %88 = zext nneg i32 %82 to i64
   %89 = getelementptr inbounds nuw [8 x i8], ptr addrspacecast (ptr addrspace(3) @_ZZZNK4mfem19NCL2FaceRestriction54DoubleValuedNonconformingTransposeInterpolationInPlaceERNS_6VectorEENKUliE_clEiE10dof_values to ptr), i64 %88
-  %90 = load double, ptr %89, align 8, !tbaa !26
+  %90 = load double, ptr %89, align 8, !tbaa !31
   %91 = fmul contract double %87, %90
   %92 = fadd contract double %83, %91
   %93 = add nuw nsw i32 %82, 1
   %94 = icmp eq i32 %93, %36
-  br i1 %94, label %75, label %81, !llvm.loop !243
+  br i1 %94, label %75, label %81, !llvm.loop !366
 
 95:                                               ; preds = %72, %21, %9, %2
   ret void
@@ -3247,18 +3247,18 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_19NCL2FaceRestricti
   br i1 %8, label %9, label %28
 
 9:                                                ; preds = %2
-  %10 = load ptr, ptr %1, align 8, !tbaa !244
+  %10 = load ptr, ptr %1, align 8, !tbaa !370
   %11 = sext i32 %7 to i64
   %12 = getelementptr inbounds [4 x i8], ptr %10, i64 %11
-  %13 = load i32, ptr %12, align 4, !tbaa !18
+  %13 = load i32, ptr %12, align 4, !tbaa !11
   %14 = getelementptr inbounds nuw i8, ptr %1, i64 8
-  %15 = load ptr, ptr %14, align 8, !tbaa !246
+  %15 = load ptr, ptr %14, align 8, !tbaa !371
   %16 = getelementptr inbounds [4 x i8], ptr %15, i64 %11
-  %17 = load i32, ptr %16, align 4, !tbaa !18
+  %17 = load i32, ptr %16, align 4, !tbaa !11
   %18 = getelementptr inbounds nuw i8, ptr %1, i64 16
-  %19 = load ptr, ptr %18, align 8, !tbaa !247
+  %19 = load ptr, ptr %18, align 8, !tbaa !372
   %20 = getelementptr inbounds nuw i8, ptr %1, i64 24
-  %21 = load i32, ptr %20, align 8, !tbaa !248
+  %21 = load i32, ptr %20, align 8, !tbaa !373
   %22 = sext i32 %13 to i64
   %23 = getelementptr inbounds [4 x i8], ptr %19, i64 %22
   %24 = atomicrmw add ptr %23, i32 %21 monotonic, align 4
@@ -3282,27 +3282,27 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_19NCL2FaceRestricti
   br i1 %8, label %9, label %162
 
 9:                                                ; preds = %2
-  %10 = load i32, ptr %1, align 8, !tbaa !249
+  %10 = load i32, ptr %1, align 8, !tbaa !376
   %11 = sdiv i32 %7, %10
   %12 = getelementptr inbounds nuw i8, ptr %1, i64 8
-  %13 = load ptr, ptr %12, align 8, !tbaa !252
+  %13 = load ptr, ptr %12, align 8, !tbaa !378
   %14 = sext i32 %11 to i64
   %15 = getelementptr inbounds [4 x i8], ptr %13, i64 %14
-  %16 = load i32, ptr %15, align 4, !tbaa !221
+  %16 = load i32, ptr %15, align 4, !tbaa !332
   %17 = srem i32 %7, %10
   %18 = getelementptr inbounds nuw i8, ptr %1, i64 16
-  %19 = load ptr, ptr %18, align 8, !tbaa !253
+  %19 = load ptr, ptr %18, align 8, !tbaa !380
   %20 = mul nsw i32 %11, %10
   %21 = add nsw i32 %17, %20
   %22 = sext i32 %21 to i64
   %23 = getelementptr inbounds [4 x i8], ptr %19, i64 %22
-  %24 = load i32, ptr %23, align 4, !tbaa !18
+  %24 = load i32, ptr %23, align 4, !tbaa !11
   %25 = getelementptr inbounds nuw i8, ptr %1, i64 24
-  %26 = load ptr, ptr %25, align 8, !tbaa !254
+  %26 = load ptr, ptr %25, align 8, !tbaa !381
   %27 = getelementptr inbounds [4 x i8], ptr %26, i64 %22
-  %28 = load i32, ptr %27, align 4, !tbaa !18
+  %28 = load i32, ptr %27, align 4, !tbaa !11
   %29 = getelementptr inbounds nuw i8, ptr %1, i64 32
-  %30 = load ptr, ptr %29, align 8, !tbaa !255
+  %30 = load ptr, ptr %29, align 8, !tbaa !382
   %31 = sext i32 %24 to i64
   %32 = getelementptr inbounds [4 x i8], ptr %30, i64 %31
   %33 = atomicrmw add ptr %32, i32 %10 monotonic, align 4
@@ -3315,7 +3315,7 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_19NCL2FaceRestricti
 38:                                               ; preds = %9
   %39 = lshr i32 %16, 2
   %40 = getelementptr inbounds nuw i8, ptr %1, i64 40
-  %41 = load ptr, ptr %40, align 8, !tbaa !256
+  %41 = load ptr, ptr %40, align 8, !tbaa !384
   %42 = and i32 %16, 3
   %43 = getelementptr inbounds nuw i8, ptr %1, i64 88
   %44 = getelementptr inbounds nuw i8, ptr %1, i64 96
@@ -3325,7 +3325,7 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_19NCL2FaceRestricti
   %48 = getelementptr inbounds nuw i8, ptr %1, i64 68
   %49 = getelementptr inbounds nuw i8, ptr %1, i64 72
   %50 = getelementptr inbounds nuw i8, ptr %1, i64 112
-  %51 = load ptr, ptr %50, align 8, !tbaa !257
+  %51 = load ptr, ptr %50, align 8, !tbaa !389
   %52 = load ptr, ptr %43, align 8
   %53 = load i32, ptr %44, align 4
   %54 = load i32, ptr %45, align 4
@@ -3351,17 +3351,17 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_19NCL2FaceRestricti
   %72 = add nsw i32 %71, %20
   %73 = sext i32 %72 to i64
   %74 = getelementptr inbounds [4 x i8], ptr %19, i64 %73
-  %75 = load i32, ptr %74, align 4, !tbaa !18
+  %75 = load i32, ptr %74, align 4, !tbaa !11
   %76 = getelementptr inbounds [4 x i8], ptr %26, i64 %73
-  %77 = load i32, ptr %76, align 4, !tbaa !18
+  %77 = load i32, ptr %76, align 4, !tbaa !11
   %78 = add nsw i32 %71, %36
   %79 = sext i32 %78 to i64
   %80 = getelementptr inbounds [4 x i8], ptr %41, i64 %79
-  store i32 %75, ptr %80, align 4, !tbaa !18
+  store i32 %75, ptr %80, align 4, !tbaa !11
   %81 = add nsw i32 %71, %33
   %82 = sext i32 %81 to i64
   %83 = getelementptr inbounds [4 x i8], ptr %41, i64 %82
-  store i32 %77, ptr %83, align 4, !tbaa !18
+  store i32 %77, ptr %83, align 4, !tbaa !11
   switch i32 %42, label %146 [
     i32 1, label %87
     i32 3, label %84
@@ -3384,28 +3384,28 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_19NCL2FaceRestricti
   %94 = add nsw i32 %91, %69
   %95 = sext i32 %94 to i64
   %96 = getelementptr inbounds [8 x i8], ptr %58, i64 %95
-  %97 = load double, ptr %96, align 8, !tbaa !26
+  %97 = load double, ptr %96, align 8, !tbaa !31
   %98 = add nsw i32 %91, %89
   %99 = sext i32 %98 to i64
   %100 = getelementptr inbounds [8 x i8], ptr %52, i64 %99
-  %101 = load double, ptr %100, align 8, !tbaa !26
+  %101 = load double, ptr %100, align 8, !tbaa !31
   %102 = fmul contract double %97, %101
   %103 = fadd contract double %93, %102
   %104 = add nsw i32 %91, %57
   %105 = sext i32 %104 to i64
   %106 = getelementptr inbounds [8 x i8], ptr %52, i64 %105
-  %107 = load double, ptr %106, align 8, !tbaa !26
+  %107 = load double, ptr %106, align 8, !tbaa !31
   %108 = add nsw i32 %91, %65
   %109 = mul nsw i32 %108, %59
   %110 = add nsw i32 %109, %71
   %111 = sext i32 %110 to i64
   %112 = getelementptr inbounds [8 x i8], ptr %58, i64 %111
-  %113 = load double, ptr %112, align 8, !tbaa !26
+  %113 = load double, ptr %112, align 8, !tbaa !31
   %114 = fmul contract double %107, %113
   %115 = fadd contract double %92, %114
   %116 = add nuw nsw i32 %91, 1
   %117 = icmp eq i32 %116, %10
-  br i1 %117, label %155, label %90, !llvm.loop !258
+  br i1 %117, label %155, label %90, !llvm.loop !386
 
 118:                                              ; preds = %118, %84
   %119 = phi i32 [ 0, %84 ], [ %144, %118 ]
@@ -3414,50 +3414,50 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_19NCL2FaceRestricti
   %122 = add nsw i32 %119, %57
   %123 = sext i32 %122 to i64
   %124 = getelementptr inbounds [8 x i8], ptr %52, i64 %123
-  %125 = load double, ptr %124, align 8, !tbaa !26
+  %125 = load double, ptr %124, align 8, !tbaa !31
   %126 = add nsw i32 %119, %63
   %127 = mul nsw i32 %126, %59
   %128 = add nsw i32 %127, %71
   %129 = sext i32 %128 to i64
   %130 = getelementptr inbounds [8 x i8], ptr %58, i64 %129
-  %131 = load double, ptr %130, align 8, !tbaa !26
+  %131 = load double, ptr %130, align 8, !tbaa !31
   %132 = fmul contract double %125, %131
   %133 = fadd contract double %121, %132
   %134 = add nsw i32 %119, %67
   %135 = sext i32 %134 to i64
   %136 = getelementptr inbounds [8 x i8], ptr %58, i64 %135
-  %137 = load double, ptr %136, align 8, !tbaa !26
+  %137 = load double, ptr %136, align 8, !tbaa !31
   %138 = add nsw i32 %119, %86
   %139 = sext i32 %138 to i64
   %140 = getelementptr inbounds [8 x i8], ptr %52, i64 %139
-  %141 = load double, ptr %140, align 8, !tbaa !26
+  %141 = load double, ptr %140, align 8, !tbaa !31
   %142 = fmul contract double %137, %141
   %143 = fadd contract double %120, %142
   %144 = add nuw nsw i32 %119, 1
   %145 = icmp eq i32 %144, %10
-  br i1 %145, label %155, label %118, !llvm.loop !259
+  br i1 %145, label %155, label %118, !llvm.loop !388
 
 146:                                              ; preds = %70
   %147 = add nsw i32 %69, %71
   %148 = sext i32 %147 to i64
   %149 = getelementptr inbounds [8 x i8], ptr %58, i64 %148
-  %150 = load double, ptr %149, align 8, !tbaa !26
+  %150 = load double, ptr %149, align 8, !tbaa !31
   %151 = add nsw i32 %67, %71
   %152 = sext i32 %151 to i64
   %153 = getelementptr inbounds [8 x i8], ptr %58, i64 %152
-  %154 = load double, ptr %153, align 8, !tbaa !26
+  %154 = load double, ptr %153, align 8, !tbaa !31
   br label %155
 
 155:                                              ; preds = %118, %90, %146
   %156 = phi double [ %150, %146 ], [ %103, %90 ], [ %133, %118 ]
   %157 = phi double [ %154, %146 ], [ %115, %90 ], [ %143, %118 ]
   %158 = getelementptr inbounds [8 x i8], ptr %51, i64 %79
-  store double %156, ptr %158, align 8, !tbaa !26
+  store double %156, ptr %158, align 8, !tbaa !31
   %159 = getelementptr inbounds [8 x i8], ptr %51, i64 %82
-  store double %157, ptr %159, align 8, !tbaa !26
+  store double %157, ptr %159, align 8, !tbaa !31
   %160 = add nuw nsw i32 %71, 1
   %161 = icmp eq i32 %160, %10
-  br i1 %161, label %162, label %70, !llvm.loop !260
+  br i1 %161, label %162, label %70, !llvm.loop !390
 
 162:                                              ; preds = %155, %9, %2
   ret void
@@ -3474,30 +3474,30 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_19NCL2FaceRestricti
   br i1 %8, label %9, label %226
 
 9:                                                ; preds = %2
-  %10 = load ptr, ptr %1, align 8, !tbaa !261
+  %10 = load ptr, ptr %1, align 8, !tbaa !392
   %11 = sext i32 %7 to i64
   %12 = getelementptr inbounds [4 x i8], ptr %10, i64 %11
-  %13 = load i32, ptr %12, align 4, !tbaa !221
+  %13 = load i32, ptr %12, align 4, !tbaa !332
   %14 = lshr i32 %13, 2
   %15 = getelementptr inbounds nuw i8, ptr %1, i64 8
-  %16 = load ptr, ptr %15, align 8, !tbaa !263
+  %16 = load ptr, ptr %15, align 8, !tbaa !393
   %17 = getelementptr inbounds nuw i8, ptr %1, i64 16
-  %18 = load i32, ptr %17, align 8, !tbaa !264
+  %18 = load i32, ptr %17, align 8, !tbaa !394
   %19 = mul nsw i32 %18, %7
   %20 = sext i32 %19 to i64
   %21 = getelementptr inbounds nuw i8, ptr %1, i64 20
-  %22 = load i32, ptr %21, align 4, !tbaa !265
+  %22 = load i32, ptr %21, align 4, !tbaa !395
   %23 = getelementptr inbounds nuw i8, ptr %1, i64 24
-  %24 = load ptr, ptr %23, align 8, !tbaa !266
+  %24 = load ptr, ptr %23, align 8, !tbaa !396
   %25 = getelementptr inbounds [4 x i8], ptr %24, i64 %20
-  %26 = load i32, ptr %25, align 4, !tbaa !18
+  %26 = load i32, ptr %25, align 4, !tbaa !11
   %27 = sdiv i32 %26, %22
   %28 = icmp sgt i32 %18, 0
   br i1 %28, label %29, label %59
 
 29:                                               ; preds = %9
   %30 = getelementptr inbounds [4 x i8], ptr %16, i64 %20
-  %31 = load i32, ptr %30, align 4, !tbaa !18
+  %31 = load i32, ptr %30, align 4, !tbaa !11
   %32 = sdiv i32 %31, %22
   %33 = and i32 %13, 3
   %34 = icmp eq i32 %33, 1
@@ -3511,9 +3511,9 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_19NCL2FaceRestricti
   %42 = getelementptr inbounds nuw i8, ptr %1, i64 104
   %43 = getelementptr inbounds nuw i8, ptr %1, i64 112
   %44 = getelementptr inbounds nuw i8, ptr %1, i64 116
-  %45 = load ptr, ptr %42, align 8, !tbaa !25
-  %46 = load i32, ptr %43, align 4, !tbaa !18
-  %47 = load i32, ptr %44, align 4, !tbaa !18
+  %45 = load ptr, ptr %42, align 8, !tbaa !41
+  %46 = load i32, ptr %43, align 4, !tbaa !11
+  %47 = load i32, ptr %44, align 4, !tbaa !11
   %48 = mul nsw i32 %47, %32
   %49 = load ptr, ptr %35, align 8
   %50 = load i32, ptr %36, align 4
@@ -3529,7 +3529,7 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_19NCL2FaceRestricti
 
 59:                                               ; preds = %105, %9
   %60 = getelementptr inbounds nuw i8, ptr %1, i64 128
-  %61 = load i32, ptr %60, align 8, !tbaa !267
+  %61 = load i32, ptr %60, align 8, !tbaa !405
   %62 = icmp slt i32 %27, %61
   %63 = and i1 %28, %62
   br i1 %63, label %64, label %226
@@ -3547,9 +3547,9 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_19NCL2FaceRestricti
   %74 = getelementptr inbounds nuw i8, ptr %1, i64 104
   %75 = getelementptr inbounds nuw i8, ptr %1, i64 112
   %76 = getelementptr inbounds nuw i8, ptr %1, i64 116
-  %77 = load ptr, ptr %74, align 8, !tbaa !25
-  %78 = load i32, ptr %75, align 4, !tbaa !18
-  %79 = load i32, ptr %76, align 4, !tbaa !18
+  %77 = load ptr, ptr %74, align 8, !tbaa !41
+  %78 = load i32, ptr %75, align 4, !tbaa !11
+  %79 = load i32, ptr %76, align 4, !tbaa !11
   %80 = mul nsw i32 %79, %27
   %81 = load ptr, ptr %70, align 8
   %82 = load i32, ptr %71, align 4
@@ -3569,7 +3569,7 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_19NCL2FaceRestricti
   %94 = add nsw i32 %93, %19
   %95 = sext i32 %94 to i64
   %96 = getelementptr inbounds [4 x i8], ptr %16, i64 %95
-  %97 = load i32, ptr %96, align 4, !tbaa !18
+  %97 = load i32, ptr %96, align 4, !tbaa !11
   %98 = srem i32 %97, %22
   %99 = add nsw i32 %48, %98
   %100 = mul nsw i32 %99, %46
@@ -3582,14 +3582,14 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_19NCL2FaceRestricti
 105:                                              ; preds = %151
   %106 = add nuw nsw i32 %93, 1
   %107 = icmp eq i32 %106, %18
-  br i1 %107, label %59, label %92, !llvm.loop !268
+  br i1 %107, label %59, label %92, !llvm.loop !404
 
 108:                                              ; preds = %92, %151
   %109 = phi i32 [ %157, %151 ], [ 0, %92 ]
   %110 = add nsw i32 %109, %19
   %111 = sext i32 %110 to i64
   %112 = getelementptr inbounds [4 x i8], ptr %16, i64 %111
-  %113 = load i32, ptr %112, align 4, !tbaa !18
+  %113 = load i32, ptr %112, align 4, !tbaa !11
   %114 = srem i32 %113, %22
   br i1 %34, label %115, label %146
 
@@ -3604,13 +3604,13 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_19NCL2FaceRestricti
   %121 = add nsw i32 %119, %117
   %122 = sext i32 %121 to i64
   %123 = getelementptr inbounds [8 x i8], ptr %55, i64 %122
-  %124 = load double, ptr %123, align 8, !tbaa !26
+  %124 = load double, ptr %123, align 8, !tbaa !31
   br label %128
 
 125:                                              ; preds = %128
   %126 = add nuw nsw i32 %119, 1
   %127 = icmp eq i32 %126, %18
-  br i1 %127, label %151, label %118, !llvm.loop !269
+  br i1 %127, label %151, label %118, !llvm.loop !402
 
 128:                                              ; preds = %128, %118
   %129 = phi i32 [ 0, %118 ], [ %144, %128 ]
@@ -3618,25 +3618,25 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_19NCL2FaceRestricti
   %131 = add nsw i32 %129, %104
   %132 = sext i32 %131 to i64
   %133 = getelementptr inbounds [8 x i8], ptr %55, i64 %132
-  %134 = load double, ptr %133, align 8, !tbaa !26
+  %134 = load double, ptr %133, align 8, !tbaa !31
   %135 = add nsw i32 %129, %54
   %136 = mul nsw i32 %135, %50
   %137 = add nsw i32 %136, %119
   %138 = sext i32 %137 to i64
   %139 = getelementptr inbounds [8 x i8], ptr %49, i64 %138
-  %140 = load double, ptr %139, align 8, !tbaa !26
+  %140 = load double, ptr %139, align 8, !tbaa !31
   %141 = fmul contract double %134, %140
   %142 = fmul contract double %124, %141
   %143 = fadd contract double %130, %142
   %144 = add nuw nsw i32 %129, 1
   %145 = icmp eq i32 %144, %18
-  br i1 %145, label %125, label %128, !llvm.loop !270
+  br i1 %145, label %125, label %128, !llvm.loop !401
 
 146:                                              ; preds = %108
   %147 = add nsw i32 %102, %109
   %148 = sext i32 %147 to i64
   %149 = getelementptr inbounds [8 x i8], ptr %49, i64 %148
-  %150 = load double, ptr %149, align 8, !tbaa !26
+  %150 = load double, ptr %149, align 8, !tbaa !31
   br label %151
 
 151:                                              ; preds = %125, %146
@@ -3647,14 +3647,14 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_19NCL2FaceRestricti
   %156 = atomicrmw fadd ptr %155, double %152 monotonic, align 8
   %157 = add nuw nsw i32 %109, 1
   %158 = icmp eq i32 %157, %18
-  br i1 %158, label %105, label %108, !llvm.loop !271
+  br i1 %158, label %105, label %108, !llvm.loop !403
 
 159:                                              ; preds = %172, %64
   %160 = phi i32 [ 0, %64 ], [ %173, %172 ]
   %161 = add nsw i32 %160, %19
   %162 = sext i32 %161 to i64
   %163 = getelementptr inbounds [4 x i8], ptr %24, i64 %162
-  %164 = load i32, ptr %163, align 4, !tbaa !18
+  %164 = load i32, ptr %163, align 4, !tbaa !11
   %165 = srem i32 %164, %22
   %166 = add nsw i32 %80, %165
   %167 = mul nsw i32 %166, %78
@@ -3667,14 +3667,14 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_19NCL2FaceRestricti
 172:                                              ; preds = %218
   %173 = add nuw nsw i32 %160, 1
   %174 = icmp eq i32 %173, %18
-  br i1 %174, label %226, label %159, !llvm.loop !272
+  br i1 %174, label %226, label %159, !llvm.loop !413
 
 175:                                              ; preds = %159, %218
   %176 = phi i32 [ %224, %218 ], [ 0, %159 ]
   %177 = add nsw i32 %176, %19
   %178 = sext i32 %177 to i64
   %179 = getelementptr inbounds [4 x i8], ptr %24, i64 %178
-  %180 = load i32, ptr %179, align 4, !tbaa !18
+  %180 = load i32, ptr %179, align 4, !tbaa !11
   %181 = srem i32 %180, %22
   br i1 %66, label %182, label %213
 
@@ -3689,13 +3689,13 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_19NCL2FaceRestricti
   %188 = add nsw i32 %186, %184
   %189 = sext i32 %188 to i64
   %190 = getelementptr inbounds [8 x i8], ptr %88, i64 %189
-  %191 = load double, ptr %190, align 8, !tbaa !26
+  %191 = load double, ptr %190, align 8, !tbaa !31
   br label %195
 
 192:                                              ; preds = %195
   %193 = add nuw nsw i32 %186, 1
   %194 = icmp eq i32 %193, %18
-  br i1 %194, label %218, label %185, !llvm.loop !273
+  br i1 %194, label %218, label %185, !llvm.loop !411
 
 195:                                              ; preds = %195, %185
   %196 = phi i32 [ 0, %185 ], [ %211, %195 ]
@@ -3703,25 +3703,25 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_19NCL2FaceRestricti
   %198 = add nsw i32 %196, %171
   %199 = sext i32 %198 to i64
   %200 = getelementptr inbounds [8 x i8], ptr %88, i64 %199
-  %201 = load double, ptr %200, align 8, !tbaa !26
+  %201 = load double, ptr %200, align 8, !tbaa !31
   %202 = add nsw i32 %196, %87
   %203 = mul nsw i32 %202, %82
   %204 = add nsw i32 %203, %186
   %205 = sext i32 %204 to i64
   %206 = getelementptr inbounds [8 x i8], ptr %81, i64 %205
-  %207 = load double, ptr %206, align 8, !tbaa !26
+  %207 = load double, ptr %206, align 8, !tbaa !31
   %208 = fmul contract double %201, %207
   %209 = fmul contract double %191, %208
   %210 = fadd contract double %197, %209
   %211 = add nuw nsw i32 %196, 1
   %212 = icmp eq i32 %211, %18
-  br i1 %212, label %192, label %195, !llvm.loop !274
+  br i1 %212, label %192, label %195, !llvm.loop !410
 
 213:                                              ; preds = %175
   %214 = add nsw i32 %169, %176
   %215 = sext i32 %214 to i64
   %216 = getelementptr inbounds [8 x i8], ptr %81, i64 %215
-  %217 = load double, ptr %216, align 8, !tbaa !26
+  %217 = load double, ptr %216, align 8, !tbaa !31
   br label %218
 
 218:                                              ; preds = %192, %213
@@ -3732,7 +3732,7 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_19NCL2FaceRestricti
   %223 = atomicrmw fadd ptr %222, double %219 monotonic, align 8
   %224 = add nuw nsw i32 %176, 1
   %225 = icmp eq i32 %224, %18
-  br i1 %225, label %172, label %175, !llvm.loop !275
+  br i1 %225, label %172, label %175, !llvm.loop !412
 
 226:                                              ; preds = %172, %59, %2
   ret void
@@ -3750,11 +3750,11 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_19NCL2FaceRestricti
 
 9:                                                ; preds = %2
   %10 = getelementptr inbounds nuw i8, ptr %1, i64 8
-  %11 = load ptr, ptr %10, align 8, !tbaa !276
+  %11 = load ptr, ptr %10, align 8, !tbaa !416
   %12 = getelementptr inbounds nuw i8, ptr %1, i64 16
-  %13 = load i32, ptr %12, align 8, !tbaa !278
+  %13 = load i32, ptr %12, align 8, !tbaa !417
   %14 = getelementptr inbounds nuw i8, ptr %1, i64 20
-  %15 = load i32, ptr %14, align 4, !tbaa !279
+  %15 = load i32, ptr %14, align 4, !tbaa !418
   %16 = icmp sgt i32 %13, 0
   br i1 %16, label %17, label %118
 
@@ -3762,12 +3762,12 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_19NCL2FaceRestricti
   %18 = mul nsw i32 %13, %7
   %19 = sext i32 %18 to i64
   %20 = getelementptr inbounds [4 x i8], ptr %11, i64 %19
-  %21 = load i32, ptr %20, align 4, !tbaa !18
+  %21 = load i32, ptr %20, align 4, !tbaa !11
   %22 = sdiv i32 %21, %15
-  %23 = load ptr, ptr %1, align 8, !tbaa !280
+  %23 = load ptr, ptr %1, align 8, !tbaa !415
   %24 = sext i32 %7 to i64
   %25 = getelementptr inbounds [4 x i8], ptr %23, i64 %24
-  %26 = load i32, ptr %25, align 4, !tbaa !221
+  %26 = load i32, ptr %25, align 4, !tbaa !332
   %27 = lshr i32 %26, 2
   %28 = and i32 %26, 3
   %29 = icmp eq i32 %28, 1
@@ -3780,9 +3780,9 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_19NCL2FaceRestricti
   %36 = getelementptr inbounds nuw i8, ptr %1, i64 96
   %37 = getelementptr inbounds nuw i8, ptr %1, i64 104
   %38 = getelementptr inbounds nuw i8, ptr %1, i64 108
-  %39 = load ptr, ptr %36, align 8, !tbaa !25
-  %40 = load i32, ptr %37, align 4, !tbaa !18
-  %41 = load i32, ptr %38, align 4, !tbaa !18
+  %39 = load ptr, ptr %36, align 8, !tbaa !41
+  %40 = load i32, ptr %37, align 4, !tbaa !11
+  %41 = load i32, ptr %38, align 4, !tbaa !11
   %42 = mul nsw i32 %41, %22
   %43 = load ptr, ptr %30, align 8
   %44 = load i32, ptr %31, align 4
@@ -3799,7 +3799,7 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_19NCL2FaceRestricti
   %53 = add nsw i32 %52, %18
   %54 = sext i32 %53 to i64
   %55 = getelementptr inbounds [4 x i8], ptr %11, i64 %54
-  %56 = load i32, ptr %55, align 4, !tbaa !18
+  %56 = load i32, ptr %55, align 4, !tbaa !11
   %57 = srem i32 %56, %15
   %58 = add nsw i32 %42, %57
   %59 = mul nsw i32 %58, %40
@@ -3812,14 +3812,14 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_19NCL2FaceRestricti
 64:                                               ; preds = %110
   %65 = add nuw nsw i32 %52, 1
   %66 = icmp eq i32 %65, %13
-  br i1 %66, label %118, label %51, !llvm.loop !281
+  br i1 %66, label %118, label %51, !llvm.loop !426
 
 67:                                               ; preds = %51, %110
   %68 = phi i32 [ %116, %110 ], [ 0, %51 ]
   %69 = add nsw i32 %68, %18
   %70 = sext i32 %69 to i64
   %71 = getelementptr inbounds [4 x i8], ptr %11, i64 %70
-  %72 = load i32, ptr %71, align 4, !tbaa !18
+  %72 = load i32, ptr %71, align 4, !tbaa !11
   %73 = srem i32 %72, %15
   br i1 %29, label %74, label %105
 
@@ -3834,13 +3834,13 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_19NCL2FaceRestricti
   %80 = add nsw i32 %78, %76
   %81 = sext i32 %80 to i64
   %82 = getelementptr inbounds [8 x i8], ptr %47, i64 %81
-  %83 = load double, ptr %82, align 8, !tbaa !26
+  %83 = load double, ptr %82, align 8, !tbaa !31
   br label %87
 
 84:                                               ; preds = %87
   %85 = add nuw nsw i32 %78, 1
   %86 = icmp eq i32 %85, %13
-  br i1 %86, label %110, label %77, !llvm.loop !282
+  br i1 %86, label %110, label %77, !llvm.loop !424
 
 87:                                               ; preds = %87, %77
   %88 = phi i32 [ 0, %77 ], [ %103, %87 ]
@@ -3848,25 +3848,25 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_19NCL2FaceRestricti
   %90 = add nsw i32 %88, %63
   %91 = sext i32 %90 to i64
   %92 = getelementptr inbounds [8 x i8], ptr %47, i64 %91
-  %93 = load double, ptr %92, align 8, !tbaa !26
+  %93 = load double, ptr %92, align 8, !tbaa !31
   %94 = add nsw i32 %88, %46
   %95 = mul nsw i32 %94, %44
   %96 = add nsw i32 %95, %78
   %97 = sext i32 %96 to i64
   %98 = getelementptr inbounds [8 x i8], ptr %43, i64 %97
-  %99 = load double, ptr %98, align 8, !tbaa !26
+  %99 = load double, ptr %98, align 8, !tbaa !31
   %100 = fmul contract double %93, %99
   %101 = fmul contract double %83, %100
   %102 = fadd contract double %89, %101
   %103 = add nuw nsw i32 %88, 1
   %104 = icmp eq i32 %103, %13
-  br i1 %104, label %84, label %87, !llvm.loop !283
+  br i1 %104, label %84, label %87, !llvm.loop !423
 
 105:                                              ; preds = %67
   %106 = add nsw i32 %61, %68
   %107 = sext i32 %106 to i64
   %108 = getelementptr inbounds [8 x i8], ptr %43, i64 %107
-  %109 = load double, ptr %108, align 8, !tbaa !26
+  %109 = load double, ptr %108, align 8, !tbaa !31
   br label %110
 
 110:                                              ; preds = %84, %105
@@ -3877,7 +3877,7 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_19NCL2FaceRestricti
   %115 = atomicrmw fadd ptr %114, double %111 monotonic, align 8
   %116 = add nuw nsw i32 %68, 1
   %117 = icmp eq i32 %116, %13
-  br i1 %117, label %64, label %67, !llvm.loop !284
+  br i1 %117, label %64, label %67, !llvm.loop !425
 
 118:                                              ; preds = %64, %9, %2
   ret void
@@ -3895,20 +3895,20 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_26L2InterfaceFaceRe
 
 9:                                                ; preds = %2
   %10 = getelementptr inbounds nuw i8, ptr %1, i64 8
-  %11 = load i32, ptr %10, align 8, !tbaa !285
+  %11 = load i32, ptr %10, align 8, !tbaa !430
   %12 = icmp sgt i32 %11, 0
   br i1 %12, label %13, label %63
 
 13:                                               ; preds = %9
-  %14 = load ptr, ptr %1, align 8, !tbaa !287
+  %14 = load ptr, ptr %1, align 8, !tbaa !428
   %15 = sext i32 %7 to i64
   %16 = getelementptr inbounds [4 x i8], ptr %14, i64 %15
-  %17 = load i32, ptr %16, align 4, !tbaa !18
+  %17 = load i32, ptr %16, align 4, !tbaa !11
   %18 = getelementptr inbounds nuw i8, ptr %1, i64 12
-  %19 = load i32, ptr %18, align 4, !tbaa !288
+  %19 = load i32, ptr %18, align 4, !tbaa !431
   %20 = icmp slt i32 %17, %19
   %21 = getelementptr inbounds nuw i8, ptr %1, i64 80
-  %22 = load i8, ptr %21, align 8, !range !21
+  %22 = load i8, ptr %21, align 8, !range !26
   %23 = trunc nuw i8 %22 to i1
   %24 = getelementptr inbounds nuw i8, ptr %1, i64 96
   %25 = load ptr, ptr %24, align 8
@@ -3948,11 +3948,11 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_26L2InterfaceFaceRe
   %57 = add nsw i32 %56, %54
   %58 = sext i32 %57 to i64
   %59 = getelementptr inbounds [8 x i8], ptr %46, i64 %58
-  %60 = load double, ptr %59, align 8, !tbaa !26
-  store double %60, ptr %53, align 8, !tbaa !26
+  %60 = load double, ptr %59, align 8, !tbaa !31
+  store double %60, ptr %53, align 8, !tbaa !31
   %61 = add nuw nsw i32 %48, 1
   %62 = icmp eq i32 %61, %11
-  br i1 %62, label %63, label %47, !llvm.loop !289
+  br i1 %62, label %63, label %47, !llvm.loop !434
 
 63:                                               ; preds = %47, %9, %2
   ret void
@@ -3969,40 +3969,40 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_26L2InterfaceFaceRe
   br i1 %8, label %9, label %59
 
 9:                                                ; preds = %2
-  %10 = load ptr, ptr %1, align 8, !tbaa !290
+  %10 = load ptr, ptr %1, align 8, !tbaa !436
   %11 = sext i32 %7 to i64
   %12 = getelementptr inbounds [4 x i8], ptr %10, i64 %11
-  %13 = load i32, ptr %12, align 4, !tbaa !18
+  %13 = load i32, ptr %12, align 4, !tbaa !11
   %14 = icmp slt i32 %13, 0
   br i1 %14, label %59, label %15
 
 15:                                               ; preds = %9
   %16 = getelementptr inbounds nuw i8, ptr %1, i64 8
-  %17 = load i32, ptr %16, align 8, !tbaa !292
+  %17 = load i32, ptr %16, align 8, !tbaa !438
   %18 = icmp sgt i32 %17, 0
   br i1 %18, label %19, label %59
 
 19:                                               ; preds = %15
   %20 = getelementptr inbounds nuw i8, ptr %1, i64 48
   %21 = getelementptr inbounds nuw i8, ptr %1, i64 88
-  %22 = load i32, ptr %21, align 8, !tbaa !293
+  %22 = load i32, ptr %21, align 8, !tbaa !440
   %23 = srem i32 %13, %22
   %24 = sdiv i32 %13, %22
   %25 = getelementptr inbounds nuw i8, ptr %1, i64 64
-  %26 = load ptr, ptr %25, align 8, !tbaa !129
+  %26 = load ptr, ptr %25, align 8, !tbaa !63
   %27 = getelementptr inbounds nuw i8, ptr %1, i64 72
-  %28 = load i32, ptr %27, align 4, !tbaa !18
+  %28 = load i32, ptr %27, align 4, !tbaa !11
   %29 = getelementptr inbounds nuw i8, ptr %1, i64 76
-  %30 = load i32, ptr %29, align 4, !tbaa !18
+  %30 = load i32, ptr %29, align 4, !tbaa !11
   %31 = mul nsw i32 %30, %24
   %32 = getelementptr inbounds nuw i8, ptr %1, i64 40
-  %33 = load i8, ptr %32, align 8, !tbaa !294, !range !21, !noundef !22
+  %33 = load i8, ptr %32, align 8, !tbaa !441, !range !26, !noundef !27
   %34 = trunc nuw i8 %33 to i1
   %35 = getelementptr inbounds nuw i8, ptr %1, i64 24
-  %36 = load ptr, ptr %35, align 8, !tbaa !42
+  %36 = load ptr, ptr %35, align 8, !tbaa !66
   %37 = getelementptr inbounds nuw i8, ptr %1, i64 32
-  %38 = load i32, ptr %37, align 4, !tbaa !18
-  %39 = load double, ptr %20, align 8, !tbaa !295
+  %38 = load i32, ptr %37, align 4, !tbaa !11
+  %39 = load double, ptr %20, align 8, !tbaa !439
   br label %40
 
 40:                                               ; preds = %40, %19
@@ -4012,7 +4012,7 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_26L2InterfaceFaceRe
   %44 = add nsw i32 %43, %23
   %45 = sext i32 %44 to i64
   %46 = getelementptr inbounds [8 x i8], ptr %26, i64 %45
-  %47 = load double, ptr %46, align 8, !tbaa !26
+  %47 = load double, ptr %46, align 8, !tbaa !31
   %48 = fmul contract double %39, %47
   %49 = select i1 %34, i32 %41, i32 %7
   %50 = select i1 %34, i32 %7, i32 %41
@@ -4020,12 +4020,12 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_26L2InterfaceFaceRe
   %52 = add nsw i32 %51, %49
   %53 = sext i32 %52 to i64
   %54 = getelementptr inbounds [8 x i8], ptr %36, i64 %53
-  %55 = load double, ptr %54, align 8, !tbaa !26
+  %55 = load double, ptr %54, align 8, !tbaa !31
   %56 = fadd contract double %48, %55
-  store double %56, ptr %54, align 8, !tbaa !26
+  store double %56, ptr %54, align 8, !tbaa !31
   %57 = add nuw nsw i32 %41, 1
   %58 = icmp eq i32 %57, %17
-  br i1 %58, label %59, label %40, !llvm.loop !296
+  br i1 %58, label %59, label %40, !llvm.loop !442
 
 59:                                               ; preds = %40, %15, %9, %2
   ret void
@@ -4042,38 +4042,38 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_26L2InterfaceFaceRe
   br i1 %8, label %9, label %54
 
 9:                                                ; preds = %2
-  %10 = load ptr, ptr %1, align 8, !tbaa !297
+  %10 = load ptr, ptr %1, align 8, !tbaa !444
   %11 = sext i32 %7 to i64
   %12 = getelementptr inbounds [4 x i8], ptr %10, i64 %11
-  %13 = load i32, ptr %12, align 4, !tbaa !18
+  %13 = load i32, ptr %12, align 4, !tbaa !11
   %14 = icmp slt i32 %13, 0
   br i1 %14, label %54, label %15
 
 15:                                               ; preds = %9
   %16 = getelementptr inbounds nuw i8, ptr %1, i64 8
-  %17 = load i32, ptr %16, align 8, !tbaa !299
+  %17 = load i32, ptr %16, align 8, !tbaa !446
   %18 = icmp sgt i32 %17, 0
   br i1 %18, label %19, label %54
 
 19:                                               ; preds = %15
   %20 = getelementptr inbounds nuw i8, ptr %1, i64 80
-  %21 = load i32, ptr %20, align 8, !tbaa !300
+  %21 = load i32, ptr %20, align 8, !tbaa !447
   %22 = srem i32 %13, %21
   %23 = sdiv i32 %13, %21
   %24 = getelementptr inbounds nuw i8, ptr %1, i64 56
-  %25 = load ptr, ptr %24, align 8, !tbaa !129
+  %25 = load ptr, ptr %24, align 8, !tbaa !63
   %26 = getelementptr inbounds nuw i8, ptr %1, i64 64
-  %27 = load i32, ptr %26, align 4, !tbaa !18
+  %27 = load i32, ptr %26, align 4, !tbaa !11
   %28 = getelementptr inbounds nuw i8, ptr %1, i64 68
-  %29 = load i32, ptr %28, align 4, !tbaa !18
+  %29 = load i32, ptr %28, align 4, !tbaa !11
   %30 = mul nsw i32 %29, %23
   %31 = getelementptr inbounds nuw i8, ptr %1, i64 40
-  %32 = load i8, ptr %31, align 8, !tbaa !301, !range !21, !noundef !22
+  %32 = load i8, ptr %31, align 8, !tbaa !448, !range !26, !noundef !27
   %33 = trunc nuw i8 %32 to i1
   %34 = getelementptr inbounds nuw i8, ptr %1, i64 24
-  %35 = load ptr, ptr %34, align 8, !tbaa !42
+  %35 = load ptr, ptr %34, align 8, !tbaa !66
   %36 = getelementptr inbounds nuw i8, ptr %1, i64 32
-  %37 = load i32, ptr %36, align 4, !tbaa !18
+  %37 = load i32, ptr %36, align 4, !tbaa !11
   br label %38
 
 38:                                               ; preds = %38, %19
@@ -4083,334 +4083,334 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNKS_26L2InterfaceFaceRe
   %42 = add nsw i32 %41, %22
   %43 = sext i32 %42 to i64
   %44 = getelementptr inbounds [8 x i8], ptr %25, i64 %43
-  %45 = load double, ptr %44, align 8, !tbaa !26
+  %45 = load double, ptr %44, align 8, !tbaa !31
   %46 = select i1 %33, i32 %39, i32 %7
   %47 = select i1 %33, i32 %7, i32 %39
   %48 = mul nsw i32 %47, %37
   %49 = add nsw i32 %48, %46
   %50 = sext i32 %49 to i64
   %51 = getelementptr inbounds [8 x i8], ptr %35, i64 %50
-  store double %45, ptr %51, align 8, !tbaa !26
+  store double %45, ptr %51, align 8, !tbaa !31
   %52 = add nuw nsw i32 %39, 1
   %53 = icmp eq i32 %52, %17
-  br i1 %53, label %54, label %38, !llvm.loop !302
+  br i1 %53, label %54, label %38, !llvm.loop !449
 
 54:                                               ; preds = %38, %15, %9, %2
   ret void
 }
 
-attributes #0 = { mustprogress nofree noinline norecurse nosync nounwind memory(readwrite, inaccessiblemem: none, target_mem: none) "frame-pointer"="all" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="sm_120" "target-features"="+ptx88,+sm_120" "uniform-work-group-size" }
+attributes #0 = { mustprogress nofree noinline norecurse nosync nounwind memory(readwrite, inaccessiblemem: none, target_mem: none) "frame-pointer"="all" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="sm_120" "target-features"="+ptx88" "uniform-work-group-size" }
 attributes #1 = { mustprogress nocallback nofree nosync nounwind speculatable willreturn memory(none) }
-attributes #2 = { mustprogress nofree noinline norecurse nosync nounwind willreturn memory(write, argmem: readwrite, inaccessiblemem: none, target_mem: none) "frame-pointer"="all" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="sm_120" "target-features"="+ptx88,+sm_120" "uniform-work-group-size" }
-attributes #3 = { mustprogress noinline norecurse nounwind memory(readwrite, inaccessiblemem: none, target_mem: none) "frame-pointer"="all" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="sm_120" "target-features"="+ptx88,+sm_120" "uniform-work-group-size" }
-attributes #4 = { mustprogress noinline norecurse nounwind willreturn memory(readwrite, inaccessiblemem: none, target_mem: none) "frame-pointer"="all" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="sm_120" "target-features"="+ptx88,+sm_120" "uniform-work-group-size" }
-attributes #5 = { convergent mustprogress noinline norecurse nounwind "frame-pointer"="all" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="sm_120" "target-features"="+ptx88,+sm_120" "uniform-work-group-size" }
+attributes #2 = { mustprogress nofree noinline norecurse nosync nounwind willreturn memory(write, argmem: readwrite, inaccessiblemem: none, target_mem: none) "frame-pointer"="all" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="sm_120" "target-features"="+ptx88" "uniform-work-group-size" }
+attributes #3 = { mustprogress noinline norecurse nounwind memory(readwrite, inaccessiblemem: none, target_mem: none) "frame-pointer"="all" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="sm_120" "target-features"="+ptx88" "uniform-work-group-size" }
+attributes #4 = { mustprogress noinline norecurse nounwind willreturn memory(readwrite, inaccessiblemem: none, target_mem: none) "frame-pointer"="all" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="sm_120" "target-features"="+ptx88" "uniform-work-group-size" }
+attributes #5 = { convergent mustprogress noinline norecurse nounwind "frame-pointer"="all" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="sm_120" "target-features"="+ptx88" "uniform-work-group-size" }
 attributes #6 = { convergent nocallback nounwind }
 
-!llvm.module.flags = !{!0, !1, !2}
-!llvm.ident = !{!3, !4}
-!llvm.errno.tbaa = !{!5}
+!llvm.module.flags = !{!7, !450, !451}
+!llvm.ident = !{!452, !1}
+!llvm.errno.tbaa = !{!454}
 
-!0 = !{i32 2, !"SDK Version", [2 x i32] [i32 12, i32 9]}
-!1 = !{i32 4, !"nvvm-reflect-ftz", i32 0}
-!2 = !{i32 7, !"frame-pointer", i32 2}
-!3 = !{!"clang version 24.0.0git (git@github.com:llvm/llvm-project 0220c07a94012b9dce9250addac6a8ee1f674b21)"}
-!4 = !{!"clang version 3.8.0 (tags/RELEASE_380/final)"}
-!5 = !{!6, !7, i64 0}
-!6 = !{!"__libc_errno", !7, i64 0}
-!7 = !{!"int", !8, i64 0}
-!8 = !{!"omnipotent char", !9, i64 0}
-!9 = !{!"Simple C++ TBAA"}
-!10 = !{!11, !12, i64 0}
-!11 = !{!"_ZTSZNK4mfem18ElementRestriction4MultERKNS_6VectorERS1_EUliE_", !12, i64 0, !7, i64 8, !14, i64 16, !16, i64 40, !17, i64 48, !7, i64 80}
-!12 = !{!"p1 int", !13, i64 0}
-!13 = !{!"any pointer", !8, i64 0}
-!14 = !{!"_ZTSN4mfem12DeviceTensorILi2EKdEE", !7, i64 0, !15, i64 8, !8, i64 16}
-!15 = !{!"p1 double", !13, i64 0}
-!16 = !{!"bool", !8, i64 0}
-!17 = !{!"_ZTSN4mfem12DeviceTensorILi3EdEE", !7, i64 0, !15, i64 8, !8, i64 16}
-!18 = !{!7, !7, i64 0}
-!19 = !{!11, !7, i64 8}
-!20 = !{!11, !16, i64 40}
-!21 = !{i8 0, i8 2}
-!22 = !{}
-!23 = !{!14, !15, i64 8}
-!24 = !{!11, !7, i64 80}
-!25 = !{!17, !15, i64 8}
-!26 = !{!27, !27, i64 0}
-!27 = !{!"double", !8, i64 0}
-!28 = distinct !{!28, !29}
-!29 = !{!"llvm.loop.mustprogress"}
-!30 = !{!31, !12, i64 0}
-!31 = !{!"_ZTSZNK4mfem18ElementRestriction7AbsMultERKNS_6VectorERS1_EUliE_", !12, i64 0, !7, i64 8, !17, i64 16, !7, i64 48, !14, i64 56, !16, i64 80}
-!32 = !{!31, !7, i64 8}
-!33 = !{!31, !16, i64 80}
-!34 = !{!31, !7, i64 48}
-!35 = distinct !{!35, !29}
-!36 = !{!37, !12, i64 0}
-!37 = !{!"_ZTSZNK4mfem18ElementRestriction17TAddMultTransposeILb0EEEvRKNS_6VectorERS2_EUliE_", !12, i64 0, !7, i64 8, !12, i64 16, !38, i64 24, !7, i64 56, !39, i64 64, !16, i64 88}
-!38 = !{!"_ZTSN4mfem12DeviceTensorILi3EKdEE", !7, i64 0, !15, i64 8, !8, i64 16}
-!39 = !{!"_ZTSN4mfem12DeviceTensorILi2EdEE", !7, i64 0, !15, i64 8, !8, i64 16}
-!40 = !{!37, !7, i64 8}
-!41 = !{!37, !16, i64 88}
-!42 = !{!39, !15, i64 8}
-!43 = distinct !{!43, !29}
-!44 = distinct !{!44, !29}
-!45 = !{!46, !12, i64 0}
-!46 = !{!"_ZTSZNK4mfem18ElementRestriction17TAddMultTransposeILb1EEEvRKNS_6VectorERS2_EUliE_", !12, i64 0, !7, i64 8, !12, i64 16, !38, i64 24, !7, i64 56, !39, i64 64, !16, i64 88}
-!47 = !{!46, !7, i64 8}
-!48 = !{!46, !16, i64 88}
-!49 = distinct !{!49, !29}
-!50 = distinct !{!50, !29}
-!51 = !{!52, !12, i64 0}
-!52 = !{!"_ZTSZNK4mfem18ElementRestriction16AbsMultTransposeERKNS_6VectorERS1_EUliE_", !12, i64 0, !7, i64 8, !12, i64 16, !38, i64 24, !7, i64 56, !39, i64 64, !16, i64 88}
-!53 = !{!52, !7, i64 8}
-!54 = !{!52, !16, i64 88}
-!55 = distinct !{!55, !29}
-!56 = distinct !{!56, !29}
-!57 = !{!58, !7, i64 8}
-!58 = !{!"_ZTSZNK4mfem18ElementRestriction15MultLeftInverseERKNS_6VectorERS1_EUliE_", !12, i64 0, !7, i64 8, !12, i64 16, !38, i64 24, !7, i64 56, !39, i64 64, !16, i64 88}
-!59 = !{!58, !12, i64 0}
-!60 = !{!58, !12, i64 16}
-!61 = !{!58, !16, i64 88}
-!62 = distinct !{!62, !29}
-!63 = !{!64, !12, i64 0}
-!64 = !{!"_ZTSZNK4mfem18ElementRestriction5FillIERNS_12SparseMatrixEEUliE_", !12, i64 0}
-!65 = !{!66, !7, i64 0}
-!66 = !{!"_ZTSZNK4mfem18ElementRestriction5FillIERNS_12SparseMatrixEEUliE0_", !7, i64 0, !12, i64 8, !12, i64 16, !67, i64 24, !12, i64 48, !12, i64 56}
-!67 = !{!"_ZTSN4mfem12DeviceTensorILi2EiEE", !7, i64 0, !12, i64 8, !8, i64 16}
-!68 = !{!66, !12, i64 8}
-!69 = !{!66, !12, i64 16}
-!70 = !{!67, !12, i64 8}
-!71 = !{!66, !12, i64 48}
-!72 = distinct !{!72, !29}
-!73 = distinct !{!73, !29}
-!74 = distinct !{!74, !29}
-!75 = distinct !{!75, !29}
-!76 = distinct !{!76, !29}
-!77 = !{!78, !12, i64 0}
-!78 = !{!"_ZTSZNK4mfem18ElementRestriction5FillIERNS_12SparseMatrixERKS0_EUliE_", !12, i64 0}
-!79 = !{!80, !7, i64 0}
-!80 = !{!"_ZTSZNK4mfem18ElementRestriction5FillIERNS_12SparseMatrixERKS0_EUliE0_", !7, i64 0, !7, i64 4, !12, i64 8, !7, i64 16, !16, i64 20, !12, i64 24, !12, i64 32, !12, i64 40, !7, i64 48, !7, i64 52, !12, i64 56, !12, i64 64, !12, i64 72, !12, i64 80, !12, i64 88}
-!81 = !{!80, !7, i64 4}
-!82 = !{!80, !12, i64 8}
-!83 = !{!80, !7, i64 16}
-!84 = !{!80, !16, i64 20}
-!85 = !{!80, !12, i64 24}
-!86 = !{!80, !12, i64 32}
-!87 = !{!80, !12, i64 40}
-!88 = !{!80, !7, i64 48}
-!89 = !{!80, !7, i64 52}
-!90 = distinct !{!90, !29}
-!91 = distinct !{!91, !29}
-!92 = distinct !{!92, !29}
-!93 = distinct !{!93, !29}
-!94 = !{!95, !7, i64 0}
-!95 = !{!"_ZTSZNK4mfem18ElementRestriction12FillJAndDataERKNS_6VectorERNS_12SparseMatrixEEUliE_", !7, i64 0, !12, i64 8, !12, i64 16, !67, i64 24, !12, i64 48, !12, i64 56, !12, i64 64, !15, i64 72, !38, i64 80}
-!96 = !{!95, !12, i64 8}
-!97 = !{!95, !12, i64 16}
-!98 = !{!95, !12, i64 48}
-!99 = distinct !{!99, !29}
-!100 = distinct !{!100, !29}
-!101 = distinct !{!101, !29}
-!102 = distinct !{!102, !29}
-!103 = distinct !{!103, !29}
-!104 = !{!105, !7, i64 0}
-!105 = !{!"_ZTSZNK4mfem18ElementRestriction12FillJAndDataERKNS_6VectorERNS_12SparseMatrixERKS0_EUliE_", !7, i64 0, !7, i64 4, !12, i64 8, !7, i64 16, !16, i64 20, !12, i64 24, !67, i64 32, !12, i64 56, !7, i64 64, !7, i64 68, !12, i64 72, !7, i64 80, !16, i64 84, !12, i64 88, !12, i64 96, !12, i64 104, !15, i64 112, !106, i64 120, !67, i64 160, !12, i64 184}
-!106 = !{!"_ZTSN4mfem12DeviceTensorILi5EKdEE", !7, i64 0, !15, i64 8, !8, i64 16}
-!107 = !{!105, !7, i64 4}
-!108 = !{!105, !12, i64 8}
-!109 = !{!105, !7, i64 16}
-!110 = !{!105, !16, i64 20}
-!111 = !{!105, !12, i64 24}
-!112 = !{!105, !12, i64 56}
-!113 = !{!105, !7, i64 64}
-!114 = !{!105, !7, i64 68}
-!115 = distinct !{!115, !29}
-!116 = distinct !{!116, !29}
-!117 = distinct !{!117, !29}
-!118 = distinct !{!118, !29}
-!119 = distinct !{!119, !29}
-!120 = distinct !{!120, !29}
-!121 = !{!122, !7, i64 0}
-!122 = !{!"_ZTSZNK4mfem20L2ElementRestriction4MultERKNS_6VectorERS1_EUliE_", !7, i64 0, !7, i64 4, !17, i64 8, !14, i64 40, !16, i64 64}
-!123 = !{!122, !7, i64 4}
-!124 = !{!122, !16, i64 64}
-!125 = distinct !{!125, !29}
-!126 = !{!127, !7, i64 0}
-!127 = !{!"_ZTSZNK4mfem20L2ElementRestriction17TAddMultTransposeILb0EEEvRKNS_6VectorERS2_EUliE_", !7, i64 0, !7, i64 4, !39, i64 8, !16, i64 32, !38, i64 40}
-!128 = !{!127, !7, i64 4}
-!129 = !{!38, !15, i64 8}
-!130 = !{!127, !16, i64 32}
-!131 = distinct !{!131, !29}
-!132 = !{!133, !7, i64 0}
-!133 = !{!"_ZTSZNK4mfem20L2ElementRestriction17TAddMultTransposeILb1EEEvRKNS_6VectorERS2_EUliE_", !7, i64 0, !7, i64 4, !39, i64 8, !16, i64 32, !38, i64 40}
-!134 = !{!133, !7, i64 4}
-!135 = !{!133, !16, i64 32}
-!136 = distinct !{!136, !29}
-!137 = !{!138, !7, i64 8}
-!138 = !{!"_ZTSZNK4mfem20L2ElementRestriction5FillIERNS_12SparseMatrixEEUliE_", !12, i64 0, !7, i64 8, !7, i64 12}
-!139 = !{!138, !12, i64 0}
-!140 = !{!141, !12, i64 0}
-!141 = !{!"_ZTSZNK4mfem20L2ElementRestriction12FillJAndDataERKNS_6VectorERNS_12SparseMatrixEEUliE_", !12, i64 0, !7, i64 8, !12, i64 16, !15, i64 24, !38, i64 32}
-!142 = !{!141, !7, i64 8}
-!143 = !{!141, !12, i64 16}
-!144 = !{!141, !15, i64 24}
-!145 = distinct !{!145, !29}
-!146 = !{!147, !12, i64 0}
-!147 = !{!"_ZTSZNK4mfem25ConformingFaceRestriction12MultInternalERKNS_6VectorERS1_bEUliE_", !12, i64 0, !16, i64 8, !7, i64 12, !7, i64 16, !17, i64 24, !14, i64 56, !16, i64 80}
-!148 = !{!147, !16, i64 8}
-!149 = !{!147, !7, i64 12}
-!150 = !{!147, !7, i64 16}
-!151 = !{!147, !16, i64 80}
-!152 = distinct !{!152, !29}
-!153 = !{!154, !12, i64 0}
-!154 = !{!"_ZTSZN4mfemL42ConformingFaceRestriction_AddMultTransposeEiiiibRKNS_5ArrayIiEES3_RKNS_6VectorERS4_bdEUliE_", !12, i64 0, !7, i64 8, !12, i64 16, !16, i64 24, !38, i64 32, !7, i64 64, !39, i64 72, !16, i64 96}
-!155 = !{!154, !7, i64 8}
-!156 = !{!154, !16, i64 96}
-!157 = distinct !{!157, !29}
-!158 = distinct !{!158, !29}
-!159 = !{!160, !7, i64 0}
-!160 = !{!"_ZTSZNK4mfem17L2FaceRestriction26SingleValuedConformingMultERKNS_6VectorERS1_EUliE_", !7, i64 0, !12, i64 8, !7, i64 16, !17, i64 24, !14, i64 56, !16, i64 80}
-!161 = !{!160, !12, i64 8}
-!162 = !{!160, !7, i64 16}
-!163 = !{!160, !16, i64 80}
-!164 = distinct !{!164, !29}
-!165 = !{!166, !7, i64 0}
-!166 = !{!"_ZTSZNK4mfem17L2FaceRestriction26DoubleValuedConformingMultERKNS_6VectorERS1_EUliE_", !7, i64 0, !12, i64 8, !7, i64 16, !167, i64 24, !14, i64 56, !16, i64 80, !12, i64 88}
-!167 = !{!"_ZTSN4mfem12DeviceTensorILi4EdEE", !7, i64 0, !15, i64 8, !8, i64 16}
-!168 = !{!166, !12, i64 8}
-!169 = !{!166, !7, i64 16}
-!170 = !{!166, !16, i64 80}
-!171 = !{!167, !15, i64 8}
-!172 = !{!166, !12, i64 88}
-!173 = distinct !{!173, !29}
-!174 = distinct !{!174, !29}
-!175 = !{!176, !12, i64 0}
-!176 = !{!"_ZTSZNK4mfem17L2FaceRestriction38SingleValuedConformingAddMultTransposeERKNS_6VectorERS1_EUliE_", !12, i64 0, !7, i64 8, !12, i64 16, !38, i64 24, !7, i64 56, !39, i64 64, !16, i64 88}
-!177 = !{!176, !7, i64 8}
-!178 = !{!176, !16, i64 88}
-!179 = distinct !{!179, !29}
-!180 = distinct !{!180, !29}
-!181 = !{!182, !12, i64 0}
-!182 = !{!"_ZTSZNK4mfem17L2FaceRestriction38DoubleValuedConformingAddMultTransposeERKNS_6VectorERS1_EUliE_", !12, i64 0, !7, i64 8, !12, i64 16, !7, i64 24, !183, i64 32, !7, i64 64, !39, i64 72, !16, i64 96}
-!183 = !{!"_ZTSN4mfem12DeviceTensorILi4EKdEE", !7, i64 0, !15, i64 8, !8, i64 16}
-!184 = !{!182, !7, i64 8}
-!185 = !{!182, !16, i64 96}
-!186 = distinct !{!186, !29}
-!187 = distinct !{!187, !29}
-!188 = !{!189, !12, i64 0}
-!189 = !{!"_ZTSZNK4mfem17L2FaceRestriction5FillIERNS_12SparseMatrixEbEUliE_", !12, i64 0, !12, i64 8, !12, i64 16, !7, i64 24}
-!190 = !{!189, !12, i64 8}
-!191 = !{!189, !12, i64 16}
-!192 = !{!189, !7, i64 24}
-!193 = !{!194, !7, i64 0}
-!194 = !{!"_ZTSZNK4mfem17L2FaceRestriction12FillJAndDataERKNS_6VectorERNS_12SparseMatrixEbEUliE_", !7, i64 0, !12, i64 8, !12, i64 16, !12, i64 24, !12, i64 32, !15, i64 40, !183, i64 48}
-!195 = !{!194, !12, i64 8}
-!196 = !{!194, !12, i64 16}
-!197 = !{!194, !12, i64 24}
-!198 = !{!194, !12, i64 32}
-!199 = !{!183, !15, i64 8}
-!200 = !{!194, !15, i64 40}
-!201 = distinct !{!201, !29}
-!202 = !{!203, !12, i64 0}
-!203 = !{!"_ZTSZNK4mfem17L2FaceRestriction32AddFaceMatricesToElementMatricesERKNS_6VectorERS1_EUliE_", !12, i64 0, !7, i64 8, !7, i64 12, !12, i64 16, !17, i64 24, !183, i64 56, !7, i64 88}
-!204 = !{!203, !7, i64 8}
-!205 = !{!203, !7, i64 12}
-!206 = !{!203, !12, i64 16}
-!207 = !{!203, !7, i64 88}
-!208 = distinct !{!208, !29}
-!209 = distinct !{!209, !29}
-!210 = distinct !{!210, !29}
-!211 = distinct !{!211, !29}
-!212 = !{!213, !12, i64 0}
-!213 = !{!"_ZTSZNK4mfem17L2FaceRestriction32AddFaceMatricesToElementMatricesERKNS_6VectorERS1_EUliE0_", !12, i64 0, !7, i64 8, !7, i64 12, !17, i64 16, !38, i64 48}
-!214 = !{!213, !7, i64 8}
-!215 = !{!213, !7, i64 12}
-!216 = distinct !{!216, !29}
-!217 = distinct !{!217, !29}
-!218 = !{!219, !220, i64 0}
-!219 = !{!"_ZTSZNK4mfem19NCL2FaceRestriction38DoubleValuedNonconformingInterpolationERNS_6VectorEEUliE_", !220, i64 0, !7, i64 8, !7, i64 12, !167, i64 16, !38, i64 48}
-!220 = !{!"p1 _ZTSN4mfem14NCInterpConfigE", !13, i64 0}
-!221 = !{!8, !8, i64 0}
-!222 = !{!219, !7, i64 8}
-!223 = !{!219, !7, i64 12}
-!224 = distinct !{!224, !29}
-!225 = distinct !{!225, !29}
-!226 = distinct !{!226, !29}
-!227 = distinct !{!227, !29}
-!228 = !{!229, !220, i64 0}
-!229 = !{!"_ZTSZNK4mfem19NCL2FaceRestriction54SingleValuedNonconformingTransposeInterpolationInPlaceERNS_6VectorEEUliE_", !220, i64 0, !7, i64 8, !7, i64 12, !17, i64 16, !38, i64 48}
-!230 = !{!229, !7, i64 8}
-!231 = !{!229, !7, i64 12}
-!232 = distinct !{!232, !29}
-!233 = distinct !{!233, !29}
-!234 = distinct !{!234, !29}
-!235 = distinct !{!235, !29}
-!236 = !{!237, !220, i64 0}
-!237 = !{!"_ZTSZNK4mfem19NCL2FaceRestriction54DoubleValuedNonconformingTransposeInterpolationInPlaceERNS_6VectorEEUliE_", !220, i64 0, !7, i64 8, !7, i64 12, !167, i64 16, !38, i64 48}
-!238 = !{!237, !7, i64 8}
-!239 = !{!237, !7, i64 12}
-!240 = distinct !{!240, !29}
-!241 = distinct !{!241, !29}
-!242 = distinct !{!242, !29}
-!243 = distinct !{!243, !29}
-!244 = !{!245, !12, i64 0}
-!245 = !{!"_ZTSZNK4mfem19NCL2FaceRestriction5FillIERNS_12SparseMatrixEbEUliE_", !12, i64 0, !12, i64 8, !12, i64 16, !7, i64 24}
-!246 = !{!245, !12, i64 8}
-!247 = !{!245, !12, i64 16}
-!248 = !{!245, !7, i64 24}
-!249 = !{!250, !7, i64 0}
-!250 = !{!"_ZTSZNK4mfem19NCL2FaceRestriction12FillJAndDataERKNS_6VectorERNS_12SparseMatrixEbEUliE_", !7, i64 0, !251, i64 8, !12, i64 16, !12, i64 24, !12, i64 32, !12, i64 40, !183, i64 48, !38, i64 80, !15, i64 112}
-!251 = !{!"p1 _ZTSN4mfem12InterpConfigE", !13, i64 0}
-!252 = !{!250, !251, i64 8}
-!253 = !{!250, !12, i64 16}
-!254 = !{!250, !12, i64 24}
-!255 = !{!250, !12, i64 32}
-!256 = !{!250, !12, i64 40}
-!257 = !{!250, !15, i64 112}
-!258 = distinct !{!258, !29}
-!259 = distinct !{!259, !29}
-!260 = distinct !{!260, !29}
-!261 = !{!262, !251, i64 0}
-!262 = !{!"_ZTSZNK4mfem19NCL2FaceRestriction32AddFaceMatricesToElementMatricesERKNS_6VectorERS1_EUliE_", !251, i64 0, !12, i64 8, !7, i64 16, !7, i64 20, !12, i64 24, !38, i64 32, !183, i64 64, !17, i64 96, !7, i64 128}
-!263 = !{!262, !12, i64 8}
-!264 = !{!262, !7, i64 16}
-!265 = !{!262, !7, i64 20}
-!266 = !{!262, !12, i64 24}
-!267 = !{!262, !7, i64 128}
-!268 = distinct !{!268, !29}
-!269 = distinct !{!269, !29}
-!270 = distinct !{!270, !29}
-!271 = distinct !{!271, !29}
-!272 = distinct !{!272, !29}
-!273 = distinct !{!273, !29}
-!274 = distinct !{!274, !29}
-!275 = distinct !{!275, !29}
-!276 = !{!277, !12, i64 8}
-!277 = !{!"_ZTSZNK4mfem19NCL2FaceRestriction32AddFaceMatricesToElementMatricesERKNS_6VectorERS1_EUliE0_", !251, i64 0, !12, i64 8, !7, i64 16, !7, i64 20, !38, i64 24, !38, i64 56, !17, i64 88}
-!278 = !{!277, !7, i64 16}
-!279 = !{!277, !7, i64 20}
-!280 = !{!277, !251, i64 0}
-!281 = distinct !{!281, !29}
-!282 = distinct !{!282, !29}
-!283 = distinct !{!283, !29}
-!284 = distinct !{!284, !29}
-!285 = !{!286, !7, i64 8}
-!286 = !{!"_ZTSZNK4mfem26L2InterfaceFaceRestriction4MultERKNS_6VectorERS1_EUliE_", !12, i64 0, !7, i64 8, !7, i64 12, !17, i64 16, !7, i64 48, !14, i64 56, !16, i64 80, !14, i64 88}
-!287 = !{!286, !12, i64 0}
-!288 = !{!286, !7, i64 12}
-!289 = distinct !{!289, !29}
-!290 = !{!291, !12, i64 0}
-!291 = !{!"_ZTSZNK4mfem26L2InterfaceFaceRestriction16AddMultTransposeERKNS_6VectorERS1_dEUliE_", !12, i64 0, !7, i64 8, !39, i64 16, !16, i64 40, !27, i64 48, !38, i64 56, !7, i64 88}
-!292 = !{!291, !7, i64 8}
-!293 = !{!291, !7, i64 88}
-!294 = !{!291, !16, i64 40}
-!295 = !{!291, !27, i64 48}
-!296 = distinct !{!296, !29}
-!297 = !{!298, !12, i64 0}
-!298 = !{!"_ZTSZNK4mfem26L2InterfaceFaceRestriction19MultTransposeSharedERKNS_6VectorERS1_EUliE_", !12, i64 0, !7, i64 8, !39, i64 16, !16, i64 40, !38, i64 48, !7, i64 80}
-!299 = !{!298, !7, i64 8}
-!300 = !{!298, !7, i64 80}
-!301 = !{!298, !16, i64 40}
-!302 = distinct !{!302, !29}
+!1 = !{!"clang version 3.8.0 (tags/RELEASE_380/final)"}
+!7 = !{i32 2, !"SDK Version", [2 x i32] [i32 12, i32 9]}
+!8 = !{!"Simple C++ TBAA"}
+!9 = !{!"omnipotent char", !8, i64 0}
+!10 = !{!"int", !9, i64 0}
+!11 = !{!10, !10, i64 0}
+!12 = !{!"any pointer", !9, i64 0}
+!13 = !{!"p1 int", !12, i64 0}
+!14 = !{!"double", !9, i64 0}
+!15 = !{!"p1 double", !12, i64 0}
+!16 = !{!"_ZTSN4mfem12DeviceTensorILi2EKdEE", !10, i64 0, !15, i64 8, !9, i64 16}
+!17 = !{!"bool", !9, i64 0}
+!18 = !{!"_ZTSN4mfem12DeviceTensorILi3EdEE", !10, i64 0, !15, i64 8, !9, i64 16}
+!19 = !{!"_ZTSZNK4mfem18ElementRestriction4MultERKNS_6VectorERS1_EUliE_", !13, i64 0, !10, i64 8, !16, i64 16, !17, i64 40, !18, i64 48, !10, i64 80}
+!24 = !{!19, !13, i64 0}
+!26 = !{i8 0, i8 2}
+!27 = !{}
+!29 = !{!19, !10, i64 8}
+!30 = !{!19, !17, i64 40}
+!31 = !{!14, !14, i64 0}
+!32 = !{!19, !10, i64 80}
+!33 = !{!"llvm.loop.mustprogress"}
+!34 = distinct !{!34, !33}
+!37 = !{!16, !15, i64 8}
+!41 = !{!18, !15, i64 8}
+!42 = !{!"_ZTSZNK4mfem18ElementRestriction7AbsMultERKNS_6VectorERS1_EUliE_", !13, i64 0, !10, i64 8, !18, i64 16, !10, i64 48, !16, i64 56, !17, i64 80}
+!43 = !{!42, !13, i64 0}
+!45 = !{!42, !10, i64 8}
+!46 = !{!42, !17, i64 80}
+!47 = !{!42, !10, i64 48}
+!48 = distinct !{!48, !33}
+!49 = !{!"_ZTSN4mfem12DeviceTensorILi3EKdEE", !10, i64 0, !15, i64 8, !9, i64 16}
+!50 = !{!"_ZTSN4mfem12DeviceTensorILi2EdEE", !10, i64 0, !15, i64 8, !9, i64 16}
+!51 = !{!"_ZTSZNK4mfem18ElementRestriction17TAddMultTransposeILb0EEEvRKNS_6VectorERS2_EUliE_", !13, i64 0, !10, i64 8, !13, i64 16, !49, i64 24, !10, i64 56, !50, i64 64, !17, i64 88}
+!52 = !{!51, !13, i64 0}
+!54 = !{!51, !10, i64 8}
+!58 = distinct !{!58, !33}
+!59 = !{!51, !17, i64 88}
+!60 = distinct !{!60, !33}
+!63 = !{!49, !15, i64 8}
+!66 = !{!50, !15, i64 8}
+!67 = !{!"_ZTSZNK4mfem18ElementRestriction17TAddMultTransposeILb1EEEvRKNS_6VectorERS2_EUliE_", !13, i64 0, !10, i64 8, !13, i64 16, !49, i64 24, !10, i64 56, !50, i64 64, !17, i64 88}
+!68 = !{!67, !13, i64 0}
+!70 = !{!67, !10, i64 8}
+!74 = distinct !{!74, !33}
+!75 = !{!67, !17, i64 88}
+!76 = distinct !{!76, !33}
+!77 = !{!"_ZTSZNK4mfem18ElementRestriction16AbsMultTransposeERKNS_6VectorERS1_EUliE_", !13, i64 0, !10, i64 8, !13, i64 16, !49, i64 24, !10, i64 56, !50, i64 64, !17, i64 88}
+!78 = !{!77, !13, i64 0}
+!80 = !{!77, !10, i64 8}
+!84 = distinct !{!84, !33}
+!85 = !{!77, !17, i64 88}
+!86 = distinct !{!86, !33}
+!87 = !{!"_ZTSZNK4mfem18ElementRestriction15MultLeftInverseERKNS_6VectorERS1_EUliE_", !13, i64 0, !10, i64 8, !13, i64 16, !49, i64 24, !10, i64 56, !50, i64 64, !17, i64 88}
+!88 = !{!87, !13, i64 0}
+!90 = !{!87, !10, i64 8}
+!91 = !{!87, !13, i64 16}
+!93 = !{!87, !17, i64 88}
+!94 = distinct !{!94, !33}
+!95 = !{!"_ZTSZNK4mfem18ElementRestriction5FillIERNS_12SparseMatrixEEUliE_", !13, i64 0}
+!96 = !{!95, !13, i64 0}
+!97 = !{!"_ZTSN4mfem12DeviceTensorILi2EiEE", !10, i64 0, !13, i64 8, !9, i64 16}
+!98 = !{!"_ZTSZNK4mfem18ElementRestriction5FillIERNS_12SparseMatrixEEUliE0_", !10, i64 0, !13, i64 8, !13, i64 16, !97, i64 24, !13, i64 48, !13, i64 56}
+!99 = !{!98, !10, i64 0}
+!100 = !{!98, !13, i64 8}
+!101 = !{!98, !13, i64 16}
+!103 = !{!98, !13, i64 48}
+!104 = distinct !{!104, !33}
+!108 = distinct !{!108, !33}
+!109 = distinct !{!109, !33}
+!112 = !{!97, !13, i64 8}
+!116 = distinct !{!116, !33}
+!117 = distinct !{!117, !33}
+!118 = !{!"_ZTSZNK4mfem18ElementRestriction5FillIERNS_12SparseMatrixERKS0_EUliE_", !13, i64 0}
+!119 = !{!118, !13, i64 0}
+!120 = !{!"_ZTSZNK4mfem18ElementRestriction5FillIERNS_12SparseMatrixERKS0_EUliE0_", !10, i64 0, !10, i64 4, !13, i64 8, !10, i64 16, !17, i64 20, !13, i64 24, !13, i64 32, !13, i64 40, !10, i64 48, !10, i64 52, !13, i64 56, !13, i64 64, !13, i64 72, !13, i64 80, !13, i64 88}
+!121 = !{!120, !10, i64 0}
+!122 = !{!120, !10, i64 4}
+!123 = !{!120, !13, i64 8}
+!124 = !{!120, !10, i64 16}
+!125 = !{!120, !17, i64 20}
+!126 = !{!120, !13, i64 24}
+!127 = !{!120, !13, i64 32}
+!129 = !{!120, !13, i64 40}
+!130 = distinct !{!130, !33}
+!132 = !{!120, !10, i64 48}
+!134 = !{!120, !10, i64 52}
+!141 = distinct !{!141, !33}
+!142 = distinct !{!142, !33}
+!143 = distinct !{!143, !33}
+!144 = !{!"_ZTSZNK4mfem18ElementRestriction12FillJAndDataERKNS_6VectorERNS_12SparseMatrixEEUliE_", !10, i64 0, !13, i64 8, !13, i64 16, !97, i64 24, !13, i64 48, !13, i64 56, !13, i64 64, !15, i64 72, !49, i64 80}
+!145 = !{!144, !10, i64 0}
+!146 = !{!144, !13, i64 8}
+!147 = !{!144, !13, i64 16}
+!149 = !{!144, !13, i64 48}
+!150 = distinct !{!150, !33}
+!156 = distinct !{!156, !33}
+!159 = distinct !{!159, !33}
+!160 = distinct !{!160, !33}
+!161 = distinct !{!161, !33}
+!162 = !{!"_ZTSN4mfem12DeviceTensorILi5EKdEE", !10, i64 0, !15, i64 8, !9, i64 16}
+!163 = !{!"_ZTSZNK4mfem18ElementRestriction12FillJAndDataERKNS_6VectorERNS_12SparseMatrixERKS0_EUliE_", !10, i64 0, !10, i64 4, !13, i64 8, !10, i64 16, !17, i64 20, !13, i64 24, !97, i64 32, !13, i64 56, !10, i64 64, !10, i64 68, !13, i64 72, !10, i64 80, !17, i64 84, !13, i64 88, !13, i64 96, !13, i64 104, !15, i64 112, !162, i64 120, !97, i64 160, !13, i64 184}
+!164 = !{!163, !10, i64 0}
+!165 = !{!163, !10, i64 4}
+!166 = !{!163, !13, i64 8}
+!167 = !{!163, !10, i64 16}
+!168 = !{!163, !17, i64 20}
+!169 = !{!163, !13, i64 24}
+!171 = !{!163, !13, i64 56}
+!172 = distinct !{!172, !33}
+!174 = !{!163, !10, i64 64}
+!176 = !{!163, !10, i64 68}
+!186 = distinct !{!186, !33}
+!189 = distinct !{!189, !33}
+!190 = distinct !{!190, !33}
+!191 = distinct !{!191, !33}
+!192 = distinct !{!192, !33}
+!196 = !{!"_ZTSZNK4mfem20L2ElementRestriction4MultERKNS_6VectorERS1_EUliE_", !10, i64 0, !10, i64 4, !18, i64 8, !16, i64 40, !17, i64 64}
+!197 = !{!196, !10, i64 0}
+!199 = !{!196, !10, i64 4}
+!200 = !{!196, !17, i64 64}
+!201 = distinct !{!201, !33}
+!202 = !{!"_ZTSZNK4mfem20L2ElementRestriction17TAddMultTransposeILb0EEEvRKNS_6VectorERS2_EUliE_", !10, i64 0, !10, i64 4, !50, i64 8, !17, i64 32, !49, i64 40}
+!203 = !{!202, !10, i64 0}
+!205 = !{!202, !10, i64 4}
+!206 = !{!202, !17, i64 32}
+!207 = distinct !{!207, !33}
+!208 = !{!"_ZTSZNK4mfem20L2ElementRestriction17TAddMultTransposeILb1EEEvRKNS_6VectorERS2_EUliE_", !10, i64 0, !10, i64 4, !50, i64 8, !17, i64 32, !49, i64 40}
+!209 = !{!208, !10, i64 0}
+!211 = !{!208, !10, i64 4}
+!212 = !{!208, !17, i64 32}
+!213 = distinct !{!213, !33}
+!214 = !{!"_ZTSZNK4mfem20L2ElementRestriction5FillIERNS_12SparseMatrixEEUliE_", !13, i64 0, !10, i64 8, !10, i64 12}
+!215 = !{!214, !10, i64 8}
+!217 = !{!214, !13, i64 0}
+!218 = !{!"_ZTSZNK4mfem20L2ElementRestriction12FillJAndDataERKNS_6VectorERNS_12SparseMatrixEEUliE_", !13, i64 0, !10, i64 8, !13, i64 16, !15, i64 24, !49, i64 32}
+!219 = !{!218, !13, i64 0}
+!220 = !{!218, !10, i64 8}
+!222 = !{!218, !13, i64 16}
+!223 = !{!218, !15, i64 24}
+!224 = distinct !{!224, !33}
+!225 = !{!"_ZTSZNK4mfem25ConformingFaceRestriction12MultInternalERKNS_6VectorERS1_bEUliE_", !13, i64 0, !17, i64 8, !10, i64 12, !10, i64 16, !18, i64 24, !16, i64 56, !17, i64 80}
+!226 = !{!225, !13, i64 0}
+!227 = !{!225, !17, i64 8}
+!228 = !{!225, !10, i64 12}
+!230 = !{!225, !10, i64 16}
+!231 = !{!225, !17, i64 80}
+!232 = distinct !{!232, !33}
+!233 = !{!"_ZTSZN4mfemL42ConformingFaceRestriction_AddMultTransposeEiiiibRKNS_5ArrayIiEES3_RKNS_6VectorERS4_bdEUliE_", !13, i64 0, !10, i64 8, !13, i64 16, !17, i64 24, !49, i64 32, !10, i64 64, !50, i64 72, !17, i64 96}
+!234 = !{!233, !13, i64 0}
+!236 = !{!233, !10, i64 8}
+!241 = distinct !{!241, !33}
+!242 = !{!233, !17, i64 96}
+!243 = distinct !{!243, !33}
+!244 = !{!"_ZTSZNK4mfem17L2FaceRestriction26SingleValuedConformingMultERKNS_6VectorERS1_EUliE_", !10, i64 0, !13, i64 8, !10, i64 16, !18, i64 24, !16, i64 56, !17, i64 80}
+!245 = !{!244, !10, i64 0}
+!246 = !{!244, !13, i64 8}
+!248 = !{!244, !10, i64 16}
+!249 = !{!244, !17, i64 80}
+!250 = distinct !{!250, !33}
+!251 = !{!"_ZTSN4mfem12DeviceTensorILi4EdEE", !10, i64 0, !15, i64 8, !9, i64 16}
+!252 = !{!"_ZTSZNK4mfem17L2FaceRestriction26DoubleValuedConformingMultERKNS_6VectorERS1_EUliE_", !10, i64 0, !13, i64 8, !10, i64 16, !251, i64 24, !16, i64 56, !17, i64 80, !13, i64 88}
+!253 = !{!252, !10, i64 0}
+!254 = !{!252, !13, i64 8}
+!256 = !{!252, !10, i64 16}
+!257 = !{!252, !17, i64 80}
+!258 = distinct !{!258, !33}
+!259 = !{!252, !13, i64 88}
+!261 = distinct !{!261, !33}
+!264 = !{!251, !15, i64 8}
+!265 = !{!"_ZTSZNK4mfem17L2FaceRestriction38SingleValuedConformingAddMultTransposeERKNS_6VectorERS1_EUliE_", !13, i64 0, !10, i64 8, !13, i64 16, !49, i64 24, !10, i64 56, !50, i64 64, !17, i64 88}
+!266 = !{!265, !13, i64 0}
+!268 = !{!265, !10, i64 8}
+!272 = distinct !{!272, !33}
+!273 = !{!265, !17, i64 88}
+!274 = distinct !{!274, !33}
+!275 = !{!"_ZTSN4mfem12DeviceTensorILi4EKdEE", !10, i64 0, !15, i64 8, !9, i64 16}
+!276 = !{!"_ZTSZNK4mfem17L2FaceRestriction38DoubleValuedConformingAddMultTransposeERKNS_6VectorERS1_EUliE_", !13, i64 0, !10, i64 8, !13, i64 16, !10, i64 24, !275, i64 32, !10, i64 64, !50, i64 72, !17, i64 96}
+!277 = !{!276, !13, i64 0}
+!279 = !{!276, !10, i64 8}
+!284 = distinct !{!284, !33}
+!285 = !{!276, !17, i64 96}
+!286 = distinct !{!286, !33}
+!289 = !{!275, !15, i64 8}
+!290 = !{!"_ZTSZNK4mfem17L2FaceRestriction5FillIERNS_12SparseMatrixEbEUliE_", !13, i64 0, !13, i64 8, !13, i64 16, !10, i64 24}
+!291 = !{!290, !13, i64 0}
+!292 = !{!290, !13, i64 8}
+!293 = !{!290, !13, i64 16}
+!294 = !{!290, !10, i64 24}
+!295 = !{!"_ZTSZNK4mfem17L2FaceRestriction12FillJAndDataERKNS_6VectorERNS_12SparseMatrixEbEUliE_", !10, i64 0, !13, i64 8, !13, i64 16, !13, i64 24, !13, i64 32, !15, i64 40, !275, i64 48}
+!296 = !{!295, !10, i64 0}
+!297 = !{!295, !13, i64 8}
+!298 = !{!295, !13, i64 16}
+!299 = !{!295, !13, i64 24}
+!301 = !{!295, !13, i64 32}
+!302 = !{!295, !15, i64 40}
+!303 = distinct !{!303, !33}
+!304 = !{!"_ZTSZNK4mfem17L2FaceRestriction32AddFaceMatricesToElementMatricesERKNS_6VectorERS1_EUliE_", !13, i64 0, !10, i64 8, !10, i64 12, !13, i64 16, !18, i64 24, !275, i64 56, !10, i64 88}
+!305 = !{!304, !13, i64 0}
+!306 = !{!304, !10, i64 8}
+!307 = !{!304, !10, i64 12}
+!308 = !{!304, !13, i64 16}
+!311 = distinct !{!311, !33}
+!312 = distinct !{!312, !33}
+!313 = !{!304, !10, i64 88}
+!316 = distinct !{!316, !33}
+!317 = distinct !{!317, !33}
+!320 = !{!"_ZTSZNK4mfem17L2FaceRestriction32AddFaceMatricesToElementMatricesERKNS_6VectorERS1_EUliE0_", !13, i64 0, !10, i64 8, !10, i64 12, !18, i64 16, !49, i64 48}
+!321 = !{!320, !13, i64 0}
+!322 = !{!320, !10, i64 8}
+!323 = !{!320, !10, i64 12}
+!326 = distinct !{!326, !33}
+!327 = distinct !{!327, !33}
+!328 = !{!"p1 _ZTSN4mfem14NCInterpConfigE", !12, i64 0}
+!329 = !{!"_ZTSZNK4mfem19NCL2FaceRestriction38DoubleValuedNonconformingInterpolationERNS_6VectorEEUliE_", !328, i64 0, !10, i64 8, !10, i64 12, !251, i64 16, !49, i64 48}
+!331 = !{!329, !328, i64 0}
+!332 = !{!9, !9, i64 0}
+!336 = !{!329, !10, i64 8}
+!338 = !{!329, !10, i64 12}
+!339 = distinct !{!339, !33}
+!342 = distinct !{!342, !33}
+!343 = distinct !{!343, !33}
+!344 = distinct !{!344, !33}
+!345 = !{!"_ZTSZNK4mfem19NCL2FaceRestriction54SingleValuedNonconformingTransposeInterpolationInPlaceERNS_6VectorEEUliE_", !328, i64 0, !10, i64 8, !10, i64 12, !18, i64 16, !49, i64 48}
+!346 = !{!345, !328, i64 0}
+!348 = !{!345, !10, i64 8}
+!350 = !{!345, !10, i64 12}
+!351 = distinct !{!351, !33}
+!354 = distinct !{!354, !33}
+!355 = distinct !{!355, !33}
+!356 = distinct !{!356, !33}
+!357 = !{!"_ZTSZNK4mfem19NCL2FaceRestriction54DoubleValuedNonconformingTransposeInterpolationInPlaceERNS_6VectorEEUliE_", !328, i64 0, !10, i64 8, !10, i64 12, !251, i64 16, !49, i64 48}
+!358 = !{!357, !328, i64 0}
+!360 = !{!357, !10, i64 8}
+!362 = !{!357, !10, i64 12}
+!363 = distinct !{!363, !33}
+!366 = distinct !{!366, !33}
+!367 = distinct !{!367, !33}
+!368 = distinct !{!368, !33}
+!369 = !{!"_ZTSZNK4mfem19NCL2FaceRestriction5FillIERNS_12SparseMatrixEbEUliE_", !13, i64 0, !13, i64 8, !13, i64 16, !10, i64 24}
+!370 = !{!369, !13, i64 0}
+!371 = !{!369, !13, i64 8}
+!372 = !{!369, !13, i64 16}
+!373 = !{!369, !10, i64 24}
+!374 = !{!"p1 _ZTSN4mfem12InterpConfigE", !12, i64 0}
+!375 = !{!"_ZTSZNK4mfem19NCL2FaceRestriction12FillJAndDataERKNS_6VectorERNS_12SparseMatrixEbEUliE_", !10, i64 0, !374, i64 8, !13, i64 16, !13, i64 24, !13, i64 32, !13, i64 40, !275, i64 48, !49, i64 80, !15, i64 112}
+!376 = !{!375, !10, i64 0}
+!378 = !{!375, !374, i64 8}
+!380 = !{!375, !13, i64 16}
+!381 = !{!375, !13, i64 24}
+!382 = !{!375, !13, i64 32}
+!384 = !{!375, !13, i64 40}
+!386 = distinct !{!386, !33}
+!388 = distinct !{!388, !33}
+!389 = !{!375, !15, i64 112}
+!390 = distinct !{!390, !33}
+!391 = !{!"_ZTSZNK4mfem19NCL2FaceRestriction32AddFaceMatricesToElementMatricesERKNS_6VectorERS1_EUliE_", !374, i64 0, !13, i64 8, !10, i64 16, !10, i64 20, !13, i64 24, !49, i64 32, !275, i64 64, !18, i64 96, !10, i64 128}
+!392 = !{!391, !374, i64 0}
+!393 = !{!391, !13, i64 8}
+!394 = !{!391, !10, i64 16}
+!395 = !{!391, !10, i64 20}
+!396 = !{!391, !13, i64 24}
+!401 = distinct !{!401, !33}
+!402 = distinct !{!402, !33}
+!403 = distinct !{!403, !33}
+!404 = distinct !{!404, !33}
+!405 = !{!391, !10, i64 128}
+!410 = distinct !{!410, !33}
+!411 = distinct !{!411, !33}
+!412 = distinct !{!412, !33}
+!413 = distinct !{!413, !33}
+!414 = !{!"_ZTSZNK4mfem19NCL2FaceRestriction32AddFaceMatricesToElementMatricesERKNS_6VectorERS1_EUliE0_", !374, i64 0, !13, i64 8, !10, i64 16, !10, i64 20, !49, i64 24, !49, i64 56, !18, i64 88}
+!415 = !{!414, !374, i64 0}
+!416 = !{!414, !13, i64 8}
+!417 = !{!414, !10, i64 16}
+!418 = !{!414, !10, i64 20}
+!423 = distinct !{!423, !33}
+!424 = distinct !{!424, !33}
+!425 = distinct !{!425, !33}
+!426 = distinct !{!426, !33}
+!427 = !{!"_ZTSZNK4mfem26L2InterfaceFaceRestriction4MultERKNS_6VectorERS1_EUliE_", !13, i64 0, !10, i64 8, !10, i64 12, !18, i64 16, !10, i64 48, !16, i64 56, !17, i64 80, !16, i64 88}
+!428 = !{!427, !13, i64 0}
+!430 = !{!427, !10, i64 8}
+!431 = !{!427, !10, i64 12}
+!434 = distinct !{!434, !33}
+!435 = !{!"_ZTSZNK4mfem26L2InterfaceFaceRestriction16AddMultTransposeERKNS_6VectorERS1_dEUliE_", !13, i64 0, !10, i64 8, !50, i64 16, !17, i64 40, !14, i64 48, !49, i64 56, !10, i64 88}
+!436 = !{!435, !13, i64 0}
+!438 = !{!435, !10, i64 8}
+!439 = !{!435, !14, i64 48}
+!440 = !{!435, !10, i64 88}
+!441 = !{!435, !17, i64 40}
+!442 = distinct !{!442, !33}
+!443 = !{!"_ZTSZNK4mfem26L2InterfaceFaceRestriction19MultTransposeSharedERKNS_6VectorERS1_EUliE_", !13, i64 0, !10, i64 8, !50, i64 16, !17, i64 40, !49, i64 48, !10, i64 80}
+!444 = !{!443, !13, i64 0}
+!446 = !{!443, !10, i64 8}
+!447 = !{!443, !10, i64 80}
+!448 = !{!443, !17, i64 40}
+!449 = distinct !{!449, !33}
+!450 = !{i32 4, !"nvvm-reflect-ftz", i32 0}
+!451 = !{i32 7, !"frame-pointer", i32 2}
+!452 = !{!"clang version 24.0.0git (git@github.com:llvm/llvm-project b08e005995ed29a2f89aa9a3f599a9d45db65523)"}
+!453 = !{!"__libc_errno", !10, i64 0}
+!454 = !{!453, !10, i64 0}

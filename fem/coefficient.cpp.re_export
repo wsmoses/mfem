@@ -1,5 +1,5 @@
-; ModuleID = '/mnt3/wmoses/git/mfem/fem/coefficient.cpp'
-source_filename = "/mnt3/wmoses/git/mfem/fem/coefficient.cpp"
+; ModuleID = '/home/wmoses/git/mfem/fem/coefficient.cpp'
+source_filename = "/home/wmoses/git/mfem/fem/coefficient.cpp"
 target datalayout = "e-p6:32:32-i64:64-i128:128-i256:256-v16:16-v32:32-n16:32:64"
 target triple = "nvptx64-nvidia-cuda"
 
@@ -24,31 +24,31 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNS_18PWConstCoefficient
   br i1 %8, label %9, label %53
 
 9:                                                ; preds = %2
-  %10 = load ptr, ptr %1, align 8, !tbaa !10
+  %10 = load ptr, ptr %1, align 8, !tbaa !22
   %11 = sext i32 %7 to i64
   %12 = getelementptr inbounds [4 x i8], ptr %10, i64 %11
-  %13 = load i32, ptr %12, align 4, !tbaa !16
+  %13 = load i32, ptr %12, align 4, !tbaa !11
   %14 = getelementptr inbounds nuw i8, ptr %1, i64 8
-  %15 = load ptr, ptr %14, align 8, !tbaa !17
+  %15 = load ptr, ptr %14, align 8, !tbaa !23
   %16 = sext i32 %13 to i64
   %17 = getelementptr [8 x i8], ptr %15, i64 %16
   %18 = getelementptr i8, ptr %17, i64 -8
-  %19 = load double, ptr %18, align 8, !tbaa !18
+  %19 = load double, ptr %18, align 8, !tbaa !24
   %20 = getelementptr inbounds nuw i8, ptr %1, i64 16
-  %21 = load i8, ptr %20, align 8, !tbaa !20, !range !21, !noundef !22
+  %21 = load i8, ptr %20, align 8, !tbaa !25, !range !26, !noundef !27
   %22 = trunc nuw i8 %21 to i1
   %23 = getelementptr inbounds nuw i8, ptr %1, i64 24
-  %24 = load ptr, ptr %23, align 8, !tbaa !23
+  %24 = load ptr, ptr %23, align 8, !tbaa !28
   br i1 %22, label %25, label %28
 
 25:                                               ; preds = %9
-  %26 = load i32, ptr %24, align 4, !tbaa !16
+  %26 = load i32, ptr %24, align 4, !tbaa !11
   %27 = mul nsw i32 %26, %7
   br label %31
 
 28:                                               ; preds = %9
   %29 = getelementptr inbounds [4 x i8], ptr %24, i64 %11
-  %30 = load i32, ptr %29, align 4, !tbaa !16
+  %30 = load i32, ptr %29, align 4, !tbaa !11
   br label %31
 
 31:                                               ; preds = %28, %25
@@ -57,14 +57,14 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNS_18PWConstCoefficient
 
 33:                                               ; preds = %31
   %34 = add nsw i32 %7, 1
-  %35 = load i32, ptr %24, align 4, !tbaa !16
+  %35 = load i32, ptr %24, align 4, !tbaa !11
   %36 = mul nsw i32 %35, %34
   br label %41
 
 37:                                               ; preds = %31
   %38 = getelementptr [4 x i8], ptr %24, i64 %11
   %39 = getelementptr i8, ptr %38, i64 4
-  %40 = load i32, ptr %39, align 4, !tbaa !16
+  %40 = load i32, ptr %39, align 4, !tbaa !11
   br label %41
 
 41:                                               ; preds = %37, %33
@@ -74,17 +74,17 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNS_18PWConstCoefficient
 
 44:                                               ; preds = %41
   %45 = getelementptr inbounds nuw i8, ptr %1, i64 32
-  %46 = load ptr, ptr %45, align 8, !tbaa !24
+  %46 = load ptr, ptr %45, align 8, !tbaa !30
   br label %47
 
 47:                                               ; preds = %47, %44
   %48 = phi i32 [ %32, %44 ], [ %51, %47 ]
   %49 = sext i32 %48 to i64
   %50 = getelementptr inbounds [8 x i8], ptr %46, i64 %49
-  store double %19, ptr %50, align 8, !tbaa !18
+  store double %19, ptr %50, align 8, !tbaa !24
   %51 = add nsw i32 %48, 1
   %52 = icmp eq i32 %51, %42
-  br i1 %52, label %53, label %47, !llvm.loop !25
+  br i1 %52, label %53, label %47, !llvm.loop !32
 
 53:                                               ; preds = %47, %41, %2
   ret void
@@ -111,16 +111,16 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNS_14SumCoefficient7Pro
 
 9:                                                ; preds = %2
   %10 = getelementptr inbounds nuw i8, ptr %1, i64 8
-  %11 = load double, ptr %10, align 8, !tbaa !27
+  %11 = load double, ptr %10, align 8, !tbaa !34
   %12 = getelementptr inbounds nuw i8, ptr %1, i64 16
-  %13 = load double, ptr %12, align 8, !tbaa !29
-  %14 = load ptr, ptr %1, align 8, !tbaa !30
+  %13 = load double, ptr %12, align 8, !tbaa !35
+  %14 = load ptr, ptr %1, align 8, !tbaa !36
   %15 = sext i32 %7 to i64
   %16 = getelementptr inbounds [8 x i8], ptr %14, i64 %15
-  %17 = load double, ptr %16, align 8, !tbaa !18
+  %17 = load double, ptr %16, align 8, !tbaa !24
   %18 = fmul contract double %13, %17
   %19 = fadd contract double %11, %18
-  store double %19, ptr %16, align 8, !tbaa !18
+  store double %19, ptr %16, align 8, !tbaa !24
   br label %20
 
 20:                                               ; preds = %2, %9
@@ -138,17 +138,17 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNS_23InnerProductCoeffi
   br i1 %8, label %9, label %41
 
 9:                                                ; preds = %2
-  %10 = load ptr, ptr %1, align 8, !tbaa !31
+  %10 = load ptr, ptr %1, align 8, !tbaa !38
   %11 = getelementptr inbounds nuw i8, ptr %1, i64 8
-  %12 = load i32, ptr %11, align 8, !tbaa !33
+  %12 = load i32, ptr %11, align 8, !tbaa !39
   %13 = mul nsw i32 %12, %7
   %14 = sext i32 %13 to i64
   %15 = getelementptr inbounds [8 x i8], ptr %10, i64 %14
   %16 = getelementptr inbounds nuw i8, ptr %1, i64 16
-  %17 = load ptr, ptr %16, align 8, !tbaa !34
+  %17 = load ptr, ptr %16, align 8, !tbaa !41
   %18 = getelementptr inbounds [8 x i8], ptr %17, i64 %14
-  %19 = load double, ptr %15, align 8, !tbaa !18
-  %20 = load double, ptr %18, align 8, !tbaa !18
+  %19 = load double, ptr %15, align 8, !tbaa !24
+  %20 = load double, ptr %18, align 8, !tbaa !24
   %21 = fmul contract double %19, %20
   %22 = icmp sgt i32 %12, 1
   br i1 %22, label %23, label %35
@@ -158,70 +158,70 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNS_23InnerProductCoeffi
   %25 = phi double [ %32, %23 ], [ %21, %9 ]
   %26 = zext nneg i32 %24 to i64
   %27 = getelementptr inbounds nuw [8 x i8], ptr %15, i64 %26
-  %28 = load double, ptr %27, align 8, !tbaa !18
+  %28 = load double, ptr %27, align 8, !tbaa !24
   %29 = getelementptr inbounds nuw [8 x i8], ptr %18, i64 %26
-  %30 = load double, ptr %29, align 8, !tbaa !18
+  %30 = load double, ptr %29, align 8, !tbaa !24
   %31 = fmul contract double %28, %30
   %32 = fadd contract double %25, %31
   %33 = add nuw nsw i32 %24, 1
   %34 = icmp eq i32 %33, %12
-  br i1 %34, label %35, label %23, !llvm.loop !35
+  br i1 %34, label %35, label %23, !llvm.loop !43
 
 35:                                               ; preds = %23, %9
   %36 = phi double [ %21, %9 ], [ %32, %23 ]
   %37 = getelementptr inbounds nuw i8, ptr %1, i64 24
-  %38 = load ptr, ptr %37, align 8, !tbaa !36
+  %38 = load ptr, ptr %37, align 8, !tbaa !44
   %39 = sext i32 %7 to i64
   %40 = getelementptr inbounds [8 x i8], ptr %38, i64 %39
-  store double %36, ptr %40, align 8, !tbaa !18
+  store double %36, ptr %40, align 8, !tbaa !24
   br label %41
 
 41:                                               ; preds = %2, %35
   ret void
 }
 
-attributes #0 = { mustprogress nofree noinline norecurse nosync nounwind memory(readwrite, inaccessiblemem: none, target_mem: none) "frame-pointer"="all" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="sm_120" "target-features"="+ptx88,+sm_120" "uniform-work-group-size" }
+attributes #0 = { mustprogress nofree noinline norecurse nosync nounwind memory(readwrite, inaccessiblemem: none, target_mem: none) "frame-pointer"="all" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="sm_120" "target-features"="+ptx88" "uniform-work-group-size" }
 attributes #1 = { mustprogress nocallback nofree nosync nounwind speculatable willreturn memory(none) }
-attributes #2 = { mustprogress nofree noinline norecurse nosync nounwind willreturn memory(readwrite, inaccessiblemem: none, target_mem: none) "frame-pointer"="all" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="sm_120" "target-features"="+ptx88,+sm_120" "uniform-work-group-size" }
+attributes #2 = { mustprogress nofree noinline norecurse nosync nounwind willreturn memory(readwrite, inaccessiblemem: none, target_mem: none) "frame-pointer"="all" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="sm_120" "target-features"="+ptx88" "uniform-work-group-size" }
 
-!llvm.module.flags = !{!0, !1, !2}
-!llvm.ident = !{!3, !4}
-!llvm.errno.tbaa = !{!5}
+!llvm.module.flags = !{!7, !45, !46}
+!llvm.ident = !{!47, !1}
+!llvm.errno.tbaa = !{!49}
 
-!0 = !{i32 2, !"SDK Version", [2 x i32] [i32 12, i32 9]}
-!1 = !{i32 4, !"nvvm-reflect-ftz", i32 0}
-!2 = !{i32 7, !"frame-pointer", i32 2}
-!3 = !{!"clang version 24.0.0git (git@github.com:llvm/llvm-project 0220c07a94012b9dce9250addac6a8ee1f674b21)"}
-!4 = !{!"clang version 3.8.0 (tags/RELEASE_380/final)"}
-!5 = !{!6, !7, i64 0}
-!6 = !{!"__libc_errno", !7, i64 0}
-!7 = !{!"int", !8, i64 0}
-!8 = !{!"omnipotent char", !9, i64 0}
-!9 = !{!"Simple C++ TBAA"}
-!10 = !{!11, !12, i64 0}
-!11 = !{!"_ZTSZN4mfem18PWConstCoefficient7ProjectERNS_18QuadratureFunctionEEUliE_", !12, i64 0, !14, i64 8, !15, i64 16, !12, i64 24, !14, i64 32}
-!12 = !{!"p1 int", !13, i64 0}
-!13 = !{!"any pointer", !8, i64 0}
-!14 = !{!"p1 double", !13, i64 0}
-!15 = !{!"bool", !8, i64 0}
-!16 = !{!7, !7, i64 0}
-!17 = !{!11, !14, i64 8}
-!18 = !{!19, !19, i64 0}
-!19 = !{!"double", !8, i64 0}
-!20 = !{!11, !15, i64 16}
-!21 = !{i8 0, i8 2}
-!22 = !{}
-!23 = !{!11, !12, i64 24}
-!24 = !{!11, !14, i64 32}
-!25 = distinct !{!25, !26}
-!26 = !{!"llvm.loop.mustprogress"}
-!27 = !{!28, !19, i64 8}
-!28 = !{!"_ZTSZN4mfem14SumCoefficient7ProjectERNS_18QuadratureFunctionEEUliE_", !14, i64 0, !19, i64 8, !19, i64 16}
-!29 = !{!28, !19, i64 16}
-!30 = !{!28, !14, i64 0}
-!31 = !{!32, !14, i64 0}
-!32 = !{!"_ZTSZN4mfem23InnerProductCoefficient7ProjectERNS_18QuadratureFunctionEEUliE_", !14, i64 0, !7, i64 8, !14, i64 16, !14, i64 24}
-!33 = !{!32, !7, i64 8}
-!34 = !{!32, !14, i64 16}
-!35 = distinct !{!35, !26}
-!36 = !{!32, !14, i64 24}
+!1 = !{!"clang version 3.8.0 (tags/RELEASE_380/final)"}
+!7 = !{i32 2, !"SDK Version", [2 x i32] [i32 12, i32 9]}
+!8 = !{!"Simple C++ TBAA"}
+!9 = !{!"omnipotent char", !8, i64 0}
+!10 = !{!"int", !9, i64 0}
+!11 = !{!10, !10, i64 0}
+!12 = !{!"any pointer", !9, i64 0}
+!13 = !{!"p1 int", !12, i64 0}
+!14 = !{!"double", !9, i64 0}
+!15 = !{!"p1 double", !12, i64 0}
+!16 = !{!"bool", !9, i64 0}
+!17 = !{!"_ZTSZN4mfem18PWConstCoefficient7ProjectERNS_18QuadratureFunctionEEUliE_", !13, i64 0, !15, i64 8, !16, i64 16, !13, i64 24, !15, i64 32}
+!22 = !{!17, !13, i64 0}
+!23 = !{!17, !15, i64 8}
+!24 = !{!14, !14, i64 0}
+!25 = !{!17, !16, i64 16}
+!26 = !{i8 0, i8 2}
+!27 = !{}
+!28 = !{!17, !13, i64 24}
+!30 = !{!17, !15, i64 32}
+!31 = !{!"llvm.loop.mustprogress"}
+!32 = distinct !{!32, !31}
+!33 = !{!"_ZTSZN4mfem14SumCoefficient7ProjectERNS_18QuadratureFunctionEEUliE_", !15, i64 0, !14, i64 8, !14, i64 16}
+!34 = !{!33, !14, i64 8}
+!35 = !{!33, !14, i64 16}
+!36 = !{!33, !15, i64 0}
+!37 = !{!"_ZTSZN4mfem23InnerProductCoefficient7ProjectERNS_18QuadratureFunctionEEUliE_", !15, i64 0, !10, i64 8, !15, i64 16, !15, i64 24}
+!38 = !{!37, !15, i64 0}
+!39 = !{!37, !10, i64 8}
+!41 = !{!37, !15, i64 16}
+!43 = distinct !{!43, !31}
+!44 = !{!37, !15, i64 24}
+!45 = !{i32 4, !"nvvm-reflect-ftz", i32 0}
+!46 = !{i32 7, !"frame-pointer", i32 2}
+!47 = !{!"clang version 24.0.0git (git@github.com:llvm/llvm-project b08e005995ed29a2f89aa9a3f599a9d45db65523)"}
+!48 = !{!"__libc_errno", !10, i64 0}
+!49 = !{!48, !10, i64 0}

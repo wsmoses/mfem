@@ -1,5 +1,5 @@
-; ModuleID = '/mnt3/wmoses/git/mfem/fem/integ/bilininteg_transpose_ea.cpp'
-source_filename = "/mnt3/wmoses/git/mfem/fem/integ/bilininteg_transpose_ea.cpp"
+; ModuleID = '/home/wmoses/git/mfem/fem/integ/bilininteg_transpose_ea.cpp'
+source_filename = "/home/wmoses/git/mfem/fem/integ/bilininteg_transpose_ea.cpp"
 target datalayout = "e-p6:32:32-i64:64-i128:128-i256:256-v16:16-v32:32-n16:32:64"
 target triple = "nvptx64-nvidia-cuda"
 
@@ -37,7 +37,7 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNS_19TransposeIntegrato
   br i1 %8, label %9, label %49
 
 9:                                                ; preds = %2
-  %10 = load i32, ptr %1, align 8, !tbaa !10
+  %10 = load i32, ptr %1, align 8, !tbaa !23
   %11 = icmp sgt i32 %10, 0
   br i1 %11, label %12, label %49
 
@@ -67,7 +67,7 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNS_19TransposeIntegrato
 31:                                               ; preds = %34
   %32 = add nuw nsw i32 %28, 1
   %33 = icmp eq i32 %32, %10
-  br i1 %33, label %49, label %27, !llvm.loop !16
+  br i1 %33, label %49, label %27, !llvm.loop !28
 
 34:                                               ; preds = %34, %27
   %35 = phi i32 [ 0, %27 ], [ %47, %34 ]
@@ -76,16 +76,16 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNS_19TransposeIntegrato
   %38 = add nsw i32 %37, %28
   %39 = sext i32 %38 to i64
   %40 = getelementptr inbounds [8 x i8], ptr %14, i64 %39
-  %41 = load double, ptr %40, align 8, !tbaa !18
+  %41 = load double, ptr %40, align 8, !tbaa !25
   %42 = add nsw i32 %35, %30
   %43 = sext i32 %42 to i64
   %44 = getelementptr inbounds [8 x i8], ptr %21, i64 %43
-  %45 = load double, ptr %44, align 8, !tbaa !18
+  %45 = load double, ptr %44, align 8, !tbaa !25
   %46 = fadd contract double %41, %45
-  store double %46, ptr %44, align 8, !tbaa !18
+  store double %46, ptr %44, align 8, !tbaa !25
   %47 = add nuw nsw i32 %35, 1
   %48 = icmp eq i32 %47, %10
-  br i1 %48, label %31, label %34, !llvm.loop !20
+  br i1 %48, label %31, label %34, !llvm.loop !27
 
 49:                                               ; preds = %31, %9, %2
   ret void
@@ -111,7 +111,7 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNS_19TransposeIntegrato
   br i1 %8, label %9, label %43
 
 9:                                                ; preds = %2
-  %10 = load i32, ptr %1, align 8, !tbaa !21
+  %10 = load i32, ptr %1, align 8, !tbaa !39
   %11 = icmp sgt i32 %10, 0
   br i1 %11, label %12, label %43
 
@@ -127,7 +127,7 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNS_19TransposeIntegrato
 
 20:                                               ; preds = %29, %22
   %21 = icmp eq i32 %24, %10
-  br i1 %21, label %43, label %22, !llvm.loop !23
+  br i1 %21, label %43, label %22, !llvm.loop !42
 
 22:                                               ; preds = %20, %12
   %23 = phi i32 [ 0, %12 ], [ %24, %20 ]
@@ -147,16 +147,16 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNS_19TransposeIntegrato
   %33 = add nsw i32 %32, %23
   %34 = sext i32 %33 to i64
   %35 = getelementptr inbounds [8 x i8], ptr %14, i64 %34
-  %36 = load double, ptr %35, align 8, !tbaa !18
+  %36 = load double, ptr %35, align 8, !tbaa !25
   %37 = add nsw i32 %30, %28
   %38 = sext i32 %37 to i64
   %39 = getelementptr inbounds [8 x i8], ptr %14, i64 %38
-  %40 = load double, ptr %39, align 8, !tbaa !18
-  store double %36, ptr %39, align 8, !tbaa !18
-  store double %40, ptr %35, align 8, !tbaa !18
+  %40 = load double, ptr %39, align 8, !tbaa !25
+  store double %36, ptr %39, align 8, !tbaa !25
+  store double %40, ptr %35, align 8, !tbaa !25
   %41 = add nuw nsw i32 %30, 1
   %42 = icmp eq i32 %41, %10
-  br i1 %42, label %20, label %29, !llvm.loop !24
+  br i1 %42, label %20, label %29, !llvm.loop !41
 
 43:                                               ; preds = %20, %9, %2
   ret void
@@ -173,7 +173,7 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNS_19TransposeIntegrato
   br i1 %8, label %9, label %122
 
 9:                                                ; preds = %2
-  %10 = load i32, ptr %1, align 8, !tbaa !25
+  %10 = load i32, ptr %1, align 8, !tbaa !47
   %11 = icmp sgt i32 %10, 0
   br i1 %11, label %12, label %122
 
@@ -213,15 +213,15 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNS_19TransposeIntegrato
   %45 = getelementptr inbounds nuw i8, ptr %1, i64 120
   %46 = getelementptr inbounds nuw i8, ptr %1, i64 124
   %47 = getelementptr inbounds nuw i8, ptr %1, i64 128
-  %48 = load i32, ptr %43, align 4, !tbaa !29
+  %48 = load i32, ptr %43, align 4, !tbaa !11
   %49 = mul nsw i32 %48, %7
   %50 = mul nsw i32 %49, %42
   %51 = add nsw i32 %49, 1
   %52 = mul nsw i32 %51, %42
-  %53 = load ptr, ptr %44, align 8, !tbaa !30
-  %54 = load i32, ptr %45, align 4, !tbaa !29
-  %55 = load i32, ptr %46, align 4, !tbaa !29
-  %56 = load i32, ptr %47, align 4, !tbaa !29
+  %53 = load ptr, ptr %44, align 8, !tbaa !56
+  %54 = load i32, ptr %45, align 4, !tbaa !11
+  %55 = load i32, ptr %46, align 4, !tbaa !11
+  %56 = load i32, ptr %47, align 4, !tbaa !11
   %57 = mul nsw i32 %56, %7
   %58 = mul nsw i32 %57, %55
   %59 = add nsw i32 %57, 1
@@ -243,7 +243,7 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNS_19TransposeIntegrato
 71:                                               ; preds = %74
   %72 = add nuw nsw i32 %62, 1
   %73 = icmp eq i32 %72, %10
-  br i1 %73, label %122, label %61, !llvm.loop !31
+  br i1 %73, label %122, label %61, !llvm.loop !50
 
 74:                                               ; preds = %74, %61
   %75 = phi i32 [ 0, %61 ], [ %120, %74 ]
@@ -252,52 +252,52 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNS_19TransposeIntegrato
   %78 = add nsw i32 %77, %62
   %79 = sext i32 %78 to i64
   %80 = getelementptr inbounds [8 x i8], ptr %14, i64 %79
-  %81 = load double, ptr %80, align 8, !tbaa !18
+  %81 = load double, ptr %80, align 8, !tbaa !25
   %82 = add nsw i32 %75, %24
   %83 = mul nsw i32 %82, %16
   %84 = add nsw i32 %83, %62
   %85 = sext i32 %84 to i64
   %86 = getelementptr inbounds [8 x i8], ptr %14, i64 %85
-  %87 = load double, ptr %86, align 8, !tbaa !18
+  %87 = load double, ptr %86, align 8, !tbaa !25
   %88 = add nsw i32 %75, %34
   %89 = mul nsw i32 %88, %28
   %90 = add nsw i32 %89, %62
   %91 = sext i32 %90 to i64
   %92 = getelementptr inbounds [8 x i8], ptr %26, i64 %91
-  %93 = load double, ptr %92, align 8, !tbaa !18
+  %93 = load double, ptr %92, align 8, !tbaa !25
   %94 = add nsw i32 %75, %36
   %95 = mul nsw i32 %94, %28
   %96 = add nsw i32 %95, %62
   %97 = sext i32 %96 to i64
   %98 = getelementptr inbounds [8 x i8], ptr %26, i64 %97
-  %99 = load double, ptr %98, align 8, !tbaa !18
+  %99 = load double, ptr %98, align 8, !tbaa !25
   %100 = add nsw i32 %75, %64
   %101 = sext i32 %100 to i64
   %102 = getelementptr inbounds [8 x i8], ptr %38, i64 %101
-  %103 = load double, ptr %102, align 8, !tbaa !18
+  %103 = load double, ptr %102, align 8, !tbaa !25
   %104 = fadd contract double %81, %103
-  store double %104, ptr %102, align 8, !tbaa !18
+  store double %104, ptr %102, align 8, !tbaa !25
   %105 = add nsw i32 %75, %66
   %106 = sext i32 %105 to i64
   %107 = getelementptr inbounds [8 x i8], ptr %38, i64 %106
-  %108 = load double, ptr %107, align 8, !tbaa !18
+  %108 = load double, ptr %107, align 8, !tbaa !25
   %109 = fadd contract double %87, %108
-  store double %109, ptr %107, align 8, !tbaa !18
+  store double %109, ptr %107, align 8, !tbaa !25
   %110 = add nsw i32 %75, %68
   %111 = sext i32 %110 to i64
   %112 = getelementptr inbounds [8 x i8], ptr %53, i64 %111
-  %113 = load double, ptr %112, align 8, !tbaa !18
+  %113 = load double, ptr %112, align 8, !tbaa !25
   %114 = fadd contract double %99, %113
-  store double %114, ptr %112, align 8, !tbaa !18
+  store double %114, ptr %112, align 8, !tbaa !25
   %115 = add nsw i32 %75, %70
   %116 = sext i32 %115 to i64
   %117 = getelementptr inbounds [8 x i8], ptr %53, i64 %116
-  %118 = load double, ptr %117, align 8, !tbaa !18
+  %118 = load double, ptr %117, align 8, !tbaa !25
   %119 = fadd contract double %93, %118
-  store double %119, ptr %117, align 8, !tbaa !18
+  store double %119, ptr %117, align 8, !tbaa !25
   %120 = add nuw nsw i32 %75, 1
   %121 = icmp eq i32 %120, %10
-  br i1 %121, label %71, label %74, !llvm.loop !32
+  br i1 %121, label %71, label %74, !llvm.loop !49
 
 122:                                              ; preds = %71, %9, %2
   ret void
@@ -314,7 +314,7 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNS_19TransposeIntegrato
   br i1 %8, label %9, label %94
 
 9:                                                ; preds = %2
-  %10 = load i32, ptr %1, align 8, !tbaa !33
+  %10 = load i32, ptr %1, align 8, !tbaa !59
   %11 = icmp sgt i32 %10, 0
   br i1 %11, label %12, label %94
 
@@ -335,17 +335,17 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNS_19TransposeIntegrato
 
 25:                                               ; preds = %49, %40
   %26 = icmp eq i32 %42, %10
-  br i1 %26, label %27, label %40, !llvm.loop !35
+  br i1 %26, label %27, label %40, !llvm.loop !62
 
 27:                                               ; preds = %25
   %28 = getelementptr inbounds nuw i8, ptr %1, i64 48
   %29 = getelementptr inbounds nuw i8, ptr %1, i64 56
   %30 = getelementptr inbounds nuw i8, ptr %1, i64 60
   %31 = getelementptr inbounds nuw i8, ptr %1, i64 64
-  %32 = load ptr, ptr %28, align 8, !tbaa !30
-  %33 = load i32, ptr %29, align 4, !tbaa !29
-  %34 = load i32, ptr %30, align 4, !tbaa !29
-  %35 = load i32, ptr %31, align 4, !tbaa !29
+  %32 = load ptr, ptr %28, align 8, !tbaa !56
+  %33 = load i32, ptr %29, align 4, !tbaa !11
+  %34 = load i32, ptr %30, align 4, !tbaa !11
+  %35 = load i32, ptr %31, align 4, !tbaa !11
   %36 = mul nsw i32 %35, %7
   %37 = mul nsw i32 %36, %34
   %38 = add nsw i32 %36, 1
@@ -372,28 +372,28 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNS_19TransposeIntegrato
   %53 = add nsw i32 %52, %41
   %54 = sext i32 %53 to i64
   %55 = getelementptr inbounds [8 x i8], ptr %14, i64 %54
-  %56 = load double, ptr %55, align 8, !tbaa !18
+  %56 = load double, ptr %55, align 8, !tbaa !25
   %57 = add nsw i32 %50, %24
   %58 = mul nsw i32 %57, %16
   %59 = add nsw i32 %58, %41
   %60 = sext i32 %59 to i64
   %61 = getelementptr inbounds [8 x i8], ptr %14, i64 %60
-  %62 = load double, ptr %61, align 8, !tbaa !18
+  %62 = load double, ptr %61, align 8, !tbaa !25
   %63 = add nsw i32 %50, %46
   %64 = sext i32 %63 to i64
   %65 = getelementptr inbounds [8 x i8], ptr %14, i64 %64
-  %66 = load double, ptr %65, align 8, !tbaa !18
+  %66 = load double, ptr %65, align 8, !tbaa !25
   %67 = add nsw i32 %50, %48
   %68 = sext i32 %67 to i64
   %69 = getelementptr inbounds [8 x i8], ptr %14, i64 %68
-  %70 = load double, ptr %69, align 8, !tbaa !18
-  store double %56, ptr %65, align 8, !tbaa !18
-  store double %62, ptr %69, align 8, !tbaa !18
-  store double %66, ptr %55, align 8, !tbaa !18
-  store double %70, ptr %61, align 8, !tbaa !18
+  %70 = load double, ptr %69, align 8, !tbaa !25
+  store double %56, ptr %65, align 8, !tbaa !25
+  store double %62, ptr %69, align 8, !tbaa !25
+  store double %66, ptr %55, align 8, !tbaa !25
+  store double %70, ptr %61, align 8, !tbaa !25
   %71 = add nuw nsw i32 %50, 1
   %72 = icmp eq i32 %71, %10
-  br i1 %72, label %25, label %49, !llvm.loop !36
+  br i1 %72, label %25, label %49, !llvm.loop !61
 
 73:                                               ; preds = %77, %27
   %74 = phi i32 [ 0, %27 ], [ %78, %77 ]
@@ -404,7 +404,7 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNS_19TransposeIntegrato
 77:                                               ; preds = %80
   %78 = add nuw nsw i32 %74, 1
   %79 = icmp eq i32 %78, %10
-  br i1 %79, label %94, label %73, !llvm.loop !37
+  br i1 %79, label %94, label %73, !llvm.loop !66
 
 80:                                               ; preds = %80, %73
   %81 = phi i32 [ 0, %73 ], [ %92, %80 ]
@@ -413,16 +413,16 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNS_19TransposeIntegrato
   %84 = add nsw i32 %83, %74
   %85 = sext i32 %84 to i64
   %86 = getelementptr inbounds [8 x i8], ptr %32, i64 %85
-  %87 = load double, ptr %86, align 8, !tbaa !18
+  %87 = load double, ptr %86, align 8, !tbaa !25
   %88 = add nsw i32 %81, %76
   %89 = sext i32 %88 to i64
   %90 = getelementptr inbounds [8 x i8], ptr %32, i64 %89
-  %91 = load double, ptr %90, align 8, !tbaa !18
-  store double %87, ptr %90, align 8, !tbaa !18
-  store double %91, ptr %86, align 8, !tbaa !18
+  %91 = load double, ptr %90, align 8, !tbaa !25
+  store double %87, ptr %90, align 8, !tbaa !25
+  store double %91, ptr %86, align 8, !tbaa !25
   %92 = add nuw nsw i32 %81, 1
   %93 = icmp eq i32 %92, %10
-  br i1 %93, label %77, label %80, !llvm.loop !38
+  br i1 %93, label %77, label %80, !llvm.loop !65
 
 94:                                               ; preds = %77, %9, %2
   ret void
@@ -439,7 +439,7 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNS_19TransposeIntegrato
   br i1 %8, label %9, label %49
 
 9:                                                ; preds = %2
-  %10 = load i32, ptr %1, align 8, !tbaa !39
+  %10 = load i32, ptr %1, align 8, !tbaa !69
   %11 = icmp sgt i32 %10, 0
   br i1 %11, label %12, label %49
 
@@ -469,7 +469,7 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNS_19TransposeIntegrato
 31:                                               ; preds = %34
   %32 = add nuw nsw i32 %28, 1
   %33 = icmp eq i32 %32, %10
-  br i1 %33, label %49, label %27, !llvm.loop !41
+  br i1 %33, label %49, label %27, !llvm.loop !72
 
 34:                                               ; preds = %34, %27
   %35 = phi i32 [ 0, %27 ], [ %47, %34 ]
@@ -478,16 +478,16 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNS_19TransposeIntegrato
   %38 = add nsw i32 %37, %28
   %39 = sext i32 %38 to i64
   %40 = getelementptr inbounds [8 x i8], ptr %14, i64 %39
-  %41 = load double, ptr %40, align 8, !tbaa !18
+  %41 = load double, ptr %40, align 8, !tbaa !25
   %42 = add nsw i32 %35, %30
   %43 = sext i32 %42 to i64
   %44 = getelementptr inbounds [8 x i8], ptr %21, i64 %43
-  %45 = load double, ptr %44, align 8, !tbaa !18
+  %45 = load double, ptr %44, align 8, !tbaa !25
   %46 = fadd contract double %41, %45
-  store double %46, ptr %44, align 8, !tbaa !18
+  store double %46, ptr %44, align 8, !tbaa !25
   %47 = add nuw nsw i32 %35, 1
   %48 = icmp eq i32 %47, %10
-  br i1 %48, label %31, label %34, !llvm.loop !42
+  br i1 %48, label %31, label %34, !llvm.loop !71
 
 49:                                               ; preds = %31, %9, %2
   ret void
@@ -504,7 +504,7 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNS_19TransposeIntegrato
   br i1 %8, label %9, label %43
 
 9:                                                ; preds = %2
-  %10 = load i32, ptr %1, align 8, !tbaa !43
+  %10 = load i32, ptr %1, align 8, !tbaa !75
   %11 = icmp sgt i32 %10, 0
   br i1 %11, label %12, label %43
 
@@ -520,7 +520,7 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNS_19TransposeIntegrato
 
 20:                                               ; preds = %29, %22
   %21 = icmp eq i32 %24, %10
-  br i1 %21, label %43, label %22, !llvm.loop !45
+  br i1 %21, label %43, label %22, !llvm.loop !78
 
 22:                                               ; preds = %20, %12
   %23 = phi i32 [ 0, %12 ], [ %24, %20 ]
@@ -540,72 +540,72 @@ define dso_local ptx_kernel void @_ZN4mfemL10CuKernel1DIZNS_19TransposeIntegrato
   %33 = add nsw i32 %32, %23
   %34 = sext i32 %33 to i64
   %35 = getelementptr inbounds [8 x i8], ptr %14, i64 %34
-  %36 = load double, ptr %35, align 8, !tbaa !18
+  %36 = load double, ptr %35, align 8, !tbaa !25
   %37 = add nsw i32 %30, %28
   %38 = sext i32 %37 to i64
   %39 = getelementptr inbounds [8 x i8], ptr %14, i64 %38
-  %40 = load double, ptr %39, align 8, !tbaa !18
-  store double %36, ptr %39, align 8, !tbaa !18
-  store double %40, ptr %35, align 8, !tbaa !18
+  %40 = load double, ptr %39, align 8, !tbaa !25
+  store double %36, ptr %39, align 8, !tbaa !25
+  store double %40, ptr %35, align 8, !tbaa !25
   %41 = add nuw nsw i32 %30, 1
   %42 = icmp eq i32 %41, %10
-  br i1 %42, label %20, label %29, !llvm.loop !46
+  br i1 %42, label %20, label %29, !llvm.loop !77
 
 43:                                               ; preds = %20, %9, %2
   ret void
 }
 
-attributes #0 = { mustprogress nofree noinline norecurse nosync nounwind memory(readwrite, inaccessiblemem: none, target_mem: none) "frame-pointer"="all" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="sm_120" "target-features"="+ptx88,+sm_120" "uniform-work-group-size" }
+attributes #0 = { mustprogress nofree noinline norecurse nosync nounwind memory(readwrite, inaccessiblemem: none, target_mem: none) "frame-pointer"="all" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="sm_120" "target-features"="+ptx88" "uniform-work-group-size" }
 attributes #1 = { mustprogress nocallback nofree nosync nounwind speculatable willreturn memory(none) }
 
-!llvm.module.flags = !{!0, !1, !2}
-!llvm.ident = !{!3, !4}
-!llvm.errno.tbaa = !{!5}
+!llvm.module.flags = !{!7, !79, !80}
+!llvm.ident = !{!81, !1}
+!llvm.errno.tbaa = !{!83}
 
-!0 = !{i32 2, !"SDK Version", [2 x i32] [i32 12, i32 9]}
-!1 = !{i32 4, !"nvvm-reflect-ftz", i32 0}
-!2 = !{i32 7, !"frame-pointer", i32 2}
-!3 = !{!"clang version 24.0.0git (git@github.com:llvm/llvm-project 0220c07a94012b9dce9250addac6a8ee1f674b21)"}
-!4 = !{!"clang version 3.8.0 (tags/RELEASE_380/final)"}
-!5 = !{!6, !7, i64 0}
-!6 = !{!"__libc_errno", !7, i64 0}
-!7 = !{!"int", !8, i64 0}
-!8 = !{!"omnipotent char", !9, i64 0}
-!9 = !{!"Simple C++ TBAA"}
-!10 = !{!11, !7, i64 0}
-!11 = !{!"_ZTSZN4mfem19TransposeIntegrator10AssembleEAERKNS_18FiniteElementSpaceERNS_6VectorEbEUliE_", !7, i64 0, !12, i64 8, !15, i64 40}
-!12 = !{!"_ZTSN4mfem12DeviceTensorILi3EKdEE", !7, i64 0, !13, i64 8, !8, i64 16}
-!13 = !{!"p1 double", !14, i64 0}
-!14 = !{!"any pointer", !8, i64 0}
-!15 = !{!"_ZTSN4mfem12DeviceTensorILi3EdEE", !7, i64 0, !13, i64 8, !8, i64 16}
-!16 = distinct !{!16, !17}
-!17 = !{!"llvm.loop.mustprogress"}
-!18 = !{!19, !19, i64 0}
-!19 = !{!"double", !8, i64 0}
-!20 = distinct !{!20, !17}
-!21 = !{!22, !7, i64 0}
-!22 = !{!"_ZTSZN4mfem19TransposeIntegrator10AssembleEAERKNS_18FiniteElementSpaceERNS_6VectorEbEUliE0_", !7, i64 0, !15, i64 8}
-!23 = distinct !{!23, !17}
-!24 = distinct !{!24, !17}
-!25 = !{!26, !7, i64 0}
-!26 = !{!"_ZTSZN4mfem19TransposeIntegrator23AssembleEAInteriorFacesERKNS_18FiniteElementSpaceERNS_6VectorES5_bEUliE_", !7, i64 0, !27, i64 8, !27, i64 40, !28, i64 72, !28, i64 104}
-!27 = !{!"_ZTSN4mfem12DeviceTensorILi4EKdEE", !7, i64 0, !13, i64 8, !8, i64 16}
-!28 = !{!"_ZTSN4mfem12DeviceTensorILi4EdEE", !7, i64 0, !13, i64 8, !8, i64 16}
-!29 = !{!7, !7, i64 0}
-!30 = !{!28, !13, i64 8}
-!31 = distinct !{!31, !17}
-!32 = distinct !{!32, !17}
-!33 = !{!34, !7, i64 0}
-!34 = !{!"_ZTSZN4mfem19TransposeIntegrator23AssembleEAInteriorFacesERKNS_18FiniteElementSpaceERNS_6VectorES5_bEUliE0_", !7, i64 0, !28, i64 8, !28, i64 40}
-!35 = distinct !{!35, !17}
-!36 = distinct !{!36, !17}
-!37 = distinct !{!37, !17}
-!38 = distinct !{!38, !17}
-!39 = !{!40, !7, i64 0}
-!40 = !{!"_ZTSZN4mfem19TransposeIntegrator23AssembleEABoundaryFacesERKNS_18FiniteElementSpaceERNS_6VectorEbEUliE_", !7, i64 0, !12, i64 8, !15, i64 40}
-!41 = distinct !{!41, !17}
-!42 = distinct !{!42, !17}
-!43 = !{!44, !7, i64 0}
-!44 = !{!"_ZTSZN4mfem19TransposeIntegrator23AssembleEABoundaryFacesERKNS_18FiniteElementSpaceERNS_6VectorEbEUliE0_", !7, i64 0, !15, i64 8}
-!45 = distinct !{!45, !17}
-!46 = distinct !{!46, !17}
+!1 = !{!"clang version 3.8.0 (tags/RELEASE_380/final)"}
+!7 = !{i32 2, !"SDK Version", [2 x i32] [i32 12, i32 9]}
+!8 = !{!"Simple C++ TBAA"}
+!9 = !{!"omnipotent char", !8, i64 0}
+!10 = !{!"int", !9, i64 0}
+!11 = !{!10, !10, i64 0}
+!12 = !{!"double", !9, i64 0}
+!13 = !{!"any pointer", !9, i64 0}
+!14 = !{!"p1 double", !13, i64 0}
+!15 = !{!"_ZTSN4mfem12DeviceTensorILi3EKdEE", !10, i64 0, !14, i64 8, !9, i64 16}
+!16 = !{!"_ZTSN4mfem12DeviceTensorILi3EdEE", !10, i64 0, !14, i64 8, !9, i64 16}
+!17 = !{!"_ZTSZN4mfem19TransposeIntegrator10AssembleEAERKNS_18FiniteElementSpaceERNS_6VectorEbEUliE_", !10, i64 0, !15, i64 8, !16, i64 40}
+!23 = !{!17, !10, i64 0}
+!25 = !{!12, !12, i64 0}
+!26 = !{!"llvm.loop.mustprogress"}
+!27 = distinct !{!27, !26}
+!28 = distinct !{!28, !26}
+!37 = !{!"_ZTSZN4mfem19TransposeIntegrator10AssembleEAERKNS_18FiniteElementSpaceERNS_6VectorEbEUliE0_", !10, i64 0, !16, i64 8}
+!39 = !{!37, !10, i64 0}
+!41 = distinct !{!41, !26}
+!42 = distinct !{!42, !26}
+!43 = !{!"_ZTSN4mfem12DeviceTensorILi4EKdEE", !10, i64 0, !14, i64 8, !9, i64 16}
+!44 = !{!"_ZTSN4mfem12DeviceTensorILi4EdEE", !10, i64 0, !14, i64 8, !9, i64 16}
+!45 = !{!"_ZTSZN4mfem19TransposeIntegrator23AssembleEAInteriorFacesERKNS_18FiniteElementSpaceERNS_6VectorES5_bEUliE_", !10, i64 0, !43, i64 8, !43, i64 40, !44, i64 72, !44, i64 104}
+!47 = !{!45, !10, i64 0}
+!49 = distinct !{!49, !26}
+!50 = distinct !{!50, !26}
+!56 = !{!44, !14, i64 8}
+!57 = !{!"_ZTSZN4mfem19TransposeIntegrator23AssembleEAInteriorFacesERKNS_18FiniteElementSpaceERNS_6VectorES5_bEUliE0_", !10, i64 0, !44, i64 8, !44, i64 40}
+!59 = !{!57, !10, i64 0}
+!61 = distinct !{!61, !26}
+!62 = distinct !{!62, !26}
+!65 = distinct !{!65, !26}
+!66 = distinct !{!66, !26}
+!67 = !{!"_ZTSZN4mfem19TransposeIntegrator23AssembleEABoundaryFacesERKNS_18FiniteElementSpaceERNS_6VectorEbEUliE_", !10, i64 0, !15, i64 8, !16, i64 40}
+!69 = !{!67, !10, i64 0}
+!71 = distinct !{!71, !26}
+!72 = distinct !{!72, !26}
+!73 = !{!"_ZTSZN4mfem19TransposeIntegrator23AssembleEABoundaryFacesERKNS_18FiniteElementSpaceERNS_6VectorEbEUliE0_", !10, i64 0, !16, i64 8}
+!75 = !{!73, !10, i64 0}
+!77 = distinct !{!77, !26}
+!78 = distinct !{!78, !26}
+!79 = !{i32 4, !"nvvm-reflect-ftz", i32 0}
+!80 = !{i32 7, !"frame-pointer", i32 2}
+!81 = !{!"clang version 24.0.0git (git@github.com:llvm/llvm-project b08e005995ed29a2f89aa9a3f599a9d45db65523)"}
+!82 = !{!"__libc_errno", !10, i64 0}
+!83 = !{!82, !10, i64 0}
