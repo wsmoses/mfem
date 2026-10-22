@@ -1,0 +1,3 @@
+general/mem_manager.cpp
+linalg/densemat.cpp
+fem/integ/nonlininteg_vecconvection_pa_grad.cpp

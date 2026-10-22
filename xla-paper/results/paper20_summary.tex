@@ -1,0 +1,17 @@
+\begin{tabular}{l S[table-format=3] S[table-format=4.3] S[table-format=4.3] S[table-format=1.2]}
+\toprule
+Suite & {cases} & {native CUDA (ms)} & {XLA-GPU (ms)} & {speedup} \\
+\midrule
+\texttt{assembly\_levels} & 28 & 232 & 166 & 0.95 \\
+\texttt{ceed} & 12 & 443 & 688 & 0.62 \\
+\texttt{dg\_amr} & 4 & 2.09 & 3.59 & 0.58 \\
+\texttt{elasticity} & 4 & 4.60 & 7.28 & 0.57 \\
+\texttt{nlvc} & 12 & 30.4 & 22.1 & 0.89 \\
+\texttt{tmop} & 32 & 19.5 & 23.0 & 1.16 \\
+\texttt{vector} & 12 & 1.25e-3 & 1.22e-3 & 1.02 \\
+\texttt{virtuals} & 3 & 1.51e-6 & 1.60e-6 & 0.95 \\
+\texttt{bpl} & 14 & 44.6 & {---} & {---} \\
+\midrule
+all & 107 & 731 & 910 & 0.92 \\
+\bottomrule
+\end{tabular}

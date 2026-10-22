@@ -1,0 +1,9 @@
+bench_assembly_levels_x0 ^((BP[13]|BK[1-6])(PARTIAL|ELEMENT)|BP5PARTIAL)/1048576/(2|4)$
+bench_bpl ^BPL_(Global|Local)(Derivative)?Mult/(2|4|6)/96$|^BPL_BP3PAMult/(2|4)/96$
+bench_ceed ^BP[1-6]/(2|4)/96$
+bench_dg_amr ^BK_DG/1048576/(2|4)/(0|10)$
+bench_nlvc ^(AddMultPA|AssembleGradDiagonal|Setup)(2d|3d)/(2|4)/96$
+bench_elasticity ^Gradient3D/(2|3)/60/(0|1)$
+bench_tmop .
+bench_vector /1024$
+bench_virtuals .

@@ -1,0 +1,44 @@
+{
+ "date": "2026-10-20",
+ "builds": {
+  "xla2off": {
+   "label": "XLA-GPU",
+   "note": "Reactant, dot formation off (the paper's XLA-GPU column; REACTANT_EXEC_DOT_FORMATION=0)"
+  }
+ },
+ "method": [
+  [
+   "GPU",
+   "one NVIDIA GeForce RTX 5090 (sm_120, 32 GB), driver 575.57.08, CUDA 12.9; both columns on the same device class in the same session, one GPU per configuration, each run gated on the GPU being idle (shared machine)"
+  ],
+  [
+   "MFEM",
+   "the same source tree for every build (<code>93b234fdc</code>, 2026-08-29, with the XLA-port changes); Release, <code>-O3 -DNDEBUG</code>, CUDA on, MPI + HYPRE + METIS on"
+  ],
+  [
+   "native CUDA",
+   "clang 24 (<code>b08e0059</code>) <code>-O3</code> for <code>sm_120</code> with the ClangEnzyme plugin, i.e. MFEM's own CUDA kernels compiled by Clang (not nvcc)"
+  ],
+  [
+   "XLA-GPU",
+   "the same clang plus the Reactant plugin: every kernel raised to StableHLO at compile time, optimized by Enzyme-JAX's pattern list at run time and executed by XLA through the linkable runtime. Enzyme-JAX main <code>bcc32bf89</code> (through #3622, i.e. with #3618, #3619 and <code>add_terms_to_reduce</code> in the list) + #3617 + #3490 + #3623 + #3624 (<code>transposed_view_elementwise</code>, run as a layout round after the list, Reactant #3474) + #3626 (<code>scatter_masked_index_slice</code> cuts a grid at its loop guard's last block) + #3627 (<code>reduce_minor_dims</code>, in the layout round) + #3634 (<code>reread_barrier</code>) and #3538 (<code>concat_operand_barrier</code>: the computation behind each operand of a wide concatenate is materialized, except a dot's result), both in a round of their own after the layout round (Reactant #3474); Reactant.jl <code>837af6d55</code> + the linkable-runtime series (#3423–#3445, exec-folder #3473) + #3641 with Reactant.jl #3495 (<code>cudaDeviceSynchronize</code> in the host code becomes <code>reactantXLASync</code>, which runs the pending executables and waits for the device, so MFEM's <code>MFEM_DEVICE_SYNC</code> is honoured exactly as in the native build)"
+  ],
+  [
+   "timing",
+   "Google Benchmark, <code>device=cuda</code>, 1 s warm-up before each case (so JIT compiles are outside the measurement), <code>--benchmark_repetitions=3</code>; the table lists all three, their mean and population σ. Both builds synchronize with the device at every <code>MFEM_DEVICE_SYNC</code>, so an iteration is the kernel's launch, execution and the wait for it on either backend. (The Oct 17 morning page's XLA column was measured without that wait — the host lowering dropped <code>cudaDeviceSynchronize</code> — and reported the host's enqueue rate wherever it was faster than the GPU; the 8 s-run page in between saturated the launch queue, which still let the host's enqueue of one iteration overlap the GPU's execution of the previous one, something the native benchmark cannot do: tmop AddMultGradPA/0/4 read 1.23, 2.13 and now 2.58 ms.) The native and XLA columns were measured suite by suite back to back in one session (22:05&ndash;22:40 on 2026-10-20, assembly_levels 22:40&ndash;22:48; the machine's load was 23&ndash;25 of 192 cores throughout), because the host-bound suites follow the machine's load: this shared machine carried another user's CPU-bound processes (load 24 of 192 cores) throughout, under which the host-bound native cases run up to 1.5&times; slower than on an idle machine (nlvc Setup3d/2: 3.5 vs 5.5 ms); the ratios are what the same conditions give both columns"
+  ],
+  [
+   "cases",
+   "the paper subset: assembly_levels <code>^((BP[13]|BK[1-6])(PARTIAL|ELEMENT)|BP5PARTIAL)/1048576/(2|4)$</code>; ceed <code>^BP[1-6]/(2|4)/96$</code>; dg_amr <code>^BK_DG/1048576/(2|4)/(0|10)$</code>; elasticity <code>^Gradient3D/(2|3)/60/(0|1)$</code>; nlvc <code>^(AddMultPA|AssembleGradDiagonal|Setup)(2d|3d)/(2|4)/96$</code>; tmop and virtuals whole; vector <code>/1024$</code>; bpl <code>^BPL_(Global|Local)(Derivative)?Mult/(2|4|6)/96$|^BPL_BP3PAMult/(2|4)/96$</code>"
+  ]
+ ],
+ "notes": [
+  "<b>bpl</b> is native-only: the dfem <code>LaghosLocalQF</code> kernels call <code>__enzyme_fwddiff</code> inside the kernel and the raising pipeline cannot differentiate that call yet, so <code>bench_bpl</code> does not build through Reactant (the earlier cbrt/tanh blocker, Enzyme #3471, is merged).",
+  "<b>assembly_levels</b> is the stock benchmark with one patch (<code>bench_assembly_levels_x0</code>): the stock source never initializes the solution vector x that <code>FormLinearSystem</code> takes Dirichlet values from, which gives NaNs in CG at random on either backend; both builds run the patched copy. BP2/BP4/BP6 PARTIAL (vector problems) are left out because the native binary reports CG <code>nom=-nan</code> for them, and FULL@1M because native CG diverges.",
+  "<b>BP3 on current main</b>: without Enzyme-JAX #3624, ceed BP3 and assembly_levels BK3/BP3 PARTIAL are ~2&times; slower than here (ceed BP3/2: 80.8 ms): #3602 merges reshape&rarr;transpose&rarr;reshape views into transposes that <code>transpose_slice</code> hoists onto the 340 MB D tensor, which XLA then copies transposed. #3624 computes the product in D's layout and moves the transpose to its result, where the next contraction's broadcast takes it; both columns here run with it.",
+  "<b>tmop, XLA-GPU</b>: needs Enzyme-JAX #3623 (<code>cse_reduce_transposed</code> walked a shared-subexpression DAG as a tree and hung compiling the first case); both columns here run with it.",
+  "The XLA column for cases that take under ~10 µs natively (vector, virtuals) measures per-call dispatch, not kernels.",
+  "TPU (Google TPUv6) numbers are not on this page; this machine has no TPU.",
+  "<b>What changed since the Oct 17 evening page</b> (Enzyme-JAX #3538, <code>concat_operand_barrier</code>, in the barrier round): a wide concatenate of computed pieces fused into its consumer made XLA recompute the pieces per element; materializing them gives tmop AssembleGradDiagonalPA/1/2 0.76 &rarr; 0.40 ms, /1/4 3.04 &rarr; 1.79, /1/3 1.95 &rarr; 1.23, /0/2 1.70 &rarr; 1.09, AddMultGradPA/0/2 0.57 &rarr; 0.40, /1/2 0.23 &rarr; 0.18, nlvc AssembleGradDiagonal3d/2 5.4 &rarr; 4.1 (14 cases faster, XLA column geomean 0.92&times;); nlvc Setup2d/2 and /4 are 14% and 31% slower (a few barriers on single-op pieces, each a launch on a 30 µs case). The native column is the same session's and agrees with the Oct 17 one to 0.1%."
+ ]
+}

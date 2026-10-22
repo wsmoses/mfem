@@ -1,0 +1,21 @@
+BENCHMARK_DIR:PATH=/home/wmoses/ejwork/deps/google-benchmark
+CMAKE_BUILD_TYPE:STRING=Release
+CMAKE_CUDA_COMPILER_LAUNCHER:UNINITIALIZED=/home/wmoses/ejwork/scripts/mfem3_launch.sh
+CMAKE_CUDA_COMPILER:STRING=/home/wmoses/git/Enzyme/llvm-project/buildRelease/bin/clang++
+CMAKE_CUDA_FLAGS:STRING=--cuda-path=/usr/local/cuda-12.9
+CMAKE_CXX_COMPILER_LAUNCHER:UNINITIALIZED=/home/wmoses/ejwork/scripts/mfem3_launch.sh
+CMAKE_CXX_COMPILER:STRING=/home/wmoses/git/Enzyme/llvm-project/buildRelease/bin/clang++
+CMAKE_CXX_FLAGS_RELEASE:STRING=-O3 -DNDEBUG
+CUDA_ARCH:STRING=sm_120
+Enzyme_DIR:UNINITIALIZED=/home/wmoses/ejwork/mfem_builds/shim-xla2sync
+HYPRE_DIR:PATH=/home/wmoses/git/mfem/../hypre/src/hypre
+METIS_DIR:PATH=/home/wmoses/git/mfem/../metis-4.0
+MFEM_ENABLE_BENCHMARKS:BOOL=ON
+MFEM_ENABLE_EXAMPLES:BOOL=ON
+MFEM_ENABLE_TESTING:BOOL=ON
+MFEM_USE_BENCHMARK:BOOL=ON
+MFEM_USE_CUDA:BOOL=ON
+MFEM_USE_ENZYME:BOOL=ON
+MFEM_USE_METIS:BOOL=ON
+MFEM_USE_MPI:BOOL=ON
+MPI_CXX_COMPILER:FILEPATH=/usr/bin/mpicxx

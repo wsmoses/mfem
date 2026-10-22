@@ -1,0 +1,9 @@
+CMAKE_BUILD_TYPE:STRING=Release
+CMAKE_CUDA_COMPILER:STRING=/home/wmoses/git/Enzyme/llvm-project/buildRelease/bin/clang++
+CMAKE_CXX_COMPILER:STRING=/home/wmoses/git/Enzyme/llvm-project/buildRelease/bin/clang++
+CUDA_ARCH:STRING=sm_120
+Enzyme_DIR:UNINITIALIZED=/home/wmoses/git/Enzyme/enzyme/buildRelease
+MFEM_USE_CUDA:BOOL=ON
+MFEM_USE_ENZYME:BOOL=ON
+MFEM_USE_METIS:BOOL=ON
+MFEM_USE_MPI:BOOL=ON
